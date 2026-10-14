@@ -1,0 +1,47 @@
+name: Forge Evolve Equivalence & D2P2 Verification CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  verify-equivalence:
+    name: Verify CTDP-G, Zero-Trust Merkle, 6-Link CCD & URTS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install forge-evolve-reference Package
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Run Pytest Verification Suite
+        run: |
+          pytest -v
+
+      - name: Verify CLI Subcommands
+        run: |
+          forge-evolve ingest --step benchmarks/AF_ACP_7740_Bulkhead.stp
+          forge-evolve verify-ia --policy schemas/ia_compliance.rego
+          forge-evolve plan-path --dialect FANUC
+          forge-evolve plan-path --dialect KUKA
+          forge-evolve plan-path --dialect ROS2
+          forge-evolve benchmark --suite nist-mbe
+          forge-evolve benchmark --suite d2p2-50
+          forge-evolve benchmark --suite redteam-ccd
+
+      - name: Execute End-to-End Reference & Adversarial Benchmark Suites
+        run: |
+          python3 forge_evolve_engine.py
+          python3 run_adversarial_benchmarks.py

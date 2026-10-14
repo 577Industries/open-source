@@ -1,0 +1,13 @@
+/PROG  KINETIC_WORKCELL_01
+/ATTR
+OWNER       = MNEDITOR;
+COMMENT     = "577i Kinetic URTS -> FANUC R-30iB Plus";
+/MN
+   1:  ! Datum-A 3-Fiducial Vision Frame ;
+   2:  UFRAME_NUM=1 ;
+   3:  UTOOL_NUM=2 ;
+   4:  ! 6-Link Swept-Capsule Min Clearance: 55.04mm ;
+   5:J P[1:STN_PORT_01_APPROACH] 40% FINE ;
+   6:L P[2:BORE_F103_SCAN] 120mm/sec CNT10 ;
+   7:L P[3:POCKET_F112_NDI] 85mm/sec FINE ;
+/END

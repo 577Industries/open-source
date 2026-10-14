@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "components": {
+      "type": "array"
+    },
+    "format": {
+      "type": "string"
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "target_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "snapshot_id",
+    "target_id",
+    "format",
+    "components"
+  ],
+  "title": "dependency_snapshot.schema.json",
+  "type": "object"
+}

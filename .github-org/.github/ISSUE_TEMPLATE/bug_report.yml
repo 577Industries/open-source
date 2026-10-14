@@ -1,0 +1,36 @@
+name: Bug report
+description: Something behaves differently than documented
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: Release tag or commit SHA where you observed this
+      placeholder: v1.0.0 or a short SHA
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal steps or code that reproduce the behavior
+      placeholder: |
+        1. …
+        2. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What the docs/README say should happen, and what happens instead
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, runtime version (Node/Python), anything unusual
+    validations:
+      required: false

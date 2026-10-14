@@ -1,0 +1,62 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Deploys must never cancel each other; a run stuck in `queued`/`pending` blocks
+# every later deploy silently (helios-fusion-engine, 2026-08-09 → 09-01).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # needed for git-revision-date-localized
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+
+      - name: Install docs dependencies
+        run: pip install -r requirements-docs.txt
+
+      - name: Copy non-markdown assets into docs/
+        run: |
+          set -e
+          # All markdown content is included at build time via mkdocs-include-markdown-plugin.
+          # The only file still copied is footnotes.yaml (referenced as a relative download link in companion.md).
+          cp companion/footnotes.yaml docs/footnotes.yaml
+
+      - name: Build site
+        run: mkdocs build --strict
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

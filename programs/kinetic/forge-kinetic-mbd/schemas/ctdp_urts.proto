@@ -1,0 +1,116 @@
+syntax = "proto3";
+package forge_evolve.v2;
+
+option go_package = "577industries.com/forge_evolve/api/v2;evolv2";
+
+// 1. Sub-Second Progressive MBD Mesh & PMI Streaming Service (DV008)
+service ZeroTrustMBDStreamService {
+  rpc StreamProgressiveBVH (BVHStreamRequest) returns (stream EncryptedBVHChunk);
+  rpc CommitAsSustainedState (SustainmentCommitRequest) returns (MerkleCommitReceipt);
+}
+
+// 2. Autonomous Robotic Pathing & Multi-Vendor Execution Service (DV012)
+service AutonomousRoboticPathService {
+  rpc CompileTDPToURTS (TDPCompileRequest) returns (URTSTaskPackage);
+  rpc ExportVendorControllerCode (VendorExportRequest) returns (VendorControllerProgram);
+}
+
+message Vec3 {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message Quat {
+  double w = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+}
+
+message BVHStreamRequest {
+  string package_id = 1;
+  string spiffe_jwt_token = 2;
+  repeated string requested_abac_scopes = 3;
+  Vec3 camera_frustum_origin = 4;
+  double max_screen_space_error = 5;
+}
+
+message EncryptedBVHChunk {
+  string chunk_id = 1;
+  uint32 lod_level = 2;
+  bytes aes_gcm_iv = 3;
+  bytes encrypted_draco_mesh_payload = 4;
+  bytes encrypted_pmi_annotations = 5;
+  bytes gcm_auth_tag = 6;
+  string merkle_inclusion_proof = 7;
+}
+
+message WaypointPose {
+  string waypoint_id = 1;
+  string bound_gdt_callout_uid = 2;
+  string mobile_station_id = 3;
+  Vec3 tcp_xyz_mm = 4;
+  Quat tcp_quat_wxyz = 5;
+  repeated double joint_positions_rad = 6;
+  repeated double joint_velocities_rad_s = 7;
+  double min_sdf_clearance_mm = 8;
+  string sensor_trigger_payload = 9;
+}
+
+message TDPCompileRequest {
+  string package_id = 1;
+  string step_ap242_uri = 2;
+  string drawing_pdf_uri = 3;
+}
+
+message URTSTaskPackage {
+  string urts_id = 1;
+  string source_merkle_commit = 2;
+  repeated WaypointPose ordered_trajectory = 3;
+  double total_execution_time_sec = 4;
+  bool collision_free_verified = 5;
+}
+
+message VendorExportRequest {
+  string urts_id = 1;
+  enum ControllerDialect {
+    ROS2_MOVEIT_JSON = 0;
+    FANUC_LS_TP = 1;
+    KUKA_KRL_SRC = 2;
+    ABB_RAPID_MOD = 3;
+  }
+  ControllerDialect target_dialect = 2;
+}
+
+message VendorControllerProgram {
+  string filename = 1;
+  string controller_dialect = 2;
+  string program_source_code = 3;
+  string sha256_checksum = 4;
+}
+
+message SustainmentCommitRequest {
+  string package_id = 1;
+  string parent_commit_hash = 2;
+  string tail_number = 3;
+  string robot_cell_spiffe_id = 4;
+  bytes signed_point_cloud_digest = 5;
+  repeated AnomalyRecord detected_anomalies = 6;
+}
+
+message AnomalyRecord {
+  string face_uid = 1;
+  string callout_uid = 2;
+  string defect_classification = 3;
+  double dimensional_deviation_mm = 4;
+  double ai_confidence = 5;
+  string disposition = 6;
+}
+
+message MerkleCommitReceipt {
+  string new_commit_hash = 1;
+  string merkle_root_hash = 2;
+  string timestamp_utc = 3;
+  bool plm_sync_dispatched = 4;
+}

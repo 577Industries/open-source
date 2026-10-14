@@ -1,0 +1,67 @@
+[
+  {
+    "repo": "aegisgraph",
+    "program": "AEGIS",
+    "blurb": "AegisGraph: graph-based application-layer assessment evidence platform for Secure Messaging Applications (SMAs)."
+  },
+  {
+    "repo": "asema-feasibility-artifacts",
+    "program": "AEGIS",
+    "blurb": "Sanitized reproducibility artifacts for ASEMA secure messaging application assessment feasibility evidence"
+  },
+  {
+    "repo": "forge-agent-memory",
+    "program": "FORGE OS",
+    "blurb": "Bio-inspired memory for AI agents with logarithmic reinforcement, exponential decay, and composite recall scoring"
+  },
+  {
+    "repo": "forge-evolve-tmpc",
+    "program": "FORGE EVOLVE",
+    "blurb": "AI-assisted modernization of C#/.NET mission-planning software with behavioral-equivalence proof and continuous-ATO artifacts."
+  },
+  {
+    "repo": "forge-hashchain-audit",
+    "program": "FORGE OS",
+    "blurb": "Tamper-evident audit trail with SHA-256 hash chaining, Ed25519 signatures, and Merkle tree anchoring"
+  },
+  {
+    "repo": "forge-model-router",
+    "program": "FORGE OS",
+    "blurb": "Multi-provider AI model router with 6 routing strategies, sovereign profile support, and cost ceiling enforcement"
+  },
+  {
+    "repo": "forge-tool-guardrails",
+    "program": "FORGE OS",
+    "blurb": "4-level guardrail middleware (none/log/pause/block) for AI agent tools with human-in-the-loop approval workflow"
+  },
+  {
+    "repo": "forge-workflow-dag",
+    "program": "FORGE OS",
+    "blurb": "YAML-to-DAG workflow compiler with Kahn's topological sort, cycle detection, and parallel group identification"
+  },
+  {
+    "repo": "gannon-storm-rtk-analysis",
+    "program": "HELIOS",
+    "blurb": "Retrospective RTK-GNSS positioning error analysis during the May 10-12, 2024 Gannon G5 superstorm."
+  },
+  {
+    "repo": "helios-fusion-engine",
+    "program": "HELIOS",
+    "blurb": "Model-agnostic probabilistic fusion of heterogeneous space-weather model outputs."
+  },
+  {
+    "repo": "helios-program",
+    "program": "HELIOS",
+    "blurb": "HELIOS program meta-repo: public proposal companion, master plan, orchestration scripts, per-artifact design specs"
+  },
+  {
+    "repo": "helios-provenance-spec",
+    "program": "HELIOS",
+    "blurb": "JSON Schema (draft 2020-12) for feature-level provenance in heliophysics fusion systems, with pydantic v2 reference implementation."
+  },
+  {
+    "repo": "helios-spaceweather-connectors",
+    "program": "HELIOS",
+    "blurb": "Production-grade Python adapters for NASA DONKI, CCMC SEP Scoreboards, NOAA SWPC, CDDIS GIMs, GOES, and DSCOVR \u2014 normalized to\u2026"
+  }
+]

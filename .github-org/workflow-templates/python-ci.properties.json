@@ -1,0 +1,7 @@
+{
+  "name": "577Industries Python CI",
+  "description": "House CI shape: lint / test matrix / pip-audit, timeouts on every job, workflow_dispatch on the weekly cron, PR-only concurrency cancellation.",
+  "iconName": "octicon shield-check",
+  "categories": ["Python"],
+  "filePatterns": ["pyproject.toml"]
+}

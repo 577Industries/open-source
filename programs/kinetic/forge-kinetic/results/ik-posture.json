@@ -1,0 +1,18 @@
+{
+  "station_id": "STN-PORT-01",
+  "base_pose_mm_deg": [
+    800.0,
+    -490.0,
+    16.19
+  ],
+  "joint_angles_deg": [
+    7.285,
+    -17.84,
+    57.16,
+    0.0,
+    54.2,
+    -12.5
+  ],
+  "manipulability_index": 0.842,
+  "tcp_residual_mm": 0.015
+}

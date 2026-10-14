@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "forge-evolve-reference"
+version = "2.4.0"
+description = "Forge Evolve — Deterministic TDP Modernization (DAF27BZ01-DV008) & Autonomous TDP-to-Path Robotic Task Specification (DAF27BZ01-DV012) Reference Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [
+  {name = "Thomas G. Waweru", email = "info@577industries.com"}
+]
+keywords = ["STEP-AP242", "MBD", "Zero-Trust", "Merkle-DAG", "Robotics", "GDT", "FANUC", "KUKA", "ROS2"]
+dependencies = [
+  "numpy>=1.24.0",
+  "scipy>=1.10.0",
+  "matplotlib>=3.7.0",
+  "pydantic>=2.0.0",
+  "pytest>=7.4.0",
+]
+
+[project.urls]
+Homepage = "https://www.577industries.com/evolve"
+Documentation = "https://www.577industries.com/evolve/studio"
+Repository = "https://github.com/577Industries/forge-evolve-reference"
+
+[project.scripts]
+forge-evolve = "forge_evolve.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["forge_evolve", "forge_evolve_engine.py", "run_adversarial_benchmarks.py"]
+dev-mode-dirs = ["."]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v"

@@ -1,0 +1,66 @@
+# helios-spaceweather-connectors
+
+Production-grade Python adapters for the space-weather data sources that
+feed the HELIOS fusion engine. Each adapter normalizes its upstream
+representation into a common `NormalizedRecord` shape with full
+feature-level provenance per the
+[`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
+contract.
+
+## Adapter status
+
+| Source | Strategy | Status | Module |
+|---|---|---|---|
+| NASA DONKI (CME, FLR, SEP, GST, IPS, MPC, RBE, HSS, notifications) | BUILD | **v0.1 — shipped** | [`adapters.donki`](adapters/donki.md) |
+| CCMC SEP Scoreboards A / B / C | BUILD | **v0.2 — shipped** | [`adapters.sep_scoreboards`](adapters/sep_scoreboards.md) |
+| NOAA SWPC (Kp, plasma, mag, SEP forecast JSON) + GFZ/Kyoto archive fallback | EXTEND | **v0.2 — shipped** | [`adapters.swpc`](adapters/swpc.md) |
+| NASA CDDIS GIMs (IONEX) | BUILD | **v0.2.1 — shipped** | [`adapters.cddis_gim`](adapters/cddis.md) |
+| GOES X-ray + proton flux | WRAP (PySPEDAS / SWPC NRT JSON) | **v0.2.1 — shipped** | [`adapters.goes`](adapters/goes.md) |
+| DSCOVR upstream solar wind | WRAP (PySPEDAS archive / NOAA RTSW realtime) | **v0.2.1 — shipped** (realtime records carry `SourceID.RTSW`) | [`adapters.dscovr`](adapters/dscovr.md) |
+
+Strategy reference (from the master plan landscape survey):
+
+- **BUILD** — no existing maintained client; we implement from scratch.
+- **EXTEND** — partial SunPy / community client; we add the gaps.
+- **WRAP** — mature upstream client; we provide a thin facade that
+  emits `NormalizedRecord` objects with provenance.
+
+Excluded by license: HESPERIA REleASE (commercial use restricted per
+proposal ref [30]); model outputs flow in via CCMC SEP Scoreboards
+rather than direct adapter integration.
+
+## Quickstart
+
+```bash
+# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses); install from the tag:
+pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors@v0.2.1"
+```
+
+```python
+from datetime import datetime, timezone
+
+from helios_connectors import DonkiAdapter
+
+async with DonkiAdapter() as donki:
+    async for rec in donki.fetch_flr(
+        start=datetime(2024, 5, 8, tzinfo=timezone.utc),
+        end=datetime(2024, 5, 15, tzinfo=timezone.utc),
+    ):
+        print(rec.event_time, rec.value.get("classType"), rec.provenance.id)
+```
+
+## Design
+
+See [Adapter pattern](design.md) for the framework conventions every
+adapter follows, the streaming-async-first interface, the provenance
+model, and how to add a new source.
+
+## See also
+
+- [HELIOS program master plan](https://github.com/577Industries/helios-program)
+  (private; internal team)
+- [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
+  — JSON Schema for the provenance model
+- [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine)
+  — downstream consumer (BMA fusion + calibration)
+- NASA SBIR Phase I proposal — see proposal §2 Obj. 1 and §3 T1

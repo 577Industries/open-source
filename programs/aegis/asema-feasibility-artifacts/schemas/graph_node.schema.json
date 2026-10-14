@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "evidence_refs": {
+      "type": "array"
+    },
+    "label": {
+      "type": "string"
+    },
+    "node_id": {
+      "type": "string"
+    },
+    "node_type": {
+      "type": "string"
+    },
+    "target_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "node_id",
+    "target_id",
+    "node_type",
+    "label",
+    "evidence_refs"
+  ],
+  "title": "graph_node.schema.json",
+  "type": "object"
+}

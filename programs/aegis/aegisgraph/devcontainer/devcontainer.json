@@ -1,0 +1,33 @@
+{
+  "name": "aegisgraph-tier3-research",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": true
+    }
+  },
+  "postCreateCommand": "bash devcontainer/post-create.sh",
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "AEGISGRAPH_STRICT_TOOLING": "0"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.vscode-yaml",
+        "github.vscode-codeql",
+        "rust-lang.rust-analyzer",
+        "golang.go"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "python.testing.pytestEnabled": true
+      }
+    }
+  }
+}

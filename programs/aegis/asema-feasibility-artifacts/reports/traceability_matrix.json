@@ -1,0 +1,941 @@
+{
+  "generated_at": "2026-05-13T00:00:00Z",
+  "generated_by": "validator-export",
+  "generated_on": "2026-05-13",
+  "rows": [
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-FORMAT-FONT-SIZE",
+      "notes": "DSIP requirement DSIP-FORMAT-FONT-SIZE has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-FORMAT-MARGINS",
+      "notes": "DSIP requirement DSIP-FORMAT-MARGINS has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#12-commercialization-and-transition",
+      "dsip_requirement": "DSIP-EVAL-CRIT-COMMERCIAL",
+      "notes": "DSIP requirement DSIP-EVAL-CRIT-COMMERCIAL has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#15-compliance-and-submission-gates",
+      "dsip_requirement": "DSIP-SUB-ART-VOL5-CERTS",
+      "notes": "DSIP requirement DSIP-SUB-ART-VOL5-CERTS has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#15-compliance-and-submission-gates",
+      "dsip_requirement": "DSIP-SUB-ART-VOL7-WEBFORM",
+      "notes": "DSIP requirement DSIP-SUB-ART-VOL7-WEBFORM has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#4-phase-i-equivalent-feasibility-and-prior-work",
+      "dsip_requirement": "DSIP-EVAL-CRIT-FEASIBILITY",
+      "notes": "DSIP requirement DSIP-EVAL-CRIT-FEASIBILITY has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#4.4-what-is-novel-about-aegisgraph",
+      "dsip_requirement": "DSIP-EVAL-CRIT-NOVELTY",
+      "notes": "DSIP requirement DSIP-EVAL-CRIT-NOVELTY has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.2-months-1-4",
+      "dsip_requirement": "DSIP-DELIVERABLE-KICKOFF",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-KICKOFF has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.3-months-5-7",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q2",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-Q2 has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.4-months-8-10",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q3",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-Q3 has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.5-months-11-14",
+      "dsip_requirement": "DSIP-DELIVERABLE-FINAL",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-FINAL has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.6-months-15-24-option",
+      "dsip_requirement": "DSIP-DELIVERABLE-OPTION-M19",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-OPTION-M19 has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md#9.6-months-15-24-option",
+      "dsip_requirement": "DSIP-DELIVERABLE-OPTION-M24",
+      "notes": "DSIP requirement DSIP-DELIVERABLE-OPTION-M24 has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "03_PROPOSAL/active-package/01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md",
+      "dsip_requirement": "DSIP-PAGE-LIMIT-TECH",
+      "notes": "DSIP requirement DSIP-PAGE-LIMIT-TECH has no proposal claim referencing it",
+      "proposal_claim": "",
+      "spec_section": "(dsip)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-SUB-ART-DATA-RIGHTS",
+      "notes": "owner_section=sbir_application; claim text-anchor only",
+      "proposal_claim": "AG-CLAIM-COMPLIANCE-DATA-RIGHTS",
+      "spec_section": "(unanchored)",
+      "status": "planned"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-SUB-ART-SAM-GOV",
+      "notes": "owner_section=sbir_application; claim text-anchor only",
+      "proposal_claim": "AG-CLAIM-COMPLIANCE-SAM-GOV",
+      "spec_section": "(unanchored)",
+      "status": "planned"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-PAGE-LIMIT-SLIDES",
+      "notes": "owner_section=technical_volume; claim text-anchor only",
+      "proposal_claim": "AG-CLAIM-PACKAGE-SLIDES-15",
+      "spec_section": "(unanchored)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-PAGE-LIMIT-WP",
+      "notes": "owner_section=technical_volume; claim text-anchor only",
+      "proposal_claim": "AG-CLAIM-PACKAGE-WHITE-PAPER-20PG",
+      "spec_section": "(unanchored)",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "tooling-versions.json",
+      "dsip_requirement": "",
+      "notes": "artifact exists on disk but no proposal claim references it; consider adding a claim_id to docs/proposal-claims-index.yml",
+      "proposal_claim": "",
+      "spec_section": "10",
+      "status": "evidence_without_claim"
+    },
+    {
+      "artifact_path": "reports/traceability_matrix.json",
+      "dsip_requirement": "DSIP-EVAL-CRIT-REPRO",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-VERIFICATION-PUBLIC-PACKAGE",
+      "spec_section": "10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "validation-report.json",
+      "dsip_requirement": "DSIP-EVAL-CRIT-REPRO",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-VERIFICATION-PUBLIC-PACKAGE",
+      "spec_section": "10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "reprochain/evidence/build_manifest.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-REPROCHAIN-PRE-DISCLOSURE",
+      "spec_section": "4",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "reprochain/evidence/mapping.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-REPROCHAIN-PRE-DISCLOSURE",
+      "spec_section": "4",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "reprochain/evidence/run_status.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-REPROCHAIN-PRE-DISCLOSURE",
+      "spec_section": "4",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "reprochain/evidence/build_manifest.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-REPROCHAIN-LIBWEBP-CVE-2023-4863",
+      "spec_section": "4",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "reprochain/evidence/run_status.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-REPROCHAIN-LIBWEBP-CVE-2023-4863",
+      "spec_section": "4",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "polydiff/evidence/regression.evidence.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-POLYDIFF-FACT-VECTOR",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "polydiff/regression/report.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-POLYDIFF-FACT-VECTOR",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "schema/fact-vector.schema.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-POLYDIFF-FACT-VECTOR",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "polydiff/regression/report.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-POLYDIFF-REDISCOVERY-3",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/element-x/graph.json",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q1",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-METRIC-GRAPH-THREADS-SIX",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/signal/graph.json",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q1",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-METRIC-GRAPH-THREADS-SIX",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/manifest.json",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q1",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-METRIC-PATH-CLASSES-EIGHT",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/element-x/graph.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-SIX-GRAPH-THREADS",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/signal/graph.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-SIX-GRAPH-THREADS",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/element-x/graph.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-TWO-PUBLIC-TARGETS",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/manifest.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-TWO-PUBLIC-TARGETS",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "extraction/output/signal/graph.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-V03-TWO-PUBLIC-TARGETS",
+      "spec_section": "6",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "smabench/results/latest/results.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-SMABENCH-THREE-RING",
+      "spec_section": "7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "schema/finding.schema.json",
+      "dsip_requirement": "",
+      "notes": "artifact exists on disk but no proposal claim references it; consider adding a claim_id to docs/proposal-claims-index.yml",
+      "proposal_claim": "",
+      "spec_section": "8",
+      "status": "evidence_without_claim"
+    },
+    {
+      "artifact_path": "schema/hash-chain.schema.json",
+      "dsip_requirement": "",
+      "notes": "artifact exists on disk but no proposal claim references it; consider adding a claim_id to docs/proposal-claims-index.yml",
+      "proposal_claim": "",
+      "spec_section": "8",
+      "status": "evidence_without_claim"
+    },
+    {
+      "artifact_path": "schema/recommendation.schema.json",
+      "dsip_requirement": "",
+      "notes": "artifact exists on disk but no proposal claim references it; consider adding a claim_id to docs/proposal-claims-index.yml",
+      "proposal_claim": "",
+      "spec_section": "8",
+      "status": "evidence_without_claim"
+    },
+    {
+      "artifact_path": "schema/tool-output.schema.json",
+      "dsip_requirement": "",
+      "notes": "artifact exists on disk but no proposal claim references it; consider adding a claim_id to docs/proposal-claims-index.yml",
+      "proposal_claim": "",
+      "spec_section": "8",
+      "status": "evidence_without_claim"
+    },
+    {
+      "artifact_path": "aegisgraph/safety.py",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-CLAIM-STATE-GOVERNANCE",
+      "spec_section": "8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "aegisgraph/score.py",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-CLAIM-STATE-GOVERNANCE",
+      "spec_section": "8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "schema/evidence.schema.json",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-CLAIM-STATE-GOVERNANCE",
+      "spec_section": "8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "validator/sanitize_check.py",
+      "dsip_requirement": "",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-NOVEL-CLAIM-STATE-GOVERNANCE",
+      "spec_section": "8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "",
+      "dsip_requirement": "DSIP-DELIVERABLE-Q1",
+      "notes": "owner_section=management_plan; claim text-anchor only",
+      "proposal_claim": "AG-CLAIM-METRIC-RECOMMENDATIONS-TWELVE",
+      "spec_section": "8.2",
+      "status": "claim_without_evidence"
+    },
+    {
+      "artifact_path": "aegisgraph/safety.py",
+      "dsip_requirement": "DSIP-EVAL-CRIT-SAFETY",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-METRIC-SAFETY-SCAN-CLEAN",
+      "spec_section": "8.3",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "validator/sanitize_check.py",
+      "dsip_requirement": "DSIP-EVAL-CRIT-SAFETY",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-METRIC-SAFETY-SCAN-CLEAN",
+      "spec_section": "8.3",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "aegisgraph/export.py",
+      "dsip_requirement": "DSIP-EVAL-CRIT-SAFETY",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-VERIFICATION-EXPORT-HUMAN-GATE",
+      "spec_section": "8.5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "tests/test_export_private_complete.py",
+      "dsip_requirement": "DSIP-EVAL-CRIT-SAFETY",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-VERIFICATION-EXPORT-HUMAN-GATE",
+      "spec_section": "8.5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "validator/sanitize_check.py",
+      "dsip_requirement": "DSIP-EVAL-CRIT-SAFETY",
+      "notes": "evidence present",
+      "proposal_claim": "AG-CLAIM-VERIFICATION-EXPORT-HUMAN-GATE",
+      "spec_section": "8.5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?engine=polydiff]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "PolyDiff URL family \u2014 7 wrappers, 8 historical CVE rediscoveries; tier P1 pass",
+      "proposal_claim": "C-NEW-POLYDIFF-URL-V04",
+      "spec_section": "6.7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?family=image]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "PolyDiff image family anchored to CVE-2023-4863 + 3 historical bugs",
+      "proposal_claim": "C-NEW-POLYDIFF-IMAGE-V04",
+      "spec_section": "6.7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?family=deeplink]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "PolyDiff deeplink family \u2014 Android intent + iOS universal link wrappers, 4 anchored cases",
+      "proposal_claim": "C-NEW-POLYDIFF-DEEPLINK-V04",
+      "spec_section": "6.7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?family=opengraph]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "PolyDiff opengraph family \u2014 4 historical bugs anchored",
+      "proposal_claim": "C-NEW-POLYDIFF-OG-V04",
+      "spec_section": "6.7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?family=qr%2Bproto]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "PolyDiff qr + proto families complete the 6-family lineup",
+      "proposal_claim": "C-NEW-POLYDIFF-QR-PROTO-V04",
+      "spec_section": "6.7",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?engine=harnessgen]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "HarnessGen libwebp native harness scaffolded; 4 additional harnesses (Signal LinkPreviewUtil, matrix-rust-sdk MessageType, +2 more)",
+      "proposal_claim": "C-NEW-HARNESSGEN-LIBWEBP-V04",
+      "spec_section": "6.8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#crashes",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "Crash records land at v0.5 after first 24h fuzz run + counsel review (empty by design at v0.4)",
+      "proposal_claim": "C-NEW-HARNESSGEN-CRASHES-V05",
+      "spec_section": "6.8",
+      "status": "planned"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?engine=invariantcheck]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "InvariantCheck library v1 \u2014 15 invariants total (5 fully encoded, 10 rich stubs)",
+      "proposal_claim": "C-NEW-INVARIANTCHECK-LIB-V1",
+      "spec_section": "6.9",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#invariant_violations",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "AG-IV-* records land at v0.5 once ground-truthed on demo-vulnerable-app and Rule 8 location redaction applies (empty in public at v0.4)",
+      "proposal_claim": "C-NEW-INVARIANTCHECK-VIOLATIONS-V05",
+      "spec_section": "6.9",
+      "status": "planned"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#discovery_runs[?engine=crosssma]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "CrossSMA 24-cell matrix: 4 targets x 6 patterns; structural-only validation_state",
+      "proposal_claim": "C-NEW-CROSSSMA-MATRIX-V04",
+      "spec_section": "6.10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#cross_target_candidates",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "6 AG-XSMA-* candidates anchored to v0.4 PolyDiff families",
+      "proposal_claim": "C-NEW-CROSSSMA-CANDIDATES-V04",
+      "spec_section": "6.10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v0.4-evidence.json#disclosure_events",
+      "dsip_requirement": "DSIP-PII-COMPLIANCE",
+      "notes": "Disclosure pipeline scaffold landed (ledger.py, vendor_registry.yaml, templates/); real entries land at v0.5 (empty in public at v0.4)",
+      "proposal_claim": "C-NEW-DISCLOSURE-SCAFFOLD-V04",
+      "spec_section": "10",
+      "status": "planned"
+    },
+    {
+      "artifact_path": "manifest.json#safety_posture",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "validator-v2 \u2014 sanitize-check Rules 7/8/9 + 5 new BLOCKING_PATTERNS land on stream/validator-export",
+      "proposal_claim": "C-NEW-VALIDATOR-V2-V04",
+      "spec_section": "10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v1.0-evidence.json#cross_target_candidates[?candidate_id=AG-XSMA-VALIDATED-SIG-GP-001-ELX]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "CrossSMA validated cell \u2014 1 of 24 cells confirmed_reachable; Wire/Telegram deferred_to_M22.1 honestly",
+      "proposal_claim": "C-NEW-CROSSSMA-VALIDATED-V10",
+      "spec_section": "6.10",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v1.0-evidence.json#discovery_runs[?engine=harnessgen]",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "HarnessGen 5/5 entry points scaffolded: libwebp + libavif native; Signal LinkPreviewUtil + Element X MediaRepository JVM; matrix-rust-sdk MessageType Rust",
+      "proposal_claim": "C-NEW-HARNESSGEN-5OF5-V10",
+      "spec_section": "6.8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "baseline-tool-delta/delta-report.json",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "Baseline-tool delta report scaffold (CodeQL/Semgrep/MobSF vs AegisGraph); MOBSF-LIMITED.md honestly recorded (APK absent under anchor-only policy)",
+      "proposal_claim": "C-NEW-BASELINE-DELTA-V10",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "baseline-tool-delta/signal_android/MOBSF-LIMITED.md",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "MOBSF-LIMITED honest record for Signal Android target \u2014 APK absent under anchor-only policy",
+      "proposal_claim": "C-NEW-BASELINE-DELTA-V10",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "baseline-tool-delta/element_x_android/MOBSF-LIMITED.md",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "MOBSF-LIMITED honest record for Element X Android target \u2014 APK absent under anchor-only policy",
+      "proposal_claim": "C-NEW-BASELINE-DELTA-V10",
+      "spec_section": "5",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v1.0-evidence.json#m14_demo_dryrun_summary",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "M14 demo dry-run script (scripts/m14_demo_dryrun.sh) \u2014 end-to-end pipeline orchestration; status_counts: 5 success / 1 skipped_runner_blocked / 1 skipped_counsel_blocked",
+      "proposal_claim": "C-NEW-M14-DRYRUN-V10",
+      "spec_section": "9",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v1.0-evidence.json#invariant_violations",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "InvariantCheck reached 15/15 production invariants (was 12/15 at v0.4); SARIF stays engineering-private; public AG-IV-* records held pending Rule 8 redaction + counsel review",
+      "proposal_claim": "C-NEW-INVARIANTCHECK-15OF15-V10",
+      "spec_section": "6.9",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "(engineering-private)",
+      "dsip_requirement": "DSIP-PII-EVIDENCE",
+      "notes": "Reviewer workbench CLI + make reviewer-packet shipped on stream/integration (M8-M10); reviewer-packet contents land engineering-private",
+      "proposal_claim": "C-NEW-WORKBENCH-CLI-V10",
+      "spec_section": "8",
+      "status": "ok"
+    },
+    {
+      "artifact_path": "evidence/aegisgraph-v1.0-evidence.json#disclosure_events",
+      "dsip_requirement": "DSIP-PII-COMPLIANCE",
+      "notes": "Disclosure pipeline scaffold complete; ledger entries zero pending T-M1.4/T-M1.5 counsel review (honest)",
+      "proposal_claim": "C-NEW-DISCLOSURE-V10",
+      "spec_section": "10",
+      "status": "planned"
+    }
+  ],
+  "safety_posture": "sanitized_candidate",
+  "spec_sections": [
+    {
+      "level": 2,
+      "section": "0",
+      "title": "How to Use This Document"
+    },
+    {
+      "level": 2,
+      "section": "1",
+      "title": "Strategic Context"
+    },
+    {
+      "level": 3,
+      "section": "1.1",
+      "title": "What we are trying to prove"
+    },
+    {
+      "level": 3,
+      "section": "1.2",
+      "title": "What we are explicitly not doing"
+    },
+    {
+      "level": 3,
+      "section": "1.3",
+      "title": "What \"done\" looks like"
+    },
+    {
+      "level": 3,
+      "section": "1.4",
+      "title": "Stretch goals (only if everything above is real)"
+    },
+    {
+      "level": 2,
+      "section": "2",
+      "title": "The Two Headline Deliverables (decisions and rationale)"
+    },
+    {
+      "level": 3,
+      "section": "2.1",
+      "title": "Why CVE-2023-4863 specifically"
+    },
+    {
+      "level": 3,
+      "section": "2.2",
+      "title": "Why differential URL/OpenGraph parser fuzzing as the novel capability"
+    },
+    {
+      "level": 3,
+      "section": "2.3",
+      "title": "What success means for each"
+    },
+    {
+      "level": 2,
+      "section": "3",
+      "title": "Repository Architecture & Tooling"
+    },
+    {
+      "level": 3,
+      "section": "3.1",
+      "title": "Top-level layout"
+    },
+    {
+      "level": 3,
+      "section": "3.2",
+      "title": "Languages, runtimes, build systems"
+    },
+    {
+      "level": 3,
+      "section": "3.3",
+      "title": "Tooling baseline (the \"CodeQL not on PATH\" embarrassment, fixed)"
+    },
+    {
+      "level": 3,
+      "section": "3.4",
+      "title": "Reproducibility contract"
+    },
+    {
+      "level": 2,
+      "section": "4",
+      "title": "Workstream A \u2014 ReproChain (CVE-2023-4863)"
+    },
+    {
+      "level": 3,
+      "section": "4.1",
+      "title": "Background you'll want to load before working on this"
+    },
+    {
+      "level": 3,
+      "section": "4.2",
+      "title": "Phase A1 \u2014 Vendor the library and stand up a harness"
+    },
+    {
+      "level": 3,
+      "section": "4.3",
+      "title": "Phase A2 \u2014 Reproduce the crash"
+    },
+    {
+      "level": 3,
+      "section": "4.4",
+      "title": "Phase A3 \u2014 Confirm the fix and bound the claims"
+    },
+    {
+      "level": 3,
+      "section": "4.5",
+      "title": "Phase A4 \u2014 Static reachability in Signal Android"
+    },
+    {
+      "level": 3,
+      "section": "4.6",
+      "title": "Phase A5 \u2014 AegisGraph evidence record"
+    },
+    {
+      "level": 3,
+      "section": "4.7",
+      "title": "Phase A6 \u2014 \"Pre-disclosure simulation\""
+    },
+    {
+      "level": 3,
+      "section": "4.8",
+      "title": "ReproChain deliverables summary"
+    },
+    {
+      "level": 2,
+      "section": "5",
+      "title": "Workstream B \u2014 PolyDiff (differential parser fuzzing)"
+    },
+    {
+      "level": 3,
+      "section": "5.1",
+      "title": "What PolyDiff actually does"
+    },
+    {
+      "level": 3,
+      "section": "5.2",
+      "title": "Phase B1 \u2014 Parser inventory and selection"
+    },
+    {
+      "level": 3,
+      "section": "5.3",
+      "title": "Phase B2 \u2014 Wrapper harness design"
+    },
+    {
+      "level": 3,
+      "section": "5.4",
+      "title": "Phase B3 \u2014 Fact-vector schema"
+    },
+    {
+      "level": 3,
+      "section": "5.5",
+      "title": "Phase B4 \u2014 Disagreement detector"
+    },
+    {
+      "level": 3,
+      "section": "5.6",
+      "title": "Phase B5 \u2014 Security-relevance classifier"
+    },
+    {
+      "level": 3,
+      "section": "5.7",
+      "title": "Phase B6 \u2014 Regression set (the credibility anchor)"
+    },
+    {
+      "level": 3,
+      "section": "5.8",
+      "title": "Phase B7 \u2014 Fuzzer driver"
+    },
+    {
+      "level": 3,
+      "section": "5.9",
+      "title": "Phase B8 \u2014 Triage and reporting"
+    },
+    {
+      "level": 3,
+      "section": "5.10",
+      "title": "Phase B9 \u2014 Map disagreements back to SMA codepaths"
+    },
+    {
+      "level": 3,
+      "section": "5.11",
+      "title": "PolyDiff deliverables summary"
+    },
+    {
+      "level": 2,
+      "section": "6",
+      "title": "Workstream C \u2014 Real Automated Extraction"
+    },
+    {
+      "level": 3,
+      "section": "6.1",
+      "title": "Why this exists"
+    },
+    {
+      "level": 3,
+      "section": "6.2",
+      "title": "Phase C1 \u2014 CodeQL queries"
+    },
+    {
+      "level": 3,
+      "section": "6.3",
+      "title": "Phase C2 \u2014 Semgrep ruleset"
+    },
+    {
+      "level": 3,
+      "section": "6.4",
+      "title": "Phase C3 \u2014 MobSF integration (done properly)"
+    },
+    {
+      "level": 3,
+      "section": "6.5",
+      "title": "Phase C4 \u2014 Manifest analyzer"
+    },
+    {
+      "level": 3,
+      "section": "6.6",
+      "title": "Phase C5 \u2014 Graph assembler"
+    },
+    {
+      "level": 2,
+      "section": "7",
+      "title": "Workstream D \u2014 SMABench Made Real"
+    },
+    {
+      "level": 3,
+      "section": "7.1",
+      "title": "Ring 1 \u2014 Synthetic harnesses with actual code"
+    },
+    {
+      "level": 3,
+      "section": "7.2",
+      "title": "Ring 2 \u2014 Wired to extraction"
+    },
+    {
+      "level": 3,
+      "section": "7.3",
+      "title": "Ring 3 \u2014 Placeholder, future"
+    },
+    {
+      "level": 3,
+      "section": "7.4",
+      "title": "Bench runner"
+    },
+    {
+      "level": 2,
+      "section": "8",
+      "title": "Cross-cutting \u2014 Evidence Schema, Audit, and Safety"
+    },
+    {
+      "level": 3,
+      "section": "8.1",
+      "title": "Evidence schema (`schema/evidence.schema.json`)"
+    },
+    {
+      "level": 3,
+      "section": "8.2",
+      "title": "Recommendation contract"
+    },
+    {
+      "level": 3,
+      "section": "8.3",
+      "title": "Safety scanner"
+    },
+    {
+      "level": 3,
+      "section": "8.4",
+      "title": "Audit trail"
+    },
+    {
+      "level": 3,
+      "section": "8.5",
+      "title": "Disclosure policy (because PolyDiff might find live bugs)"
+    },
+    {
+      "level": 2,
+      "section": "9",
+      "title": "Phase Plan and Milestones"
+    },
+    {
+      "level": 3,
+      "section": "9.1",
+      "title": "Phase ordering"
+    },
+    {
+      "level": 3,
+      "section": "9.2",
+      "title": "Definition-of-done gates per phase"
+    },
+    {
+      "level": 3,
+      "section": "9.3",
+      "title": "Demo points (for internal review and eventual proposal use)"
+    },
+    {
+      "level": 2,
+      "section": "10",
+      "title": "Risks, Open Questions, and Decisions Only the Human Can Make"
+    },
+    {
+      "level": 3,
+      "section": "10.1",
+      "title": "Risks"
+    },
+    {
+      "level": 3,
+      "section": "10.2",
+      "title": "Open questions that block work"
+    },
+    {
+      "level": 3,
+      "section": "10.3",
+      "title": "Decisions only you can make"
+    },
+    {
+      "level": 3,
+      "section": "10.4",
+      "title": "What this spec does not address (and why)"
+    },
+    {
+      "level": 2,
+      "section": "11",
+      "title": "Appendix \u2014 File-by-file checklist for Phase 0"
+    }
+  ],
+  "summary": {
+    "claim_without_evidence": 17,
+    "evidence_without_claim": 5,
+    "ok": 39,
+    "planned": 5,
+    "total": 66
+  },
+  "tool_output_type": "traceability_matrix",
+  "v04_additions_note": "Extended with 13 v0.4 engine rows (PolyDiff\u00d75 families, HarnessGen, InvariantCheck library v1, CrossSMA 24-cell matrix, disclosure scaffold, validator-v2). Status counts updated.",
+  "v10_additions_note": "v1.0 rows added (9): CrossSMA validated cell, HarnessGen 5/5 entry points, baseline-tool delta + MOBSF-LIMITED records, M14 demo dry-run summary, InvariantCheck 15/15 production, reviewer workbench, disclosure pipeline scaffold (planned).",
+  "version": "v1.0"
+}

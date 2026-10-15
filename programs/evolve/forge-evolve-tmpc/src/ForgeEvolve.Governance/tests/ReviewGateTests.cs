@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H) tests.
+// Evolve for TMPC — Governance workstream (WS-H) tests.
 //
 // Gate-logic tests pinned to the pre-registered thresholds (pre-registration.md):
 //   * KG1 passes with F1 >= 0.85 + oracle harness; fails when F1 < 0.85.

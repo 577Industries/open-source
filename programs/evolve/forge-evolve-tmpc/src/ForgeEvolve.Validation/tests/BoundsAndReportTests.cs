@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Chernoff bound, Equivalence-Composability, and report serialization.
+// Evolve for TMPC — Chernoff bound, Equivalence-Composability, and report serialization.
 
 using ForgeEvolve.Contracts;
 using Xunit;

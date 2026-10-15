@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H).
+// Evolve for TMPC — Governance workstream (WS-H).
 //
 // GovernanceService is the concrete IGovernance: it records every pipeline action to the
 // tamper-evident hashchain (the IGOM), exposes the current Merkle root, and evaluates the

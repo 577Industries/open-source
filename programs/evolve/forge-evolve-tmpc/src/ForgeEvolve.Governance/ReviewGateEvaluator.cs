@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H).
+// Evolve for TMPC — Governance workstream (WS-H).
 //
 // ReviewGateEvaluator encodes the human-in-the-loop review gates named in
 // governance/REVIEW_GATES.md and governance/pre-registration.md, and turns supplied evidence

@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — statistical equivalence bounds.
+// Evolve for TMPC — statistical equivalence bounds.
 //
 // Two quantities, both pre-registered in governance/pre-registration.md:
 //

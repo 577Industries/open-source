@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // ProvenanceLedger — tamper-evident SHA-256 hashchain + Merkle root.
 //
-// PART OF: FORGE EVOLVE for TMPC, Cyber/cATO overlay (Stage 5).
+// PART OF: Evolve for TMPC, Cyber/cATO overlay (Stage 5).
 //
 // This is the C# mirror of the forge-os hashchain-audit pattern
 // (hashchain-audit/src/types.ts: AuditEntry / MerkleAnchor / Ledger):

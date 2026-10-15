@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ForgeEvolve.Cli — the FORGE EVOLVE for TMPC Phase-3 integration driver.
+// ForgeEvolve.Cli — the Evolve for TMPC Phase-3 integration driver.
 //
 // Runs the FULL eight-stage pipeline end-to-end on the synthetic, unclassified surrogate,
 // OFFLINE and keyless, and writes the cited evidence artifacts under --out (results/run/):
@@ -77,7 +77,7 @@ internal static class Program
         Directory.CreateDirectory(outDir);
 
         Console.WriteLine("==================================================================");
-        Console.WriteLine(" FORGE EVOLVE for TMPC — full pipeline (offline, keyless, deterministic)");
+        Console.WriteLine(" Evolve for TMPC — full pipeline (offline, keyless, deterministic)");
         Console.WriteLine("==================================================================");
         Console.WriteLine($"surrogate : {Rel(repoRoot, surrogateDir)}");
         Console.WriteLine($"out       : {Rel(repoRoot, outDir)}");
@@ -377,7 +377,7 @@ internal static class Program
 
         // ── STAGE 8 — HONEST SUMMARY ─────────────────────────────────────────────
         Console.WriteLine("══════════════════════════════════════════════════════════════════");
-        Console.WriteLine(" FORGE EVOLVE for TMPC — HEADLINE METRICS (honest summary)");
+        Console.WriteLine(" Evolve for TMPC — HEADLINE METRICS (honest summary)");
         Console.WriteLine("══════════════════════════════════════════════════════════════════");
         Console.WriteLine($"  Discovery   : C# parse rate {csharpParseRate:P1}; god-method CC {god.Complexity.CyclomaticComplexity}; rule F1 {f1.F1:F4}; crypto findings {discovery.CryptoFindings.Count}");
         Console.WriteLine($"  Planner     : {plan.Units.Count} candidate microservice boundaries proposed (heuristic)");

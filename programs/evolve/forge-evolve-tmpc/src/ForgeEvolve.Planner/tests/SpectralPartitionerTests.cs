@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SpectralPartitionerTests — synthetic-graph unit tests for the Fiedler bipartition.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner tests (workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner tests (workstream WS-C).
 //
 // Validates the spectral partitioner independently of the surrogate on a KNOWN two-community graph
 // (two cliques joined by a single weak bridge). The Fiedler-vector bipartition must recover the two

@@ -94,7 +94,7 @@ internal static class BusinessRulesTtl
     public static string Render(IReadOnlyList<BusinessRule> rules)
     {
         var sb = new StringBuilder();
-        sb.Append("# business-rules.ttl — rules extracted by the FORGE EVOLVE Discovery engine\n");
+        sb.Append("# business-rules.ttl — rules extracted by the Evolve Discovery engine\n");
         sb.Append("# from the synthetic, unclassified surrogate. Scored (F1) against\n");
         sb.Append("# surrogate/gold/business-rules.gold.ttl. Deterministic; no timestamps.\n\n");
         sb.Append("@prefix fe:   <https://577industries.com/forge-evolve/ns#> .\n");

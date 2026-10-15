@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — IClarProvider implementation.
+// Evolve for TMPC — IClarProvider implementation.
 //
 // Stage between Discovery and the Planner/Transformer: lifts source modules into CLAR
 // JSON-LD and validates CLAR documents against the FROZEN clar-spec/CLAR.schema.json.

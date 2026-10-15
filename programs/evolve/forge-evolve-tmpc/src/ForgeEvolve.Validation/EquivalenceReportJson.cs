@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — EquivalenceReport serializer.
+// Evolve for TMPC — EquivalenceReport serializer.
 //
 // Writes the frozen EquivalenceReport DTO to results/equivalence-report.json (the artifact the
 // proposal cites). Uses System.Text.Json defaults (the contract is designed for them):

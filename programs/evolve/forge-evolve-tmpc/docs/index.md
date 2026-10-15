@@ -1,5 +1,5 @@
 ---
-title: FORGE EVOLVE for TMPC
+title: Evolve for TMPC
 template: home.html
 hide:
   - navigation
@@ -8,7 +8,7 @@ hide:
 
 ## About this site
 
-This is the public companion site for **FORGE EVOLVE for TMPC** - 577 Industries' U.S. Navy SBIR
+This is the public companion site for **Evolve for TMPC** - 577 Industries' U.S. Navy SBIR
 Phase I work under topic **DON26BZ01-NV013** ("AI-Assisted Modernization and Optimization of Theater
 Mission Planning Center (TMPC) Software"). It mirrors the repository's own Markdown verbatim, so every
 claim here is the claim in the repo - no new assertions are introduced.

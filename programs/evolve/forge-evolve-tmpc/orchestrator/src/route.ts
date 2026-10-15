@@ -1,5 +1,5 @@
 /**
- * FORGE EVOLVE for TMPC — TypeScript live-mode bridge.
+ * Evolve for TMPC — TypeScript live-mode bridge.
  *
  * This module is the "already-built reuse" proof: the Tool Orchestrator's Local (sovereign /
  * air-gapped) and Cloud modes select a model through the published @577-industries/model-router

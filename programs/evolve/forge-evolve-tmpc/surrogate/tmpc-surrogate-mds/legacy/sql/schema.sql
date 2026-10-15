@@ -1,7 +1,7 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 -- schema.sql — SYNTHETIC, INTENTIONALLY-LEGACY mission-distribution schema.
 --
--- PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+-- PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 --
 -- Models legacy SQL technical debt typical of a long-lived MDS-like store:
 --   * FLOAT (approximate, precision-losing) columns used for distance/coordinate values

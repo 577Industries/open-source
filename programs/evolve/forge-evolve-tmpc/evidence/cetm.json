@@ -1,6 +1,6 @@
 {
   "cetm_version": "0.1.0",
-  "description": "Claim -> Evidence Traceability Matrix for the FORGE EVOLVE for TMPC proposal and repository. Every claim is A (anchored to a runnable artifact/test in this repo), E (external citation), or P (preliminary/surrogate prior art, with a mandatory in-text label). A-rows point at the committed reference run (results/reference/) or a test; reviewers reproduce with `make demo` / `dotnet test`. All A/E metrics are measured on the synthetic, unclassified surrogate and are preliminary; none is government-validated.",
+  "description": "Claim -> Evidence Traceability Matrix for the Evolve for TMPC proposal and repository. Every claim is A (anchored to a runnable artifact/test in this repo), E (external citation), or P (preliminary/surrogate prior art, with a mandatory in-text label). A-rows point at the committed reference run (results/reference/) or a test; reviewers reproduce with `make demo` / `dotnet test`. All A/E metrics are measured on the synthetic, unclassified surrogate and are preliminary; none is government-validated.",
   "claims": [
     {
       "claim_id": "C-DATA-EXCL",
@@ -136,25 +136,25 @@
     },
     {
       "claim_id": "C-FORGE-BENCH",
-      "claim_text": "FORGE EVOLVE achieves high module-level behavioral-equivalence pass rates and multi-tool orchestration quality gains on prior modernization benchmarks.",
+      "claim_text": "Withdrawn: no published Evolve benchmark results exist. An internal draft paper cited here earlier contained generated figures and is withdrawn as a citation (see ERRATUM.md).",
       "source_location": "Vol2/§d",
       "claim_type": "quantitative",
       "status": "P",
-      "evidence_artifact": "forge-evolve.pdf (internal prior art)",
+      "evidence_artifact": "ERRATUM.md",
       "evidence_hash": null,
       "verification_command": null,
-      "label": "Internal/preliminary prior art for COBOL/Fortran/Ada/VB6 -> Java/Python/Rust/TS; not government-validated; the C#/.NET/JS/SQL capability is the newly developed extension demonstrated in this repository."
+      "label": "No published results exist; an internal draft paper cited here earlier contained generated figures and is withdrawn as a citation (see ERRATUM.md). The C#/.NET/JS/SQL capability is the newly developed extension demonstrated in this repository."
     },
     {
       "claim_id": "C-AIRGAP-QUALITY",
-      "claim_text": "FORGE EVOLVE's air-gapped open-weight local-model mode reaches roughly 94% of cloud-frontier quality on prior internal benchmarks.",
+      "claim_text": "Withdrawn: the air-gapped local-model quality figure cited here earlier came from the withdrawn draft paper and was never measured; no local or cloud model is called anywhere in this repository (see ERRATUM.md).",
       "source_location": "Vol2/§c; Vol2/§d",
       "claim_type": "quantitative",
       "status": "P",
-      "evidence_artifact": "forge-evolve.pdf (internal prior art)",
+      "evidence_artifact": "ERRATUM.md",
       "evidence_hash": null,
       "verification_command": null,
-      "label": "Internal/preliminary prior-art benchmark; not re-measured on the TMPC surrogate; not government-validated."
+      "label": "No published results exist; an internal draft paper cited here earlier contained generated figures and is withdrawn as a citation (see ERRATUM.md)."
     }
   ]
 }

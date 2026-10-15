@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SourceLoader — turns files on disk into SourceArtifacts (with SHA-256 provenance).
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // Maps file extensions to SourceLanguage and computes the lowercase-hex SHA-256 the contract's
 // SourceArtifact.ContentSha256 requires. Used by tests (and any host) to feed the real surrogate

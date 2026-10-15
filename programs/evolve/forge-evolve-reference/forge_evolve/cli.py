@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Forge Evolve CLI Entry Point (`forge-evolve`)
+Evolve CLI Entry Point (`forge-evolve`), design study
 Supports subcommands:
   - forge-evolve ingest --step benchmarks/AF_ACP_7740_Bulkhead.stp
   - forge-evolve verify-ia --policy schemas/ia_compliance.rego
@@ -55,8 +55,8 @@ def cmd_verify_ia(args: argparse.Namespace) -> int:
     ledger = ZeroTrustMerkleLedger(package_id="TDP-DAF-ACP-7740-REV-C")
     policy_path = pathlib.Path(args.policy)
     verdict = ledger.evaluate_ia_compliance(faces, callouts, rego_policy_path=policy_path)
-    c1 = ledger.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://afmc.af.mil/plm/teamcenter-exporter", faces, callouts)
-    c2 = ledger.commit_state("AS_BUILT", "TAIL-XQ67A-042", "spiffe://plant42.af.mil/qa/cmm-cell-01", faces, callouts)
+    c1 = ledger.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://example.invalid/plm/teamcenter-exporter", faces, callouts)
+    c2 = ledger.commit_state("AS_BUILT", "TAIL-SYNTH-042", "spiffe://example.invalid/qa/cmm-cell-01", faces, callouts)
 
     output = {
         "command": "verify-ia",
@@ -87,7 +87,7 @@ def cmd_plan_path(args: argparse.Namespace) -> int:
         print(f"Unsupported dialect: {dialect}", file=sys.stderr)
         return 1
 
-    print(f"# === Forge Evolve URTS Post-Processor ({dialect}) ===")
+    print(f"# === Evolve URTS Post-Processor ({dialect}) ===")
     print(f"# Waypoints: {stats['total_waypoints']} | Stations: {stats['mobile_stations_used']} | Min 6-Link Clearance: {stats['minimum_6link_swept_clearance_mm']} mm")
     print(program)
     return 0
@@ -121,7 +121,7 @@ def cmd_benchmark(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="forge-evolve",
-        description="Forge Evolve — Deterministic TDP & Robotic Equivalence CLI (577 Industries Inc.)",
+        description="Evolve: Deterministic TDP & Robotic Equivalence CLI, design study (577 Industries Inc.)",
     )
     sub = parser.add_subparsers(dest="subcommand", required=True)
 
@@ -153,7 +153,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_plan.set_defaults(func=cmd_plan_path)
 
-    p_bench = sub.add_parser("benchmark", help="Run empirical verification benchmark suites")
+    p_bench = sub.add_parser("benchmark", help="Run synthetic design-target suites (seeded draws and constants, not measurements)")
     p_bench.add_argument(
         "--suite",
         type=str,

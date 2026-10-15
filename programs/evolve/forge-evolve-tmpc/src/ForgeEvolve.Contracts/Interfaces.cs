@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — frozen module interfaces (the integration seams).
+// Evolve for TMPC — frozen module interfaces (the integration seams).
 //
 // Each pipeline stage implements exactly one of these. Stages depend ONLY on this contract
 // assembly, never on each other's implementations — that is what lets the eight workstreams be

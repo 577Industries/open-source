@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SbomBuilder — minimal, valid CycloneDX 1.5 SBOM for the analyzed component.
 //
-// PART OF: FORGE EVOLVE for TMPC, Cyber/cATO overlay (Stage 5).
+// PART OF: Evolve for TMPC, Cyber/cATO overlay (Stage 5).
 //
 // DEVIATION / offline note:
 //   The spec allows either shelling out to the `CycloneDX` dotnet tool OR constructing a

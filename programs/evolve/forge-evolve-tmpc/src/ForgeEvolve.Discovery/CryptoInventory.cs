@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // CryptoInventory — weak-crypto and hardcoded-secret scan over all surrogate sources.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // HONESTY NOTE: this reports ONLY what is actually present. The synthetic surrogate contains NO
 // cryptographic primitives (no MD5/DES/SHA1/RSA/etc.), so the weak-crypto count is legitimately

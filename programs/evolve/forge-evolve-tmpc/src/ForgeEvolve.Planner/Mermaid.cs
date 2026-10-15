@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Mermaid — render a risk-annotated flowchart of the migration units + their seams.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner (Stage 2, workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner (Stage 2, workstream WS-C).
 //
 // Produces a Mermaid `flowchart LR` string: one node per migration unit (labeled with the proposed
 // service name, the unit id, and its aggregate risk), edges for the inter-unit dependencies
@@ -24,7 +24,7 @@ internal static class Mermaid
     {
         var sb = new StringBuilder();
         sb.AppendLine("flowchart LR");
-        sb.AppendLine("    %% FORGE EVOLVE — Migration Plan (units = candidate microservices, edges = strangler-fig seams)");
+        sb.AppendLine("    %% Evolve — Migration Plan (units = candidate microservices, edges = strangler-fig seams)");
         sb.AppendLine("    %% Node label: [order] ServiceName / risk=AggregateRiskScore. Heuristic proposal on the synthetic surrogate.");
 
         var orderIndex = new Dictionary<string, int>(StringComparer.Ordinal);

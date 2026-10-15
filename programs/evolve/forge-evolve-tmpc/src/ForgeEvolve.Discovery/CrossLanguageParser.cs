@@ -1,14 +1,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // CrossLanguageParser — lightweight, HEURISTIC parsing of the non-C# surrogate.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // HONESTY NOTE: C# is parsed with Roslyn (a real AST). JavaScript, SQL and VB6 here are parsed
 // with deliberately LIGHTWEIGHT regex/heuristic recognizers — enough to (a) confirm the file is
 // the expected language and is structurally sane, (b) count it for the per-language ParseStats,
 // and (c) emit a coarse ModuleNode (function / procedure / table) with a syntactic-CC estimate.
-// These are NOT full grammars. In production FORGE EVOLVE uses real ANTLR grammars for VB6/SQL
-// and an ESTree parser for JS; the heuristic recognizers below are the keyless/offline demo path.
+// These are NOT full grammars. No ANTLR, Tree-sitter or ESTree front-end exists in this
+// repository; the keyword probes below are the only JS/SQL/VB6 recognizers (see ERRATUM.md).
 // The pre-registered "≥95% parse" metric is measured on the C# (Roslyn) path only.
 // ─────────────────────────────────────────────────────────────────────────────
 

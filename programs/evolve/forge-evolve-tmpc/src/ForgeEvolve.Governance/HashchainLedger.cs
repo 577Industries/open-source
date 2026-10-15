@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H).
+// Evolve for TMPC — Governance workstream (WS-H).
 //
 // HashchainLedger is the Immutable Governance Object Model (IGOM): a tamper-evident,
 // append-only SHA-256 hashchain with a binary Merkle root over all entries to date.

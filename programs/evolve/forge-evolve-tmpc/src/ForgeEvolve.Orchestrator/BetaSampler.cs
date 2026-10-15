@@ -8,7 +8,7 @@ namespace ForgeEvolve.Orchestrator;
 /// Beta(α, β) is sampled as X / (X + Y) where X ~ Gamma(α, 1) and Y ~ Gamma(β, 1). Gamma draws
 /// use the Marsaglia–Tsang method, which is fast and accurate for shape ≥ 1; for shape &lt; 1 we
 /// boost the shape and apply the standard u^(1/α) correction. Because the supplied
-/// <see cref="Random"/> is seedable, every sample sequence is reproducible — load-bearing for the
+/// <see cref="Random"/> is seedable, every sample sequence is reproducible, which the
 /// deterministic reviewer demo and the unit tests.
 /// </remarks>
 public static class BetaSampler

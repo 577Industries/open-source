@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "forge-evolve-reference"
+name = "forge-evolve-tdp-design-study"
 version = "2.4.0"
-description = "Forge Evolve — Deterministic TDP Modernization (DAF27BZ01-DV008) & Autonomous TDP-to-Path Robotic Task Specification (DAF27BZ01-DV012) Reference Engine"
+description = "Evolve: TDP Modernization (DAF27BZ01-DV008) & TDP-to-Path Robotic Task Specification (DAF27BZ01-DV012) design-study reference engine. Numbers it emits are synthetic design targets, not measurements."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
@@ -30,7 +30,7 @@ Repository = "https://github.com/577Industries/forge-evolve-reference"
 forge-evolve = "forge_evolve.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["forge_evolve", "forge_evolve_engine.py", "run_adversarial_benchmarks.py"]
+packages = ["forge_evolve"]
 dev-mode-dirs = ["."]
 
 [tool.pytest.ini_options]

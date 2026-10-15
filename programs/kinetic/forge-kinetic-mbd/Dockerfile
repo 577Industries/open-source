@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-LABEL org.opencontainers.image.title="Forge Evolve Reference Engine" \
+LABEL org.opencontainers.image.title="Evolve Reference Engine (design study)" \
       org.opencontainers.image.vendor="577 Industries Inc." \
       org.opencontainers.image.authors="Thomas G. Waweru <info@577industries.com>" \
       org.opencontainers.image.url="https://www.577industries.com/evolve" \

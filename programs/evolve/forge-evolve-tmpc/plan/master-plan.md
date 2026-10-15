@@ -1,4 +1,4 @@
-# Master Plan - FORGE EVOLVE for TMPC
+# Master Plan - Evolve for TMPC
 
 This is the execution map for the build. Full program plan is held privately by 577 Industries.
 

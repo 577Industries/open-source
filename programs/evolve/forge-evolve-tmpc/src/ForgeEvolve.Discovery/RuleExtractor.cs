@@ -1,14 +1,16 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // RuleExtractor — OFFLINE, DETERMINISTIC business-rule extraction from the C# AST.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
-// PRODUCTION vs. DEMO PATH:
-//   In production, FORGE EVOLVE extracts business rules with an LLM ENSEMBLE (majority vote across
-//   models) — that is the path the BusinessRule.Confidence field ("ensemble-agreement") documents.
-//   This class is the KEYLESS / OFFLINE / DETERMINISTIC demo path: it uses purely structural AST
-//   heuristics (no network, no model) so the demo is reproducible and air-gappable. Confidence here
-//   is a fixed heuristic certainty, NOT an ensemble vote.
+// WHAT THIS CLASS IS:
+//   A keyless, offline, deterministic rule extractor built from structural probes over the Roslyn
+//   AST. The probes are keyed to the surrogate: they look for methods named ProcessMission,
+//   WrapDlon, TurnAngleDeg and InitialBearingDeg and for literals such as "MST" and "SSN". No
+//   language model is called anywhere in this repository and no LLM ensemble exists; the
+//   BusinessRule.Confidence value is a fixed heuristic certainty, not a vote. The gold set in
+//   surrogate/gold/ was authored together with these probes, so the F1 it reports is circular
+//   (see ERRATUM.md).
 //
 // METHOD: we walk the Roslyn AST of MissionProcessor and recognize specific structural signatures
 // (a comparison against a named MaxTurn/Tol/Box constant, a great-circle distance kernel, an

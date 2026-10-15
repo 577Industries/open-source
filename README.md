@@ -16,13 +16,15 @@ Canonical public monorepo for **577 Industries Inc.** open-source packages, refe
 
 | Program | Path | Contents |
 |---|---|---|
-| **FORGE Evolve** | [`programs/evolve/`](programs/evolve/) | `forge-evolve` (autonomous engineering engine), `forge-evolve-tmpc` (tube-based model predictive control), `forge-evolve-tdp` (technical data package modernization), and `forge-evolve-reference` (adversarial TDP & robotic path benchmark suite). |
-| **FORGE Kinetic** | [`programs/kinetic/`](programs/kinetic/) | `forge-kinetic` (embodied physical autonomy & robotic task execution) and `forge-kinetic-mbd` (model-based definition to kinematic trajectory synthesis). |
+| **Evolve** | [`programs/evolve/`](programs/evolve/) | `forge-evolve` (modernization engine core; the public code is a Python surrogate), `forge-evolve-tmpc` (the Evolve reference for a Theater Mission Planning Center (TMPC) modernization on a synthetic C#/.NET surrogate; see its `ERRATUM.md`), `forge-evolve-tdp` (technical data package modernization design study), and `forge-evolve-reference` (combined Evolve and Kinetic TDP and robotic-path design study, superseded). |
+| **Kinetic** | [`programs/kinetic/`](programs/kinetic/) | `forge-kinetic` (physical autonomy and robotic task execution core; the public code is a placeholder) and `forge-kinetic-mbd` (model-based definition to robot trajectory design study). |
 | **HELIOS** | [`programs/helios/`](programs/helios/) | `helios-program` (overview & architecture), `helios-fusion-engine` (probabilistic multi-sensor space-weather fusion), `helios-provenance-spec` (cryptographic telemetry provenance specification), `helios-spaceweather-connectors` (NOAA/SWPC & GNSS data ingestion), and `gannon-storm-rtk-analysis` (May 2024 Gannon geomagnetic superstorm RTK positioning analysis). |
 | **FORGE QBit** | [`programs/qbit/`](programs/qbit/) | `forge-qbit-qsparx` (quantum state preparation and circuit synthesis algorithms). |
 | **AEGIS** | [`programs/aegis/`](programs/aegis/) | `aegisgraph` (binary vulnerability analysis & exploitability graph engine) and `asema-feasibility-artifacts` (formal verification & program analysis feasibility benchmarks). |
 | **FORGE Intelligence** | [`programs/intelligence/`](programs/intelligence/) | `forge-intelligence` (multi-source analytical reasoning and structured evidence evaluation). |
 | **Counter-Swarm** | [`programs/counter-swarm/`](programs/counter-swarm/) | `sbir-arm26bx04-nv008-public-evidence` (unclassified synthetic surrogate benchmark data for decentralized counter-swarm target deduplication). |
+
+Status of the Evolve and Kinetic entries: forge-evolve, forge-evolve-reference, forge-evolve-tdp, forge-kinetic and forge-kinetic-mbd are generated design studies (2026-10-13), relabeled 2026-10-15; their numbers are not measurements. Measured implementations replace them in place.
 
 ### `.github-org/` — Organization Profile & Brand Assets
 

@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — corpus-driven differential equivalence tests (acceptance a–e).
+// Evolve for TMPC — corpus-driven differential equivalence tests (acceptance a–e).
 //
 // These prove the ENGINE is correct against the frozen golden corpus + the surrogate legacy
 // runner. The headline equivalence number for the REAL modern component is produced later at

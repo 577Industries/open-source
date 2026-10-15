@@ -1,21 +1,23 @@
 # Canonical Technical Data Package Graph (CTDP-G) & Unified Robotic Task Specification (URTS)
 
+> **Unimplemented design draft (2026-10-13). Nothing in this document is implemented or measured.** Identifiers, markings and numeric values in the examples below are synthetic placeholders.
+
 **Document ID:** FORGE-EVOLVE-SPEC-2026-001  
-**Version:** 2.4.0 (Phase II / Phase III Baseline)  
+**Version:** 2.4.0 (design draft, unimplemented)  
 **Applicable Solicitations:** DAF27BZ01-DV008 (TDP Modernization & Zero Trust Exchange) & DAF27BZ01-DV012 (Autonomous TDP-to-Path Robotic Task Specification)  
-**Compliance Standards:** MIL-STD-31000B, ISO 10303-242 (STEP AP242), ASME Y14.5-2018, ASME Y14.41, NIST SP 800-207 (Zero Trust Architecture), DoDI 8500.01, CMMC Level 2
+**Referenced Standards (design intent, no compliance claimed):** MIL-STD-31000B, ISO 10303-242 (STEP AP242), ASME Y14.5-2018, ASME Y14.41, NIST SP 800-207 (Zero Trust Architecture), DoDI 8500.01, CMMC Level 2
 
 ---
 
 ## 1. Architectural Overview & First-Principles Data Model
 
-The **Forge Evolve Canonical Technical Data Package Graph (CTDP-G)** eliminates the historical divide between enterprise Product Lifecycle Management (PLM) repositories and shop-floor offline robotic programming (OLP) utilities. Rather than treating 3D CAD geometry, 2D PDF drawings, Bills of Materials (BOMs), Information Assurance (IA) markings, and robotic motion paths as disconnected files, CTDP-G models the entire physical-digital lifecycle as a **cryptographically verifiable, spatially indexed property graph**.
+The **Evolve Canonical Technical Data Package Graph (CTDP-G)** eliminates the historical divide between enterprise Product Lifecycle Management (PLM) repositories and shop-floor offline robotic programming (OLP) utilities. Rather than treating 3D CAD geometry, 2D PDF drawings, Bills of Materials (BOMs), Information Assurance (IA) markings, and robotic motion paths as disconnected files, CTDP-G models the entire physical-digital lifecycle as a **cryptographically verifiable, spatially indexed property graph**.
 
 Every entity in the graph is governed by four design invariants:
 
 1. **Topological Binding of Engineering Intent:** Every Geometric Dimensioning and Tolerancing (GD&T) feature control frame, fastener torque/flushness tolerance, surface finish requirement, and non-destructive inspection (NDI) callout extracted from 3D PMI or 2D drawings is bound via a directed edge (`HAS_TOLERANCE`, `REQUIRES_INSPECTION`, `REFERENCED_TO_DATUM`) to an explicit 3D Boundary Representation (B-Rep) topological face, edge, or vertex ID.
 2. **Node-Level Zero Trust Envelope Encryption (NIST SP 800-207):** Each graph node and geometric sub-mesh is wrapped in an independent cryptographic envelope with its own Data Encryption Key (DEK) governed by Attribute-Based Access Control (ABAC) policies. An external supplier or shop-floor robotic controller only receives decryption keys for the specific topological faces and tolerance bounds required for its authorized workcell task.
-3. **Immutable Merkle-DAG Configuration Lineage ("As-Sustained" State):** Every state transition across an asset's lifecycle—from *As-Designed* (`DESIGN_BASELINE`) to *As-Built* (`MANUFACTURING_QA`) to *As-Sustained* (`DEPOT_SUSTAINMENT`)—is recorded as a content-addressable Merkle-DAG commit signed by hardware security modules (HSMs) and edge inspection sensors.
+3. **Immutable Merkle-DAG Configuration Lineage ("As-Sustained" State):** Every state transition across an asset's lifecycle—from *As-Designed* (`DESIGN_BASELINE`) to *As-Built* (`MANUFACTURING_QA`) to *As-Sustained* (`DEPOT_SUSTAINMENT`)—would be recorded as a content-addressable Merkle-DAG commit. Signing by hardware security modules (HSMs) and edge inspection sensors is a design goal and is not implemented.
 4. **Hardware-Agnostic Kinematic & Trajectory Abstraction:** Robotic inspection tasks are derived directly from topological surface normals and sensor frustum constraints, serialized into the **Unified Robotic Task Specification (URTS)**, and post-processed deterministically into vendor-specific robot controller code (FANUC TP/LS, KUKA KRL, ABB RAPID, or SROS2 DDS `JointTrajectory` messages).
 
 | Graph Domain | Primary Node Labels | Primary Edge Types | Governing Standard |
@@ -43,11 +45,11 @@ CREATE CONSTRAINT urts_task_uid IF NOT EXISTS FOR (t:InspectionTask) REQUIRE t.t
 // 2. Canonical Graph Pattern (Cypher Instantiation Template)
 MERGE (pkg:TDPPackage {
   package_id: "TDP-DAF-ACP-7740-REV-C",
-  nsn: "1560-01-692-8412",
-  platform_designator: "XQ-67A / ACP Wing Carry-Through Bulkhead",
+  nsn: "SYNTHETIC-PART-001",
+  platform_designator: "SYNTHETIC-PLATFORM / synthetic wing carry-through bulkhead",
   tdp_level: "Level 3 - Developmental & Production MBD",
-  itar_category: "USML Category VIII(h)",
-  cui_marking: "CUI//SP-EXPT//NOFORN",
+  itar_category: "SYNTHETIC-EXPORT-CATEGORY",
+  cui_marking: "SYNTHETIC-MARKING",
   merkle_root_hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 })
 
@@ -56,8 +58,8 @@ MERGE (pol:SecurityPolicy {
   min_clearance: "SECRET_OR_CUI_AUTHORIZED",
   allowed_citizenship: ["US"],
   allowed_roles: ["AFMC_SUSTAINMENT_ENG", "ALC_ROBOT_CELL_CONTROLLER", "QA_METROLOGIST"],
-  encryption_algorithm: "AES-256-GCM-FIPS140-3",
-  kms_key_uri: "arn:aws-us-gov:kms:us-gov-west-1:0192837465:key/9f8e7d6c-5b4a"
+  encryption_algorithm: "AES-256-GCM (design, not implemented)",
+  kms_key_uri: "https://example.invalid/kms/keys/synthetic-key-001"
 })
 MERGE (pkg)-[:GOVERNED_BY]->(pol)
 
@@ -74,6 +76,7 @@ MERGE (face:BRepFace {
 })
 MERGE (pkg)-[:CONTAINS_FACE]->(face)
 
+// Example metric values below are placeholders, not measured.
 MERGE (gdt:GDTCallout {
   callout_uid: "GDT-7740-FCF-019",
   characteristic: "SURFACE_PROFILE",
@@ -83,11 +86,11 @@ MERGE (gdt:GDTCallout {
   material_condition: "RFS",
   datum_precedence: ["A", "B", "C"],
   extraction_source: "HYBRID_AP242_AND_2D_DRAWING_OCR",
-  ocr_confidence: 0.994,
+  ocr_confidence: 0.0,
   required_ndi_modality: "LASER_PROFILOMETRY_AND_EDDY_CURRENT",
   critical_safety_item: true
 })
-MERGE (gdt)-[:APPLIES_TO_FACE {binding_confidence: 0.998, projection_residual_mm: 0.003}]->(face);
+MERGE (gdt)-[:APPLIES_TO_FACE {binding_confidence: 0.0, projection_residual_mm: 0.0}]->(face);
 ```
 
 ### 2.2 PostgreSQL + PostGIS Spatial-Relational Backing Schema
@@ -177,8 +180,8 @@ This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (D
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://forge_evolve.af.mil/schemas/v2.4/ctdp-urts-exchange.schema.json",
-  "title": "Forge Evolve Canonical TDP Graph & Unified Robotic Task Specification",
+  "$id": "https://example.invalid/schemas/v2.4/ctdp-urts-exchange.schema.json",
+  "title": "Evolve Canonical TDP Graph & Unified Robotic Task Specification",
   "type": "object",
   "required": [
     "schema_version",
@@ -207,8 +210,8 @@ This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (D
       ],
       "properties": {
         "package_id": { "type": "string", "pattern": "^TDP-[A-Z0-9-]+$" },
-        "classification_marking": { "type": "string", "enum": ["CUI//SP-EXPT", "CUI//SP-CTI", "SECRET//NOFORN"] },
-        "export_control": { "type": "string", "enum": ["ITAR_USML_CAT_VIII", "ITAR_USML_CAT_IV", "EAR_9A610"] },
+        "classification_marking": { "type": "string", "enum": ["SYNTHETIC-MARKING-A", "SYNTHETIC-MARKING-B"] },
+        "export_control": { "type": "string", "enum": ["SYNTHETIC-EXPORT-CATEGORY-A", "SYNTHETIC-EXPORT-CATEGORY-B"] },
         "cmmc_level": { "type": "integer", "minimum": 2, "maximum": 3 },
         "spiffe_sender_id": { "type": "string", "format": "uri" },
         "abac_policy_rules": {
@@ -229,7 +232,7 @@ This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (D
           "required": ["cipher_suite", "key_derivation", "kms_master_key_id", "payload_hmac_sha384"],
           "properties": {
             "cipher_suite": { "type": "string", "const": "TLS_AES_256_GCM_SHA384" },
-            "key_derivation": { "type": "string", "const": "HKDF-SHA384-FIPS140-3" },
+            "key_derivation": { "type": "string", "const": "HKDF-SHA384" },
             "kms_master_key_id": { "type": "string" },
             "payload_hmac_sha384": { "type": "string", "pattern": "^[a-f0-9]{96}$" }
           }
@@ -438,7 +441,7 @@ This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (D
 
 ## 4. High-Performance gRPC / Protocol Buffers v3 Wire Definition (`ctdp_urts.proto`)
 
-For sub-second WebGPU streaming of massive Model-Based Definition (MBD) assemblies (DV008) and real-time SROS2 robotic telemetry streaming (DV012), Forge Evolve uses binary gRPC streams defined below:
+For sub-second WebGPU streaming of massive Model-Based Definition (MBD) assemblies (DV008) and real-time SROS2 robotic telemetry streaming (DV012), the Evolve design specifies the binary gRPC streams defined below (not implemented):
 
 ```protobuf
 syntax = "proto3";
@@ -557,7 +560,7 @@ message MerkleCommitReceipt {
 
 ## 5. Open Policy Agent (OPA) Rego Policy for Automated IA Compliance Validation (DV008)
 
-Every Technical Data Package ingested or exchanged across the Forge Evolve fabric is validated in `<50 ms` against this deterministic policy-as-code gate before any geometry or trajectory can be rendered or transmitted:
+In the Evolve design, every Technical Data Package ingested or exchanged would be validated against this policy-as-code gate before any geometry or trajectory is rendered or transmitted. Target: `<50 ms` (not measured; the policy has not been evaluated by OPA):
 
 ```rego
 package forge_evolve.zerotrust.ia_compliance

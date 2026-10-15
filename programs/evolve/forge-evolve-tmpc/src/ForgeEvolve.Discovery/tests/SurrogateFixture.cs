@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SurrogateFixture — loads the ACTUAL surrogate files and runs Discovery once per test class.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine tests (workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine tests (workstream WS-A).
 //
 // Walks up from the test assembly location to the worktree root (the directory containing
 // ForgeEvolve.sln), then reads the real surrogate C#/JS/SQL/VB6 and the gold TTL. No fixtures are

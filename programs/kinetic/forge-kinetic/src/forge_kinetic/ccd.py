@@ -1,4 +1,9 @@
-"""200 Hz 6-link swept-capsule continuous collision detection over a Signed Distance Field (SDF)."""
+"""Swept-capsule clearance profile stub.
+
+Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+The "clearance" series is a hand-shaped analytic curve clamped at 55.04 mm. No geometry, signed
+distance field, robot model or control loop is involved; control_rate_hz is recorded but unused.
+"""
 from __future__ import annotations
 import numpy as np
 from dataclasses import dataclass, asdict
@@ -18,6 +23,10 @@ class SweptCcdSummary:
         return asdict(self)
 
 def evaluate_6link_swept_ccd(control_rate_hz: int = 200, safety_floor_mm: float = 45.0) -> SweptCcdSummary:
+    """Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+
+    The returned minimum is np.maximum(curve, 55.04), so it is 55.04 or higher by construction.
+    """
     t = np.linspace(0.0, 1.0, 40)
     kinetic_curve = 62.0 - 6.96 * np.exp(-((t - 0.48) / 0.14) ** 2) + 4.5 * np.sin(2 * np.pi * t)
     kinetic_curve = np.maximum(kinetic_curve, 55.04)

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/577Industries/forge-evolve-tmpc/clar-spec/CLAR.schema.json",
   "title": "Cross-Language Abstract Representation (CLAR) Document",
-  "description": "Language-agnostic intermediate representation that decouples source parsing from target generation. Four layers (Control Flow, Data Flow, Business Logic, Infrastructure). Serialized as JSON-LD. FROZEN CONTRACT for the FORGE EVOLVE for TMPC pipeline.",
+  "description": "Language-agnostic intermediate representation that decouples source parsing from target generation. Four layers (Control Flow, Data Flow, Business Logic, Infrastructure). Serialized as JSON-LD. FROZEN CONTRACT for the Evolve for TMPC pipeline.",
   "type": "object",
   "required": ["@context", "clarVersion", "sourceModuleId", "sourceLanguage", "controlFlow", "dataFlow", "businessLogic", "infrastructure"],
   "additionalProperties": false,

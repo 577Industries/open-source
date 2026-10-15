@@ -6,7 +6,7 @@ prepare the release; the Principal Investigator authorizes and executes the push
 
 ## What is published
 The entire repository, Apache-2.0. It is a **clean-room** TMPC-reference implementation containing
-**no** 577 proprietary FORGE EVOLVE / FORGE OS engine internals, **no** model weights, and **no**
+**no** 577 proprietary Evolve / FORGE OS engine internals, **no** model weights, and **no**
 real/controlled TMPC data - so there is nothing to sanitize or split out. See `EXCLUSIONS.md`.
 
 ## Pre-publication verification (all PASS at the frozen commit)
@@ -31,9 +31,9 @@ Prerequisite: .NET SDK 8 (pinned in `global.json`), Node 18+. See `REPRODUCIBILI
 
 ## Honest scope of claims (re-affirmed at release)
 All quantitative results are measured on the **synthetic, unclassified surrogate**, are **preliminary**,
-and are **not government-validated**. FORGE EVOLVE's prior published benchmarks are internal/preliminary
-prior art for COBOL/Fortran/Ada/VB6 → Java/Python/Rust/TS; the C#/.NET/JS/SQL capability here is the
-newly developed extension. CMMC L2 (Self), ITAR/DDTC registration, and any facility clearance are
+and are **not government-validated**. No published results exist; an internal draft paper cited here
+earlier contained generated figures and is withdrawn as a citation (see ERRATUM.md). The C#/.NET/JS/SQL
+capability here is the newly developed extension. CMMC L2 (Self), ITAR/DDTC registration, and any facility clearance are
 in-progress / at-award.
 
 ## PI authorization (H6)

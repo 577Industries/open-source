@@ -31,7 +31,7 @@ semantic_binding_confidence_ok {
     }
 }
 
-# Gate 4: ITAR_USML_CAT_VIII_ABAC_TAGGED
+# Gate 4: EXPORT_CONTROL_ABAC_TAGGED
 itar_abac_tagged {
     every face in input.canonical_tdp_graph.topological_faces {
         face.abac_scope != ""

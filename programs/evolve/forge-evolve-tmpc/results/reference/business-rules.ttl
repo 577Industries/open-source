@@ -1,4 +1,4 @@
-# business-rules.ttl — rules extracted by the FORGE EVOLVE Discovery engine
+# business-rules.ttl — rules extracted by the Evolve Discovery engine
 # from the synthetic, unclassified surrogate. Scored (F1) against
 # surrogate/gold/business-rules.gold.ttl. Deterministic; no timestamps.
 

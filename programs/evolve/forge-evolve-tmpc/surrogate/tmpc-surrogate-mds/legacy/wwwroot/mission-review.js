@@ -1,7 +1,7 @@
 /*
  * mission-review.js — SYNTHETIC, INTENTIONALLY-LEGACY jQuery mission-review UI.
  *
- * PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+ * PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
  *
  * Models the classic client-side technical debt found in legacy mission-planning web UIs:
  * an IIFE-wrapped jQuery widget with inline DOM string-building and a BUSINESS RULE

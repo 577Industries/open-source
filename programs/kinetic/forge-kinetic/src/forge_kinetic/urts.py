@@ -1,4 +1,9 @@
-"""Unified Robotic Task Specification (URTS) multi-vendor controller post-processors."""
+"""Controller program templates stub.
+
+Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+Each dialect is a fixed string with the 55.04 mm and 0.015 mm figures written into it; no
+trajectory, waypoint list or robot model is consulted.
+"""
 from __future__ import annotations
 from typing import Dict
 
@@ -53,6 +58,10 @@ waypoints:
 }
 
 def compile_urts_program(dialect: str = "FANUC") -> str:
+    """Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+
+    Returns the fixed template for the dialect; nothing is compiled.
+    """
     key = dialect.upper()
     if key not in DIALECT_TEMPLATES:
         raise ValueError(f"Unsupported dialect: {dialect}")

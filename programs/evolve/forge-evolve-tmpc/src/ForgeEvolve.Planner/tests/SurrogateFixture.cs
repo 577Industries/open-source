@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SurrogateFixture — runs the REAL Discovery engine on the ACTUAL surrogate, then the REAL Planner.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner tests (workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner tests (workstream WS-C).
 //
 // No fixtures are fabricated: the tests analyze the same surrogate files shipped under surrogate/ via
 // the real ForgeEvolve.Discovery engine, then plan the resulting DiscoveryReport with the real

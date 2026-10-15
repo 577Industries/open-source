@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // RuleF1Scorer — honest precision/recall/F1 of extracted rules vs. the gold TTL set.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // MATCHING METHOD (documented for reviewers):
 //   1. Parse surrogate/gold/business-rules.gold.ttl into (category, label, statement, expression)

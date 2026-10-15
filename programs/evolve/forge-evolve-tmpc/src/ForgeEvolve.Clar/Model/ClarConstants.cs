@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CLAR constants.
+// Evolve for TMPC — CLAR constants.
 //
 // Central, single-source spellings for the frozen vocabulary so the lifter and tests
 // reference the same literals. The schema pins clarVersion to "0.1.0" (a const), so we

@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — frozen CLAR schema loader + validator.
+// Evolve for TMPC — frozen CLAR schema loader + validator.
 //
 // Loads clar-spec/CLAR.schema.json (the FROZEN contract) and validates CLAR JSON against
 // it using JsonSchema.Net (JSON Schema draft 2020-12, which the schema declares). The

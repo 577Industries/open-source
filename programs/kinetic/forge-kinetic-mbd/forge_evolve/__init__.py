@@ -1,4 +1,4 @@
-"""Forge Evolve Reference Package (CTDP-G v2.4 & URTS)."""
+"""Evolve Reference Package (CTDP-G v2.4 & URTS), design study."""
 
 from forge_evolve_engine import (
     AerospaceTDPIngestionEngine,

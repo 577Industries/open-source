@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <RootNamespace>ForgeEvolve.Planner</RootNamespace>
-    <Description>FORGE EVOLVE for TMPC — Migration Planner (Stage 2). Composite modernization-risk scoring,
+    <Description>Evolve for TMPC — Migration Planner (Stage 2). Composite modernization-risk scoring,
     dependency-graph decomposition (Tarjan SCC -> DAG) with a spectral / Fiedler bipartition of the
     god-class coupling cluster into candidate microservice boundaries, lowest-risk-first topological
     ordering of the unit DAG (strangler-fig seams), and a risk-annotated Mermaid flowchart.</Description>

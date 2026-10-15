@@ -9,7 +9,7 @@
 //                       string that is the exact in-text disclaimer required at the claim site.
 // Status "I" (implicit / unanchored) or any other value is FORBIDDEN.
 //
-// Honesty rule of record: a FORGE EVOLVE benchmark or any capability number is P by construction
+// Honesty rule of record: a Evolve benchmark or any capability number is P by construction
 // until a runnable artifact in THIS repo reproduces it on the surrogate, at which point it may
 // become A (anchored to the surrogate, never to real TMPC code).
 //

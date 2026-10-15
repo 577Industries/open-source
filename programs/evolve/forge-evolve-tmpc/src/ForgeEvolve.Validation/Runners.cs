@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — the two equivalence runners (the legacy/modern adapters).
+// Evolve for TMPC — the two equivalence runners (the legacy/modern adapters).
 //
 // The validator is *implementation-agnostic*: it only ever sees an ILegacyRunner and an
 // IModernRunner, each a `string -> string` (JSON in, JSON out) function. That is the whole

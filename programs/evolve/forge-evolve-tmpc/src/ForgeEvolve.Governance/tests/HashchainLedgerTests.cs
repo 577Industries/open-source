@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H) tests.
+// Evolve for TMPC — Governance workstream (WS-H) tests.
 //
 // These tests assert the security-relevant invariants of the IGOM:
 //   * the chain self-verifies (recomputing EntryHash from the stored fields reproduces the chain);

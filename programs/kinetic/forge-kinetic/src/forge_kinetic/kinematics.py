@@ -1,4 +1,9 @@
-"""Redundant 6-DOF manipulator + 3-DOF omnidirectional AGV whole-body inverse kinematics."""
+"""Whole-body posture stub.
+
+Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+Joint angles come from linear formulas and constants; manipulability_index and tcp_residual_mm
+are hardcoded. No robot model, Jacobian or forward-kinematics check exists.
+"""
 from __future__ import annotations
 import math
 from dataclasses import dataclass, asdict
@@ -16,6 +21,10 @@ class WholeBodyPosture:
         return asdict(self)
 
 def solve_whole_body_ik(target_xyz_mm: List[float], station_id: str = "STN-PORT-01") -> WholeBodyPosture:
+    """Placeholder: returns fixed values; not a kinematics, collision or post-processing implementation.
+
+    J4, J5, J6, manipulability_index (0.842) and tcp_residual_mm (0.015) are constants.
+    """
     x, y, z = target_xyz_mm
     base_x = x - 620.0 if station_id == "STN-PORT-01" else x + 620.0
     base_y = y - 180.0

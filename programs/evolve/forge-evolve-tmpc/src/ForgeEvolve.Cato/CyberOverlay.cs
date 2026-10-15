@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// CyberOverlay — Stage 5 of the FORGE EVOLVE for TMPC pipeline.
+// CyberOverlay — Stage 5 of the Evolve for TMPC pipeline.
 //
 // Implements ICyberOverlay.Generate(legacy, modern, discovery, outputDir) and emits the
 // continuous-ATO (cATO) artifact bundle:

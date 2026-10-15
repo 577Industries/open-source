@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — frozen data contracts (DTOs).
+// Evolve for TMPC — frozen data contracts (DTOs).
 //
 // These records are the language-neutral payloads that flow between pipeline stages and are
 // serialized to the JSON artifacts under results/ that the proposal cites. Treat this file as a
@@ -25,7 +25,7 @@ public enum SourceLanguage
     JavaScript,
     Sql,
     Vb6,
-    // Already-validated FORGE EVOLVE source languages (supported, not the TMPC focus):
+    // Other Evolve source languages (design targets; no front-end for them exists in this repository):
     Cobol,
     Fortran,
     Ada,

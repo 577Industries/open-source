@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — frozen golden-corpus loader.
+// Evolve for TMPC — frozen golden-corpus loader.
 //
 // Loads surrogate/corpus/corpus.json (2000 vectors) and maps each entry onto the frozen
 // EquivalenceTestVector contract. Mapping decision:

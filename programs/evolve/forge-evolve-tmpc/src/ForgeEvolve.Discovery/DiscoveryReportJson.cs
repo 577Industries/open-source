@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // DiscoveryReportJson — System.Text.Json serialization helpers.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // Produces the deterministic JSON later written to results/discovery-report.json, plus a small
 // companion F1 governance object. Uses indented output and the contract's JsonStringEnumConverter

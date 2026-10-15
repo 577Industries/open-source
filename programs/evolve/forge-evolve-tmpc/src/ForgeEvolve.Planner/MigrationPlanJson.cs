@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // MigrationPlanJson — System.Text.Json serialization helper for the migration plan.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner (Stage 2, workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner (Stage 2, workstream WS-C).
 //
 // Produces the deterministic, reviewer-diffable JSON written to results/migration-plan.json. Uses
 // indented output and the contract's JsonStringEnumConverter attributes (already on the enums) for

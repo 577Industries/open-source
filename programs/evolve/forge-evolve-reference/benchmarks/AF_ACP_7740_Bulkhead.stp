@@ -1,7 +1,7 @@
 ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('STEP AP242 Synthetic Unclassified Benchmark Model - ACP Wing Bulkhead'),'2;1');
-FILE_NAME('AF_ACP_7740_Bulkhead.stp','2026-10-13T12:00:00',('577 Industries Inc.'),('Forge Evolve Reference'),'ForgeEvolve v2.4','OpenCASCADE','UNCLASSIFIED//SYNTHETIC_BENCHMARK');
+FILE_NAME('AF_ACP_7740_Bulkhead.stp','2026-10-13T12:00:00',('577 Industries Inc.'),('Evolve Reference'),'ForgeEvolve v2.4','OpenCASCADE','UNCLASSIFIED//SYNTHETIC_BENCHMARK');
 FILE_SCHEMA(('AP242_MANAGED_MODEL_BASED_3D_ENGINEERING_MIM_LF { 1 0 10303 442 3 1 4 }'));
 ENDSEC;
 DATA;

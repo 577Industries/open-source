@@ -17,7 +17,7 @@
 
 ## Core Architecture & Domain Extensions
 
-`forge-kinetic` is the foundational physical AI and robotics platform developed by **577 Industries Inc.** It connects sensor operating-envelope analysis with real-time GPU/CPU Signed Distance Field (SDF) collision avoidance and multi-vendor industrial robot controller generation:
+`forge-kinetic` is the foundational physical AI and robotics platform developed by **577 Industries Inc.** It is designed to connect sensor operating-envelope analysis with real-time GPU/CPU Signed Distance Field (SDF) collision avoidance and multi-vendor industrial robot controller generation. The current public code is a placeholder that returns fixed values (see the module docstrings under `src/forge_kinetic/`):
 
 ```text
 Sensor Envelope & Occlusion Analysis -> 3D Signed Distance Field (SDF)
@@ -29,7 +29,7 @@ Sensor Envelope & Occlusion Analysis -> 3D Signed Distance Field (SDF)
 
 | Extension / Lab | Program / Domain Scope | Capabilities Added |
 |---|---|---|
-| [`577Industries/forge-kinetic-mbd`](https://github.com/577Industries/forge-kinetic-mbd) | U.S. Air Force / Space Force `DAF27BZ01-DV012` (Autonomous TDP-to-Robot Compilation) | Multimodal 2D/3D ASME Y14.5 GD&T topological binding (99.1% precision on NIST MBE PMI `FTC-01..11`), 6D reachability-inversion mobile base clustering, Datum-A 3-fiducial calibration (<0.025 mm residual), and No-Code depot workbench |
+| [`577Industries/forge-kinetic-mbd`](https://github.com/577Industries/forge-kinetic-mbd) | U.S. Air Force / Space Force `DAF27BZ01-DV012` (Autonomous TDP-to-Robot Compilation) | Multimodal 2D/3D ASME Y14.5 GD&T topological binding (design target; evaluation on NIST MBE PMI `CTC-01..05`, `FTC-06..11` planned, not yet measured), 6D reachability-inversion mobile base clustering, Datum-A 3-fiducial calibration (residual target set by the part tolerance; not yet measured), and No-Code depot workbench |
 | [IRIS Perception Lab](https://www.577industries.com/government/labs/iris) | Sparse-Data Sensor Fusion Research | Held-out environmental condition evaluation under limited labeling budgets |
 
 ## Quickstart (Offline, Deterministic)

@@ -3,7 +3,7 @@ using ForgeEvolve.Contracts;
 namespace ForgeEvolve.Orchestrator;
 
 /// <summary>
-/// The FORGE EVOLVE Tool Orchestrator: routes a <see cref="TransformTask"/> to the best available
+/// The Evolve Tool Orchestrator: routes a <see cref="TransformTask"/> to the best available
 /// coding agent in one of three modes.
 /// <list type="bullet">
 ///   <item><b>Offline</b> (default, keyless): deterministic transcript replay. The recorded

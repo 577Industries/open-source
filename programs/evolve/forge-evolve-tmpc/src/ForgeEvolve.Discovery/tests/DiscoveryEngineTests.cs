@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // DiscoveryEngineTests — acceptance tests over the ACTUAL surrogate files.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine tests (workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine tests (workstream WS-A).
 //
 // Asserts the pre-registered metrics: god-method CC > 30, C# parse rate >= 0.95, the categorical
 // tasking rule + leg/turn/TOT rules are extracted, rule-extraction F1 >= 0.85, and at least one

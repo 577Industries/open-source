@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — mission-data-aware equivalence oracles.
+// Evolve for TMPC — mission-data-aware equivalence oracles.
 //
 // An ORACLE answers one question: "for this named mission output, is the modern result
 // equivalent to the legacy result?" Two kinds, per the frozen contract (OracleKind):

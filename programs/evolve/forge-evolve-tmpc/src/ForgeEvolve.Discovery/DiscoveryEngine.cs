@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // DiscoveryEngine — IDiscoveryEngine implementation (Stage 1, workstream WS-A).
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine.
+// PART OF: Evolve for TMPC, Discovery Engine.
 //
 // Pipeline:
 //   1. Partition sources by language.

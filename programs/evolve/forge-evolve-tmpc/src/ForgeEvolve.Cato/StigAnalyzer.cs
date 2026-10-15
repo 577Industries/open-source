@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // StigAnalyzer — static security analyzers that emit STIG findings (before/after).
 //
-// PART OF: FORGE EVOLVE for TMPC, Cyber/cATO overlay (Stage 5).
+// PART OF: Evolve for TMPC, Cyber/cATO overlay (Stage 5).
 //
 // Detects the security-relevant *classes of defect that are actually present* in the
 // synthetic legacy surrogate, and confirms their absence in the modern code. Every

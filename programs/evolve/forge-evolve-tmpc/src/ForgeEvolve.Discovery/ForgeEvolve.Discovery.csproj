@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <RootNamespace>ForgeEvolve.Discovery</RootNamespace>
-    <Description>FORGE EVOLVE for TMPC — Discovery Engine (Stage 1). Roslyn-based static analysis of the
+    <Description>Evolve for TMPC — Discovery Engine (Stage 1). Roslyn-based static analysis of the
     synthetic surrogate: complexity vectors, dependency graph + Tarjan SCC, offline business-rule
     extraction with an honest F1 vs. the gold set, and a weak-crypto / hardcoded-secret inventory.</Description>
   </PropertyGroup>

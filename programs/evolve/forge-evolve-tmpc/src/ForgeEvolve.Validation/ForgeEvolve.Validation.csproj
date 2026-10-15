@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
     <RootNamespace>ForgeEvolve.Validation</RootNamespace>
-    <Description>Validation Engine (behavioral equivalence) for FORGE EVOLVE for TMPC: differential + property-based equivalence verification with mission-data-aware oracles, the multiplicative-Chernoff deviation bound, the Equivalence-Composability system bound, and intentional-divergence detection against the frozen golden corpus.</Description>
+    <Description>Validation Engine (behavioral equivalence) for Evolve for TMPC: differential + property-based equivalence verification with mission-data-aware oracles, the multiplicative-Chernoff deviation bound, the Equivalence-Composability system bound, and intentional-divergence detection against the frozen golden corpus.</Description>
   </PropertyGroup>
 
   <ItemGroup>

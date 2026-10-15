@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    ForgeEvolve.Cli — the Phase-3 integration driver. Runs the FULL FORGE EVOLVE for TMPC
+    ForgeEvolve.Cli — the Phase-3 integration driver. Runs the FULL Evolve for TMPC
     pipeline end-to-end on the synthetic surrogate, OFFLINE and keyless, writing the cited
     evidence artifacts under results/run/. Wired into `make demo` via scripts/run-demo.sh.
 
@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- All 8 FORGE EVOLVE module libraries. -->
+    <!-- All 8 Evolve module libraries. -->
     <ProjectReference Include="..\ForgeEvolve.Contracts\ForgeEvolve.Contracts.csproj" />
     <ProjectReference Include="..\ForgeEvolve.Discovery\ForgeEvolve.Discovery.csproj" />
     <ProjectReference Include="..\ForgeEvolve.Clar\ForgeEvolve.Clar.csproj" />

@@ -1,6 +1,6 @@
 # CLAR Language Profile - C# (.NET)
 
-> Part of **FORGE EVOLVE for TMPC**. Defines how a C# source module maps into the four
+> Part of **Evolve for TMPC**. Defines how a C# source module maps into the four
 > CLAR layers of [`clar-spec/CLAR.schema.json`](../CLAR.schema.json). C# is the **primary
 > TMPC focus language** (the real MDS is ~1.3M LOC, mostly C#). The reference lift is
 > implemented in `src/ForgeEvolve.Clar/ClarLifter.cs` against the synthetic surrogate
@@ -39,7 +39,7 @@
 | `IConfiguration` / static config singleton | infrastructure | `CONFIGURATION` |
 | `ILogger` / message accumulation | infrastructure | `LOGGING` |
 
-## Precision-constrained mapping (load-bearing)
+## Precision-constrained mapping (the part that drives the result)
 
 The dataFlow `precisionConstrained` flag tells the target generator it **MUST** emit
 `decimal` / `System.Numerics`-backed / `checked` arithmetic for that value and **MUST NOT**

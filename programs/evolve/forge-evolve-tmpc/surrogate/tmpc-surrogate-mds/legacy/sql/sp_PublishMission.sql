@@ -1,7 +1,7 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 -- sp_PublishMission.sql — SYNTHETIC, INTENTIONALLY-LEGACY publish stored procedure.
 --
--- PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+-- PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 --
 -- Models legacy SQL technical debt:
 --   * N+1 INSERT pattern: a cursor loops over waypoints and issues one INSERT per row

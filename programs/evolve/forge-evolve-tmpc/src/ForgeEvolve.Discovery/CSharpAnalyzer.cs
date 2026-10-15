@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // CSharpAnalyzer — Roslyn-based static analysis of the surrogate's C#.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // Uses Roslyn (Microsoft.CodeAnalysis.CSharp): CSharpSyntaxTree.ParseText to build the syntax
 // tree, and a CSharpCompilation to obtain a SemanticModel where it sharpens results (symbol

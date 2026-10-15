@@ -1,11 +1,12 @@
 # CLAR Language Profile - VB6
 
-> Part of **FORGE EVOLVE for TMPC**. Defines how a Visual Basic 6 source module maps into the
+> Part of **Evolve for TMPC**. Defines how a Visual Basic 6 source module maps into the
 > four CLAR layers of [`clar-spec/CLAR.schema.json`](../CLAR.schema.json). The surrogate's
 > representative VB6 artifact is the fixed-point geo module
-> `surrogate/tmpc-surrogate-mds/legacy/GeoFixedPoint.bas`. VB6 → TypeScript is one of FORGE
-> EVOLVE's already-validated transformation paths; this profile feeds the pre-existing VB6
-> front-end.
+> `surrogate/tmpc-surrogate-mds/legacy/GeoFixedPoint.bas`. No VB6 front-end exists in this
+> repository; VB6 is recognized by regex heuristics (`CrossLanguageParser.cs`). No published
+> results exist; an internal draft paper cited here earlier contained generated figures and is
+> withdrawn as a citation (see ERRATUM.md).
 
 `sourceLanguage`: **`Vb6`**
 
@@ -41,7 +42,7 @@
 | module-level `Public` global (e.g. `gLastGeoError`) | infrastructure | `CONFIGURATION` |
 | `Debug.Print` / log file | infrastructure | `LOGGING` |
 
-## Precision-constrained mapping (load-bearing)
+## Precision-constrained mapping (the part that drives the result)
 
 VB6 legacy mission code typically stores coordinates as **scaled-integer fixed-point** ("mils",
 e.g. 1° = 10000 grid units in `GeoFixedPoint.bas`) and money as the `Currency` type (a 64-bit
@@ -68,7 +69,7 @@ arithmetic and an explicit anti-meridian wrap, fixing the same class of bug as C
 
 - `degValue As Double` argument of `DegreesToMilGrid` → dataFlow `PARAMETER`, `PrecisionConstrained`.
 - `DegreesToMilGrid = CLng(degValue * MILGRID_SCALE)` → dataFlow `CAST`, `PrecisionConstrained`
-  (the `CLng` banker's-rounding and overflow risk are the load-bearing detail).
+  (the `CLng` banker's-rounding and overflow risk are the detail that drives the result).
 - `MilGridLonDelta` longitude delta `Long` → dataFlow `FIXED_DECIMAL`, `PrecisionConstrained`.
 - `gLastGeoError As Integer` module global → infrastructure `CONFIGURATION`.
 - `LegInsideBox` box check → businessLogic `VALIDATION` (mirrors the C#/SQL degree-box proxy).

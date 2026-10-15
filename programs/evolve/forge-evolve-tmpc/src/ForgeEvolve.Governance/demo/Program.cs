@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H) acceptance demo.
+// Evolve for TMPC — Governance workstream (WS-H) acceptance demo.
 //
 // Prints a sample 3-entry hashchain ledger with its Merkle root, evaluates the KG1/KG2 review
 // gates (recording each decision to the chain), demonstrates tamper-detection, and writes
@@ -14,7 +14,7 @@ gov.Record("discovery", "discovery-engine", "{\"modules\":42,\"parseRate\":0.97}
 gov.Record("transform", "offline-replay", "{\"unit\":\"MissionRouting\",\"compiledClean\":true}");
 gov.Record("validate", "equivalence-validator", "{\"violations\":0,\"vectors\":512}");
 
-Console.WriteLine("=== FORGE EVOLVE — Governance IGOM: sample 3-entry hashchain ===");
+Console.WriteLine("=== Evolve — Governance IGOM: sample 3-entry hashchain ===");
 PrintLedger(gov.Ledger);
 Console.WriteLine($"Merkle root : {gov.CurrentMerkleRoot()}");
 Console.WriteLine($"Verify()    : {Describe(gov.Verify())}");

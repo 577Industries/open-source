@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — intentional-divergence detector.
+// Evolve for TMPC — intentional-divergence detector.
 //
 // "Intentional divergence" = a vector where the LEGACY output is operationally wrong vs. the
 // reference answer key (so a correct modern that matches the reference will *intentionally*

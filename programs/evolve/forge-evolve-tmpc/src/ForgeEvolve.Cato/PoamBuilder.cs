@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // PoamBuilder — Plan of Action & Milestones (poam.csv / PoamItem list).
 //
-// PART OF: FORGE EVOLVE for TMPC, Cyber/cATO overlay (Stage 5).
+// PART OF: Evolve for TMPC, Cyber/cATO overlay (Stage 5).
 //
 // Two sources of POA&M items:
 //   1. STIG findings — Remediated where the transform fixed them; Open otherwise.

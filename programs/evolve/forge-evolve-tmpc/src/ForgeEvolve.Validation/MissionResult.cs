@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — typed view of a MissionResult JSON document.
+// Evolve for TMPC — typed view of a MissionResult JSON document.
 //
 // The runners exchange JSON strings (the frozen contract seam). The oracles, however, reason
 // over NAMED mission outputs, so we parse each side's JSON once into this small typed shape.

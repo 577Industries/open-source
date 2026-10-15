@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
     <RootNamespace>ForgeEvolve.Orchestrator</RootNamespace>
-    <Description>Tool Orchestrator for FORGE EVOLVE for TMPC: routes transform tasks to coding agents in Offline (deterministic transcript replay — the default, keyless reviewer demo path), Local (sovereign/air-gapped via Ollama + @577-industries/model-router sovereignOnly) or Cloud mode. The Offline path is pure C# with no network and no npm dependency; it replays a transcript recorded under a deterministic SHA-256 key and never fabricates model output. A Thompson-sampling capability registry computes the agent the task WOULD route to (recorded in the result Notes) so the routing logic stays real and testable.</Description>
+    <Description>Tool Orchestrator for Evolve for TMPC: routes transform tasks to coding agents in Offline (deterministic transcript replay — the default, keyless reviewer demo path), Local (sovereign/air-gapped via Ollama + @577-industries/model-router sovereignOnly) or Cloud mode. The Offline path is pure C# with no network and no npm dependency; it replays a transcript recorded under a deterministic SHA-256 key and never fabricates model output. A Thompson-sampling capability registry computes the agent the task WOULD route to (recorded in the result Notes) so the routing logic stays real and testable.</Description>
   </PropertyGroup>
 
   <ItemGroup>

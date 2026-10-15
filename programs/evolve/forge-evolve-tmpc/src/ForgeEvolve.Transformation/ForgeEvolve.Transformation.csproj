@@ -16,7 +16,7 @@
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>ForgeEvolve.Transformation</RootNamespace>
-    <Description>FORGE EVOLVE for TMPC — Transformation Engine (Stage 3). Offline deterministic
+    <Description>Evolve for TMPC — Transformation Engine (Stage 3). Offline deterministic
     transcript replay producing the behavior-preserving modern .NET 8 mission component, with
     measurable complexity-reduction notes (max method CC 49 -> &lt; 10).</Description>
   </PropertyGroup>

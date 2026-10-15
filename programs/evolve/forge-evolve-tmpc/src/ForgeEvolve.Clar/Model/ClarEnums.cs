@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CLAR node-type enums.
+// Evolve for TMPC — CLAR node-type enums.
 //
 // Each enum mirrors a "type" enum from clar-spec/CLAR.schema.json EXACTLY (UPPER_SNAKE_CASE
 // member names). They serialize via JsonStringEnumConverter to the schema's strings with no

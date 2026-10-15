@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Forge Evolve — Deterministic TDP & Robotic Equivalence Reference Engine
+Evolve: Deterministic TDP & Robotic Equivalence Reference Engine (design study)
+
+Design-study code. Benchmark rows, exception counts and timing values in this module are synthetic design targets (seeded random draws and constants), not measurements.
 Organization: 577 Industries Inc. (Columbus, Ohio | https://www.577industries.com/evolve)
 Principal Investigator: Dr. Thomas G. Waweru <info@577industries.com>
 
 Addresses:
-  - DAF27BZ01-DV008 (Forge Evolve TDP): Technical Data Package Modernization for Information Assurance & Secure Data Exchange
-  - DAF27BZ01-DV012 (Forge Evolve Kinetic): Agile Autonomous Technical Data Package to Path Robotic Task Specification
+  - DAF27BZ01-DV008 (Evolve TDP): Technical Data Package Modernization for Information Assurance & Secure Data Exchange
+  - DAF27BZ01-DV012 (Kinetic): Agile Autonomous Technical Data Package to Path Robotic Task Specification
 
 Executes:
   1. Synthetic Unclassified Aerospace TDP Generation & Parsing (STEP AP242 B-Rep + 2D Drawing GD&T + BOM) for AF-ACP-7740 Wing Bulkhead
@@ -16,7 +18,7 @@ Executes:
   5. Multi-Vendor Robotic Code Post-Processing (FANUC LS, KUKA KRL, ABB RAPID, ROS 2 MoveIt JointTrajectory)
   6. 6-Class Multi-Format TDP Exception Recovery Engine (EXC-01 through EXC-06)
   7. Closed-Loop 3D Point-Cloud AI Damage Detection & "As-Sustained" Digital Twin State Commit
-  8. 50-Assembly Empirical D2P2 Benchmark Suite, NIST MBE PMI Suite & Publication-Grade Diagnostic Charts
+  8. 50-Row Synthetic D2P2 Design-Target Table, NIST MBE PMI Case Table & Diagnostic Charts (all synthetic, not measured)
 """
 
 import csv
@@ -216,7 +218,7 @@ class AerospaceTDPIngestionEngine:
             "ISO-10303-21;",
             "HEADER;",
             "FILE_DESCRIPTION(('STEP AP242 Synthetic Unclassified Benchmark Model - ACP Wing Bulkhead'),'2;1');",
-            "FILE_NAME('AF_ACP_7740_Bulkhead.stp','2026-10-13T12:00:00',('577 Industries Inc.'),('Forge Evolve Reference'),'ForgeEvolve v2.4','OpenCASCADE','UNCLASSIFIED//SYNTHETIC_BENCHMARK');",
+            "FILE_NAME('AF_ACP_7740_Bulkhead.stp','2026-10-13T12:00:00',('577 Industries Inc.'),('Evolve Reference'),'ForgeEvolve v2.4','OpenCASCADE','UNCLASSIFIED//SYNTHETIC_BENCHMARK');",
             "FILE_SCHEMA(('AP242_MANAGED_MODEL_BASED_3D_ENGINEERING_MIM_LF { 1 0 10303 442 3 1 4 }'));",
             "ENDSEC;",
             "DATA;",
@@ -330,7 +332,7 @@ class ZeroTrustMerkleLedger:
                 "cmmc_enclave_level": 2,
                 "role": "AFMC_SUSTAINMENT_ENG",
                 "mtls_spiffe_verified": True,
-                "spiffe_id": "spiffe://afmc.af.mil/plm/teamcenter-exporter",
+                "spiffe_id": "spiffe://example.invalid/plm/teamcenter-exporter",
                 "cipher_suite": "TLS_AES_256_GCM_SHA384",
                 "pqc_kem": "FIPS_203_ML_KEM_768",
             }
@@ -367,7 +369,7 @@ class ZeroTrustMerkleLedger:
             "MIL_STD_31000B_TOPOLOGY_WATERTIGHT": all_faces_valid,
             "ASME_Y14_5_DATUM_COMPLETENESS": all_tolerances_positive,
             "SEMANTIC_BINDING_CONFIDENCE_FLOOR_95PCT": min_ocr_conf >= 0.95,
-            "ITAR_USML_CAT_VIII_ABAC_TAGGED": itar_ok,
+            "EXPORT_CONTROL_ABAC_TAGGED": itar_ok,
             "FIPS_140_3_AES_256_GCM_ENVELOPE": fips_ok,
             "NIST_800_207_SPIFFE_MTLS_IDENTITY": spiffe_ok,
         }
@@ -1107,9 +1109,9 @@ def run_nist_mbe_pmi_benchmark() -> Dict[str, Any]:
 
 def run_50_part_empirical_benchmark() -> List[Dict[str, Any]]:
     """
-    Executes the quantitative benchmark across 50 synthetic aerospace TDP packages
-    spanning 4 complexity tiers to substantiate Direct-to-Phase-II (D2P2) feasibility
-    for both DAF27BZ01-DV008 and DAF27BZ01-DV012.
+    Generates 50 synthetic design-target rows across 4 complexity tiers from a seeded RNG
+    (np.random.default_rng(2026)) and fixed formulas. Nothing here is measured; the rows exist
+    to exercise the table and chart code for DAF27BZ01-DV008 and DAF27BZ01-DV012.
     """
     rng = np.random.default_rng(2026)
     tiers = [
@@ -1225,7 +1227,7 @@ def generate_benchmark_charts(rows: List[Dict[str, Any]], output_dir: pathlib.Pa
     x = np.arange(len(tiers))
     w = 0.34
     b1 = ax1.bar(x - w / 2, manual_prog, w, label="Legacy Manual OLP & Teach Pendant", color=slate, alpha=0.85)
-    b2 = ax1.bar(x + w / 2, auto_prog, w, label="Forge Evolve Autonomous TDP-to-Path", color=teal)
+    b2 = ax1.bar(x + w / 2, auto_prog, w, label="Evolve Autonomous TDP-to-Path", color=teal)
     ax1.axhline(1.5, color=crimson, linestyle="--", linewidth=1.5, label="DV012 Max Target (1.5 hrs)")
     ax1.set_yscale("log")
     ax1.set_ylabel("QC Numerical Programming Time (Hours, Log Scale)", fontsize=9.5, fontweight="bold", color=navy)
@@ -1247,7 +1249,7 @@ def generate_benchmark_charts(rows: List[Dict[str, Any]], output_dir: pathlib.Pa
     auto_setup = [np.mean([r["auto_reconfig_setup_hr"] for r in rows if r["complexity_tier"] == t]) for t in tiers]
 
     b3 = ax2.bar(x - w / 2, manual_setup, w, label="Legacy Workcell Reconfiguration", color=slate, alpha=0.85)
-    b4 = ax2.bar(x + w / 2, auto_setup, w, label="Forge Evolve Agile Reconfiguration", color=navy)
+    b4 = ax2.bar(x + w / 2, auto_setup, w, label="Evolve Agile Reconfiguration", color=navy)
     ax2.axhline(8.0, color=crimson, linestyle="--", linewidth=1.5, label="DV012 Max Setup Threshold (8.0 hrs)")
     ax2.set_ylabel("Total Line Setup & Calibration Time (Hours)", fontsize=9.5, fontweight="bold", color=navy)
     ax2.set_title("B. Novel Line Reconfiguration Setup Time (DV012)", fontsize=10.5, fontweight="bold", color=navy, pad=10)
@@ -1276,7 +1278,7 @@ def generate_benchmark_charts(rows: List[Dict[str, Any]], output_dir: pathlib.Pa
     legacy_arr = np.array([r["legacy_web_load_ms"] for r in rows])
 
     ax1.scatter(faces_arr, legacy_arr / 1000.0, color=slate, alpha=0.65, s=28, label="Legacy Monolithic STEP/WebGL Loader")
-    ax1.scatter(faces_arr, webgpu_arr / 1000.0, color=teal, alpha=0.9, s=32, label="Forge Evolve BVH-Octree WebGPU Stream")
+    ax1.scatter(faces_arr, webgpu_arr / 1000.0, color=teal, alpha=0.9, s=32, label="Evolve BVH-Octree WebGPU Stream")
     ax1.axhline(1.0, color=crimson, linestyle="--", linewidth=1.5, label="DV008 Sub-Second Mandate (1.0 sec)")
     ax1.set_yscale("log")
     ax1.set_xlabel("Assembly Topological Complexity (B-Rep Face Count)", fontsize=9.5, fontweight="bold", color=navy)
@@ -1376,7 +1378,7 @@ def generate_benchmark_charts(rows: List[Dict[str, Any]], output_dir: pathlib.Pa
 # ==============================================================================
 
 def main() -> None:
-    print("=== Forge Evolve Unified Zero-Trust TDP & Autonomous Pathing Reference Engine ===")
+    print("=== Evolve Unified Zero-Trust TDP & Autonomous Pathing Reference Engine (design study; outputs are synthetic targets) ===")
     gpu_telemetry = get_gpu_accelerator_telemetry()
     print(f"[GPU] Compute Backend: {gpu_telemetry['backend']} | Device: {gpu_telemetry['device_name']} ({gpu_telemetry['compute_capability']})")
     engine = AerospaceTDPIngestionEngine(seed=42)
@@ -1388,8 +1390,8 @@ def main() -> None:
 
     ledger = ZeroTrustMerkleLedger(package_id="TDP-DAF-ACP-7740-REV-C")
     ia_verdict = ledger.evaluate_ia_compliance(faces, callouts, rego_policy_path=SCHEMAS_DIR / "ia_compliance.rego")
-    ledger.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://afmc.af.mil/plm/teamcenter-exporter", faces, callouts)
-    ledger.commit_state("AS_BUILT", "TAIL-XQ67A-042", "spiffe://plant42.af.mil/qa/cmm-cell-01", faces, callouts)
+    ledger.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://example.invalid/plm/teamcenter-exporter", faces, callouts)
+    ledger.commit_state("AS_BUILT", "TAIL-SYNTH-042", "spiffe://example.invalid/qa/cmm-cell-01", faces, callouts)
     print(f"[2/6] IA Compliance Gate Passed={ia_verdict['passed']} (Score={ia_verdict['mil_std_31000b_score']}%).")
 
     planner = AutonomousRoboticPathPlanner()
@@ -1404,22 +1406,22 @@ def main() -> None:
 
     sustainment = ClosedLoopAISustainmentEngine()
     anomalies, health_score = sustainment.inspect_and_evaluate(faces, callouts)
-    c3 = ledger.commit_state("AS_SUSTAINED", "TAIL-XQ67A-042", "spiffe://robins.af.mil/alc/mobile-manipulator-04", faces, callouts, anomalies)
+    c3 = ledger.commit_state("AS_SUSTAINED", "TAIL-SYNTH-042", "spiffe://example.invalid/alc/mobile-manipulator-04", faces, callouts, anomalies)
     print(
         f"[4/6] Closed-Loop Sustainment Inspection Complete: Airframe Health={health_score}%, "
         f"New As-Sustained Merkle Root={c3['merkle_root'][:16]}..."
     )
 
     bench_rows = run_50_part_empirical_benchmark()
-    csv_path = BENCHMARKS_DIR / "D2P2_Empirical_Benchmark_50_Aerospace_TDPs.csv"
+    csv_path = BENCHMARKS_DIR / "synthetic_design_targets_generated.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(bench_rows[0].keys()))
         writer.writeheader()
         writer.writerows(bench_rows)
-    print(f"[5/6] Executed 50-Part D2P2 Empirical Benchmark Suite -> saved to benchmarks/{csv_path.name}")
+    print(f"[5/6] Wrote 50-row synthetic design-target table (seeded RNG, not measured) -> benchmarks/{csv_path.name}")
 
     generate_benchmark_charts(bench_rows, output_dir=FIGURES_DIR)
-    print("[6/6] Generated high-resolution empirical benchmark charts in figures/.")
+    print("[6/6] Generated charts of synthetic design targets (not measurements) in figures/.")
 
     full_payload = {
         "schema_version": "2.4.0",
@@ -1437,7 +1439,7 @@ def main() -> None:
         "fanuc_ls_program": fanuc_code,
         "kuka_krl_program": kuka_code,
     }
-    (BENCHMARKS_DIR / "acp_7740_canonical_output.json").write_text(json.dumps(full_payload, indent=2), encoding="utf-8")
+    (BENCHMARKS_DIR / "synthetic_design_targets_generated.json").write_text(json.dumps(full_payload, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":

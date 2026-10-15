@@ -5,7 +5,7 @@
 
 # forge-evolve-tmpc
 
-`FORGE EVOLVE` · [program overview](https://github.com/577Industries#forge-evolve-for-tmpc--ai-assisted-modernization-of-mission-planning-software)
+`EVOLVE` · [program overview](https://github.com/577Industries#forge-evolve-for-tmpc--ai-assisted-modernization-of-mission-planning-software)
 
 **AI-assisted modernization of C#/.NET mission-planning software, with behavioral-equivalence proof and continuous-ATO artifacts - runnable end-to-end on a synthetic, unclassified surrogate.**
 
@@ -19,9 +19,10 @@
 
 Developed by [577 Industries, Inc.](https://github.com/577Industries) under U.S. Navy SBIR topic
 **DON26BZ01-NV013** ("AI-Assisted Modernization and Optimization of Theater Mission Planning Center
-(TMPC) Software"). This repository is the **C#/.NET/JavaScript/SQL extension** of the FORGE EVOLVE
-code-modernization framework. *(FORGE EVOLVE's prior published results cover COBOL/Fortran/Ada/VB6 →
-Java/Python/Rust/TypeScript; the C#/.NET capability here is newly developed for the TMPC stack.)*
+(TMPC) Software"). This repository is the **C#/.NET/JavaScript/SQL extension** of the Evolve
+code-modernization framework. *(No published results exist; an internal draft paper cited here earlier
+contained generated figures and is withdrawn as a citation, see [ERRATUM.md](ERRATUM.md). The C#/.NET
+capability here is newly developed for the TMPC stack.)*
 
 ---
 
@@ -40,8 +41,8 @@ make demo        # offline, deterministic, ~minutes
 
 | Phase-I ask (topic) | What the demo does | Evidence produced |
 |---|---|---|
-| 1. Analyze architecture, identify modernization needs | Roslyn/Tree-sitter discovery → dependency graph, complexity, business rules, crypto inventory | `results/discovery-report.json`, `results/business-rules.ttl` |
-| 2. Conceptual AI models for analysis/refactor/cyber | CLAR lift → risk-scored microservice decomposition → multi-agent transform | `results/migration-plan.json`, `results/clar/*.jsonld` |
+| 1. Analyze architecture, identify modernization needs | Roslyn discovery (C#) plus regex heuristics for JS/SQL/VB6 → dependency graph, complexity, surrogate-keyed business-rule probes, crypto inventory | `results/discovery-report.json`, `results/business-rules.ttl` |
+| 2. Conceptual AI models for analysis/refactor/cyber | template CLAR lift → risk-scored microservice decomposition → replayed transform (no model call) | `results/migration-plan.json`, `results/clar/*.jsonld` |
 | 3. PoC AI refactoring on a representative component | Modernize a coupled C# component to .NET 8; prove behavioral equivalence | `results/equivalence-report.json`, `tmpc-modern-mds/` |
 | 4. Phase II prototype plans + cyber | cATO artifacts as CI byproducts | `results/stig-findings.*.json`, `results/control-map.yaml`, `results/sbom.cdx.json`, `results/provenance.json`, `results/poam.csv` |
 
@@ -53,6 +54,7 @@ exact file/test that backs it. [`EXCLUSIONS.md`](EXCLUSIONS.md) states why this 
 > TMPC code and not validated by the Navy. The surrogate is engineered to exhibit the *same classes*
 > of technical debt and *shapes* of mission-planning logic the government described, so results
 > transfer in kind, not in fidelity. See [`surrogate/DEBT.md`](surrogate/DEBT.md).
+> See [`ERRATUM.md`](ERRATUM.md) for the 2026-10-15 corrections to earlier claims in this repository.
 
 ## Reading order for first-time visitors
 
@@ -71,18 +73,22 @@ ingest → Discovery → CLAR → Migration Planner → Tool Orchestrator → Tr
        → Validation (behavioral equivalence) → Cyber/cATO overlay → Governance
 ```
 
-- **Discovery** - [Roslyn](https://github.com/dotnet/roslyn) semantic analysis of C# (+ Tree-sitter for
-  JS/SQL, FORGE VB6 grammar): dependency graph, Tarjan SCCs, complexity vectors, business-rule
-  extraction (AST + LLM majority vote → RDF), cryptographic inventory.
+- **Discovery** - [Roslyn](https://github.com/dotnet/roslyn) semantic analysis of C# (JS/SQL/VB6 are
+  recognized by regex heuristics; no Tree-sitter or ANTLR grammar is present): dependency graph, Tarjan
+  SCCs, complexity vectors, business-rule extraction by structural AST probes keyed to the surrogate
+  (no language model; emitted as RDF), cryptographic inventory.
 - **CLAR** - Cross-Language Abstract Representation ([`clar-spec/`](clar-spec/CLAR.schema.json)):
   four layers, decouples source parsing from target generation; flags precision-constrained values so
-  coordinate/time-on-target math is emitted with `decimal`/checked arithmetic.
+  coordinate/time-on-target math is emitted with `decimal`/checked arithmetic. (The lifter in this
+  repository emits a fixed mission-domain template; see ERRATUM.md.)
 - **Migration Planner** - composite risk scoring + spectral clustering → candidate microservice
   boundaries + a topologically-ordered, risk-scored migration sequence (the Phase II roadmap).
 - **Tool Orchestrator** - routes transform tasks via
   [`@577-industries/model-router`](https://github.com/577Industries); runs **offline** (deterministic
-  transcript replay - the default), **local** (sovereign/air-gapped), or **cloud**.
-- **Transformation** - emits modern, testable .NET 8 with secure-by-construction patterns.
+  transcript replay - the default). The **local** and **cloud** modes select a model but do not call one
+  (`orchestrator/src/cli.ts` exits before any model call).
+- **Transformation** - replays the hand-refactored .NET 8 files in `tmpc-modern-mds/`; no code is
+  generated at run time (see ERRATUM.md).
 - **Validation** - differential + property-based testing with **mission-data-aware oracles**
   (route feasibility, anti-meridian, time-on-target); discrete outputs to exact equality, continuous to
   bounded relative error; reports a Chernoff confidence bound.
@@ -94,7 +100,7 @@ ingest → Discovery → CLAR → Migration Planner → Tool Orchestrator → Tr
 
 | Path | Contents |
 |---|---|
-| [`src/`](src/) | The FORGE EVOLVE for TMPC engine (.NET). `ForgeEvolve.Contracts` = frozen interfaces/DTOs. |
+| [`src/`](src/) | The Evolve for TMPC engine (.NET). `ForgeEvolve.Contracts` = frozen interfaces/DTOs. |
 | [`orchestrator/`](orchestrator/) | TypeScript orchestration layer (consumes `@577-industries/*`). |
 | [`surrogate/`](surrogate/) | The synthetic, unclassified MDS-like component + golden corpus + legacy runtime. |
 | [`clar-spec/`](clar-spec/) | CLAR JSON-LD schema + per-language profiles. |

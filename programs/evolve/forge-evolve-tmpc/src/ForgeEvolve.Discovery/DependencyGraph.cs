@@ -2,7 +2,7 @@
 // DependencyGraph — builds DependencyEdges among C# methods/types and runs Tarjan's
 // strongly-connected-components algorithm to surface tight-coupling clusters.
 //
-// PART OF: FORGE EVOLVE for TMPC, Discovery Engine (Stage 1, workstream WS-A).
+// PART OF: Evolve for TMPC, Discovery Engine (Stage 1, workstream WS-A).
 //
 // Edge kinds:
 //   * Calls       — method A invokes method B (resolved by simple name within the analyzed set;

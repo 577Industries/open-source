@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // MigrationPlannerTests — acceptance tests over the REAL Discovery -> Planner path on the surrogate.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner tests (workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner tests (workstream WS-C).
 //
 // Asserts the WS-C acceptance criteria:
 //   * the god-class coupling cluster is split into >= 3 candidate migration units;

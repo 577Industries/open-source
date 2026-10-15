@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you reference this work, please cite it as below."
-title: "FORGE EVOLVE for TMPC: AI-Assisted Modernization of C#/.NET Mission-Planning Software"
+title: "Evolve for TMPC: AI-Assisted Modernization of C#/.NET Mission-Planning Software"
 abstract: >-
-  A reviewer-runnable C#/.NET reference implementation of the FORGE EVOLVE code-modernization
+  A reviewer-runnable C#/.NET reference implementation of the Evolve code-modernization
   framework, extended to the Theater Mission Planning Center (TMPC) software stack
   (C#/.NET, JavaScript, SQL, VB6). Demonstrates AI-assisted legacy code discovery, refactoring,
   behavioral-equivalence validation with mission-data-aware oracles, and continuous-ATO artifact

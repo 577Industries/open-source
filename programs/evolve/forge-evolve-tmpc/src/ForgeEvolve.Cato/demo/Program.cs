@@ -115,7 +115,7 @@ string outDir = args.Length > 0 ? args[0] : Path.Combine(root, "results", "run",
 var overlay = new CyberOverlay();
 CatoArtifacts art = overlay.Generate(legacy, modern, discovery, outDir);
 
-Console.WriteLine("=== FORGE EVOLVE for TMPC — Cyber/cATO overlay (WS-G) acceptance ===");
+Console.WriteLine("=== Evolve for TMPC — Cyber/cATO overlay (WS-G) acceptance ===");
 Console.WriteLine($"Output directory          : {Path.GetFullPath(outDir)}");
 Console.WriteLine($"STIG findings (before)    : {art.StigBefore.Count}");
 Console.WriteLine($"STIG findings (after)     : {art.StigAfter.Count} " +

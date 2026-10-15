@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — the differential behavioral-equivalence validator (Stage 4).
+// Evolve for TMPC — the differential behavioral-equivalence validator (Stage 4).
 //
 // IEquivalenceValidator.Verify runs the legacy AND modern implementations on every input
 // vector and compares their outputs through the mission-data-aware oracles (Oracles.cs). The

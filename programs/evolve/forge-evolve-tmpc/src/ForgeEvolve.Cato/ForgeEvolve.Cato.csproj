@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
     <RootNamespace>ForgeEvolve.Cato</RootNamespace>
-    <Description>FORGE EVOLVE for TMPC — Cyber / cATO overlay (Stage 5). Static STIG analyzers (before/after), NIST 800-53 control map, CycloneDX SBOM, SHA-256 hashchain + Merkle provenance, and POA&amp;M generation.</Description>
+    <Description>Evolve for TMPC — Cyber / cATO overlay (Stage 5). Static STIG analyzers (before/after), NIST 800-53 control map, CycloneDX SBOM, SHA-256 hashchain + Merkle provenance, and POA&amp;M generation.</Description>
   </PropertyGroup>
 
   <!-- The test/demo projects live in ./tests and ./demo; keep their sources out of this

@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
     <RootNamespace>ForgeEvolve.Clar</RootNamespace>
-    <Description>CLAR (Cross-Language Abstract Representation) provider for FORGE EVOLVE for TMPC: lifts source modules into a four-layer JSON-LD CLAR document and validates it against the frozen clar-spec/CLAR.schema.json. The precision-constrained dataFlow mapping is the load-bearing feature driving decimal/checked target generation.</Description>
+    <Description>CLAR (Cross-Language Abstract Representation) provider for Evolve for TMPC: lifts source modules into a four-layer JSON-LD CLAR document and validates it against the frozen clar-spec/CLAR.schema.json. The precision-constrained dataFlow mapping is the feature that drives decimal/checked target generation.</Description>
   </PropertyGroup>
 
   <ItemGroup>

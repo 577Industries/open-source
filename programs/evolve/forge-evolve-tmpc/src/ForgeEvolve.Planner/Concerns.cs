@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Concerns — the candidate microservice boundaries for the surrogate god class.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner (Stage 2, workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner (Stage 2, workstream WS-C).
 //
 // HONESTY: these boundaries are HEURISTIC PROPOSALS for the synthetic surrogate, not a validated
 // target architecture. A concern is a SEED label attached to god-class members and related modules

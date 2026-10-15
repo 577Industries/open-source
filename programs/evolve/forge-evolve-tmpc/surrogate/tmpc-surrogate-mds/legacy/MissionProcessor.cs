@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // MissionProcessor — SYNTHETIC, INTENTIONALLY-LEGACY MDS-like mission processor.
 //
-// PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+// PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 //
 // This file is engineered to exhibit the *classes of technical debt* the government
 // described for the real (1.3M-LOC, mostly-C#) MDS — NOT any real algorithm, data, or

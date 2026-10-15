@@ -2,7 +2,7 @@ Attribute VB_Name = "GeoFixedPoint"
 ' ─────────────────────────────────────────────────────────────────────────────
 ' GeoFixedPoint.bas — SYNTHETIC, INTENTIONALLY-LEGACY VB6 fixed-point geo module.
 '
-' PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+' PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 '
 ' This module models the kind of decades-old VB6 "mil-grid" coordinate math that lingers
 ' in legacy mission-planning tool-chains: scaled-integer (fixed-point) lat/lon stored as
@@ -13,10 +13,10 @@ Attribute VB_Name = "GeoFixedPoint"
 ' demo has a representative VB6 artifact to parse and so the modernization can show a
 ' VB6 -> TypeScript lift.
 '
-' NOTE: VB6 -> TypeScript is one of FORGE EVOLVE's ALREADY-VALIDATED transformation paths
-' (the framework's prior published results cover COBOL/Fortran/Ada/VB6 -> Java/Python/
-' Rust/TypeScript). The C#/.NET capability is the new TMPC-specific extension; this VB6
-' file lets the surrogate exercise the pre-existing VB6 front-end.
+' NOTE: VB6 -> TypeScript is a design target of Evolve, not a validated path. No published
+' results exist; an internal draft paper cited here earlier contained generated figures and
+' is withdrawn as a citation (see ERRATUM.md). The C#/.NET capability is the TMPC-specific
+' extension; this VB6 file gives the regex-based VB6 recognizer a module to parse.
 ' ─────────────────────────────────────────────────────────────────────────────
 Option Explicit
 

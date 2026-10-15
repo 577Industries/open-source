@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — shared corpus fixture for the validation tests.
+// Evolve for TMPC — shared corpus fixture for the validation tests.
 //
 // Loads the frozen golden corpus (surrogate/corpus/corpus.json) exactly once and shares it
 // across the whole test class collection. No real data — synthetic surrogate only.

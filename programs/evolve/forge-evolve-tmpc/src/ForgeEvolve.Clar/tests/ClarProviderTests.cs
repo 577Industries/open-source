@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CLAR provider tests.
+// Evolve for TMPC — CLAR provider tests.
 //
 // Acceptance assertions:
 //   * a lifted CLAR doc VALIDATES against clar-spec/CLAR.schema.json;
@@ -56,7 +56,7 @@ public sealed class ClarProviderTests
         Assert.True(root.GetProperty("infrastructure").GetArrayLength() > 0, "infrastructure empty");
     }
 
-    // ── Load-bearing feature: coordinate / distance / TOT are precision-constrained ─
+    // ── The feature that drives the result: coordinate / distance / TOT are precision-constrained ─
 
     [Theory]
     [InlineData("latDeg")]

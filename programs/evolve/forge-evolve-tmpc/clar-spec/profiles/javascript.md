@@ -1,6 +1,6 @@
 # CLAR Language Profile - JavaScript
 
-> Part of **FORGE EVOLVE for TMPC**. Defines how a JavaScript source module maps into the
+> Part of **Evolve for TMPC**. Defines how a JavaScript source module maps into the
 > four CLAR layers of [`clar-spec/CLAR.schema.json`](../CLAR.schema.json). The surrogate's
 > representative JS artifact is the mission-review client
 > `surrogate/tmpc-surrogate-mds/legacy/wwwroot/mission-review.js`.
@@ -38,7 +38,7 @@
 | `console.*` | infrastructure | `LOGGING` |
 | config object / `window.__CONFIG__` | infrastructure | `CONFIGURATION` |
 
-## Precision-constrained mapping (load-bearing)
+## Precision-constrained mapping (the part that drives the result)
 
 JavaScript has a **single numeric type (IEEE-754 `double`)**, so *every* coordinate, distance,
 and time value is implicitly a float - the precision hazard is even sharper than C#. CLAR marks

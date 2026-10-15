@@ -10,3 +10,5 @@ dist/
 venv/
 *.Zone.Identifier
 .DS_Store
+# generated charts of synthetic design targets; never evidence
+figures/*.png

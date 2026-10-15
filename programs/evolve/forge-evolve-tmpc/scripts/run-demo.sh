@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# run-demo.sh — drives the full FORGE EVOLVE for TMPC pipeline on the synthetic surrogate.
+# run-demo.sh — drives the full Evolve for TMPC pipeline on the synthetic surrogate.
 # Offline and keyless by default (FORGE_ORCHESTRATOR_MODE=offline).
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -8,7 +8,7 @@ DOTNET="${DOTNET:-$([ -x "$HOME/.dotnet/dotnet" ] && echo "$HOME/.dotnet/dotnet"
 RUN_DIR="results/run"
 CLI_PROJ="src/ForgeEvolve.Cli/ForgeEvolve.Cli.csproj"
 
-echo "==> FORGE EVOLVE for TMPC — demo (mode=${FORGE_ORCHESTRATOR_MODE:-offline})"
+echo "==> Evolve for TMPC — demo (mode=${FORGE_ORCHESTRATOR_MODE:-offline})"
 
 if [ ! -f "$CLI_PROJ" ]; then
   echo "NOTE: the CLI driver ($CLI_PROJ) is assembled during the integration phase (P3)."

@@ -1,6 +1,6 @@
 # business-rules.gold.ttl — HAND-LABELED gold business rules for the discovery F1 metric.
 #
-# PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+# PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 #
 # This is the authoritative, human-authored set of business rules PRESENT in the synthetic
 # surrogate. The Discovery Engine's extracted rules are scored (precision/recall/F1) against

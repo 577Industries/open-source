@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — JSON-LD @context helper.
+// Evolve for TMPC — JSON-LD @context helper.
 //
 // The CLAR schema accepts "@context" as either a string IRI or an inline object. We emit an
 // inline object that (a) declares the vocabulary base and (b) maps the CLAR layer terms to

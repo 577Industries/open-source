@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CLAR document model.
+// Evolve for TMPC — CLAR document model.
 //
 // These classes serialize (System.Text.Json) to the exact shape of the FROZEN
 // clar-spec/CLAR.schema.json. The schema sets "additionalProperties": false on every
@@ -69,7 +69,7 @@ public sealed class ControlFlowNode
 
 /// <summary>
 /// Data-flow layer node. "type" is one of the schema's dataFlowNode enums. The
-/// <see cref="PrecisionConstrained"/> flag is the load-bearing field: when true (set for
+/// <see cref="PrecisionConstrained"/> flag is the field the rest depends on: when true (set for
 /// coordinate / distance / TOT math, VB6 fixed-point, and SQL FLOAT-backed values) the
 /// target generator MUST emit decimal/checked arithmetic instead of coercing to float.
 /// </summary>

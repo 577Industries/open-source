@@ -1,7 +1,7 @@
 // LegacyCheck — replay the frozen golden corpus through the C# legacy MissionProcessor
 // and assert its output equals the stored Python `legacyOutput` answer key.
 //
-// PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+// PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 //
 // Discrete fields exact; continuous distance fields within 1e-9 relative.
 // Prints "LEGACY-CHECK PASS: N/N" on success; otherwise lists mismatches and exits 1.

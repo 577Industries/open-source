@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // RiskModel — composite modernization-risk score in [0,1] per module.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner (Stage 2, workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner (Stage 2, workstream WS-C).
 //
 // The composite score is a WEIGHTED BLEND of normalized debt/criticality factors. The weights are
-// the FORGE EVOLVE spec factor weights (they sum to 1.0); each factor is squashed into [0,1] before
+// the Evolve spec factor weights (they sum to 1.0); each factor is squashed into [0,1] before
 // blending so the composite is always in [0,1]:
 //
 //   factor                weight   source signal (from the frozen ComplexityVector + heuristics)
@@ -29,7 +29,7 @@ using ForgeEvolve.Contracts;
 
 namespace ForgeEvolve.Planner;
 
-/// <summary>The eight FORGE EVOLVE risk-factor weights (sum = 1.0) and their saturation constants.</summary>
+/// <summary>The eight Evolve risk-factor weights (sum = 1.0) and their saturation constants.</summary>
 internal static class RiskWeights
 {
     public const double Cyclomatic        = 0.20;

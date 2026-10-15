@@ -1,6 +1,6 @@
 # ForgeEvolve.ModernMds - behavior-preserving modernization of the legacy MissionProcessor
 
-**Part of FORGE EVOLVE for TMPC (synthetic, unclassified surrogate - Phase 1).**
+**Part of Evolve for TMPC (synthetic, unclassified surrogate - Phase 1).**
 
 This is the **modernized mission component**: a clean .NET 8 re-architecture of the synthetic
 legacy `MissionProcessor.ProcessMission`

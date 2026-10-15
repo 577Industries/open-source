@@ -48,7 +48,7 @@ def test_adversarial_zero_trust_blocks_unauthorized_subjects():
         },
     )
     assert fn_verdict["passed"] is False
-    assert fn_verdict["rule_results"]["ITAR_USML_CAT_VIII_ABAC_TAGGED"] is False
+    assert fn_verdict["rule_results"]["EXPORT_CONTROL_ABAC_TAGGED"] is False
 
     # Non-CMMC Level 1 enclave attempt
     cmmc_verdict = ledger.evaluate_ia_compliance(
@@ -63,7 +63,7 @@ def test_adversarial_zero_trust_blocks_unauthorized_subjects():
         },
     )
     assert cmmc_verdict["passed"] is False
-    assert cmmc_verdict["rule_results"]["ITAR_USML_CAT_VIII_ABAC_TAGGED"] is False
+    assert cmmc_verdict["rule_results"]["EXPORT_CONTROL_ABAC_TAGGED"] is False
 
     # Missing SPIFFE mTLS identity
     mtls_verdict = ledger.evaluate_ia_compliance(
@@ -89,9 +89,9 @@ def test_deterministic_merkle_dag_lineage_and_pydantic_schema():
 
     ledger_a = ZeroTrustMerkleLedger(package_id="TDP-DAF-ACP-7740-REV-C")
     verdict_a = ledger_a.evaluate_ia_compliance(faces_a, callouts_a)
-    c1_a = ledger_a.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://afmc.af.mil/plm/teamcenter-exporter", faces_a, callouts_a)
-    c2_a = ledger_a.commit_state("AS_BUILT", "TAIL-XQ67A-042", "spiffe://plant42.af.mil/qa/cmm-cell-01", faces_a, callouts_a)
-    c3_a = ledger_a.commit_state("AS_SUSTAINED", "TAIL-XQ67A-042", "spiffe://robins.af.mil/alc/mobile-manipulator-04", faces_a, callouts_a, anomalies_a)
+    c1_a = ledger_a.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://example.invalid/plm/teamcenter-exporter", faces_a, callouts_a)
+    c2_a = ledger_a.commit_state("AS_BUILT", "TAIL-SYNTH-042", "spiffe://example.invalid/qa/cmm-cell-01", faces_a, callouts_a)
+    c3_a = ledger_a.commit_state("AS_SUSTAINED", "TAIL-SYNTH-042", "spiffe://example.invalid/alc/mobile-manipulator-04", faces_a, callouts_a, anomalies_a)
 
     # Second independent run must produce identical SHA-256 Merkle roots and commit hashes
     engine_b = AerospaceTDPIngestionEngine(seed=42)
@@ -100,9 +100,9 @@ def test_deterministic_merkle_dag_lineage_and_pydantic_schema():
     anomalies_b, _ = sust_b.inspect_and_evaluate(faces_b, callouts_b)
 
     ledger_b = ZeroTrustMerkleLedger(package_id="TDP-DAF-ACP-7740-REV-C")
-    c1_b = ledger_b.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://afmc.af.mil/plm/teamcenter-exporter", faces_b, callouts_b)
-    c2_b = ledger_b.commit_state("AS_BUILT", "TAIL-XQ67A-042", "spiffe://plant42.af.mil/qa/cmm-cell-01", faces_b, callouts_b)
-    c3_b = ledger_b.commit_state("AS_SUSTAINED", "TAIL-XQ67A-042", "spiffe://robins.af.mil/alc/mobile-manipulator-04", faces_b, callouts_b, anomalies_b)
+    c1_b = ledger_b.commit_state("AS_DESIGNED", "FLEET_BASELINE", "spiffe://example.invalid/plm/teamcenter-exporter", faces_b, callouts_b)
+    c2_b = ledger_b.commit_state("AS_BUILT", "TAIL-SYNTH-042", "spiffe://example.invalid/qa/cmm-cell-01", faces_b, callouts_b)
+    c3_b = ledger_b.commit_state("AS_SUSTAINED", "TAIL-SYNTH-042", "spiffe://example.invalid/alc/mobile-manipulator-04", faces_b, callouts_b, anomalies_b)
 
     assert c1_a["commit_hash"] == c1_b["commit_hash"]
     assert c2_a["commit_hash"] == c2_b["commit_hash"]
@@ -127,12 +127,12 @@ def test_crdt_multi_depot_branch_reconciliation():
     ledger = ZeroTrustMerkleLedger(package_id="TDP-DAF-ACP-7740-REV-C")
 
     depot_robins = [
-        CRDTStateEntry("TAIL-XQ67A-042", "F-103", 10, "ROBINS_ALC", 0.028, "MRB_REVIEW", "sig-robins-10"),
-        CRDTStateEntry("TAIL-XQ67A-042", "F-108", 11, "ROBINS_ALC", 0.082, "REWORK", "sig-robins-11"),
+        CRDTStateEntry("TAIL-SYNTH-042", "F-103", 10, "ROBINS_ALC", 0.028, "MRB_REVIEW", "sig-robins-10"),
+        CRDTStateEntry("TAIL-SYNTH-042", "F-108", 11, "ROBINS_ALC", 0.082, "REWORK", "sig-robins-11"),
     ]
     depot_ogden = [
-        CRDTStateEntry("TAIL-XQ67A-042", "F-103", 14, "OGDEN_ALC", 0.011, "ACCEPT", "sig-ogden-14"),
-        CRDTStateEntry("TAIL-XQ67A-042", "F-118", 12, "OGDEN_ALC", 0.031, "REWORK", "sig-ogden-12"),
+        CRDTStateEntry("TAIL-SYNTH-042", "F-103", 14, "OGDEN_ALC", 0.011, "ACCEPT", "sig-ogden-14"),
+        CRDTStateEntry("TAIL-SYNTH-042", "F-118", 12, "OGDEN_ALC", 0.031, "REWORK", "sig-ogden-12"),
     ]
 
     merge_ab = ledger.reconcile_crdt_branches(depot_robins, depot_ogden)

@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H) tests.
+// Evolve for TMPC — Governance workstream (WS-H) tests.
 //
 // Serialization tests: the results/provenance.json document round-trips through the Contracts
 // ProvenanceRecord shape (so the Cyber/cATO overlay can read it back), and carries the Merkle root.

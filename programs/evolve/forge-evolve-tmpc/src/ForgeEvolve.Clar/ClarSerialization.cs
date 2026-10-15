@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — shared CLAR serialization options.
+// Evolve for TMPC — shared CLAR serialization options.
 
 using System.Text.Json;
 

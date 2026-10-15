@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SpectralPartitioner — Fiedler-vector spectral bipartition of an undirected weighted graph.
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner (Stage 2, workstream WS-C).
+// PART OF: Evolve for TMPC, Migration Planner (Stage 2, workstream WS-C).
 //
 // Used to PARTITION the large coupling cluster (the god class + its methods + its data/rule
 // affinities) into candidate microservice boundaries.

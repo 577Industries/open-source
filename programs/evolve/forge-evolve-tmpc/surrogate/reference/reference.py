@@ -1,6 +1,6 @@
 """reference.py — NEUTRAL CORRECT semantics + a faithful LEGACY port.
 
-PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 
 This module is the single SOURCE OF TRUTH for the "Mission-Data Routing, Validation
 & Distribution" domain. It is 100% synthetic and unclassified: it models the *shapes*

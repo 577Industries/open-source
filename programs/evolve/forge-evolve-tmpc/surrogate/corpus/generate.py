@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """generate.py — frozen golden corpus for the synthetic TMPC surrogate.
 
-PART OF: FORGE EVOLVE for TMPC, synthetic unclassified surrogate (Phase 1).
+PART OF: Evolve for TMPC, synthetic unclassified surrogate (Phase 1).
 
 Generates N=2000 MissionRequests from a FIXED RNG seed (577077), spanning the
 pre-registered tags. For each vector it stores:

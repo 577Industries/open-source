@@ -14,7 +14,7 @@ namespace ForgeEvolve.Orchestrator;
 /// a tighter posterior make the agent more likely to be sampled.
 /// </para>
 /// <para>
-/// The registry is seeded from prior FORGE EVOLVE telemetry (these priors are illustrative
+/// The registry is seeded from prior Evolve telemetry (these priors are illustrative
 /// for the keyless surrogate demo, not measured TMPC numbers). In a live deployment the
 /// posteriors are updated from validator outcomes after each dispatch.
 /// </para>
@@ -88,7 +88,7 @@ public sealed class CapabilityRegistry
     public IReadOnlyList<AgentCapability> Agents => _agents;
 
     /// <summary>
-    /// The default FORGE EVOLVE agent roster. "claude-code" is the strongest general transformer;
+    /// The default Evolve agent roster. "claude-code" is the strongest general transformer;
     /// the Ollama/Llama agents are sovereign (local) options for air-gapped Local mode.
     /// Priors are illustrative defaults for the surrogate demo, NOT measured TMPC metrics.
     /// </summary>

@@ -1,4 +1,4 @@
-name: Forge Evolve Equivalence & D2P2 Verification CI
+name: Design-study self-check (not evidence)
 
 on:
   push:

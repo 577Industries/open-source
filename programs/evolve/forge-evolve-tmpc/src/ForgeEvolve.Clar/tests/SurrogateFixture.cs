@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — test fixture modeling the surrogate's mission processor.
+// Evolve for TMPC — test fixture modeling the surrogate's mission processor.
 //
 // Builds a representative ModuleNode + DiscoveryReport for the synthetic
 // MissionProcessor.ProcessMission god method, matching the gold business rules in

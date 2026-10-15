@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — Governance workstream (WS-H).
+// Evolve for TMPC — Governance workstream (WS-H).
 //
 // ProvenanceJson serializes the ledger to results/provenance.json — the artifact the README and
 // companion cite, and the one the Cyber/cATO overlay consumes for CatoArtifacts.ProvenanceMerkleRoot.

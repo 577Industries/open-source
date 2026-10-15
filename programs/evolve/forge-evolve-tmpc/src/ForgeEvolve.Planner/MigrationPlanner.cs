@@ -1,11 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // MigrationPlanner — IMigrationPlanner implementation (Stage 2, workstream WS-C).
 //
-// PART OF: FORGE EVOLVE for TMPC, Migration Planner.
+// PART OF: Evolve for TMPC, Migration Planner.
 //
 // Pipeline (Plan(DiscoveryReport) -> MigrationPlan):
 //   1. RISK SCORE every module in [0,1] from its ComplexityVector + business-criticality, using the
-//      FORGE EVOLVE factor weights (see RiskModel). Re-emit each ModuleNode with RiskScore set.
+//      Evolve factor weights (see RiskModel). Re-emit each ModuleNode with RiskScore set.
 //   2. DECOMPOSE: build the module dependency graph from DiscoveryReport.Edges, run Tarjan SCC, and
 //      contract to a DAG. The large coupling SCC (the god class + its methods) is PARTITIONED with a
 //      spectral / Fiedler bipartition of a concern-affinity graph (SpectralPartitioner) into

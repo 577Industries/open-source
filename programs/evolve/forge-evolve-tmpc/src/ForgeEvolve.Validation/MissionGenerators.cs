@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CsCheck generators for property-based equivalence testing.
+// Evolve for TMPC — CsCheck generators for property-based equivalence testing.
 //
 // These produce random, well-formed MissionRequest JSON inputs (the same schema the legacy
 // MissionProcessor and reference model consume) plus helpers to build perturbed-modern stand-

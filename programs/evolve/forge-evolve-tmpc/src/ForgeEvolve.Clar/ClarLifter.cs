@@ -1,4 +1,4 @@
-// FORGE EVOLVE for TMPC — CLAR lifter.
+// Evolve for TMPC — CLAR lifter.
 //
 // Lifts a discovered C# mission-processing module into a four-layer CLAR document. The
 // representative nodes model the surrogate's MissionProcessor.ProcessMission god method
@@ -6,7 +6,7 @@
 // surrogate/reference/reference.py and whose business rules are hand-labeled in
 // surrogate/gold/business-rules.gold.ttl.
 //
-// LOAD-BEARING FEATURE — precision-constrained data flow:
+// THE FEATURE THAT DRIVES THE RESULT: precision-constrained data flow:
 //   The coordinate (lat/lon), distance (leg/total nm), and time-on-target (TOT) values are
 //   C# `double` in the legacy code, FLOAT in the SQL store, and fixed-point Long in the VB6
 //   analog. All of these LOSE precision. Each corresponding dataFlow node is emitted with

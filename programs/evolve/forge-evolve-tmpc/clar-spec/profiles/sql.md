@@ -1,6 +1,6 @@
 # CLAR Language Profile - SQL (T-SQL / SQL Server)
 
-> Part of **FORGE EVOLVE for TMPC**. Defines how a SQL source module (schema + stored
+> Part of **Evolve for TMPC**. Defines how a SQL source module (schema + stored
 > procedures) maps into the four CLAR layers of [`clar-spec/CLAR.schema.json`](../CLAR.schema.json).
 > The surrogate's representative SQL artifacts are
 > `surrogate/tmpc-surrogate-mds/legacy/sql/schema.sql` and `.../sql/sp_PublishMission.sql`.
@@ -40,7 +40,7 @@
 | `sp_configure` / settings table | infrastructure | `CONFIGURATION` |
 | `RAISERROR` / error log table | infrastructure | `LOGGING` |
 
-## Precision-constrained mapping (load-bearing)
+## Precision-constrained mapping (the part that drives the result)
 
 SQL Server `FLOAT`/`REAL` are **approximate** numeric types: storing a nautical-mile distance or
 a coordinate in a `FLOAT` column **loses precision on every read/write round-trip** - this is the

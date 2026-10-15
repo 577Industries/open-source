@@ -1,7 +1,7 @@
 # Human-in-the-Loop Review Gates
 
 The government's topic Q&A states the expectation directly: *"a lot of human involvement until the
-product is verified; then ECP to baseline and less human involvement."* FORGE EVOLVE for TMPC encodes
+product is verified; then ECP to baseline and less human involvement."* Evolve for TMPC encodes
 that as explicit, recorded gates. No transformation is accepted into the modern baseline without a
 human sign-off carrying the rule-diff, the equivalence delta, and the STIG delta.
 

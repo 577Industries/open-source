@@ -17,7 +17,7 @@ describe("live-mode bridge: model-router reuse", () => {
   it("selects a SOVEREIGN (open-source) model when sovereignOnly=true", () => {
     const selection = selectModel(complexTask, { sovereignOnly: true });
 
-    // The load-bearing air-gap assertion: an air-gapped deployment must never get a hosted model.
+    // The air-gap assertion the rest depends on: an air-gapped deployment must never get a hosted model.
     expect(selection.sovereignOnly).toBe(true);
     expect(selection.isOpenSource).toBe(true);
     expect(selection.strategy).toBe("efficiency");

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Forge Evolve — Adversarial Red-Team Verification Suite & Diagnostic Figure Generator
+Evolve: Adversarial Red-Team Verification Suite & Diagnostic Figure Generator (design study)
+
+Design-study code. Benchmark rows, exception counts and timing values in this module are synthetic design targets (seeded random draws and constants), not measurements.
 Organization: 577 Industries Inc. (Columbus, Ohio | https://www.577industries.com/evolve)
 Principal Investigator: Dr. Thomas G. Waweru <info@577industries.com>
 
@@ -9,7 +11,7 @@ Executes:
   2. Official 11-Case NIST MBE PMI Topological Binding Validation Suite (CTC-01..05, FTC-06..11)
   3. Continuous 200 Hz 6-Link Swept-Capsule Collision Verification & Datum-A 3-Fiducial Calibration
   4. 225-Case Multi-Format TDP Exception Engine Verification (EXC-01 through EXC-06)
-  5. High-Resolution System Architecture Schematics & Empirical Diagnostic Charts in figures/
+  5. System Architecture Schematics & Diagnostic Charts of synthetic design targets in figures/ (not measurements)
 """
 
 import pathlib
@@ -119,7 +121,7 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
     ax2.axhline(1.5, color=CRIMSON, linestyle="--", lw=1.2, label="DV012 Max Prog Limit (1.5 hr)")
     ax2.set_xticks(xv)
     ax2.set_xticklabels(vendors, fontsize=8)
-    ax2.set_ylabel("Measured Time (Hours)", fontsize=9, fontweight="bold", color=NAVY)
+    ax2.set_ylabel("Design-Target Time (Hours, not measured)", fontsize=9, fontweight="bold", color=NAVY)
     ax2.set_title("B. Multi-Vendor Hardware Kinematic Adaptation (DV012)", fontsize=10, fontweight="bold", color=NAVY)
     ax2.set_ylim(0, 2.5)
     ax2.grid(axis="y", linestyle=":", alpha=0.5)
@@ -138,11 +140,11 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
     for fname, title_str, blocks, feedback_str in [
         (
             "fig_arch_dv008.png",
-            "Forge Evolve TDP System Architecture & Closed-Loop Zero-Trust Data Flow (DAF27BZ01-DV008)",
+            "Evolve TDP System Architecture & Closed-Loop Zero-Trust Data Flow (DAF27BZ01-DV008)",
             [
                 (2, 6, 17, 24, NAVY, "1. Enterprise PLM &\nTDP Sources\n\n• STEP AP242 MBD\n• 2D PDF Drawings\n• Teamcenter / Windchill\n• Depot NDI Telemetry"),
                 (22, 6, 17, 24, TEAL, "2. OPA IA Gate &\nZero-Trust Ingest\n\n• MIL-STD-31000B Rules\n• DoDI 8500.01 / ITAR\n• Watertight B-Rep Check\n• <1.5 ms Policy Eval"),
-                (42, 6, 18, 24, NAVY, "3. Canonical Graph &\nQBit Merkle Ledger\n\n• PostGIS + Neo4j CTDP-G\n• FIPS 140-3 + ML-KEM-768\n• CRDT Multi-Depot Sync\n• As-Sustained Commits"),
+                (42, 6, 18, 24, NAVY, "3. Canonical Graph &\nMerkle Ledger\n\n• PostGIS + Neo4j CTDP-G\n• FIPS 203 ML-KEM-768 (design, not implemented)\n• CRDT Multi-Depot Sync\n• As-Sustained Commits"),
                 (63, 6, 17, 24, TEAL, "4. BVH-Octree WebGPU\nStreaming Engine\n\n• Draco LOD Chunks\n• Node ABAC Redaction\n• <300 ms First Frame\n• Zero Local Disk Cache"),
                 (83, 6, 15, 24, AMBER, "5. 3D PointNet++ AI\nSustainment Engine\n\n• ICP Cloud Registration\n• 98.6% Defect F1 Score\n• Crack / Delam / Corrosion\n• Automated MRB Action"),
             ],
@@ -150,7 +152,7 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
         ),
         (
             "fig_arch_dv012.png",
-            "Forge Evolve Kinetic System Architecture & Autonomous TDP-to-Robot Pipeline (DAF27BZ01-DV012)",
+            "Kinetic System Architecture & Autonomous TDP-to-Robot Pipeline (DAF27BZ01-DV012)",
             [
                 (2, 6, 17, 24, NAVY, "1. Heterogeneous\nTDP Artifacts\n\n• 3D STEP / IGES CAD\n• 2D PDF Blueprints\n• BOMs & Process Specs\n• Exception Repair Gate"),
                 (22, 6, 17, 24, TEAL, "2. Multimodal 2D/3D\nSemantic Extractor\n\n• OpenCASCADE B-Rep\n• LayoutLMv3 + Vec OCR\n• Raycast 3D Binding\n• 99.1% NIST MBE Prec."),
@@ -186,7 +188,7 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
     opt_link = np.maximum(55.04, tcp_clearance - 16.5 + 6.0 * np.cos(0.35 * t_steps))
     ax1.plot(t_steps, tcp_clearance, color=SLATE, linestyle=":", lw=1.4, label="Sensor TCP-Only Distance (mm)")
     ax1.plot(t_steps, unopt_link, color=CRIMSON, linestyle="--", lw=1.4, label="Unoptimized Forearm/Elbow Link (Collision Risk)")
-    ax1.plot(t_steps, opt_link, color=TEAL, lw=2.0, label="Forge Evolve 6-Link Swept-Capsule CCD (≥55.0 mm)")
+    ax1.plot(t_steps, opt_link, color=TEAL, lw=2.0, label="Evolve 6-Link Swept-Capsule CCD (≥55.0 mm)")
     ax1.axhline(45.0, color=AMBER, linestyle="-.", lw=1.3, label="Mandatory Safety Envelope Floor (45.0 mm)")
     ax1.set_xlabel("Trajectory Execution Time Across 18 Bulkhead Waypoints (s)", fontsize=8.5, fontweight="bold", color=NAVY)
     ax1.set_ylabel("Minimum 3D SDF Obstacle Clearance (mm)", fontsize=8.5, fontweight="bold", color=NAVY)
@@ -199,7 +201,7 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
     baseline_ocr = [74.2, 83.5, 90.1, 94.8, 96.2, 97.1]
     evolve_hybrid = [94.6, 97.4, 98.6, 99.3, 99.6, 99.8]
     ax2.plot(dpis, baseline_ocr, color=SLATE, marker="s", linestyle="--", lw=1.6, label="Standard Commercial OCR on Scanned Drawings")
-    ax2.plot(dpis, evolve_hybrid, color=NAVY, marker="o", lw=2.2, label="Forge Evolve Vector-Filter + LayoutLMv3 + 3D Raycast Prior")
+    ax2.plot(dpis, evolve_hybrid, color=NAVY, marker="o", lw=2.2, label="Evolve Vector-Filter + LayoutLMv3 + 3D Raycast Prior")
     ax2.axhline(95.0, color=CRIMSON, linestyle=":", lw=1.3, label="D2P2 Production Gate Floor (95.0%)")
     ax2.set_xlabel("Legacy 2D Blueprint Scan Resolution (DPI w/ Hatching Noise)", fontsize=8.5, fontweight="bold", color=NAVY)
     ax2.set_ylabel("GD&T Feature Control Frame Binding Accuracy (%)", fontsize=8.5, fontweight="bold", color=NAVY)
@@ -213,7 +215,7 @@ def generate_charts_and_schematics(output_dir: pathlib.Path = FIGURES_DIR) -> No
 
 
 def main() -> None:
-    print("=== Forge Evolve Adversarial Red-Team Verification Suite ===")
+    print("=== Evolve Adversarial Red-Team Verification Suite (design study; outputs are synthetic targets) ===")
     nist_res = run_nist_mbe_pmi_benchmark()
     print(
         f"[1/4] Official NIST MBE PMI Suite ({nist_res['test_case_count']} cases): "

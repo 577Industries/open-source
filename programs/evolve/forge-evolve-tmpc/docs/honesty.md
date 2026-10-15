@@ -22,7 +22,7 @@ data-provenance statement, and the honesty header of the synthetic technical-deb
 
 {%
    include-markdown "../surrogate/DEBT.md"
-   start="**This document is part of the FORGE EVOLVE for TMPC"
+   start="**This document is part of the Evolve for TMPC"
    end="## Debt items → plausible real-MDS analog"
    rewrite-relative-urls=false
    recursive=false

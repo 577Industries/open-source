@@ -5,6 +5,9 @@
 
 # forge-evolve-tdp
 
+> **Status (2026-10-15): generated design study, not evidence.** This directory was produced as a design study by a code-generation agent on 2026-10-13. Its benchmark tables, figures and numeric claims (precision, latency, clearance, timing, exception counts) are synthetic design targets emitted by the code itself, not measurements, and must not be cited as results. The maintained, measured implementation replaces this directory in place as it lands; measured results will be published under `programs/evolve/bench-results/` with run receipts. Until then this directory is retained for provenance only.
+
+
 `EVOLVE EXTENSION` · [Parent Platform: `577Industries/forge-evolve`](https://github.com/577Industries/forge-evolve) · [Product Page](https://www.577industries.com/evolve) · [Interactive 3D MBD Studio](https://www.577industries.com/evolve/studio)
 
 **Zero-Trust Model-Based Definition (MBD) and Technical Data Package (TDP) modernization extension of the `forge-evolve` engine for Department of the Air Force Direct-to-Phase-II Topic `DAF27BZ01-DV008`.**

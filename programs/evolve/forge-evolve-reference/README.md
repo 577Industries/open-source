@@ -1,5 +1,8 @@
 # Forge Evolve & Forge Kinetic — Deterministic Engineering, TDP & Robotic Equivalence Reference
 
+> **Status (2026-10-15): generated design study, not evidence.** This directory was produced as a design study by a code-generation agent on 2026-10-13. Its benchmark tables, figures and numeric claims (precision, latency, clearance, timing, exception counts) are synthetic design targets emitted by the code itself, not measurements, and must not be cited as results. The maintained, measured implementation replaces this directory in place as it lands; measured results will be published under `programs/evolve/bench-results/` with run receipts. Until then this directory is retained for provenance only.
+
+
 [![Forge Evolve Equivalence & D2P2 Verification CI](https://github.com/577Industries/forge-evolve-reference/actions/workflows/ci_equivalence_verification.yml/badge.svg)](https://github.com/577Industries/forge-evolve-reference/actions/workflows/ci_equivalence_verification.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-0D9488.svg)](https://www.python.org/)
 [![PQC FIPS 203](https://img.shields.io/badge/crypto-ML--KEM--768%20%2B%20AES--256--GCM-0F2942.svg)](https://www.577industries.com/evolve)

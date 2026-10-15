@@ -1,4 +1,4 @@
-# 577 Industries — Open Source Monorepo
+# 577 Industries — Open Source
 
 Canonical public monorepo for **577 Industries Inc.** open-source packages, reference implementations, standards specifications, and reproducible research artifacts.
 

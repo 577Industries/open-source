@@ -7,7 +7,7 @@
 
 `EVOLVE` · [program overview](https://github.com/577Industries#forge-evolve-for-tmpc--a-verification-harness-for-modernized-mission-planning-software)
 
-**AI-assisted modernization of C#/.NET mission-planning software, with behavioral-equivalence proof and continuous-ATO artifacts - runnable end-to-end on a synthetic, unclassified surrogate.**
+**A verification harness for modernized C#/.NET mission-planning software, with continuous-ATO artifacts. It runs end to end on a synthetic, unclassified surrogate and compares a legacy component with its hand-refactored replacement.**
 
 [![ci](https://img.shields.io/github/actions/workflow/status/577Industries/forge-evolve-tmpc/demo-offline.yml?style=flat-square&label=ci)](https://github.com/577Industries/forge-evolve-tmpc/actions/workflows/demo-offline.yml)
 [![release](https://img.shields.io/github/v/release/577Industries/forge-evolve-tmpc?style=flat-square)](https://github.com/577Industries/forge-evolve-tmpc/releases)
@@ -42,7 +42,7 @@ make demo        # offline, deterministic, ~minutes
 |---|---|---|
 | 1. Analyze architecture, identify modernization needs | Roslyn discovery (C#) plus regex heuristics for JS/SQL/VB6 → dependency graph, complexity, surrogate-keyed business-rule probes, crypto inventory | `results/discovery-report.json`, `results/business-rules.ttl` |
 | 2. Conceptual AI models for analysis/refactor/cyber | template CLAR lift → risk-scored microservice decomposition → replayed transform (no model call) | `results/migration-plan.json`, `results/clar/*.jsonld` |
-| 3. PoC AI refactoring on a representative component | Modernize a coupled C# component to .NET 8; prove behavioral equivalence | `results/equivalence-report.json`, `tmpc-modern-mds/` |
+| 3. PoC AI refactoring on a representative component | Replay the hand-refactored .NET 8 version of a coupled C# component (no model call) and compare its behavior with the legacy component on the seeded corpus | `results/equivalence-report.json`, `tmpc-modern-mds/` |
 | 4. Prototype plans + cyber | cATO artifacts as CI byproducts | `results/stig-findings.*.json`, `results/control-map.yaml`, `results/sbom.cdx.json`, `results/provenance.json`, `results/poam.csv` |
 
 **What to read first:** [`companion/companion.md`](companion/companion.md) maps each claim to the

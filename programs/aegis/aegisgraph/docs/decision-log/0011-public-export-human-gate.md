@@ -19,7 +19,7 @@ sanitize check must also pass).
 
 ## Rationale
 
-A False `release_authorized` field is the load-bearing signal that the
+A False `release_authorized` field is the core signal that the
 sanitized export is a CANDIDATE, not an authorized release. Downstream
 publishers (the operator who copies into `02_PUBLIC_RELEASE/`) refuse
 to act on a manifest with `release_authorized=False`. Inverting this
@@ -61,10 +61,9 @@ class of mistake structurally impossible.
 
 ## Out of scope
 
-- This ADR does not govern the PRIVATE submission export
-  (`exports/private-submission/manifest.json`). Private submissions go
-  to DARPA reviewers under the DSIP terms and are NOT subject to this
-  gate.
+- This ADR does not govern the PRIVATE export
+  (`exports/private-submission/manifest.json`), a private bundle that is
+  not published. It is NOT subject to this gate.
 - This ADR does not specify what counts as "sanitized." That contract
   is defined in `validator/sanitize_check.py` (validator-export stream)
   and the patterns in `aegisgraph/safety.py::BLOCKING_PATTERNS`.
@@ -76,7 +75,7 @@ class of mistake structurally impossible.
 - 0006 — disclosure ownership (what counts as a disclosable / public-safe finding)
 - 0021 — validator hardening (implements the gate via `validator/sanitize_check.py`)
 
-## Proposal claims
+## CETM claims
 
 - C-EVAL-2 — safety-scan / 8 forbidden categories enforced at the public-export boundary.
 - C-VAL-2 — validator independence boundary enforced at the same gate.

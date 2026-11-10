@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-This is an open-source artifact of the HELIOS program (NASA SBIR Phase I, subtopic SPWX.1.S26A). Security fixes are applied to the latest published release.
+This is an open-source artifact of the HELIOS program. Security fixes are applied to the latest published release.
 
 | Version | Supported |
 | --- | --- |

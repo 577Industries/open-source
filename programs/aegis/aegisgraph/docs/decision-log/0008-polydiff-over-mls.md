@@ -32,7 +32,7 @@ initial PolyDiff contribution. NOT MLS (RFC 9420) lifecycle modeling.
 ## Out of scope
 
 - This ADR does not block future MLS work. If a separate stream proposes
-  an MLS lifecycle module after Phase II kickoff, it gets its own ADR
+  an MLS lifecycle module in later work, it gets its own ADR
   and its own evidence schema. PolyDiff is specifically about parser
   disagreement, not protocol-level analysis.
 - This ADR does not assert which parser is "correct." Differential
@@ -57,7 +57,7 @@ initial PolyDiff contribution. NOT MLS (RFC 9420) lifecycle modeling.
 - 0010 — schema additive-only policy (governs the URL-parser fact-vector evolution)
 - 0020 — fact-vector v2 migration (concrete additive evolution this ADR anticipated)
 
-## Proposal claims
+## CETM claims
 
 - C-NEW-PD — PolyDiff rediscovery target.
 - C-ABS-5 — measured-output framing relies on this scope.

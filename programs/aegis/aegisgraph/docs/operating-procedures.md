@@ -1,7 +1,7 @@
 # AegisGraph Tier 3 — Operating Procedures
 
 This document is the day-to-day playbook for parallel-stream contributors,
-the integration owner, and reviewers preparing the DARPA/ASEMA submission.
+the integration owner, and reviewers preparing evidence releases.
 It is intentionally short. Long-form rationale lives in
 `docs/decision-log/000X-*.md`; this file tells you what to *do*.
 

@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AegisGraph — ASEMA Public Feasibility Release</title>
+  <title>AegisGraph Public Feasibility Release</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="hero">
     <div>
-      <p class="eyebrow">577 Industries · AegisGraph · DARPA SBIR HR0011SB20254-12</p>
-      <h1>AegisGraph for ASEMA</h1>
-      <p class="lede">Graph-driven automated vulnerability discovery for secure messaging applications. Six engines coordinated by an evidence graph as planner. Public feasibility release for DARPA SBIR Direct-to-Phase-II.</p>
+      <p class="eyebrow">577 Industries · AegisGraph</p>
+      <h1>AegisGraph Review Collection</h1>
+      <p class="lede">Graph-driven automated vulnerability discovery for secure messaging applications. Six engines coordinated by an evidence graph as planner. Public feasibility release.</p>
       <div class="actions">
         <a href="../README.md">README + Reviewer Start Here</a>
-        <a href="00_evaluator_quickstart.md">Evaluator Quickstart</a>
+        <a href="00_evaluator_quickstart.md">Quickstart</a>
         <a href="../figures/F15-engine-architecture.png">6-Engine Architecture</a>
         <a href="https://github.com/577-Industries/asema-feasibility-artifacts">GitHub Repo</a>
         <a href="https://github.com/577Industries/aegisgraph">Engineering Platform</a>
@@ -55,11 +55,10 @@
 
     <section>
       <h2>Reproduce in 5 Minutes</h2>
-      <pre><code>git clone https://github.com/577-Industries/asema-feasibility-artifacts
-cd asema-feasibility-artifacts
-git checkout v1.0.0-asema-dp2-feasibility
-node evidence/validate-evidence.mjs                   # safety_scan: passed
-node evidence/validate-cetm.mjs evidence/cetm.json    # issues_count: 0
+      <pre><code>git clone https://github.com/577Industries/open-source
+cd open-source/programs/aegis/aegisgraph/review-collection
+python3 scripts/verify_public_package.py              # PUBLIC PACKAGE READY
+sha256sum -c checksums/SHA256SUMS                     # all OK
 sha256sum -c evidence/checksums.sha256                # all OK</code></pre>
     </section>
 
@@ -67,7 +66,6 @@ sha256sum -c evidence/checksums.sha256                # all OK</code></pre>
       <h2>Pointers</h2>
       <div class="grid">
         <article><strong>Engineering platform</strong><span><a href="https://github.com/577Industries/aegisgraph">github.com/577Industries/aegisgraph</a> at tag <code>v1.0.0-tier3-research</code> (1030 passing tests, full source under Apache-2.0)</span></article>
-        <article><strong>DARPA topic</strong><span><a href="https://www.darpa.mil/research/programs/asema">HR0011SB20254-12 — Assessing Security of Encrypted Messaging Applications</a></span></article>
         <article><strong>Detailed docs</strong><span><a href="./">All docs/</a> — quickstart, claim discipline, release boundaries, architecture, graph schema, SMABench methodology, SOTA comparison, responsible disclosure</span></article>
         <article><strong>What's NOT here (by design)</strong><span><a href="../EXCLUSIONS.md">EXCLUSIONS.md</a> — crash bytes, raw source, embargoed disclosures, engineering-private artifacts</span></article>
       </div>

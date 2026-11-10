@@ -24,7 +24,7 @@ Discover -> Normalize -> Contextualize -> Detect -> Prioritize
 This release implements passive synthetic discovery, normalization,
 contextualization, deterministic detection and prioritization, approval-gated
 effect-free simulation, and verification. Real approval issuance, migration,
-and continuous monitoring are private or future Phase I work.
+and continuous monitoring are private or future work.
 
 ## Data flow
 

@@ -1,4 +1,4 @@
-# Reviewer Companion: `forge-evolve-tdp` (`DAF27BZ01-DV008`)
+# Companion: `forge-evolve-tdp`
 
 Design elements of the study and where the placeholder code lives. No row below is evidence of a measured result.
 

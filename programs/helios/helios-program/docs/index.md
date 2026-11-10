@@ -8,11 +8,11 @@ hide:
 
 ## About this site
 
-This is the public landing page for HELIOS — 577 Industries' NASA SBIR Phase I program (subtopic SPWX.1.S26A) on calibrated, provenance-tracked space-weather decision intelligence. The submitted proposal mirrors here as the **[Proposal Companion](companion.md)** with live citations to every public artifact. The **[Master Plan](master-plan.md)** has the dependency graph and execution log.
+This is the public landing page for HELIOS, 577 Industries' research program on calibrated, provenance-tracked space-weather decision intelligence. The **[Companion Document](companion.md)** describes HELIOS with live citations to every public artifact. The **[Master Plan](master-plan.md)** has the dependency graph and execution log.
 
 **Reading order for first-time visitors**:
 
-1. The **[Proposal Companion](companion.md)** — what HELIOS does and why it matters for both NASA mission ops and U.S. precision agriculture.
+1. The **[Companion Document](companion.md)** — what HELIOS does and why it matters for both NASA mission ops and U.S. precision agriculture.
 2. The **[Master Plan](master-plan.md)** — how the program is structured, the pre-registered validation discipline, the Wave 1 → Wave 2 execution log.
 3. Whichever **artifact card above** matches your interest.
 4. The **[Operations Guide](operations.md)** — practical runbook for operators and Claude sessions joining the program.

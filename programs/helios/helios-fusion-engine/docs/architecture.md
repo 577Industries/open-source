@@ -46,7 +46,7 @@ upstream model is replaced or temporarily unavailable.
 
 ### Why isotonic over Platt?
 
-The proposal §2 Obj. 2 explicitly rejects Platt scaling. The rationale is
+The design explicitly rejects Platt scaling. The rationale is
 implemented in `tests/test_calibration.py::test_platt_worsens_calibration_at_extremes`:
 on a synthetic stream that is well-calibrated at moderate probabilities
 but miscalibrated at extremes (the regime where SEP all-clear-revocation
@@ -64,7 +64,7 @@ Operational decisions at extreme-Kp conditions are exactly the decisions
 that matter most. An unstratified isotonic calibrator pools across the Kp
 distribution, where quiet samples dominate by volume — the extreme stratum
 contributes too few samples to the global fit to influence its knots. The
-proposal §2 Obj. 2 explicitly calls for severity-stratified calibration to
+design explicitly calls for severity-stratified calibration to
 "prevent calibration collapse on the events that matter most."
 
 `SeverityStratifiedCalibrator` holds one `IsotonicCalibrator` per stratum.

@@ -11,7 +11,7 @@ package.
 
 - **Bayesian Model Averaging orchestrator** with rolling-window skill-weight
   updates and explicit handling of missing component models.
-- **Reliability calibrators** — isotonic (proposal-default), Platt (rejected,
+- **Reliability calibrators** — isotonic (the default), Platt (rejected,
   retained for comparison), and severity-stratified isotonic (one calibrator
   per Kp severity stratum).
 - **Conformal prediction wrappers** — split conformal (marginal coverage)
@@ -25,7 +25,7 @@ package.
 
 - No trained weights. Callers supply BMA weights at construction time, or
   fit them at runtime via `BMAOrchestrator.update_weights`.
-- No equipment transfer functions. The GNSS slice (proposal Obj. 4) builds
+- No equipment transfer functions. The GNSS slice (design objective 4) builds
   on top of this framework but ships separately.
 - No kill-gate execution. The kill-gate runner lives in
   `helios-program/orchestration/kill_gate.py` and **consumes** this

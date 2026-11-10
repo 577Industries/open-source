@@ -31,7 +31,7 @@ extract:
 
 # extract-deep: extract + MobSF + CodeQL deep stage (LONG; not in `reproduce`
 # critical path). Requires Docker and MobSF image pulled. Reserved for
-# pre-submission rebuilds; CI runs the lightweight `extract` instead.
+# full evidence rebuilds; CI runs the lightweight `extract` instead.
 extract-deep:
 	$(AEGISGRAPH) extract --deep
 
@@ -139,7 +139,7 @@ sanitize-check:
 reproduce: tooling-strict extract reprochain-build reprochain-run reprochain-map polydiff-regression smabench validate export-private
 	@echo "AegisGraph Tier 3 private reproduction scaffold complete."
 
-# export-private: bundle private DARPA/ASEMA submission candidate manifest.
+# export-private: bundle the private evidence candidate manifest.
 # Always after `validate`.
 export-private:
 	$(AEGISGRAPH) export private

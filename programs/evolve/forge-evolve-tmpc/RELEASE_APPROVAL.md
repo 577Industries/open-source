@@ -19,10 +19,10 @@ real/controlled TMPC data - so there is nothing to sanitize or split out. See `E
 - [x] No absolute build paths / usernames in committed artifacts (recursive username/home-path grep over `results/` → clean)
 - [x] CI workflow (`.github/workflows/demo-offline.yml`) runs build + test + offline demo + secret scan on push
 
-## Reviewer reproduction contract (what a Navy reviewer does)
+## Reviewer reproduction contract (what a reviewer does)
 ```bash
 git clone https://github.com/577Industries/forge-evolve-tmpc
-cd forge-evolve-tmpc            # checkout the commit cited in the proposal
+cd forge-evolve-tmpc            # checkout the frozen release commit
 make demo                       # offline, no keys; prints the headline metrics
 make verify                     # confirms byte-determinism
 make test                       # 137 passing tests
@@ -33,12 +33,11 @@ Prerequisite: .NET SDK 8 (pinned in `global.json`), Node 18+. See `REPRODUCIBILI
 All quantitative results are measured on the **synthetic, unclassified surrogate**, are **preliminary**,
 and are **not government-validated**. No published results exist; an internal draft paper cited here
 earlier contained generated figures and is withdrawn as a citation (see ERRATUM.md). The C#/.NET/JS/SQL
-capability here is the newly developed extension. CMMC L2 (Self), ITAR/DDTC registration, and any facility clearance are
-in-progress / at-award.
+capability here is the newly developed extension. When this approval was written, CMMC L2 (Self),
+ITAR/DDTC registration and a facility clearance were not in place.
 
 ## PI authorization (H6)
-- [ ] Frozen submission commit: `__________________` (full SHA - set at push)
-- [ ] Tag pushed: `v0.1.0-sbir-DON26BZ01-NV013`
-- [ ] Proposal commit-hash citations updated to the frozen full SHA (Vol 2 header, §a/§d/§g/§l; Vol 1; Vol 3; Vol 5; guide)
+- [ ] Frozen release commit: `__________________` (full SHA - set at push)
+- [ ] Tag pushed: the v0.1.0 release tag, exactly as named in the deep links of `docs/artifacts.md`
 - [ ] Repo set **public** on github.com/577Industries
 - [ ] Approved by: Thomas Waweru, Ph.D. (PI) - date: __________

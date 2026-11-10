@@ -6,11 +6,11 @@ Tamper-evident hash-chained ledger for coordinated vulnerability disclosure even
 
 **v0.4 scaffolding.** Ledger format finalized (ADR-0014). Vendor registry populated. No real disclosure entries yet — first contact gated on:
 
-1. Counsel one-time review of disclosure policy + first-letter template (Phase II `T-M1.4`, blocking)
+1. Counsel one-time review of disclosure policy + first-letter template (`T-M1.4`, blocking)
 2. ≥1 qualifying finding from PolyDiff Extended / HarnessGen / InvariantCheck reaching `claim_state: reviewed`
 3. PI sign-off on the specific first-disclosure target
 
-The Phase II plan recommends **libwebp upstream** as first target (Option A), reasoning documented in `vendor_registry.yaml`.
+The project plan recommends **libwebp upstream** as first target (Option A), reasoning documented in `vendor_registry.yaml`.
 
 ## Files
 
@@ -78,4 +78,4 @@ Per sanitize-check Rule 7 (forthcoming in validator-v2), the ledger is **enginee
 - ADR-0013 — schema v2 (introduces `disclosure_event` node + new claim states)
 - ADR-0014 — hash-chained ledger format
 - `SECURITY.md` (workspace root) — canonical disclosure protocol
-- Asemarefactor.md "Engine 6" — original design spec
+- Internal refactor design document, "Engine 6" section — original design spec (not part of this repository)

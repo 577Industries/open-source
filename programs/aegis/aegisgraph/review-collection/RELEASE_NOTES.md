@@ -1,13 +1,23 @@
 # AegisGraph v1.0 Release Notes
 
-**Tag**: `v1.0.0-asema-dp2-feasibility` (branch `release/v1.0.0`)
+> **2026-11-10, documentation only.** This collection now lives inside the AegisGraph project directory
+> (`review-collection/`, beside the engine). The wording of its front files changed (`README.md`, `NOTICE`,
+> `CITATION.cff`, this file, `docs/00_evaluator_quickstart.md`, `docs/01_phase_i_equivalent_summary.md`,
+> `docs/index.html`), and `checksums/SHA256SUMS`
+> was regenerated to match. The regeneration also refreshed the entries for `.github/workflows/ci.yml`,
+> `apps/local-demo/web/package.json` and `apps/local-demo/web/package-lock.json`, which had changed after the
+> v1.0.0 release, and added `.github/dependabot.yml`. Every evidence record, artifact, schema, graph and figure is byte-identical to the
+> copy published before this change, and the hashes pinned in the evidence ledger, the evidence indexes and `manifest.json` are
+> unchanged. `tools/aegisgraph/buildout.py` still emits the earlier wording for the files it generates if the
+> release is rebuilt.
+
+**Tag**: the v1.0.0 release tag (branch `release/v1.0.0`)
 **Date**: 2026-05-13
 **Predecessor**: v0.4.0 (tag `release/v0.4.0`, 2026-05-13)
-**Earlier predecessor**: v0.3.0 (tag `v0.3.0-asema-dp2-feasibility`, 2026-05-08)
+**Earlier predecessor**: v0.3.0 (the v0.3.0 release tag, 2026-05-08)
 **License**: Apache-2.0
 **Engineering integration tip at cut**: `d91c1df` on `stream/integration`
 **Tests at cut**: 1030 passed, 19 skipped (engineering integration)
-**Master proposal v1.0 PDF SHA**: `1ed7a5afe4a4b2ff659afa307e7bb391c724c16365d7a693d51121b9e073716b`
 
 ## v0.4 -> v1.0 Delta
 
@@ -80,14 +90,11 @@ delta, M14 demo dry-run).
   only the `m14_demo_dryrun_summary` block (step names, status
   counts, skip reasons) — no payload bytes.
 - **F15-F22 figure pack**: 8 new figures rendered for the v1.0
-  master proposal cut and now bundled in `figures/`:
+  cut and now bundled in `figures/`:
   F15 engine architecture, F16 discovery loop, F17 polydiff
   multi-family, F18 harnessgen flow, F19 invariantcheck card,
   F20 crosssma matrix, F21 disclosure state diagram, F22 schema-v2
   overlay.
-- **Master proposal v1.0**: published at
-  `03_PROPOSAL/active-package/01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v1.0.md`;
-  rendered PDF SHA `1ed7a5afe4a4b2ff659afa307e7bb391c724c16365d7a693d51121b9e073716b`.
 
 ### Added — public artifact schema (v1.0 additive surfaces)
 
@@ -158,14 +165,14 @@ GitHub Security Advisory). Real CVE filing is blocked on:
 design. The v1.0 narrative does not claim disclosures that did not
 occur.
 
-### Honest gap list (load-bearing — read this)
+### Honest gap list (read this)
 
 - **0 real disclosure ledger entries** (T-M1.4 + T-M1.5 counsel
   review pending)
 - **Live 24h HarnessGen fuzz runs deferred** (T-M4.1 self-hosted
   runner provisioning). HarnessGen ships harness *scaffolds*, not
   crash bytes.
-- **DynamicProbe Engine 5 scaffold only** (M15-M24 option-period
+- **DynamicProbe Engine 5 scaffold only** (M15-M24 follow-on
   scope per plan §28).
 - **InvariantCheck ground-truth pass against real binaries** runs on
   the self-hosted runner per

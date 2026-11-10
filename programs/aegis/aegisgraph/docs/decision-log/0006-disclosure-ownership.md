@@ -1,10 +1,10 @@
 # 0006 Disclosure Ownership
 
-Status: **accepted** (resolved as part of Phase II rollout planning; supersedes prior "pending human confirmation").
+Status: **accepted** (resolved as part of rollout planning; supersedes prior "pending human confirmation").
 
 ## Decision
 
-Coordinated-disclosure relationships for findings produced by AegisGraph engines (PolyDiff, HarnessGen, InvariantCheck, CrossSMA, ReproChain, DynamicProbe option-period) are owned by the named PI with structural counsel review at the first vendor contact.
+Coordinated-disclosure relationships for findings produced by AegisGraph engines (PolyDiff, HarnessGen, InvariantCheck, CrossSMA, ReproChain, and DynamicProbe in a follow-on stage) are owned by the named PI with structural counsel review at the first vendor contact.
 
 ### Roles
 
@@ -22,8 +22,8 @@ Coordinated-disclosure relationships for findings produced by AegisGraph engines
 
 ### What this ADR does NOT decide
 
-- The mechanism for signed authorization in DynamicProbe (option-period). That lives in `aegisgraph/dynamicprobe/authorization/` with its own ADR when DynamicProbe ships.
-- The retention of specific outside counsel (a Phase II M1 task `T-M1.5` per the rollout plan).
+- The mechanism for signed authorization in DynamicProbe (follow-on stage). That lives in `aegisgraph/dynamicprobe/authorization/` with its own ADR when DynamicProbe ships.
+- The retention of specific outside counsel (an M1 task `T-M1.5` per the rollout plan).
 - The first real-disclosure target selection. The current plan recommends a libwebp upstream path via the Chrome CNA, but the specific candidate emerges from PolyDiff Extended / HarnessGen triage output, not from this ADR.
 
 ## Related
@@ -34,7 +34,7 @@ Coordinated-disclosure relationships for findings produced by AegisGraph engines
 - 0014 — hash-chained disclosure ledger (the mechanism this ADR's decisions are recorded in)
 - 0021 — validator hardening (sanitize-check rejects disclosed-pending-patch records on public export; extended in v0.4 to redact embargoed records)
 
-## Proposal claims
+## CETM claims
 
 - C-VAL-2 — validator independence boundary references this disclosure posture.
 - C-NEW-PD — disclosure handling for any novel-private candidate from PolyDiff.

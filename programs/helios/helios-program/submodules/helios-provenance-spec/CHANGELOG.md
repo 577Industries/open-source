@@ -56,7 +56,7 @@ stabilising to v1.0; see
 ### Added — RFC
 
 - `rfc/RFC-0001-feature-lineage.md` — design document. Motivation
-  (proposal §1.4 + §4.2), background survey (SPASE / PROV-JSON / RO-Crate),
+  (design motivation), background survey (SPASE / PROV-JSON / RO-Crate),
   design, the centrepiece worked example, eight open questions for the
   community, adoption ask, stability commitment.
 

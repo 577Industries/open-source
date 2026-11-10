@@ -27,9 +27,9 @@ Sensor Envelope & Occlusion Analysis -> 3D Signed Distance Field (SDF)
 
 ### Official Domain Extensions & Research Labs
 
-| Extension / Lab | Program / Domain Scope | Capabilities Added |
+| Extension / Lab | Domain Scope | Capabilities Added |
 |---|---|---|
-| [`577Industries/forge-kinetic-mbd`](https://github.com/577Industries/forge-kinetic-mbd) | U.S. Air Force / Space Force `DAF27BZ01-DV012` (Autonomous TDP-to-Robot Compilation) | Multimodal 2D/3D ASME Y14.5 GD&T topological binding (design target; evaluation on NIST MBE PMI `CTC-01..05`, `FTC-06..11` planned, not yet measured), 6D reachability-inversion mobile base clustering, Datum-A 3-fiducial calibration (residual target set by the part tolerance; not yet measured), and No-Code depot workbench |
+| [`577Industries/forge-kinetic-mbd`](https://github.com/577Industries/forge-kinetic-mbd) | Autonomous TDP-to-Robot Compilation | Multimodal 2D/3D ASME Y14.5 GD&T topological binding (design target; evaluation on NIST MBE PMI `CTC-01..05`, `FTC-06..11` planned, not yet measured), 6D reachability-inversion mobile base clustering, Datum-A 3-fiducial calibration (residual target set by the part tolerance; not yet measured), and No-Code depot workbench |
 | [IRIS Perception Lab](https://www.577industries.com/government/labs/iris) | Sparse-Data Sensor Fusion Research | Held-out environmental condition evaluation under limited labeling budgets |
 
 ## Quickstart (Offline, Deterministic)

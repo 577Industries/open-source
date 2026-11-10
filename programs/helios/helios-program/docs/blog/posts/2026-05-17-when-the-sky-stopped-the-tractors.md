@@ -136,8 +136,8 @@ not whether one specific station's error was 2.18 m or 2.52 m at 19:43 UT
 on May 11. What it needs is the regional, multi-day, multi-station
 *envelope* of degradation — and that envelope is dominated by Kp and Dst,
 which are public, archival, and traceable to GFZ Potsdam and the Kyoto WDC.
-Our v2 release (scheduled alongside the rest of the HELIOS Phase I work
-plan) will replace the climatological model with full PPP/RTK processing
+Our v2 release (scheduled alongside the rest of the HELIOS work plan)
+will replace the climatological model with full PPP/RTK processing
 and add **equipment-specific transfer functions** for the John Deere
 StarFire 6000/7000, Trimble RTK, and AgLeader Surefire/Versa families —
 the receivers operating on 80%+ of US row-crop acres.
@@ -184,27 +184,26 @@ team, and every agricultural insurer to take away from this analysis:
 The good news is that all the upstream science needed to build that
 operator-facing prediction system exists — at NASA CCMC, at NOAA SWPC, at
 the Moon-to-Mars Space Weather Analysis Office, at the SEP Scoreboards
-funded by the ISEP partnership. The gap, as we wrote in our SBIR proposal,
-is not a shortage of models. It is the translation layer that converts
+funded by the ISEP partnership. The gap is not a shortage of models.
+It is the translation layer that converts
 those models into the specific decisions operators must make.
 
 ## What HELIOS does about it
 
-HELIOS is 577 Industries' Phase I effort under the NASA SBIR programme
-(subtopic SPWX.1.S26A) to build that translation layer. The fusion engine
+HELIOS is 577 Industries' effort to build that translation layer. The fusion engine
 combines outputs from multiple NOAA and CCMC models with explicit reliability
 calibration and provenance tracking. The precision-agriculture slice
 emits field-level go/no-go maps against operator-configurable accuracy
 thresholds (typically 2.5 cm planting, 5 cm spraying).
 
 The Gannon analysis you've just seen is one of four public artifacts we
-are publishing as part of this Phase I work. The others are: a
+are publishing as part of this work. The others are: a
 JSON-Schema provenance specification for heliophysics derived data
 (Artifact A), a Python connector library for the six upstream data
 sources HELIOS ingests (Artifact B), and a calibrated fusion engine
 framework with a pre-registered retrospective validation paper (Artifact
-C). Together with the proposal's companion document, they constitute a
-single, citable URL for every claim in the proposal.
+C). Together with the HELIOS public companion document, they constitute a
+single, citable URL for every claim in that document.
 
 If you operate row crops in the Midwest, run an OEM telematics platform,
 or write about ag-tech for a living: **read the analysis on GitHub at**
@@ -219,8 +218,7 @@ Reach out: **engineering@577industries.com**.
 
 ---
 
-*577 Industries Inc. is a Columbus, Ohio-based applied-AI company. HELIOS
-is funded under NASA SBIR Phase I subtopic SPWX.1.S26A. All public artifacts
-are released under the Apache 2.0 license. Headline image and per-station
+*577 Industries Inc. is a Columbus, Ohio-based applied-AI company. All
+public HELIOS artifacts are released under the Apache 2.0 license. Headline image and per-station
 analysis are reproducible from the [GitHub repository](https://github.com/577Industries/gannon-storm-rtk-analysis)
 using `make all`.*

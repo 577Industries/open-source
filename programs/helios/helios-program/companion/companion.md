@@ -3,18 +3,16 @@
 **Heliophysics-Enhanced Location Integrity and Operations System**
 *Calibrated Space-Weather Decision Intelligence for NASA Mission Operations and U.S. Precision Agriculture*
 
-**Submitted by**: 577 Industries Inc. — Columbus, Ohio — <https://www.577industries.com>
+**Organization**: 577 Industries Inc. — Columbus, Ohio — <https://www.577industries.com>
 **Principal Investigator**: Thomas Waweru
-**NASA Subtopic**: SPWX.1.S26A — Advanced Data-Driven Applications for Space Weather R2O2R
-**Lead Center**: MSFC — **Participating Centers**: GSFC, JSC, ARC, LaRC
 
 ---
 
-> **About this document.** This public companion mirrors 577 Industries' submitted NASA SBIR Phase I proposal "HELIOS". Where the submitted document made paper claims, this companion attaches **live citations** to the public artifacts that back those claims — repositories, preprints, blog posts, and reproducible notebooks. Use the status field next to each artifact to gauge maturity:
+> **About this document.** This public companion describes HELIOS, 577 Industries' calibrated space-weather decision-intelligence work. Where the text makes technical claims, it attaches **live citations** to the public artifacts that back those claims — repositories, preprints, blog posts, and reproducible notebooks. Use the status field next to each artifact to gauge maturity:
 >
 > **scaffolding** → repo exists, implementation in progress · **rfc** → draft circulated for comment · **in-development** → functional but not v1 · **stable** → v1.0+ tagged release
 >
-> Audiences: Phase II re-pitch reviewers · NASA-center engagement (CCMC, M2M SWAO, SRAG, SPoRT) · customer-discovery pre-reads · public web presence.
+> Audiences: customer-discovery pre-reads · public web presence.
 
 ---
 
@@ -33,17 +31,17 @@ A canonical machine-readable artifact registry lives at [`footnotes.yaml`](./foo
 
 ## Technical Abstract
 
-577 Industries Inc. proposes **HELIOS** — a calibrated, provenance-tracked decision-intelligence layer that fuses mature NASA and NOAA space-weather model outputs and translates them into the specific operational decisions two user communities act on. Phase I develops and validates two tightly scoped vertical slices, both demonstrated against named historical events.
+**HELIOS** is a planned calibrated, provenance-tracked decision-intelligence layer, designed to fuse mature NASA and NOAA space-weather model outputs and translate them into the specific operational decisions two user communities act on. The work plan develops and validates two tightly scoped vertical slices against named historical events.
 
 **Slice 1 — NASA mission operations.** Translation of fused SEP forecasts from the CCMC SEP Scoreboards (A onset, B peak flux, C time profiles), DONKI event linkages, and GOES/SWPC inputs into all-clear-status revocation probabilities and time-to-threshold estimates aligned with SRAG's ALARA decision framework. Outputs are designed to be compatible with the Acute Radiation Risk Tool (ARRT), not to replace it.
 
 **Slice 2 — U.S. precision agriculture GNSS.** Translation of ionospheric disturbance forecasts into equipment-specific RTK positioning-accuracy products for the John Deere StarFire, Trimble RTK, and AgLeader receivers that dominate the U.S. row-crop install base. Outputs are field-level go/no-go maps against operator-configurable accuracy thresholds (typically 2.5 cm planting, 5 cm spraying), not raw geophysical indices.
 
-HELIOS is **not a new space-weather model**. The innovation is a **model-agnostic fusion layer** applying Bayesian Model Averaging with isotonic-regression reliability calibration and conformal prediction across heterogeneous model outputs, paired with industry-native translation modules. Every output traces to its underlying models, data feeds, and assumptions — supporting CCMC proving-ground evaluation, ARRT-compatible integration, and operator trust in safety-critical applications.
+HELIOS is **not a new space-weather model**. The innovation is a **model-agnostic fusion layer** applying Bayesian Model Averaging with isotonic-regression reliability calibration and conformal prediction across heterogeneous model outputs, paired with industry-native translation modules. Every output traces to its underlying models, data feeds, and assumptions — supporting proving-ground evaluation, ARRT-compatible integration, and operator trust in safety-critical applications.
 
-Phase I delivers (i) a multi-source ingestion pipeline (DONKI, CCMC SEP Scoreboards, NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR) with feature-level provenance[^1]; (ii) a calibrated fusion engine[^3] validated against a pre-registered set of ten historical SEP events with explicit 7/3 training/hold-out split (Table 3-1); (iii) the two translation modules above, with the GNSS slice validated against the May 2024 Gannon superstorm plus three hold-out G2+ events[^4]; (iv) a working RESTful API and demonstration dashboard; and (v) letters of intent from at least two NASA-relevant and two precision-agriculture organizations. Expected TRL at completion: 3-4, consistent with the SPWX.1.S26A range.
+The scope of the work covers (i) a multi-source ingestion pipeline (DONKI, CCMC SEP Scoreboards, NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR) with feature-level provenance[^1]; (ii) a calibrated fusion engine[^3] validated against a pre-registered set of ten historical SEP events with explicit 7/3 training/hold-out split (Table 3-1); (iii) the two translation modules above, with the GNSS slice validated against the May 2024 Gannon superstorm plus three hold-out G2+ events[^4]; (iv) a working RESTful API and demonstration dashboard; and (v) letters of intent from at least two precision-agriculture organizations. Expected TRL at completion: 3-4.
 
-The **May 2024 Gannon superstorm** (G5, Kp=9) made the translation gap concrete. RTK-GNSS positioning failed across the U.S. Midwest during peak planting; equipment shutdowns were widely documented; no commercial product converted federal space-weather data into terms a row-crop operator could act on. HELIOS closes that gap with a beachhead in U.S. precision agriculture and a NASA mission-operations slice that targets the SRAG console workflow directly. The subtopic's two named critical gaps — **nowcasting/forecasting tools for energetic particles aiding spacecraft anomaly resolution**, and **techniques to predict ionospheric variability disrupting GNSS** — map one-to-one onto the two slices.
+The **May 2024 Gannon superstorm** (G5, Kp=9) made the translation gap concrete. RTK-GNSS positioning failed across the U.S. Midwest during peak planting; equipment shutdowns were widely documented; no commercial product converted federal space-weather data into terms a row-crop operator could act on. HELIOS closes that gap with a beachhead in U.S. precision agriculture and a NASA mission-operations slice that targets the SRAG console workflow directly. Each slice targets one gap: the mission-operations slice fuses **energetic-particle (SEP) forecasts** into all-clear decisions, and the precision-agriculture slice translates **ionospheric variability forecasts** into GNSS accuracy products.
 
 ---
 
@@ -51,12 +49,11 @@ The **May 2024 Gannon superstorm** (G5, Kp=9) made the translation gap concrete.
 
 1. [Identification and Significance of the Problem](#1-identification-and-significance-of-the-problem)
 2. [Technical Objectives](#2-technical-objectives)
-3. [Work Plan, Validation Framework, Risk, and Phase II Vision](#3-work-plan-validation-framework-risk-and-phase-ii-vision)
+3. [Work Plan, Validation Framework, Risk, and Follow-On Vision](#3-work-plan-validation-framework-risk-and-follow-on-vision)
 4. [Related R&D and HELIOS Innovation](#4-related-rd-and-helios-innovation)
 5. [Key Personnel and Facilities](#5-key-personnel-and-facilities)
 6. [Potential Post Applications and Commercialization Plan](#6-potential-post-applications-and-commercialization-plan)
-7. [Budget Summary](#7-budget-summary)
-8. [References](#8-references)
+7. [References](#7-references)
 
 ---
 
@@ -66,16 +63,16 @@ The **May 2024 Gannon superstorm** (G5, Kp=9) made the translation gap concrete.
 
 The federal space-weather enterprise has world-class models. CCMC hosts over 100 of them. NOAA SWPC issues operational forecasts. NASA's SEP Scoreboards — built through the ISEP partnership of CCMC, M2M SWAO, and SRAG — consolidate research SEP models into a unified operational view across Scoreboard A (onset probability), Scoreboard B (peak flux prediction), and Scoreboard C (event time profiles). DONKI provides intelligent event linkages via JSON API. **The problem HELIOS addresses is not a shortage of models or data. It is the absence of a calibrated, provenance-tracked translation layer that converts heterogeneous and sometimes contradictory model outputs into the specific decisions operators must make.**
 
-This is the same gap the PROSWIFT Act [1] charged the Space Weather Advisory Group (SWAG) with characterizing. The resulting 2023 report [2] produced 46 findings and 113 recommendations; Finding 1 identified insufficient coordination across the federal, commercial, and academic sectors, and Recommendation 2.2.3 explicitly encouraged regional and local alerts developed through private-sector partnerships. Subtopic SPWX.1.S26A operationalizes those findings; HELIOS targets two of the subtopic's named critical gaps directly:
+This is the same gap the PROSWIFT Act [1] charged the Space Weather Advisory Group (SWAG) with characterizing. The resulting 2023 report [2] produced 46 findings and 113 recommendations; Finding 1 identified insufficient coordination across the federal, commercial, and academic sectors, and Recommendation 2.2.3 explicitly encouraged regional and local alerts developed through private-sector partnerships. HELIOS targets two critical gaps directly:
 
-- *"Nowcasting and forecasting tools for energetic particles and plasma conditions that directly aid in spacecraft anomaly resolution."* — addressed by the NASA mission-operations slice (§1.2, §2 Obj. 3).
-- *"Techniques to characterize and predict ionospheric variability, which can disrupt global navigation and communication systems."* — addressed by the precision-agriculture slice (§1.3, §2 Obj. 4).
+- Energetic-particle nowcasting and forecasting: the NASA mission-operations slice (§1.2, §2 Obj. 3) fuses SEP forecasts into all-clear-revocation probabilities and time-to-threshold estimates.
+- Ionospheric variability that disrupts GNSS: the precision-agriculture slice (§1.3, §2 Obj. 4) translates ionospheric disturbance forecasts into receiver-specific RTK accuracy products.
 
 ### 1.2 NASA Mission-Operations Slice: SRAG's All-Clear Translation Problem
 
 An SRAG console operator assessing whether all-clear status should be revoked under the operational SEP thresholds (>10 MeV at 10 pfu; >100 MeV at 1 pfu) currently cross-references raw outputs from UMASEP, HESPERIA REleASE, SEPMOD, and MagPy across three Scoreboards. No existing system provides a calibrated, probabilistic fusion of these models with quantified confidence bounds, source provenance, and time-to-threshold estimates suitable for high-tempo monitoring. The cognitive load and risk of unstructured model disagreement scale with the demands of Artemis cislunar operations and, eventually, Earth-independent decision support for Mars transit, where light-time latency precludes ground intervention.
 
-HELIOS **does not replace** SRAG's Acute Radiation Risk Tool (ARRT). It produces decision-calibrated fused inputs designed to be compatible with ARRT's downstream dose-rate computation, supporting the consolidated risk presentation flight controllers need under ALARA. The mission-operations slice maps directly to subtopic shortfalls "Provide Earth-independent safety and crew health and performance countermeasures during long duration missions" and "Perform advanced remote sensing and science measurements with improved sensing capabilities and autonomy."
+HELIOS **does not replace** SRAG's Acute Radiation Risk Tool (ARRT). It produces decision-calibrated fused inputs designed to be compatible with ARRT's downstream dose-rate computation, supporting the consolidated risk presentation flight controllers need under ALARA.
 
 ### 1.3 Precision-Agriculture Slice: The Gannon Case Study
 
@@ -83,15 +80,15 @@ The **May 10-12, 2024 Gannon superstorm (G5, Kp=9)** was the most powerful geoma
 
 [^4]: A retrospective reanalysis of the May 10-12, 2024 Gannon storm using NGS CORS data across IA / IL / IN / OH is published at [`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis) (v0.1.0 released). **Headline**: across 25 NGS CORS stations the v1 climatological model produced 2D horizontal positioning error exceeding the 2.5 cm planting threshold for 1,302 station-hours during May 10-12 2024 (peak Kp=9.0, Dst min = -406 nT, DSCOVR L2 peak Bz = -59.16 nT). v1 climatological; v2 will swap in full pseudo-range SPP via the helios-spaceweather-connectors CDDIS adapter.
 
-Precision agriculture is the beachhead for three reasons. **First, install base concentration:** more than 80% of U.S. row-crop acres operate under GPS guidance [27]; the John Deere StarFire 6000/7000, Trimble RTK, and AgLeader Surefire/Versa families dominate. Deere's Operations Center alone connects 500,000+ machines. **Second, observable, dollar-quantified disruption:** the May 2024 storm produced widely reported equipment shutdowns during peak planting, with daily opportunity costs documented at the national level. **Third, geographic concentration:** the IA/IL/IN/OH corridor — within one day's drive of 577 Industries' Columbus, OH base — concentrates the customer base where OEM, cooperative, and operator conversations are tractable on a Phase I budget.
+Precision agriculture is the beachhead for three reasons. **First, install base concentration:** more than 80% of U.S. row-crop acres operate under GPS guidance [27]; the John Deere StarFire 6000/7000, Trimble RTK, and AgLeader Surefire/Versa families dominate. Deere's Operations Center alone connects 500,000+ machines. **Second, observable, dollar-quantified disruption:** the May 2024 storm produced widely reported equipment shutdowns during peak planting, with daily opportunity costs documented at the national level. **Third, geographic concentration:** the IA/IL/IN/OH corridor — within one day's drive of 577 Industries' Columbus, OH base — concentrates the customer base where OEM, cooperative, and operator conversations are tractable on a limited budget.
 
-Market sizing for the beachhead: global precision-agriculture market reached $12.9 B in 2024 (CAGR ~15% through 2030); the U.S. SAM dominated by row-crop guidance, RTK services, and equipment telematics is several billion dollars and growing. Autonomous transportation, geospatial surveying, satellite-drag forecasting for LEO operators, and parametric space-weather insurance are Phase II expansion verticals enabled by the same fusion engine; they are explicitly not Phase I deliverables (§6.4).
+Market sizing for the beachhead: global precision-agriculture market reached $12.9 B in 2024 (CAGR ~15% through 2030); the U.S. SAM dominated by row-crop guidance, RTK services, and equipment telematics is several billion dollars and growing. Autonomous transportation, geospatial surveying, satellite-drag forecasting for LEO operators, and parametric space-weather insurance are expansion verticals enabled by the same fusion engine; they are explicitly outside the initial scope (§6.4).
 
 ### 1.4 Concept of Operations
 
-HELIOS operates as a continuously running cloud service. The ingestion tier[^2] pulls upstream data on its native cadence (DONKI: minutes; SEP Scoreboards: minutes-to-hours; CDDIS GIMs: 2-hour; GOES/DSCOVR: 1-minute) and normalizes each source into a common feature schema with full provenance[^1]. The fusion tier[^3] applies BMA weights, isotonic calibration, and conformal-prediction wrappers on a configurable schedule (operational: every 5 minutes; analytical: on-demand). The translation tier splits into the two slices: the SRAG-oriented radiation-risk module emits all-clear revocation probability, time-to-threshold conformal intervals, and ARRT-compatible dose-rate inputs; the precision-ag module emits receiver-family-specific 2D accuracy distributions over 0-24 hour horizons with location-aware adjustments. Operators consume HELIOS via the RESTful API (JSON) or via the dashboard (web view).
+HELIOS is designed to operate as a continuously running cloud service. The ingestion tier[^2] pulls upstream data on its native cadence (DONKI: minutes; SEP Scoreboards: minutes-to-hours; CDDIS GIMs: 2-hour; GOES/DSCOVR: 1-minute) and normalizes each source into a common feature schema with full provenance[^1]. The fusion tier[^3] applies BMA weights, isotonic calibration, and conformal-prediction wrappers on a configurable schedule (operational: every 5 minutes; analytical: on-demand). The translation tier splits into the two slices: the SRAG-oriented radiation-risk module emits all-clear revocation probability, time-to-threshold conformal intervals, and ARRT-compatible dose-rate inputs; the precision-ag module emits receiver-family-specific 2D accuracy distributions over 0-24 hour horizons with location-aware adjustments. Operators consume HELIOS via the RESTful API (JSON) or via the dashboard (web view).
 
-**Every output exposes a drill-down to its full provenance chain** — which upstream models contributed at which weights, with which calibration history. This provenance affordance is essential for SRAG console adoption and for the CCMC proving-ground evaluation pathway, and is formalized as a public, community-comment RFC[^1].
+**Every output exposes a drill-down to its full provenance chain** — which upstream models contributed at which weights, with which calibration history. This provenance affordance is essential for SRAG console adoption and for proving-ground evaluation, and is formalized as a public, community-comment RFC[^1].
 
 [^1]: The provenance affordance is formalized as a public, machine-readable JSON Schema (draft 2020-12) plus a pydantic v2 reference implementation: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec). v0.1.0 RFC released; community comment open at [issue #4](https://github.com/577Industries/helios-provenance-spec/issues/4) on the 8 §6 design questions.
 
@@ -103,7 +100,7 @@ HELIOS operates as a continuously running cloud service. The ingestion tier[^2] 
 
 ## 2. Technical Objectives
 
-Phase I establishes the technical feasibility of HELIOS through five integrated objectives. Each has measurable success criteria; the validation framework is pre-registered in §3.1 to forestall any concern about post-hoc metric tuning or cherry-picked event selection.
+The work establishes the technical feasibility of HELIOS through five integrated objectives. Each has measurable success criteria; the validation framework is pre-registered in §3.1 to forestall any concern about post-hoc metric tuning or cherry-picked event selection.
 
 ### Objective 1 — Multi-Source Ingestion Pipeline
 
@@ -140,21 +137,21 @@ The equipment translation layer applies receiver-family-specific transfer functi
 
 **Success criterion**: on the May 2024 Gannon storm[^4] and three hold-out G2+ events, predicted 2D RTK error within 30% of observed CORS-derived error for the three receiver families; Heidke Skill Score improvement ≥20% over climatological persistence at the 6-hour forecast horizon.
 
-### Objective 5 — End-User Validation and Phase II Commercialization Framework
+### Objective 5 — End-User Validation and Commercialization Framework
 
-**NASA slice**: structured engagement with CCMC (validation-framework compliance), M2M SWAO (operational relevance), SRAG (operational threshold and ARRT-compatibility alignment), and SPoRT/MSFC (R2O2R transition pathway). **Ag slice**: structured interviews with at least 10 prospective customers across Ohio/Midwest cooperatives, large family operations, and OEM platform teams (Deere Operations Center, AGCO Fuse, CNH AFS Connect). TABA funds support customer discovery, FTO/IP review of the fusion architecture, and pricing-model validation.
+**NASA slice**: alignment with CCMC-compatible validation metrics, SRAG operational thresholds, and ARRT compatibility. **Ag slice**: structured interviews with at least 10 prospective customers across Ohio/Midwest cooperatives, large family operations, and OEM platform teams (Deere Operations Center, AGCO Fuse, CNH AFS Connect). The commercialization work covers customer discovery, FTO/IP review of the fusion architecture, and pricing-model validation.
 
-**Success criterion**: letters of intent from ≥2 NASA-relevant organizations and ≥2 commercial precision-ag organizations; completed Phase II commercialization plan with named pilot partners; stakeholder-approved Concept of Operations.
+**Success criterion**: letters of intent from ≥2 commercial precision-ag organizations; completed commercialization plan with named pilot partners; stakeholder-approved Concept of Operations.
 
 ---
 
-## 3. Work Plan, Validation Framework, Risk, and Phase II Vision
+## 3. Work Plan, Validation Framework, Risk, and Follow-On Vision
 
-Phase I executes over six months across five concurrent tasks (T1-T5) aligned with the technical objectives. Total proposed price: $225,000 plus $6,500 TABA (see §7 for line-item budget).
+The work plan runs over six months across five concurrent tasks (T1-T5) aligned with the technical objectives.
 
 ### T1 — Ingestion and Pipeline Architecture (Months 1-3)
 
-Month 1 finalizes the stakeholder-approved CONOPS through structured elicitation with CCMC, M2M SWAO, and three precision-ag stakeholders. Months 1-3 deploy the ETL pipeline on AWS (S3 staging, Lambda transforms, RDS metadata) with authenticated DONKI ingestion, SEP Scoreboard scrapers respecting CCMC rate limits, SWPC real-time feeds, CDDIS GIMs, GOES X-ray/proton flux, and DSCOVR. The model-adapter layer normalizes each upstream source into a common feature schema with provenance preserved at every transformation[^2]. The architecture separates HELIOS-proprietary fusion logic from licensed upstream models — HESPERIA REleASE in particular requires a separate licensing agreement for commercial use [30]; HELIOS connectors use public outputs only, with the IP value concentrated in the fusion and translation layers. **Deliverables**: CONOPS; functioning ETL pipeline; provenance-tracked data store; IT Security Plan compliant with the NASA contract.
+Month 1 finalizes the stakeholder-approved CONOPS through structured elicitation with mission-operations stakeholders and three precision-ag stakeholders. Months 1-3 deploy the ETL pipeline on AWS (S3 staging, Lambda transforms, RDS metadata) with authenticated DONKI ingestion, SEP Scoreboard scrapers respecting CCMC rate limits, SWPC real-time feeds, CDDIS GIMs, GOES X-ray/proton flux, and DSCOVR. The model-adapter layer normalizes each upstream source into a common feature schema with provenance preserved at every transformation[^2]. The architecture separates HELIOS-proprietary fusion logic from licensed upstream models — HESPERIA REleASE in particular requires a separate licensing agreement for commercial use [30]; HELIOS connectors use public outputs only, with the IP value concentrated in the fusion and translation layers. **Deliverables**: CONOPS; functioning ETL pipeline; provenance-tracked data store; IT Security Plan.
 
 ### T2 — Fusion and Calibration Engine (Months 2-4)
 
@@ -170,11 +167,11 @@ Months 4-5: RESTful API (Python/FastAPI) serving HELIOS products as JSON, querya
 
 ### T5 — End-User Engagement and Commercialization (Months 1-6)
 
-Months 1-3: structured customer-discovery interviews via OSU Extension, the Ohio Agricultural Research and Development Center (OARDC), and OEM platform teams; engagement with operators through the George Washington Carver Science Park ecosystem at OSU. Months 3-5: NASA-center engagement with CCMC (validation), M2M SWAO (operational), SRAG (threshold alignment), SPoRT/MSFC (transition pathway). Months 5-6: Phase II commercialization plan including SaaS pricing, OEM integration roadmap, IP/FTO strategy. **Deliverables**: customer-discovery report; letters of intent; Phase II commercialization plan.
+Months 1-3: structured customer-discovery interviews via OSU Extension, the Ohio Agricultural Research and Development Center (OARDC), and OEM platform teams; engagement with operators through the George Washington Carver Science Park ecosystem at OSU. Months 5-6: commercialization plan including SaaS pricing, OEM integration roadmap, IP/FTO strategy. **Deliverables**: customer-discovery report; letters of intent; commercialization plan.
 
 ### 3.1 Pre-Registered Validation Framework
 
-A common reviewer concern is that retrospective validation against a curated event list looks strong on paper and fails in production. HELIOS pre-registers training and hold-out events and metric thresholds in this proposal, before Task 4 model selection. **Any deviation in the final report is documented as a deviation; metrics are not re-baselined post hoc.** The pre-registration is filed publicly on the Open Science Framework before any hold-out evaluation runs; see `orchestration/osf_preregistration.template.md` in the helios-program meta-repo for the binding text.
+A common concern is that retrospective validation against a curated event list looks strong on paper and fails in production. HELIOS pre-registers training and hold-out events and metric thresholds in this document, before Task 4 model selection. **Any deviation in the final report is documented as a deviation; metrics are not re-baselined post hoc.** The pre-registration is filed publicly on the Open Science Framework before any hold-out evaluation runs; see `orchestration/osf_preregistration.template.md` in the helios-program meta-repo for the binding text.
 
 #### Table 3-1. Pre-registered SEP validation events for the NASA mission-operations slice
 
@@ -200,13 +197,13 @@ The GNSS slice uses the May 2024 Gannon storm (G5) plus three hold-out G2+ event
 | Upstream model licensing constraints | Medium | Some CCMC models restrict commercial use | Connector-based architecture using public outputs only; HELIOS IP concentrated in fusion/calibration/translation; FTO review |
 | Insufficient extreme-event training data | High | G3+ events <2% of time steps; tail-event learning is hard | SMOTE oversampling on event classes; PINN physics regularization for OOD extrapolation; severity-stratified validation |
 | Calibration instability across severity regimes | Medium | Reliability may hold for quiet conditions but fail at extremes | Severity-stratified isotonic regression; conformal prediction for distribution-free bounds; conservative uncertainty composition |
-| Validation event cherry-picking | Low (mitigated) | Reviewer concern about selective retrospective performance reporting | Pre-registered 7/3 train/hold-out split in Table 3-1; metric thresholds set in this proposal; deviations documented in final report |
+| Validation event cherry-picking | Low (mitigated) | Concern about selective retrospective performance reporting | Pre-registered 7/3 train/hold-out split in Table 3-1; metric thresholds set in this document; deviations documented in final report |
 | Non-traditional end-user adoption barriers | Medium | Agricultural operators unfamiliar with space-weather concepts | Equipment-native outputs (go/no-go, accuracy windows) not geophysical indices; OSU Extension and OARDC as trusted intermediaries |
 | Key-personnel recruiting risk | Low | ML Engineer role requires specialized skills | Named candidates identified at OSU ECE and Byrd Center; backup candidates in 577 network; PI absorbs critical-path work |
 
-### 3.3 Phase II Vision
+### 3.3 Follow-On Vision
 
-A Phase II effort (24 months; scope consistent with NASA SBIR Phase II funding limits) would advance HELIOS from proof-of-concept to functioning operational prototype (TRL 5-6) through: (a) real-time operational deployment with live model retraining; (b) field validation across 5-10 precision-ag operations during the 2028 planting season; (c) CCMC proving-ground evaluation; (d) prototype deployment to M2M SWAO and SPoRT for mission-operations evaluation; (e) production-grade API at 99.9% uptime; (f) pilot integration with at least one precision-ag OEM telematics platform; (g) expansion into the four Phase II verticals described in §6.4 — autonomous-vehicle GNSS integrity, geospatial surveying, satellite drag prediction for LEO operators, and parametric space-weather insurance. Post-Phase II commercialization is funded through SaaS recurring revenue and OEM revenue share.
+A subsequent 24-month stage would advance HELIOS from proof-of-concept to functioning operational prototype (TRL 5-6) through: (a) real-time operational deployment with live model retraining; (b) field validation across 5-10 precision-ag operations during the 2028 planting season; (c) production-grade API at 99.9% uptime; (d) pilot integration with at least one precision-ag OEM telematics platform; (e) expansion into the four verticals described in §6.4 — autonomous-vehicle GNSS integrity, geospatial surveying, satellite drag prediction for LEO operators, and parametric space-weather insurance. Commercialization beyond the operational prototype is funded through SaaS recurring revenue and OEM revenue share.
 
 ---
 
@@ -226,9 +223,9 @@ The novelty claim is framed conservatively. HELIOS is innovative in five specifi
 
 1. **Model-agnostic decision-calibrated fusion.** Bayesian Model Averaging with isotonic-regression reliability calibration applied across heterogeneous CCMC and SWPC SEP outputs. Operational ensemble work to date has emphasized model averaging without explicit reliability calibration; HELIOS combines both with conformal-prediction uncertainty bounds. *Implementation*: [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine)[^3].
 
-2. **Provenance-aware architecture.** Every output traces to its underlying models, data feeds, and assumptions — a property required for CCMC proving-ground evaluation, ARRT-compatible mission integration, and the operator trust that safety-critical adoption demands. *Specification*: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)[^1] — open RFC composing SPASE 2.7.1, W3C PROV-JSON, and RO-Crate 1.2 JSON-LD with a novel feature-level transformation chain. To our knowledge, the first feature-level lineage standard for heliophysics fusion systems.
+2. **Provenance-aware architecture.** Every output traces to its underlying models, data feeds, and assumptions — a property required for proving-ground evaluation, ARRT-compatible mission integration, and the operator trust that safety-critical adoption demands. *Specification*: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)[^1] — open RFC composing SPASE 2.7.1, W3C PROV-JSON, and RO-Crate 1.2 JSON-LD with a novel feature-level transformation chain. To our knowledge, the first feature-level lineage standard for heliophysics fusion systems.
 
-3. **Dual-use translation from a common fusion core.** NASA mission operations and precision agriculture share fusion infrastructure but use separate translation modules. The R2O2R feedback loop is bidirectional: operator feedback informs model weighting, and the commercial workload funds operational maturation that NASA would otherwise need to fund alone. The commercial slice produces three independent benefits to NASA: it generates real-world calibration data on rare extreme events (every G2+ event is an inadvertent validation campaign for the fusion engine), it amortizes the operational cost of keeping the system live, and it documents trust patterns from non-traditional users that inform future NASA acquisitions.
+3. **Dual-use translation from a common fusion core.** NASA mission operations and precision agriculture share fusion infrastructure but use separate translation modules. The R2O2R feedback loop is bidirectional: operator feedback informs model weighting, and the commercial workload funds operational maturation. The commercial slice produces three independent benefits for the mission-operations slice: it generates real-world calibration data on rare extreme events (every G2+ event is an inadvertent validation campaign for the fusion engine), it amortizes the operational cost of keeping the system live, and it documents trust patterns from non-traditional users.
 
 4. **Equipment-aware GNSS prediction.** To our knowledge, HELIOS is the first system to translate ionospheric disturbance forecasts into receiver-family-specific RTK accuracy distributions for named precision-ag receivers, rather than generic K-index or TEC warnings. *Foreshadowing analysis*: the May 2024 Gannon storm retrospective[^4] demonstrates the data pipeline and equipment-transfer-function concept on real CORS data.
 
@@ -237,10 +234,9 @@ The novelty claim is framed conservatively. HELIOS is innovative in five specifi
 ### 4.3 577 Industries Relevant Experience
 
 577 Industries Inc. (Columbus, OH) brings directly applicable capabilities:
-(a) three successfully executed DoD SBIR Phase I contracts applying AI/ML to defense data analytics, demonstrating on-budget, on-schedule SBIR execution;
-(b) the **FORGE OS** platform — production-grade ML pipeline infrastructure including data ingestion, feature engineering, training, and deployment, with proven containerized portability between AWS and on-premises;
-(c) the **IRIS** sparse-data learning approach, internally benchmarked to yield substantial accuracy gains on severely imbalanced classification tasks directly applicable to the <2% G2+ event rate;
-(d) experience building explainable decision-support tools that translate complex sensor data into operator-actionable intelligence for DoD customers — exactly the translation discipline HELIOS applies to civilian space weather.
+(a) the **FORGE OS** platform — production-grade ML pipeline infrastructure including data ingestion, feature engineering, training, and deployment, with proven containerized portability between AWS and on-premises;
+(b) the **IRIS** sparse-data learning approach, internally benchmarked to yield substantial accuracy gains on severely imbalanced classification tasks directly applicable to the <2% G2+ event rate;
+(c) experience building explainable decision-support tools that translate complex sensor data into operator-actionable intelligence — exactly the translation discipline HELIOS applies to civilian space weather.
 
 ---
 
@@ -248,24 +244,23 @@ The novelty claim is framed conservatively. HELIOS is innovative in five specifi
 
 ### 5.1 Key Personnel
 
-**Thomas Waweru**, Principal Investigator (60% effort, 6 months). Founder and PI, 577 Industries Inc. Led FORGE OS platform development and executed three DoD SBIR Phase I contracts in AI/ML for defense applications. Expertise: ML system architecture, sparse-data learning, predictive modeling, edge AI, NLP, computer vision, cybersecurity analytics. Will provide overall technical leadership, fusion-engine architecture, NASA-center engagement, and end-user discovery. Primary employment is with the small business, satisfying NFS 1852.219-83.
+**Thomas Waweru**, Principal Investigator (60% effort, 6 months). Founder and PI, 577 Industries Inc. Led FORGE OS platform development. Expertise: ML system architecture, sparse-data learning, predictive modeling, edge AI, NLP, computer vision, cybersecurity analytics. Will provide overall technical leadership, fusion-engine architecture, and end-user discovery.
 
-**Senior ML Engineer** (50% effort, 6 months; named candidates identified). Required profile: transformer architectures for scientific time-series; ionospheric physics or GNSS signal-processing familiarity; Python ML stack (PyTorch, scikit-learn, XGBoost, LightGBM); operational ML deployment. Candidates identified through Ohio State University's Department of Electrical and Computer Engineering, the OSU Byrd Polar and Climate Research Center, and 577 Industries' existing technical network. Conditional offers will be extended on award.
+**Senior ML Engineer** (50% effort, 6 months; a proposed role, candidates identified, no offer made). Required profile: transformer architectures for scientific time-series; ionospheric physics or GNSS signal-processing familiarity; Python ML stack (PyTorch, scikit-learn, XGBoost, LightGBM); operational ML deployment. Candidates identified through Ohio State University's Department of Electrical and Computer Engineering, the OSU Byrd Polar and Climate Research Center, and 577 Industries' existing technical network.
 
-**Data Engineer** (40% effort, 6 months; direct hire, candidate identified). Required profile: async Python data pipelines, time-series schema management, geospatial / GNSS data processing (RINEX, IONEX, NetCDF, HDF5), and PPP / RTK post-processing workflows. Owns connectors v0.3 (extending the v0.2.x line — NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR) and the PPP / RTK pipeline for `gannon-storm-rtk-analysis` v0.2. Candidate identified through the 577 Industries technical network; conditional offer will be extended on award.
+**Data Engineer** (40% effort, 6 months; a proposed role, candidate identified, no offer made). Required profile: async Python data pipelines, time-series schema management, geospatial / GNSS data processing (RINEX, IONEX, NetCDF, HDF5), and PPP / RTK post-processing workflows. Owns connectors v0.3 (extending the v0.2.x line — NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR) and the PPP / RTK pipeline for `gannon-storm-rtk-analysis` v0.2. Candidate identified through the 577 Industries technical network.
 
-**Space-Weather / Ionospheric Physics SME Consultant** — Byrd Polar and Climate Research Center, The Ohio State University (subcontract; ~250 hours over 6 months at ~$100/hr loaded; $25,000 total = 11.1% of total proposed price, well below the 33% subcontracting cap per NFS 1852.219-80). Co-engagement with the OSU College of Engineering aerospace group. Will support fusion-engine validation, CCMC framework compliance, SRAG operational-threshold alignment, and independent SME review of severity-stratified reliability diagrams. Required: peer-reviewed publication in SEP forecasting or ionospheric disturbance characterization, plus prior experience with CCMC or NOAA SWPC products. Specific faculty contact to be named at Letter of Commitment signing; discussions in progress with named candidates; LoC to be filed within 14 days of award notification per BAA §8.
+**Space-Weather / Ionospheric Physics SME Consultant** — Byrd Polar and Climate Research Center, The Ohio State University (a proposed consulting engagement, not arranged; ~250 hours over 6 months). Co-engagement with the OSU College of Engineering aerospace group. Will support fusion-engine validation, CCMC framework compliance, SRAG operational-threshold alignment, and independent SME review of severity-stratified reliability diagrams. Required: peer-reviewed publication in SEP forecasting or ionospheric disturbance characterization, plus prior experience with CCMC or NOAA SWPC products. Specific faculty contact to be named at Letter of Commitment signing; discussions in progress with named candidates.
 
 ### 5.2 Facilities and Equipment
 
-577 Industries operates from Columbus, OH. No major capital equipment is required for this software-centric Phase I, concentrating funds on labor, validation, and stakeholder engagement. Facilities include AWS cloud compute (GPU instances for ML training; $12,000 budgeted), the FORGE OS containerized ML pipeline, secured developer workstations, and access to public archives (CDDIS, DONKI, SWPC, GOES, DSCOVR, IGS, NGS CORS) requiring no special agreements.
+577 Industries operates from Columbus, OH. No major capital equipment is required for this software-centric work. Facilities include AWS cloud compute (GPU instances for ML training), the FORGE OS containerized ML pipeline, secured developer workstations, and access to public archives (CDDIS, DONKI, SWPC, GOES, DSCOVR, IGS, NGS CORS) requiring no special agreements.
 
-### 5.3 NASA Center Engagement
+### 5.3 NASA System Compatibility
 
-- **CCMC at GSFC** — HELIOS APIs designed for compatibility with CCMC containerization standards. Target validation-framework benchmarking and — on sufficient maturity — submission to the CCMC model catalog.
-- **M2M SWAO at GSFC** — Primary evaluation partner for the mission-operations translation module. Ingest DONKI linkages generated by M2M analysts; coordinate on cislunar and Mars-environment products.
+- **CCMC at GSFC** — HELIOS APIs designed for compatibility with CCMC containerization standards.
+- **M2M SWAO at GSFC** — Ingest DONKI linkages generated by M2M analysts.
 - **SRAG at JSC** — Validate the radiation-risk translation module against SRAG operational thresholds and ARRT compatibility. HELIOS positions as compatible upstream input, not a replacement.
-- **SPoRT Center at MSFC** — Engage SPoRT's established decision-support transition framework as a candidate operational-end-user pathway for HELIOS products.
 
 ---
 
@@ -277,15 +272,15 @@ The precision-agriculture beachhead is selected for the three reasons stated in 
 
 ### 6.2 Revenue Model
 
-Bottom-up near-term SAM (Years 1-3) is estimated at $15-30M across precision-ag enterprise customers, NASA and government operational users, and selected commercial satellite operators. SaaS recurring revenue is supplemented by OEM revenue share (target 70/30 HELIOS/OEM) at Phase II maturity.
+Bottom-up near-term SAM (Years 1-3) is estimated at $15-30M across precision-ag enterprise customers, government operational users, and selected commercial satellite operators. SaaS recurring revenue is supplemented by OEM revenue share (target 70/30 HELIOS/OEM) at operational-prototype maturity.
 
 | Tier | Monthly | Target customer |
 |---|---|---|
 | Basic | $200 | Individual operators; single-operation row-crop farms |
 | Professional | $1,000 | Mid-size operations; ag-tech retailers; cooperative branch operations |
-| Enterprise | $5,000-$10,000 | Large cooperatives; OEM telematics integrations; fleet operators; satellite operators; NASA/government tier |
+| Enterprise | $5,000-$10,000 | Large cooperatives; OEM telematics integrations; fleet operators; satellite operators; government tier |
 
-**Indicative three-year post-Phase-II revenue projection** (conservative against the addressable base; NASA/government and satellite-operator tiers excluded for conservatism):
+**Indicative three-year revenue projection after the operational prototype** (conservative against the addressable base; government and satellite-operator tiers excluded for conservatism):
 
 | Year | Basic ($200/mo) | Professional ($1,000/mo) | Enterprise ($5-10K/mo) |
 |---|---|---|---|
@@ -293,17 +288,16 @@ Bottom-up near-term SAM (Years 1-3) is estimated at $15-30M across precision-ag 
 | Y2 — OEM scale-up | 400 subs (~$0.96M ARR) | 120 subs (~$1.44M ARR) | 10 subs (~$1.00M ARR) |
 | Y3 — multi-vertical entry | 1,200 subs (~$2.88M ARR) | 400 subs (~$4.80M ARR) | 30 subs (~$3.00M ARR) |
 
-Year-3 indicative top line: ~$10.7M ARR across the three tiers shown. Achieving these numbers requires at least one OEM telematics integration (Phase II goal), the parametric-insurance pilot (Phase II goal), and continued OSU Extension / OARDC distribution. Failing those, the direct-SaaS-only path yields a slower but still meaningful trajectory (~$1.5-3M ARR by Y3).
+Year-3 indicative top line: ~$10.7M ARR across the three tiers shown. Achieving these numbers requires at least one OEM telematics integration (operational-prototype goal), the parametric-insurance pilot (operational-prototype goal), and continued OSU Extension / OARDC distribution. Failing those, the direct-SaaS-only path yields a slower but still meaningful trajectory (~$1.5-3M ARR by Y3).
 
 ### 6.3 Go-to-Market Strategy
 
-- **NASA mission transition** (concurrent with commercial entry). CCMC proving-ground deployment, M2M SWAO operational evaluation, SRAG threshold compatibility, NOAA SWPC collaboration. The White House R2O2R implementation plan [4] explicitly calls for improved public-private transition mechanisms, into which HELIOS fits directly.
 - **Precision-ag OEM integration.** Partnership conversations with John Deere Operations Center, AGCO Fuse, and CNH AFS Connect for telematics integration with revenue share. OEM integration converts customer acquisition from the SaaS direct model to platform distribution — a step-change in CAC and time-to-revenue.
 - **Direct SaaS sales.** Large cooperatives (CHS Inc., Land O'Lakes), commercial ag retailers (Nutrien Ag Solutions), and large family operations approached through the OSU Extension network and OARDC.
 
-### 6.4 Phase II Expansion Verticals
+### 6.4 Expansion Verticals
 
-Once the fusion engine and provenance architecture are proven, Phase II opens four expansion verticals using the same core, each requiring only a new translation module:
+Once the fusion engine and provenance architecture are proven, the same core opens four expansion verticals, each requiring only a new translation module:
 
 - **Autonomous-vehicle and trucking GNSS integrity** — Smart Columbus / DriveOhio ecosystem; May Mobility and large fleet operators with lane-level safety thresholds.
 - **Geospatial surveying and construction guidance** — Trimble, Hexagon, and large national survey firms; cm-level accuracy windows for time-bounded projects.
@@ -312,48 +306,17 @@ Once the fusion engine and provenance architecture are proven, Phase II opens fo
 
 ### 6.5 NASA Mission Applications Beyond SRAG
 
-Beyond commercial markets and beyond the Phase I SRAG translation, HELIOS supports: Artemis crew radiation protection and EVA planning; lunar-surface GNSS architecture using THEMIS-ARTEMIS cislunar data; LEO operations GNSS integrity for ISS and commercial-crew vehicles; satellite drag prediction; and integration with NAIRAS for aviation GNSS integrity supporting ADS-B mandates.
+Beyond commercial markets and beyond the SRAG translation module, the same fusion core applies to: Artemis crew radiation protection and EVA planning; lunar-surface GNSS architecture using THEMIS-ARTEMIS cislunar data; LEO operations GNSS integrity for ISS and commercial-crew vehicles; satellite drag prediction; and integration with NAIRAS for aviation GNSS integrity supporting ADS-B mandates.
 
 ### 6.6 Competitive Positioning and IP Strategy
 
-HELIOS's defensibility rests on: (1) calibrated probabilistic fusion across multiple models, not single-model wrappers; (2) provenance-aware architecture enabling proving-ground evaluation and operator trust; (3) equipment-specific GNSS predictions unavailable from either pure-play space-weather companies or GNSS correction services; (4) dual-use design from common infrastructure; (5) first-mover position in space-weather-to-receiver-accuracy prediction. The IP strategy protects 577 Industries' proprietary value in **orchestration, calibration logic, the receiver-performance ontology, event-translation rules, and operator UI/UX**, while respecting upstream model licensing — HESPERIA REleASE in particular [30]. SBIR data rights are asserted on the fusion and translation layers.
+HELIOS's defensibility rests on: (1) calibrated probabilistic fusion across multiple models, not single-model wrappers; (2) provenance-aware architecture enabling proving-ground evaluation and operator trust; (3) equipment-specific GNSS predictions unavailable from either pure-play space-weather companies or GNSS correction services; (4) dual-use design from common infrastructure; (5) first-mover position in space-weather-to-receiver-accuracy prediction. The IP strategy protects 577 Industries' proprietary value in **orchestration, calibration logic, the receiver-performance ontology, event-translation rules, and operator UI/UX**, while respecting upstream model licensing — HESPERIA REleASE in particular [30].
 
 The hybrid open/private architecture supports this: the fusion-engine framework is open source (Apache 2.0) to maximize community trust, CCMC compatibility, and academic citation; the trained weights, BMA priors fitted on Table 3-1 events, and equipment transfer functions live in a private companion repo and constitute the commercial IP.
 
 ---
 
-## 7. Budget Summary
-
-| Budget Category | Detail | Amount |
-|---|---|---|
-| Direct Labor — PI Thomas Waweru | 60% effort × 6 months | $63,000 |
-| Direct Labor — Senior ML Engineer | 50% effort × 6 months | $42,000 |
-| Direct Labor — Data Engineer | 40% effort × 6 months | $26,000 |
-| **Direct Labor — Subtotal** |  | **$131,000** |
-| Fringe Benefits | 30% rate (FICA / FUTA / SUTA / health / 401(k) match) | $39,300 |
-| **Total Compensation** | Labor + Fringe | **$170,300** |
-| ODC — AWS GPU compute | GPU instance-hours, S3, Lambda fetchers | $12,000 |
-| ODC — Software licenses | RTKLIB Pro + ML platform seats | $2,500 |
-| ODC — Travel (NASA centers) | 2 trips × 2 people @ $1,500 (GSFC / MSFC / JSC) | $6,000 |
-| ODC — Travel (CCMC / M2M technical exchange) | 1 dedicated tech-exchange trip | $2,500 |
-| ODC — Travel (ag operator visits) | 4 Midwest trips @ $750 (IA/IL/IN/OH) | $3,000 |
-| ODC — Customer-discovery honoraria | 12 interview honoraria @ $100 (Task T5) | $1,200 |
-| ODC — Materials & supplies |  | $500 |
-| **ODC — Subtotal** |  | **$27,700** |
-| Subcontract — **OSU Byrd Polar and Climate Research Center** | Space-Weather/Ionospheric SME (250 hrs @ $100/hr) | $25,000 |
-| **Direct Costs Subtotal** | Labor + Fringe + ODC + Subcontract | **$223,000** |
-| Fee / Profit | ~0.9% (constrained to maximize technical scope within cap) | $2,000 |
-| **TOTAL PROPOSED PRICE** | **Phase I base** | **$225,000** |
-| TABA Request (additive) | Customer discovery + FTO/IP review + pricing validation (BAA §3.1.5.9) | $6,500 |
-| **TOTAL REQUESTED** | Base + TABA | **$231,500** |
-
-**Subcontracting compliance.** Subcontract cost $25,000 against total proposed price $225,000 = **11.1%**, well below the 33% Phase I subcontracting ceiling per NFS 1852.219-80. PI primary employment is with the SBC (NFS 1852.219-83). All work performed in the United States. The TABA request is additive to the $225K base and excluded from the 33% subcontracting cap per BAA §3.1.5.9.
-
-**Budget rationale.** The Phase I plan executes through a three-person direct-labor team — PI Thomas Waweru, a Senior ML Engineer, and a Data Engineer — covering the four §3 objectives end-to-end (PI = fusion architecture + CCMC/SRAG engagement; Senior ML Engineer = TFT/transformer + BMA fusion; Data Engineer = connectors v0.3 + PPP/RTK pipeline). The **OSU Byrd Center subcontract** ($25K / 250 hours) brings complementary atmospheric and geomagnetic-coupling expertise that 577 Industries does not have in-house, and provides the independent SME review required to defend CCMC/SRAG-grade validation claims. Cloud compute ($12K) scales with BMA training across the 7 Table 4-1 training events plus 3 hold-out events. Expanded travel ($11.5K) covers two NASA centers, one dedicated CCMC technical-exchange trip, and four ag-operator visits across the IA/IL/IN/OH row-crop corridor. Fee is constrained to ~0.9% so the SBC accepts reduced profit to maximize technical scope within the cap. TABA funds (capped at $6,500) support customer-discovery facilitation, FTO/IP review of the fusion architecture, and pricing validation through an approved TABA vendor — additive to the $225K base.
-
----
-
-## 8. References
+## 7. References
 
 [1] *Promoting Research and Observations of Space Weather to Improve the Forecasting of Tomorrow Act*, Pub. L. No. 116-181, 134 Stat. 886 (2020).
 [2] *Findings and Recommendations to Successfully Implement PROSWIFT and Transform the National Space Weather Enterprise*, Space Weather Advisory Group (2023).
@@ -390,6 +353,6 @@ The hybrid open/private architecture supports this: the fusion-engine framework 
 
 ---
 
-*This companion document is maintained at [github.com/577Industries/helios-program](https://github.com/577Industries/helios-program) (public; pull requests welcome from interested reviewers and stakeholders).
+*This companion document is maintained at [github.com/577Industries/helios-program](https://github.com/577Industries/helios-program) (public; pull requests welcome from interested readers and stakeholders).
 Rendered HTML and PDF versions auto-publish to the project's GitHub Pages site on every artifact merge.
 Last updated: 2026-05-17. Contact: <engineering@577industries.com>.*

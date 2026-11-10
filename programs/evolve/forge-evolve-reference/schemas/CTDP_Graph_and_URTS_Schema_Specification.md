@@ -4,7 +4,7 @@
 
 **Document ID:** FORGE-EVOLVE-SPEC-2026-001  
 **Version:** 2.4.0 (design draft, unimplemented)  
-**Applicable Solicitations:** DAF27BZ01-DV008 (TDP Modernization & Zero Trust Exchange) & DAF27BZ01-DV012 (Autonomous TDP-to-Path Robotic Task Specification)  
+**Scope:** TDP Modernization & Zero Trust Exchange; Autonomous TDP-to-Path Robotic Task Specification  
 **Referenced Standards (design intent, no compliance claimed):** MIL-STD-31000B, ISO 10303-242 (STEP AP242), ASME Y14.5-2018, ASME Y14.41, NIST SP 800-207 (Zero Trust Architecture), DoDI 8500.01, CMMC Level 2
 
 ---
@@ -106,7 +106,7 @@ CREATE TYPE gdt_characteristic_enum AS ENUM (
     'ANGULARITY', 'POSITION', 'CONCENTRICITY', 'SYMMETRY', 'CIRCULAR_RUNOUT', 'TOTAL_RUNOUT'
 );
 
--- 1. Merkle-DAG Configuration Management Ledger (DV008)
+-- 1. Merkle-DAG Configuration Management Ledger
 CREATE TABLE tdp_merkle_commits (
     commit_hash CHAR(64) PRIMARY KEY,
     parent_commit_hash CHAR(64) REFERENCES tdp_merkle_commits(commit_hash),
@@ -137,7 +137,7 @@ CREATE TABLE ctdp_brep_faces (
 
 CREATE INDEX idx_ctdp_faces_gist ON ctdp_brep_faces USING GIST (centroid_3d);
 
--- 3. Extracted Semantic GD&T & Process Specifications (DV012)
+-- 3. Extracted Semantic GD&T & Process Specifications
 CREATE TABLE ctdp_gdt_callouts (
     callout_uid VARCHAR(64) PRIMARY KEY,
     face_uid VARCHAR(64) NOT NULL REFERENCES ctdp_brep_faces(face_uid),
@@ -154,7 +154,7 @@ CREATE TABLE ctdp_gdt_callouts (
     extraction_confidence DOUBLE PRECISION CHECK (extraction_confidence BETWEEN 0.0 AND 1.0)
 );
 
--- 4. Closed-Loop Sustainment & AI Damage Detection Records (DV008 + DV012)
+-- 4. Closed-Loop Sustainment & AI Damage Detection Records
 CREATE TABLE ctdp_sustainment_inspections (
     inspection_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     commit_hash CHAR(64) NOT NULL REFERENCES tdp_merkle_commits(commit_hash),
@@ -175,7 +175,7 @@ CREATE TABLE ctdp_sustainment_inspections (
 
 ## 3. Canonical JSON Schema (Draft 2020-12) for CTDP-G & URTS Exchange
 
-This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (DV008) and Autonomous Robotic Task Specifications (DV012).
+This JSON Schema defines the wire format for Zero-Trust TDP exchange packages and Autonomous Robotic Task Specifications.
 
 ```json
 {
@@ -441,7 +441,7 @@ This JSON Schema defines the wire format for Zero-Trust TDP exchange packages (D
 
 ## 4. High-Performance gRPC / Protocol Buffers v3 Wire Definition (`ctdp_urts.proto`)
 
-For sub-second WebGPU streaming of massive Model-Based Definition (MBD) assemblies (DV008) and real-time SROS2 robotic telemetry streaming (DV012), the Evolve design specifies the binary gRPC streams defined below (not implemented):
+For sub-second WebGPU streaming of massive Model-Based Definition (MBD) assemblies and real-time SROS2 robotic telemetry streaming, the Evolve design specifies the binary gRPC streams defined below (not implemented):
 
 ```protobuf
 syntax = "proto3";
@@ -449,13 +449,13 @@ package forge_evolve.v2;
 
 option go_package = "577industries.com/forge_evolve/api/v2;evolv2";
 
-// 1. Sub-Second Progressive MBD Mesh & PMI Streaming Service (DV008)
+// 1. Sub-Second Progressive MBD Mesh & PMI Streaming Service
 service ZeroTrustMBDStreamService {
   rpc StreamProgressiveBVH (BVHStreamRequest) returns (stream EncryptedBVHChunk);
   rpc CommitAsSustainedState (SustainmentCommitRequest) returns (MerkleCommitReceipt);
 }
 
-// 2. Autonomous Robotic Pathing & Multi-Vendor Execution Service (DV012)
+// 2. Autonomous Robotic Pathing & Multi-Vendor Execution Service
 service AutonomousRoboticPathService {
   rpc CompileTDPToURTS (TDPCompileRequest) returns (URTSTaskPackage);
   rpc ExportVendorControllerCode (VendorExportRequest) returns (VendorControllerProgram);
@@ -558,7 +558,7 @@ message MerkleCommitReceipt {
 
 ---
 
-## 5. Open Policy Agent (OPA) Rego Policy for Automated IA Compliance Validation (DV008)
+## 5. Open Policy Agent (OPA) Rego Policy for Automated IA Compliance Validation
 
 In the Evolve design, every Technical Data Package ingested or exchanged would be validated against this policy-as-code gate before any geometry or trajectory is rendered or transmitted. Target: `<50 ms` (not measured; the policy has not been evaluated by OPA):
 

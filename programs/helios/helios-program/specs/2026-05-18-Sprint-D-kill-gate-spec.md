@@ -10,7 +10,7 @@
 
 Sprint D executes the pre-registered kill-gate evaluation on the 3-event hold-out (Cycle 25 onset 2022-01-20 M5.5; Mid-cycle 25 2023-02-17 X2.2; Gannon 2024-05-11 G5). Outcome determines paper-vs-ablation-vs-no-paper per master plan §"Per-Artifact Briefs → C — `helios-fusion-engine`".
 
-**This sprint produces the headline Phase II result.** Every hold-out event post-dates ISWA's January 2017 cutover (per the Sprint C-Training-v2 coverage matrix) — so the evaluation runs against fully native real-data Scoreboard streams. No synthetic proxies in the final go/no-go.
+**This sprint produces the headline HELIOS result.** Every hold-out event post-dates ISWA's January 2017 cutover (per the Sprint C-Training-v2 coverage matrix) — so the evaluation runs against fully native real-data Scoreboard streams. No synthetic proxies in the final go/no-go.
 
 ## Prerequisites — verify ALL before dispatching the agent
 
@@ -111,7 +111,7 @@ Each branch has explicit downstream actions:
    - A clearly labeled README section titled "Pre-registered hold-out evaluation: negative result"
    - `notebooks/03-killgate-negative-result.ipynb` reproducing the metrics
    - Companion footnote `fusion_engine.preprint = null` with a `negative_result_notebook` URL
-3. **No paper submission.** Honest disclosure protects credibility for Phase II.
+3. **No paper submission.** Honest disclosure protects credibility for later work.
 
 ## Files to be created / modified
 

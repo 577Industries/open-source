@@ -21,8 +21,8 @@ Specifically, the package provides:
   optional rolling-window skill-based weight updates and explicit
   missing-model exclusion.
 - Three reliability calibrators (`IsotonicCalibrator`, `PlattCalibrator`,
-  `SeverityStratifiedCalibrator`). The proposal-default is the
-  severity-stratified isotonic; Platt is shipped *because the proposal
+  `SeverityStratifiedCalibrator`). The default is the
+  severity-stratified isotonic; Platt is shipped *because the design
   rejects it*, so the rejection rationale is reproducible.
 - Two conformal-prediction wrappers (`SplitConformalRegressor` for marginal
   coverage; `MondrianConformalRegressor` for per-stratum coverage).
@@ -37,7 +37,7 @@ Specifically, the package provides:
 
 - **No trained weights ship with this package.** Callers (including the
   HELIOS kill-gate runner) supply BMA weights and calibration parameters
-  at runtime. Trained weights, BMA priors fitted on Table 3-1 events, and
+  at runtime. Trained weights, BMA priors fitted on the training events, and
   equipment transfer functions live in the private companion repo
   `helios-fusion-internal` and are NOT distributed here.
 - **No kill-gate execution.** The kill-gate runner lives in
@@ -51,16 +51,14 @@ Specifically, the package provides:
 
 ## Status
 
-This repository is part of the **HELIOS** program — a NASA SBIR Phase I
-effort by 577 Industries Inc. supporting subtopic SPWX.1.S26A (Advanced
-Data-Driven Applications for Space Weather R2O2R). See proposal §2 Obj. 2 +
-§3.1 (pre-registered validation) + §4.2 innovation #1 of the proposal.
+This repository is part of the **HELIOS** program, 577 Industries Inc.'s
+data-driven space weather research-to-operations-to-research work.
 
 **v0.1.0 — public framework first release.** The framework is feature-
 complete for the kill-gate path; once `helios-spaceweather-connectors` v0.2
 ships and the OSF pre-registration is filed, training and hold-out
 evaluation proceed in the private companion repo using this framework as
-the load-bearing library.
+its core library.
 
 ## Quickstart
 
@@ -145,8 +143,8 @@ discussed in an issue first.
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, proposal companion document, orchestration scripts.
-- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from proposal §2 Obj. 2 (conformal from-scratch, Platt shipped for reproducible-rejection).
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
+- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from the original design (conformal from-scratch, Platt shipped for reproducible-rejection).
 - **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/helios-program/blob/main/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. The kill-gate runner (`orchestration/kill_gate.py`) refuses to execute without an OSF URL on file at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — `ModelOutput`, `FusedOutput`, `LineageStep` types align with this schema.
-- **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on Table 3-1 training events; not redistributed.
+- **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on the training events; not redistributed.

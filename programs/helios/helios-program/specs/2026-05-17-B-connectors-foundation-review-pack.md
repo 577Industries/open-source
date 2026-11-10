@@ -71,7 +71,7 @@ GST record `2024-05-10T15:00:00-GST-001` carries the lineage:
 2024-05-10T16:36:00-IPS-001  (interplanetary shock arrival)
 ```
 
-Tested both via fixture (`test_fetch_gst_gannon_lineage`) and live API. **This is the most concrete evidence we have so far that the "intelligent linkages" claim in proposal §2 Obj. 1 is real and operational.**
+Tested both via fixture (`test_fetch_gst_gannon_lineage`) and live API. **This is the most concrete evidence we have so far that the "intelligent linkages" claim in companion §2 Obj. 1 is real and operational.**
 
 ## Surface-area decisions worth a human pass
 

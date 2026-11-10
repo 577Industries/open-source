@@ -1,13 +1,14 @@
-# AegisGraph for ASEMA — Public Feasibility Release
+# AegisGraph review collection — the public feasibility release
 
-> **Graph-driven automated vulnerability discovery for secure messaging applications.** Feasibility evidence for DARPA SBIR Direct-to-Phase-II topic HR0011SB20254-12 (ASEMA).
+> **Graph-driven automated vulnerability discovery for secure messaging applications.** Sanitized public reproducibility artifacts for the AegisGraph engineering platform.
+
+This directory is part of [AegisGraph](../README.md). The engine, its validator and its schemas live one level up; this is the sanitized public release of the evidence they produced.
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/engineering%20tests-1030%20passing-brightgreen)](https://github.com/577Industries/aegisgraph)
 [![CETM](https://img.shields.io/badge/CETM-82%20claims-blue)](evidence/cetm.json)
 [![Engines](https://img.shields.io/badge/discovery%20engines-6-purple)](#the-six-engine-discovery-architecture)
 [![Sanitized](https://img.shields.io/badge/sanitize--check-passed-brightgreen)](EXCLUSIONS.md)
-[![Topic](https://img.shields.io/badge/DARPA%20SBIR-HR0011SB20254--12-orange)](https://www.darpa.mil/research/programs/asema)
 
 ![AegisGraph 6-engine architecture — the evidence graph plans, six engines hunt, findings flow back as new evidence](figures/F15-engine-architecture.png)
 
@@ -24,21 +25,22 @@ Three things to look at first, then a one-command reproduction.
 | Understand the system at a glance | [`figures/F15-engine-architecture.png`](figures/F15-engine-architecture.png) + [`figures/F16-discovery-loop.png`](figures/F16-discovery-loop.png) | The graph-as-planner pattern + how engine output cycles back as new evidence |
 | Verify our **claim discipline** | [`figures/F2-claim-state-machine.png`](figures/F2-claim-state-machine.png) + [`docs/02_claim_discipline.md`](docs/02_claim_discipline.md) | Static observations are never promoted to vulnerability claims; the lifecycle is structurally enforced |
 | Compare to **state-of-the-art tools** | [`figures/F6-sota-matrix.png`](figures/F6-sota-matrix.png) + [`docs/07_sota_comparison.md`](docs/07_sota_comparison.md) | Honest matrix; cells where AegisGraph is weaker are named explicitly |
-| Verify a **specific claim** | [`evidence/cetm.json`](evidence/cetm.json) (82 claims) | Every claim has an ID, a status (A/E/P), and an evidence artifact path |
+| Verify a **specific claim** | [`evidence/cetm.json`](evidence/cetm.json) (82 claims) | Every claim has an ID, a status (A/E/P), and an evidence artifact path. None of the 53 anchored claims cites a file in this collection: 41 cite the internal feasibility binder, 5 cite engine source and tests one level up, 5 cite literature references and 2 cite internal documents |
 | Check what's **deliberately absent** | [`EXCLUSIONS.md`](EXCLUSIONS.md) | Crash bytes, raw source, embargoed disclosures — by design |
 
-**One-command reproduction** (verifies this release end-to-end in under 5 minutes):
+**Reproduction** (checks this collection as published, in under 5 minutes):
 
 ```bash
-git clone https://github.com/577-Industries/asema-feasibility-artifacts
-cd asema-feasibility-artifacts
-git checkout v1.0.0-asema-dp2-feasibility
-node evidence/validate-evidence.mjs                   # → safety_scan: passed
-node evidence/validate-cetm.mjs evidence/cetm.json    # → issues_count: 0
+git clone https://github.com/577Industries/open-source
+cd open-source/programs/aegis/aegisgraph/review-collection
+python3 scripts/verify_public_package.py              # → PUBLIC PACKAGE READY (structure, graphs, ledger, checksums, safety scan)
+sha256sum -c checksums/SHA256SUMS                     # → all OK
 sha256sum -c evidence/checksums.sha256                # → all OK
 ```
 
-For the **full engineering reproduction** (the 1030 passing tests, the actual engine implementations), clone the engineering platform: [`github.com/577Industries/aegisgraph`](https://github.com/577Industries/aegisgraph) at tag `v1.0.0-tier3-research`.
+The two Node validators in [`evidence/`](evidence/) are published as source. They were written for the layout of the internal feasibility binder and do not run against this directory: `validate-evidence.mjs` looks for a `04_evidence/` tree that is not published, and `validate-cetm.mjs` reports 43 issues because 41 of the 53 anchored claims cite documents in that binder (its narrative, figure and supporting volumes as well as its evidence files).
+
+For the **full engineering reproduction** (the 1030 passing tests, the actual engine implementations), use the engine one level up: [`../README.md`](../README.md). Its tagged release `v1.0.0-tier3-research` is preserved in [the engine's original repository](https://github.com/577Industries/aegisgraph).
 
 ---
 
@@ -54,7 +56,7 @@ The evidence graph identifies high-value attack surface; engines hunt within it;
 | **HarnessGen** ([F18](figures/F18-harnessgen-flow.png)) | Graph-driven polyglot fuzz-harness generation (JVM/Jazzer + native/libFuzzer+HWASAN + Rust/cargo-fuzz) | **5/5 entry points scaffolded**: libwebp + libavif native; Signal LinkPreviewUtil + Element X MediaRepository JVM; matrix-rust-sdk Rust |
 | **InvariantCheck** ([F19](figures/F19-invariantcheck-card.png)) | SMA-specific security-invariant library with publicly-auditable ground-truth fixtures | **15/15 production invariants** (12 CodeQL + 3 Semgrep) with MASTG/SSDF mapping |
 | **CrossSMA** ([F20](figures/F20-crosssma-matrix.png)) | Cross-application propagation matrix (4 SMA targets × 6 finding patterns) | **24-cell matrix; ≥1 cell validated** (`AG-XSMA-VALIDATED-SIG-GP-001-ELX`, status `confirmed_reachable`) |
-| **DynamicProbe** *(option period)* | Frida-instrumented AOSP+HWASAN emulator with signed authorization gate | Scaffold + structural authorization gate; live runs are Phase II option period |
+| **DynamicProbe** | Frida-instrumented AOSP+HWASAN emulator with signed authorization gate | Scaffold + structural authorization gate; no live runs yet |
 | **Coordinated Disclosure** ([F21](figures/F21-disclosure-state-diagram.png)) | Hash-chained disclosure ledger + 7-vendor routing + day-7/14/30/60/90 embargo timer + CERT/CC fallback | **Full pipeline shipped** (39 tests pass); **0 real entries by design** pending counsel review (T-M1.4 + T-M1.5) |
 
 The ensemble is the contribution. Composition of existing tools is engineering; the graph-as-planner coordination pattern, the multi-format differential parsing with rediscovery anchor, the polyglot harness generation under one planner, the SMA-specific invariant library with ground-truth, the automated cross-application propagation, and the structurally-enforced disclosure pipeline are the novelty.
@@ -71,7 +73,7 @@ Static observations stay bounded as **reachability evidence**. They are NOT prom
 - The `reviewed_embargoed` state is structurally blocked from public exports by sanitize-check Rule 7
 - A deliberate-corruption test in the engineering validator confirms falsifiability: introducing a forbidden pattern, a target-source redistribution marker, or a score-vector key mismatch is caught and rejected
 
-The current CETM contains **82 claims**: 53 Anchored (status A; evidence on disk), 8 Engineering-pending (status E), 21 Planned (status P; Phase II commitments). **Zero forbidden-I.**
+The current CETM contains **82 claims**: 53 Anchored (status A), 8 Engineering-pending (status E), 21 Planned (status P). **Zero forbidden-I.** None of the 53 anchored claims cites a file in this collection: for 41 the cited document sits in the internal feasibility binder (12 of them cite its master narrative), 5 cite engine source and tests one level up, 5 cite literature references and 2 cite internal documents.
 
 ---
 
@@ -83,7 +85,7 @@ The matrix scores AegisGraph against Semgrep, CodeQL, MobSF, FlowDroid, AFL++/li
 
 - KLEE / S2E / angr stronger at deep symbolic execution at scale
 - FlowDroid + CodeQL stronger at general whole-program taint analysis
-- ProVerif + Tamarin handle cryptographic-protocol verification (out of ASEMA scope per FAQ Q1)
+- ProVerif + Tamarin handle cryptographic-protocol verification (outside AegisGraph's scope)
 - AFL++ + libFuzzer industrial CI for multi-month deep-fuzzing campaigns
 - Ghidra / BinaryNinja for closed-source binary analysis
 
@@ -132,16 +134,15 @@ See [`EXCLUSIONS.md`](EXCLUSIONS.md) for the full list. Highlights:
 - **Engineering-private CodeQL queries + Semgrep rules**; SARIF result bodies stay engineering-side
 - **Source snippets longer than 256 chars**; attacker URLs / payloads inside cross-target candidates
 
-This is **deliberate scoping**, not omission. The sanitize-check rules that enforce these exclusions are themselves auditable in the engineering repo at [`validator/sanitize_check.py`](https://github.com/577Industries/aegisgraph/blob/v1.0.0-tier3-research/validator/sanitize_check.py).
+This is **deliberate scoping**, not omission. The sanitize-check rules that enforce these exclusions are themselves auditable in the engine at [`validator/sanitize_check.py`](../validator/sanitize_check.py).
 
 ---
 
 ## Pointers
 
-- **Engineering platform** (Apache-2.0, full source): [`github.com/577Industries/aegisgraph`](https://github.com/577Industries/aegisgraph) at tag `v1.0.0-tier3-research` (commit `d91c1df6…`)
-- **DARPA topic**: HR0011SB20254-12 — Assessing Security of Encrypted Messaging Applications (ASEMA). [Topic page](https://www.darpa.mil/research/programs/asema).
-- **Detailed reviewer docs**: see [`docs/`](docs/) — evaluator quickstart, Phase-I-equivalent summary, claim discipline, release boundaries, architecture deep-dive, graph schema explainer, SMABench methodology, SOTA comparison, responsible disclosure
-- **v0.3 historical anchor**: tag [`v0.3.0-asema-dp2-feasibility`](https://github.com/577-Industries/asema-feasibility-artifacts/tree/v0.3.0-asema-dp2-feasibility) — preserved for citation continuity. Every v0.3 record continues to validate against v1.0.
+- **Engineering platform** (Apache-2.0, full source): [the AegisGraph engine](../README.md), one level up; tagged release `v1.0.0-tier3-research` (commit `d91c1df6…`)
+- **Detailed reviewer docs**: see [`docs/`](docs/) — reviewer quickstart, feasibility summary, claim discipline, release boundaries, architecture deep-dive, graph schema explainer, SMABench methodology, SOTA comparison, responsible disclosure
+- **Tagged releases**: the [v1.0.0](https://github.com/577Industries/asema-feasibility-artifacts/tree/v1.0.0-asema-dp2-feasibility) and [v0.3.0](https://github.com/577Industries/asema-feasibility-artifacts/tree/v0.3.0-asema-dp2-feasibility) release tags are preserved read-only in the collection's original repository, for citation continuity. Every v0.3 record continues to validate against v1.0.
 
 ## License
 

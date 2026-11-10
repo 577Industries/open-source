@@ -23,8 +23,8 @@ Specifically, the package provides:
   optional rolling-window skill-based weight updates and explicit
   missing-model exclusion.
 - Three reliability calibrators (`IsotonicCalibrator`, `PlattCalibrator`,
-  `SeverityStratifiedCalibrator`). The proposal-default is the
-  severity-stratified isotonic; Platt is shipped *because the proposal
+  `SeverityStratifiedCalibrator`). The default is the
+  severity-stratified isotonic; Platt is shipped *because the design
   rejects it*, so the rejection rationale is reproducible.
 - Two conformal-prediction wrappers (`SplitConformalRegressor` for marginal
   coverage; `MondrianConformalRegressor` for per-stratum coverage).
@@ -39,7 +39,7 @@ Specifically, the package provides:
 
 - **No trained weights ship with this package.** Callers (including the
   HELIOS kill-gate runner) supply BMA weights and calibration parameters
-  at runtime. Trained weights, BMA priors fitted on Table 3-1 events, and
+  at runtime. Trained weights, BMA priors fitted on the training events, and
   equipment transfer functions live in the private companion repo
   `helios-fusion-internal` and are NOT distributed here.
 - **No kill-gate execution.** The kill-gate runner lives in
@@ -53,17 +53,15 @@ Specifically, the package provides:
 
 ## Status
 
-This repository is part of the **HELIOS** program — a NASA SBIR Phase I
-effort by 577 Industries Inc. supporting subtopic SPWX.1.S26A (Advanced
-Data-Driven Applications for Space Weather R2O2R). See proposal §B Obj. 2 +
-§B.5 (pre-registered validation) + §B.6 innovation #1 of the proposal.
+This repository is part of the **HELIOS** program, 577 Industries Inc.'s
+data-driven space weather research-to-operations-to-research work.
 
 **v0.2.0 — BMA orchestration with isotonic / Platt / severity-stratified
 calibrators, split + Mondrian conformal regressors, and CCMC-compatible
 metrics (May 18, 2026).** The framework is feature-complete for the kill-
-gate path; HELIOS Phase I work delivers trained priors and hold-out
-evaluation in the private companion repo (`helios-fusion-internal`) using
-this framework as the load-bearing library.
+gate path. Trained priors and hold-out evaluation are not part of this
+repository; they belong to the private companion repo
+(`helios-fusion-internal`), which uses this framework as its core library.
 
 ## Quickstart
 
@@ -99,7 +97,7 @@ for an end-to-end runnable pipeline.
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (public; reviewer entry point)
+- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (public; program entry point)
 - **Architecture**: [`docs/architecture.md`](docs/architecture.md) explains
   why BMA + isotonic + conformal compose as they do.
 - **Baselines**: [`docs/baselines.md`](docs/baselines.md) defines the
@@ -148,8 +146,8 @@ discussed in an issue first.
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, proposal companion document, orchestration scripts.
-- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from proposal §2 Obj. 2 (conformal from-scratch, Platt shipped for reproducible-rejection).
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
+- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from the original design (conformal from-scratch, Platt shipped for reproducible-rejection).
 - **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/helios-program/blob/main/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. The kill-gate runner (`orchestration/kill_gate.py`) refuses to execute without an OSF URL on file at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — `ModelOutput`, `FusedOutput`, `LineageStep` types align with this schema.
-- **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on Table 3-1 training events; not redistributed.
+- **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on the training events; not redistributed.

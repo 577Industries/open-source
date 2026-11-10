@@ -38,7 +38,7 @@ Examples discovered live during adapter development:
 
 * `UMASEP/v3_X/10MeV/2024/05/UMASEP10_prediction_2024_05_01_000516__2024_05_01_000920.json`
 * `SEPSTER/Parker/2024/05/sepster_20240501_0636_0794_Parker_Spiral_iss_20240501_1547.json`
-* `SEPSTER/Parker/2017/09/sepster_20170906_1000_0260.json` (September 2017 event — proposal Table 3-1 training event)
+* `SEPSTER/Parker/2017/09/sepster_20170906_1000_0260.json` (September 2017 event — a pre-registered training event)
 
 Per-model "variants" subdirectory layer (`v3_X`, `Parker`, `WSA-ENLIL`,
 `1.X`, `2.X`, `3.X`, `LOS`, `VEC`, …) varies by model. The adapter
@@ -58,7 +58,7 @@ The default registry (verified 2026-05): `UMASEP`, `SEPSTER`,
 
 ## HESPERIA REleASE exclusion
 
-Per HELIOS proposal §3 T1 ref [30], **HESPERIA REleASE** requires a
+Per its license terms, **HESPERIA REleASE** requires a
 separate licensing agreement for commercial use. The adapter enforces
 this via three layered guards:
 
@@ -141,7 +141,7 @@ lineage — that's the regression guarantee.
 ## Worked example: 2017 September 6 storm window
 
 The September 6 / 10, 2017 event is one of three hold-out events in
-the proposal's pre-registration (Table 3-1). To pull Scoreboard A onset
+the HELIOS pre-registration (Table 3-1). To pull Scoreboard A onset
 probabilities across the event:
 
 ```python
@@ -219,7 +219,7 @@ absent keys as `None`.
 * CCMC ISEP project: <https://ccmc.gsfc.nasa.gov/scoreboards/sep/>
 * `sep_json_writer.py` documentation:
   <https://ccmc.gsfc.nasa.gov/scoreboards/sep/using-json-helper-script-documentation/>
-* HELIOS proposal §3 T1 — CCMC integration constraints
+* HELIOS companion §3 T1 — CCMC integration constraints
 
 ## Pre-2018 coverage (v0.2.1 ISWA probe)
 

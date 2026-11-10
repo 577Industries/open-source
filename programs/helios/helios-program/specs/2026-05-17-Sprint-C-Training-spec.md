@@ -43,7 +43,7 @@ Each event window is ±5 days of the primary onset.
 Per OSF pre-reg template:
 
 - UMASEP
-- HESPERIA REleASE (excluded from data pull — licensing per proposal §3 T1; but referenced in the consensus that `helios_connectors.adapters.SepScoreboardsAdapter` returns)
+- HESPERIA REleASE (excluded from data pull — licensing per companion §3 T1; but referenced in the consensus that `helios_connectors.adapters.SepScoreboardsAdapter` returns)
 - SEPMOD
 - MagPy
 - SEP Scoreboard A (consensus onset probability)

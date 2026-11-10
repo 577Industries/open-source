@@ -84,7 +84,7 @@ The real-data smoke test produced a citable observation worth memorializing in t
 
 > **Peak Bz over May 10, 2024 Gannon storm: -59.16 nT** (DSCOVR L2 mag, GSE frame, 1-second cadence, 86,400 samples).
 
-Combined with the SWPC adapter's GFZ-Kp=9.0 peak the same day and the gannon-storm-rtk-analysis 1,302-station-hours-over-threshold result, HELIOS now has **three live ground-truth observations of Gannon** — all traceable to specific records with full provenance lineage. That's the §4.2 innovation #2 (provenance-aware architecture) made concrete and citable for Phase II reviewers.
+Combined with the SWPC adapter's GFZ-Kp=9.0 peak the same day and the gannon-storm-rtk-analysis 1,302-station-hours-over-threshold result, HELIOS now has **three live ground-truth observations of Gannon** — all traceable to specific records with full provenance lineage. That's the §4.2 innovation #2 (provenance-aware architecture) made concrete and citable.
 
 ---
 

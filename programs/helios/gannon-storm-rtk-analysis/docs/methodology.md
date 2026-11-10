@@ -81,7 +81,7 @@ that the May 10-12, 2024 storm drove 2D RTK error across the IA/IL/IN/OH
 corridor up by 1-2 orders of magnitude for an aggregate of ~1300
 station-hours.
 
-For an SBIR Phase I customer-discovery artifact and a public-facing blog
+For a customer-discovery artifact and a public-facing blog
 post, the climatological model is honest, reproducible, and traceable to
 the real Kp and Dst time series that anyone can verify against GFZ Potsdam
 and the Kyoto WDC.
@@ -99,8 +99,8 @@ and the Kyoto WDC.
 - **Equipment-specific transfer functions** for the John Deere StarFire
   6000/7000, Trimble RTK, and AgLeader Surefire/Versa families, calibrated
   against documented receiver behaviour during the May 2024 storm. This
-  is the proposal §2 Objective 4 deliverable; this artifact prepares the
-  data infrastructure that the Phase II training pipeline will consume.
+  artifact prepares the data infrastructure that a later training pipeline
+  for those transfer functions will consume.
 
 ## References
 
@@ -116,6 +116,3 @@ and the Kyoto WDC.
 - American Farm Bureau Federation (2024). *Precision Agriculture Technology
   Survey Results.*
 - OSU Extension (2024). *Space Weather Disturbances and Farm GPS Interruptions.*
-- 577 Industries NASA SBIR Phase I Proposal (2026). HELIOS:
-  Heliophysics-Enhanced Location Integrity and Operations System.
-  §1.3 (Gannon case study), §2 Objective 4 (GNSS slice).

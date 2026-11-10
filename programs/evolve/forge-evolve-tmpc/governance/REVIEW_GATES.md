@@ -1,6 +1,6 @@
 # Human-in-the-Loop Review Gates
 
-The government's topic Q&A states the expectation directly: *"a lot of human involvement until the
+Public government Q&A on TMPC modernization states the expectation directly: *"a lot of human involvement until the
 product is verified; then ECP to baseline and less human involvement."* Evolve for TMPC encodes
 that as explicit, recorded gates. No transformation is accepted into the modern baseline without a
 human sign-off carrying the rule-diff, the equivalence delta, and the STIG delta.
@@ -21,11 +21,9 @@ provenance chain.
 |---|---|---|
 | H0 | After Phase 0 | Approve surrogate scope + frozen interface contracts |
 | H1 | After surrogate build | Confirm surrogate is representative AND unmistakably synthetic |
-| KG#1 | End of Month 3 (Base) | F1 ≥ 0.85 + oracle harness runs → continue full scope |
-| KG#2 | End of Month 6 (Base) | 0 discrete violations + cATO bundle → recommend Option/Phase II |
-| H-cost | Proposal cost volume | Supply real company/labor/rate numbers |
+| KG#1 | End of Month 3 | F1 ≥ 0.85 + oracle harness runs → continue full scope |
+| KG#2 | End of Month 6 | 0 discrete violations + cATO bundle → recommend continuing to a follow-on stage |
 | H5 | After verification | Accept the all-auditors-pass package |
 | H6 | Publish | Create/push the public repo under 577's GitHub auth |
-| H7 | Submit | Complete DSIP webforms (FWA, foreign affiliations) + final certify |
 
 Decisions are recorded here with date, gate id, outcome, and evidence pointer.

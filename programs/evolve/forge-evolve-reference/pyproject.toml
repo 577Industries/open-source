@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "forge-evolve-reference-design-study"
 version = "2.4.0"
-description = "Evolve: TDP Modernization (DAF27BZ01-DV008) & TDP-to-Path Robotic Task Specification (DAF27BZ01-DV012) design-study reference engine. Numbers it emits are synthetic design targets, not measurements."
+description = "Evolve: TDP Modernization & TDP-to-Path Robotic Task Specification design-study reference engine. Numbers it emits are synthetic design targets, not measurements."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}

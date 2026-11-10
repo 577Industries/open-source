@@ -9,7 +9,7 @@ Generated reports go here. Two paths owned by the validator-export stream:
   responsible stream.
 
 - `reports/traceability_matrix.md` - human-readable rendering of the same
-  data, suitable for proposal-package inclusion.
+  data, suitable for human review.
 
 Both files are produced by `make traceability` (which calls
 `python -m validator.cli traceability`). Regenerate after every reproduce.

@@ -4,7 +4,7 @@ Status: **accepted** (integration stream owns enforcement).
 
 ## Context
 
-The Asemarefactor reframing introduces six discovery engines (PolyDiff Extended, HarnessGen, InvariantCheck, CrossSMA, DynamicProbe, Coordinated Disclosure) plus a coordinated-disclosure pipeline. Each engine emits structured records the evidence graph must accommodate. ADR-0010 mandates additive-only schema evolution and ADR-0020 already exercised this for fact-vector v2. This ADR enumerates the v2 additions for the discovery graph and asserts they are additive.
+The discovery-engine reframing introduces six discovery engines (PolyDiff Extended, HarnessGen, InvariantCheck, CrossSMA, DynamicProbe, Coordinated Disclosure) plus a coordinated-disclosure pipeline. Each engine emits structured records the evidence graph must accommodate. ADR-0010 mandates additive-only schema evolution and ADR-0020 already exercised this for fact-vector v2. This ADR enumerates the v2 additions for the discovery graph and asserts they are additive.
 
 ## Decision
 
@@ -90,15 +90,15 @@ The `tests/test_schema_validation.py` parametrized fixture auto-discovers the si
 
 ## Why
 
-- DARPA/ASEMA submission manifest hashes records. Any breakage of v1 hash stability invalidates the v0.3 public release tarball (SHA `3ce05fbf…`).
+- The private export manifest hashes records. Any breakage of v1 hash stability invalidates the v0.3 public release tarball (SHA `3ce05fbf…`).
 - Six engines emit records on every reproduce. A breaking change in `evidence.schema.json` would silently invalidate downstream consumers (validator, sanitize-check, export).
-- The discovery-graph reframe is meaningless if it forces a hash-resetting v2 migration during a 24-month Phase II execution window.
+- The discovery-graph reframe is meaningless if it forces a hash-resetting v2 migration during later engineering work.
 
 ## Out of scope
 
 - Cryptographic signing of disclosure_event records. See ADR-0014 (the ledger), which leaves `signature: null` in v0.4 with PKI integration deferred.
 - The score-vector rebalancing within the new 100 budget. Lives in `aegisgraph/score.py`, not in the schema.
-- DynamicProbe-specific record shapes. Will live in `schema/dynamicprobe-*.schema.json` if/when needed during option period; the existing `crash.schema.json` covers the option-period crash records as of v0.4.
+- DynamicProbe-specific record shapes. Will live in `schema/dynamicprobe-*.schema.json` if/when needed in a follow-on stage; the existing `crash.schema.json` covers DynamicProbe crash records as of v0.4.
 
 ## Related
 
@@ -107,7 +107,7 @@ The `tests/test_schema_validation.py` parametrized fixture auto-discovers the si
 - 0020 — fact-vector v2 migration (concrete prior example of an additive v2 evolution)
 - 0021 — validator hardening (sanitize-check rule extensions consume the new fields)
 
-## Proposal claims
+## CETM claims
 
 - C-SCHEMA-V2 — schema v2 additive extension (new claim, anchored by this ADR + the v1↔v2 compatibility test).
 - C-NEW-HG / C-NEW-IC / C-NEW-CS / C-NEW-DP / C-NEW-CD — discovery-engine claim families depend on this schema extension for record emission.

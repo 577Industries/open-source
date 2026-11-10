@@ -62,9 +62,9 @@ and a fresh ADR before any code starts emitting v2-only fields.
 
 ReproChain, polydiff, smabench, extraction, and validator-export all emit
 evidence records on every reproduce. A breaking change in any schema
-silently invalidates every existing record. The DARPA/ASEMA submission
+silently invalidates every existing record. The private export
 manifest hashes the records; an invalidation of in-flight records during
-the submission window is a non-recoverable timing failure. Additive-only
+a release window is a non-recoverable timing failure. Additive-only
 makes the schema a versioned API rather than a moving target, lets parallel
 streams ship without coordinating timestamps, and protects the hash-chain
 guarantee that record_hash(N+1) only changes when *content* changes.
@@ -84,7 +84,7 @@ guarantee that record_hash(N+1) only changes when *content* changes.
 - 0020 — fact-vector v2 migration (concrete additive v2 schema example governed by this policy)
 - 0021 — validator hardening (the validator that enforces the schema-validation rule above)
 
-## Proposal claims
+## CETM claims
 
 - C-TECH-3 — evidence schema (9 node families + 11 edge types) preserved across migrations.
 - C-EVAL-1 — public-package verification depends on schema stability.

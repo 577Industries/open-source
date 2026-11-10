@@ -61,11 +61,11 @@ All notable changes to this project are documented here, following [Keep a Chang
 - `SepScoreboardsAdapter` — CCMC's three SEP Scoreboards (A onset probability,
   B peak flux, C event time profiles) consumed as consensus aggregates. BUILD
   strategy (no Python client existed). HESPERIA REleASE explicitly excluded
-  from request paths per the proposal's licensing constraint: triple-layered
+  from request paths per its licensing constraint: triple-layered
   guard (registry exclusion + per-request path token check + construction-time
   spec validation) with a regression test that sweeps every URL the adapter
   would issue and asserts none contains `release` or `hesperia`.
-- Recorded fixtures covering the September 2017 storm event (proposal Table 3-1
+- Recorded fixtures covering the September 2017 storm event (a pre-registered
   training event) for downstream kill-gate eval, plus 2024-05 (Gannon-week)
   recent fixtures across UMASEP, SEPSTER, and a documentation-shape sample
   with all-three-board projections populated.

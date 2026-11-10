@@ -8,9 +8,9 @@ Work is grouped into **programs**, each marked by a `577i-program-*` topic on it
 
 | Program | Topic | What it is |
 |---|---|---|
-| HELIOS | `577i-program-helios` | Calibrated heliophysics fusion (NASA SBIR) |
-| FORGE EVOLVE | `577i-program-forge-evolve` | AI-assisted legacy modernization (Navy SBIR) |
-| AEGIS | `577i-program-aegis` | Secure-messaging assessment (DARPA ASEMA) |
+| HELIOS | `577i-program-helios` | Calibrated heliophysics fusion |
+| FORGE EVOLVE | `577i-program-forge-evolve` | AI-assisted legacy modernization |
+| AEGIS | `577i-program-aegis` | Secure-messaging assessment |
 | FORGE OS | `577i-program-forge-os` | Reusable TypeScript agent-infrastructure libraries |
 
 Conventions that every repo follows (topics, badges, README shape, releases) are written down in [`docs/repo-standards.md`](https://github.com/577Industries/.github/blob/main/docs/repo-standards.md).
@@ -22,9 +22,9 @@ Conventions that every repo follows (topics, badges, README shape, releases) are
 - **Tests ride along** — a behavior change without a test needs a stated reason.
 - **Claims need evidence** — if a README or doc states a number, it must be reproducible from the repo or cited. This is a firm house rule.
 
-## Evaluation-frozen repositories
+## Frozen repositories
 
-Repositories under active government evaluation say so in their READMEs (currently the AEGIS program repos). During an evaluation window they **accept issues but not external PRs**, and their names, URLs, and descriptions are frozen. Security reports are always welcome — see [SECURITY.md](SECURITY.md).
+A repository whose URLs are cited in a document under external review can be frozen: it then **accepts issues but not external PRs**, and its name, URL, and description do not change. No repository is frozen at present. Security reports are always welcome — see [SECURITY.md](SECURITY.md).
 
 ## Questions and contact
 

@@ -8,6 +8,8 @@ __pycache__/
 htmlcov/
 dist/
 build/
+# Source templates, not build output: the harness generator reads them.
+!programs/aegis/aegisgraph/aegisgraph/harnessgen/templates/build/
 *.egg-info/
 .venv/
 venv/

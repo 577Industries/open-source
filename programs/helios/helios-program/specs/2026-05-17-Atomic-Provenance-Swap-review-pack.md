@@ -104,13 +104,13 @@ The agent flagged four surface-area decisions worth a future-PR look:
 
 None block v0.2.0; all are 1-line tweaks if revisited.
 
-## Why this matters for Phase II
+## Why this matters for later work
 
-Three concrete reviewer-facing wins this PR delivered:
+Three concrete wins this PR delivered:
 
-1. **The placeholder is gone**. The whole stack now emits the same provenance shape that `helios-provenance-spec` v0.1 documents as the open RFC. Reviewers reading the RFC + the connector code see consistent shape end-to-end.
+1. **The placeholder is gone**. The whole stack now emits the same provenance shape that `helios-provenance-spec` v0.1 documents as the open RFC. Readers of the RFC + the connector code see consistent shape end-to-end.
 
-2. **Tamper-evident hashing** is now applied to every fused output downstream of these adapters (because `HeliosModelOutputRecord` participates in `HeliosFusedOutputRecord.lineage`'s SHA-256 chain). Per proposal §1.4 / §4.2 innovation #2.
+2. **Tamper-evident hashing** is now applied to every fused output downstream of these adapters (because `HeliosModelOutputRecord` participates in `HeliosFusedOutputRecord.lineage`'s SHA-256 chain). Per companion §1.4 / §4.2 innovation #2.
 
 3. **Sprint C-Training is unblocked**. The training pipeline can now consume real `HeliosModelOutputRecord` from `helios-spaceweather-connectors` v0.2.0 and emit `HeliosTransformationRecord`/`HeliosFusedOutputRecord` for the fitted artifacts. End-to-end provenance from raw upstream model → trained BMA prior → fused output.
 

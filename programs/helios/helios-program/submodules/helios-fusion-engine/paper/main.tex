@@ -39,7 +39,7 @@
 \author[1]{\todo{Named Senior ML Engineer}}
 \author[2]{\todo{Named Space-Weather / Ionospheric SME}}
 \affil[1]{577 Industries Inc., Columbus, OH, USA}
-\affil[2]{Subcontract; institutional affiliation TBD at submission}
+\affil[2]{Institutional affiliation TBD at submission}
 \date{2026-05-18 (preprint draft); arXiv submission date TBD}
 
 \begin{document}
@@ -67,7 +67,7 @@ candidate stock paragraphs in §4.4 cover the three decision-tree branches
 PASS-both / PASS-one / FAIL-both.}  All code, figures, the
 pre-registration, and the reliability diagrams are released under Apache 2.0
 at the URLs in §6, supporting CCMC proving-ground replication and
-NASA mission-operations evaluation.  A companion vertical translating the
+mission-operations evaluation.  A companion vertical translating the
 same fusion core into receiver-family-specific RTK accuracy products for
 U.S.\ precision-agriculture GNSS is reported separately
 \cite{gannon_rtk}.
@@ -136,8 +136,8 @@ HELIOS output traces to its underlying models, data feeds, and calibration
 history through a public JSON-Schema specification with a pydantic v2 reference
 implementation \cite{helios_provenance_spec}.  This is a precondition for two
 adoption paths the paper takes seriously: (i) CCMC proving-ground evaluation,
-where containerized submissions are increasingly the norm; and (ii) SRAG
-console adoption, where flight controllers will not trust a recommendation
+where containerized submissions are increasingly the norm; and (ii) operational
+forecast-console use, where flight controllers will not trust a recommendation
 they cannot drill down into.  The provenance specification has been released
 publicly with the v0.1.0 RFC \cite{helios_provenance_spec} and is under
 community comment.
@@ -175,7 +175,7 @@ The remainder of the paper is organized as follows.
 Section~\ref{sec:methods} describes the fusion pipeline.
 Section~\ref{sec:data} describes the data and the pre-registered split.
 Section~\ref{sec:results} reports the pre-registered hold-out evaluation.
-Section~\ref{sec:discussion} discusses limitations and the Phase II
+Section~\ref{sec:discussion} discusses limitations and the follow-on
 trajectory.  Section~\ref{sec:repro} documents reproducibility artifacts.
 
 \begin{figure*}[!htbp]
@@ -513,8 +513,8 @@ with isotonic reliability calibration and Mondrian conformal coverage
 delivers operationally-relevant skill gains over the best single
 component, without sacrificing per-stratum calibration on the rare-extreme
 regime that dominates SRAG console risk.  The framework is ready for
-CCMC proving-ground replication \cite{helios_fusion_engine}; we
-are pursuing the M2M SWAO and SRAG evaluation pathways described in
+CCMC proving-ground replication \cite{helios_fusion_engine}; further
+operational evaluation pathways are described in
 §\ref{sec:discussion}.
 
 \paragraph{Branch B --- PASS one \texorpdfstring{$\land$}{AND} FAIL one (honest ablation).}
@@ -577,10 +577,10 @@ real-data model biases per component.
 
 A second limitation concerns the sample size of the hold-out itself.
 Three events is the minimum credible hold-out under the constraint of
-\emph{naming the events in advance, in this proposal} (a credibility
+\emph{naming the events in advance, in the pre-registration} (a credibility
 move whose flip side is that adding more recent events post-hoc would
 invalidate the pre-registration).  The reported HSS and reliability-slope
-confidence intervals are therefore wide.  Phase II expands the hold-out
+confidence intervals are therefore wide.  Later work expands the hold-out
 to a larger set of $\ge 20$ G2+ events for the operational evaluation
 pathway, with rolling pre-registration on new events as the solar cycle
 progresses \cite{helios_program}.
@@ -622,18 +622,18 @@ through G5-extreme, providing a meaningful basis for the per-stratum
 reliability claim.  Cycle 25 is in the rising phase as of preprint date;
 the bottom-line generalization claim --- ``these weights, fit on cycles
 23--24, transfer to cycle 25'' --- is testable against an enlarging set
-of real-data events as Phase II proceeds.
+of real-data events as later work proceeds.
 
-\subsection{Phase II vision}
+\subsection{Follow-on work}
 
-A Phase II effort would advance HELIOS from proof-of-concept to functioning
+A follow-on stage would advance HELIOS from proof-of-concept to functioning
 operational prototype (TRL 5--6) through (a) real-time operational
 deployment with live model retraining; (b) CCMC proving-ground evaluation
-\cite{whitman2023,whitman2024}; (c) prototype deployment to M2M SWAO
-\cite{m2mswao} and SPoRT/MSFC for mission-operations evaluation;
+\cite{whitman2023,whitman2024}; (c) prototype deployment for mission-operations evaluation
+\cite{m2mswao};
 (d) production-grade API at 99.9\,\% uptime; and (e) pilot integration
 with at least one precision-ag OEM telematics platform for the dual-use
-GNSS slice.  The full Phase II commercialization plan is documented in
+GNSS slice.  The commercialization plan is documented in
 the program companion \cite{helios_program}.
 
 \subsection{Equipment-aware GNSS pathway}
@@ -648,7 +648,7 @@ multi-horizon TEC forecasting; gradient-boosted regressors mapping
 ionospheric disturbance indices to observed 2D RTK positioning errors;
 and a physics-informed regularization layer imposing Chapman ionization
 profiles and equatorial-anomaly geometry) is described in a forthcoming
-companion preprint.  Phase II expansion verticals enabled by the same
+companion preprint.  Further verticals enabled by the same
 fusion core include autonomous-vehicle GNSS integrity, geospatial
 surveying, satellite drag prediction for LEO operators, and parametric
 space-weather insurance, all enumerated in the program commercialization
@@ -706,14 +706,11 @@ applied at preprint time.
 
 \section*{Acknowledgments}
 
-This work was developed by 577 Industries Inc., Columbus, Ohio, with
-direction from the NASA SBIR Phase I subtopic SPWX.1.S26A
-(Advanced Data-Driven Applications for Space Weather R2O2R).  We thank
+This work was developed by 577 Industries Inc., Columbus, Ohio.  We thank
 the CCMC team for sustained openness on the ISWA SEP Scoreboards
 \cite{ccmc_iswa,whitman2024} and the OSU Extension and Byrd Polar Climate
 Research Center for ongoing precision-ag end-user discussions.  Funding for
-the work-in-progress is from 577 Industries internal R\&D; the submitted
-NASA SBIR Phase I proposal is at NSPIRES under subtopic SPWX.1.S26A.
+the work-in-progress is from 577 Industries internal R\&D.
 
 \bibliographystyle{abbrv}
 \bibliography{refs}

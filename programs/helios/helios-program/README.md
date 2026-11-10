@@ -7,21 +7,21 @@
 
 `HELIOS` · [program overview](https://github.com/577Industries#helios--calibrated-heliophysics-fusion)
 
-**Meta-repo for HELIOS — 577 Industries' NASA SBIR Phase I program on calibrated space-weather decision intelligence (subtopic SPWX.1.S26A): public proposal companion, master plan, cross-repo orchestration scripts, and per-artifact design specs.**
+**Meta-repo for HELIOS — 577 Industries' research program on calibrated space-weather decision intelligence: public companion document, master plan, cross-repo orchestration scripts, and per-artifact design specs.**
 
 [![ci](https://img.shields.io/github/actions/workflow/status/577Industries/helios-program/companion-check.yml?style=flat-square&label=ci)](https://github.com/577Industries/helios-program/actions/workflows/companion-check.yml)
 [![release](https://img.shields.io/github/v/release/577Industries/helios-program?style=flat-square)](https://github.com/577Industries/helios-program/releases)
 [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE)
 [![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/helios-program/)
 
-The submitted NASA SBIR Phase I proposal "HELIOS: Heliophysics-Enhanced Location Integrity and Operations System" advances a model-agnostic Bayesian-Model-Averaging fusion layer for space-weather model outputs, with two vertical slices (NASA SRAG mission-operations radiation risk and U.S. precision-agriculture GNSS). This meta-repo coordinates the public artifacts that back the proposal's claims with live, citable code.
+HELIOS (Heliophysics-Enhanced Location Integrity and Operations System) is a model-agnostic Bayesian-Model-Averaging fusion layer for space-weather model outputs, with two vertical slices (NASA SRAG mission-operations radiation risk and U.S. precision-agriculture GNSS). This meta-repo coordinates the public artifacts that back its technical claims with live, citable code.
 
-## For NASA SBIR Reviewers (5-minute onramp)
+## For technical reviewers (5-minute onramp)
 
-This repository orchestrates the public artifact ecosystem for the HELIOS NASA SBIR Phase I proposal (subtopic SPWX.1.S26A). To verify proposal claims:
+This repository orchestrates the public artifact ecosystem for HELIOS. To verify its technical claims:
 
-1. **Start with [`companion/companion.md`](companion/companion.md)** — the canonical index that maps every proposal section (§1.3 Gannon case study, §3 technical objectives, §4 work plan, etc.) to specific files in the public artifact repos.
-2. **Pre-registration**: see [`orchestration/kill_gate.py`](orchestration/kill_gate.py) for the kill-gate constants and [`plan/master-plan.md`](plan/master-plan.md) for the sealed hold-out event list (Table 4-2 in the proposal).
+1. **Start with [`companion/companion.md`](companion/companion.md)** — the canonical index that maps every section of the HELIOS technical description (§1.3 Gannon case study, §2 technical objectives, §3 work plan, etc.) to specific files in the public artifact repos.
+2. **Pre-registration**: see [`orchestration/kill_gate.py`](orchestration/kill_gate.py) for the kill-gate constants and [`plan/master-plan.md`](plan/master-plan.md) for the sealed hold-out event list.
 3. **Empirical evidence**: see [`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis) for the 25-station NGS CORS analysis (1,302 station-hours headline; `results/quantitative.md`).
 4. **Framework code**: [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) (BMA + isotonic + Mondrian conformal) and [`helios-spaceweather-connectors`](https://github.com/577Industries/helios-spaceweather-connectors) (6 data adapters).
 5. **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) (feature-level lineage JSON Schema).
@@ -43,7 +43,7 @@ This umbrella repo bundles the 4 public HELIOS artifacts as git submodules pinne
   - [`helios-spaceweather-connectors`](./submodules/helios-spaceweather-connectors/) @ `v0.2.1`
   - [`helios-fusion-engine`](./submodules/helios-fusion-engine/) @ `v0.2.0`
   - [`gannon-storm-rtk-analysis`](./submodules/gannon-storm-rtk-analysis/) @ `v0.1.0`
-- [`companion/`](./companion/) — public-facing companion document mirroring the submitted proposal with live artifact citations; rebuilt automatically from upstream release state via `orchestration/companion_sync.py`. **Read this first** if you're a reviewer or stakeholder.
+- [`companion/`](./companion/) — public-facing companion document describing HELIOS with live artifact citations; rebuilt automatically from upstream release state via `orchestration/companion_sync.py`. **Read this first** if you're a reviewer or stakeholder.
 - [`plan/master-plan.md`](./plan/master-plan.md) — program-level master plan, including the dependency graph across artifacts, the pre-registered kill-gate for the fusion-engine arXiv preprint, and the rolling execution log.
 - [`specs/`](./specs/) — per-artifact design specs from each follow-up brainstorm cycle, plus operator-facing review packs for completed agent work.
 - [`orchestration/`](./orchestration/) — cross-repo automation: `companion_sync.py` rebuilds the artifact registry from GitHub release state; `kill_gate.py` executes the pre-registered HSS + reliability-slope evaluation on the 3-event hold-out; `osf_preregistration.template.md` is the binding text to file on the Open Science Framework before any hold-out evaluation runs.
@@ -69,7 +69,7 @@ This umbrella repo bundles the 4 public HELIOS artifacts as git submodules pinne
 
 ## Status
 
-**Phase-II-ready** (2026-05-18). All 4 public HELIOS artifacts have shipped initial releases and are bundled here as submodules. Phase II evidence assembly lives at [`phase-ii/`](./phase-ii/). Four dispatch-ready specs in [`specs/`](./specs/) cover Sprint D kill-gate, TFT-TEC forecasting, the arXiv preprint, and Phase II evidence refresh. See [`plan/master-plan.md` § Execution Log](./plan/master-plan.md#execution-log) for the rolling state.
+As of 2026-05-18, all 4 public HELIOS artifacts have shipped initial releases and are bundled here as submodules. Specs in [`specs/`](./specs/) include the Sprint D kill-gate, TFT-TEC forecasting and the arXiv preprint. See [`plan/master-plan.md` § Execution Log](./plan/master-plan.md#execution-log) for the rolling state.
 
 ## License
 

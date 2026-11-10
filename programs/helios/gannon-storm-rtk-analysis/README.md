@@ -28,10 +28,9 @@ Per-station, per-day breakdown: [`results/quantitative.md`](results/quantitative
 
 ## Status
 
-This is **Artifact D** of the **HELIOS** program (577 Industries' NASA SBIR
-Phase I, subtopic SPWX.1.S26A — Advanced Data-Driven Applications for Space
-Weather R2O2R). The artifact converts proposal §A (the Gannon case study)
-from a story into a reproducible result.
+This is **Artifact D** of the **HELIOS** program (577 Industries' data-driven
+space weather research-to-operations-to-research work). The artifact converts
+the Gannon case study from a story into a reproducible result.
 
 v0.1.0 (pre-stable). The positioning model in v1 is **climatological** — it
 ingests real RINEX files and real Kp/Dst indices but uses a documented
@@ -109,7 +108,7 @@ press: [`blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md`](blog-post/2
 
 ## Documentation
 
-- Master plan: [`helios-program`](https://github.com/577Industries/helios-program) (public; reviewer entry point)
+- Master plan: [`helios-program`](https://github.com/577Industries/helios-program) (public; program entry point)
 - Methodology: [`docs/methodology.md`](docs/methodology.md)
 - Provenance schema (sibling artifact): [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
 
@@ -149,7 +148,7 @@ engineering@577industries.com
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, proposal companion document, orchestration scripts.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
 - **Wave 1 review pack**: [Artifact D Gannon analysis review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-D-gannon-analysis-review-pack.md) — methodology disclosure, IL undersampling caveat, citation guidance.
 - **Connector library** (v2 dependency): [`helios-spaceweather-connectors`](https://github.com/577Industries/helios-spaceweather-connectors) — when CDDIS GIMs adapter ships (Wave 2b), v2 will swap the climatological model for full pseudo-range SPP via IGS ephemerides.
 - **Blog post**: [`blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md`](./blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md) — 1,707-word draft for 577industries.com.

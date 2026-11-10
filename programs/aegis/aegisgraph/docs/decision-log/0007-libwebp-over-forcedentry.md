@@ -58,7 +58,7 @@ The integration stream re-opens this ADR if any of the following happen:
 - 0009 — libwebp commit pins (vulnerable + fix SHAs that close the commit-pin gate from this ADR)
 - 0011 — public-export human gate (the boundary that prevents corpus / vendored sources from leaving engineering-side gated storage)
 
-## Proposal claims
+## CETM claims
 
 - C-NEW-RC — ReproChain pre-disclosure simulation depends on this target choice.
 - C-ABS-5 — "two evidence-producing capabilities" framing centers on this CVE.

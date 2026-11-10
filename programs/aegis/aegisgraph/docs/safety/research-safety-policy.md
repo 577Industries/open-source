@@ -1,6 +1,6 @@
 # Research Safety Policy
 
-This repository supports defensive, academic, and professional research for DARPA ASEMA.
+This repository supports defensive, academic, and professional research on secure-messaging application assessment.
 
 Hard boundaries:
 

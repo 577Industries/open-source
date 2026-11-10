@@ -7,7 +7,7 @@
   {
     "repo": "asema-feasibility-artifacts",
     "program": "AEGIS",
-    "blurb": "Sanitized reproducibility artifacts for ASEMA secure messaging application assessment feasibility evidence"
+    "blurb": "Sanitized reproducibility artifacts for secure messaging application assessment research"
   },
   {
     "repo": "forge-agent-memory",
@@ -17,7 +17,7 @@
   {
     "repo": "forge-evolve-tmpc",
     "program": "FORGE EVOLVE",
-    "blurb": "AI-assisted modernization of C#/.NET mission-planning software with behavioral-equivalence proof and continuous-ATO artifacts."
+    "blurb": "Verification harness for modernized C#/.NET mission-planning software on a synthetic surrogate, with continuous-ATO artifacts."
   },
   {
     "repo": "forge-hashchain-audit",
@@ -52,7 +52,7 @@
   {
     "repo": "helios-program",
     "program": "HELIOS",
-    "blurb": "HELIOS program meta-repo: public proposal companion, master plan, orchestration scripts, per-artifact design specs"
+    "blurb": "HELIOS program meta-repo: master plan, orchestration scripts, per-artifact design specs"
   },
   {
     "repo": "helios-provenance-spec",

@@ -1,10 +1,10 @@
 # tmpc-surrogate-mds - synthetic, unclassified MDS-like surrogate
 
-Part of **Evolve for TMPC** (U.S. Navy SBIR DON26BZ01-NV013). This directory is a
+Part of **Evolve for TMPC**. This directory is a
 **100% synthetic, unclassified** stand-in for a Mission-Distribution-System-like component.
-It exists so reviewers can run the modernization pipeline end-to-end **without any controlled
+It exists so anyone can run the modernization pipeline end-to-end **without any controlled
 data**, against code that exhibits the same *classes* of technical debt and *shapes* of
-mission-planning logic the government described.
+mission-planning logic described for TMPC.
 
 > **Synthetic / unclassified disclaimer.** Nothing here is real TMPC/MDS/TED/TMT/Tomahawk
 > code, data, coordinates, or algorithms. All inputs are randomly generated from a fixed seed.

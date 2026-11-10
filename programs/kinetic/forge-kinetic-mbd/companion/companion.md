@@ -1,4 +1,4 @@
-# Reviewer Companion: `forge-kinetic-mbd` (`DAF27BZ01-DV012`)
+# Companion: `forge-kinetic-mbd`
 
 Design elements of the study and where the placeholder code lives. No row below is evidence of a measured result.
 

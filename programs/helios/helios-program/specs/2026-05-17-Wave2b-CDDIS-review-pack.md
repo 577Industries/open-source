@@ -116,7 +116,7 @@ Per the dispatch coordination notes, expect trivial union conflicts on the same 
 ## Downstream impact
 
 - **Gannon analysis v2** can now swap its v1 climatological positioning for full SPP using IONEX TEC maps from this adapter. The methodology doc's v1→v2 boundary is exactly this swap.
-- **Sprint C-Training** can now ingest CDDIS GIMs for the TFT exogenous-variables input per proposal §2 Obj. 4.
+- **Sprint C-Training** can now ingest CDDIS GIMs for the TFT exogenous-variables input per companion §2 Obj. 4.
 - The synthetic Gannon fixture is a useful CI sanity check independent of Earthdata access — `pytest -m "not live"` runs everywhere.
 
 ---

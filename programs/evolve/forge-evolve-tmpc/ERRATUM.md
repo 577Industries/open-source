@@ -1,6 +1,6 @@
 # ERRATUM (2026-10-15)
 
-This erratum corrects statements made in this repository, in its companion site and in the proposal materials that cited it. It applies to every revision up to and including the first tagged release (v0.1.0).
+This erratum corrects statements made in this repository, in its companion site and in documents that cited it. It applies to every revision up to and including the first tagged release (v0.1.0).
 
 ## (a) The cited Evolve paper is withdrawn as a citation
 
@@ -22,9 +22,9 @@ Earlier versions of `NOTICE`, `README.md`, `RELEASE_APPROVAL.md`, `evidence/cetm
 
 The 137 xUnit cases pass, and the differential run of the legacy surrogate against the hand-refactored modern component is equivalent on 2000 of 2000 corpus vectors, with the expected intentional divergences classified as such. The cyclomatic-complexity reduction from 49 to 6 is measured by Roslyn on both sides. These results stand as a demonstration of the verification harness on a hand-written surrogate pair. They are not evidence of automated or AI-assisted modernization, because no model produced the modern component.
 
-## (f) Funding and status
+## (f) Funding
 
-The solicitation topic this repository was built for was never submitted. The work is internally funded by 577 Industries Inc. and carries no government validation or endorsement.
+The work is internally funded by 577 Industries Inc. and carries no government validation or endorsement.
 
 ## What is unchanged
 

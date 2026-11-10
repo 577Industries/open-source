@@ -18,10 +18,10 @@ In addition to this combined design-study bundle (`forge-evolve-reference`), the
 | Repository | Layer | Scope & Primary Surface |
 | :--- | :--- | :--- |
 | [**`577Industries/forge-evolve`**](https://github.com/577Industries/forge-evolve) | **Core Product (`Evolve`)** | Deterministic Code & Artifact Modernization Engine (`Discovery -> CLAR IR -> Planner -> Differential Equivalence Oracle -> Hashchain Provenance`). The current public code is a Python surrogate that returns fixed values. [`/evolve`](https://www.577industries.com/evolve) |
-| [**`577Industries/forge-evolve-tdp`**](https://github.com/577Industries/forge-evolve-tdp) | **Evolve Extension (`DAF27BZ01-DV008`)** | **Evolve TDP** design: STEP AP242 / 2D PDF MBD modernization, hash-linked configuration lineage, FIPS 203 ML-KEM-768 + AES-256-GCM envelope encryption (design, not implemented), streamed viewing with a sub-second first-frame target, and planned NDI deviation routing. [`/work/forge-evolve-tdp`](https://www.577industries.com/work/forge-evolve-tdp) |
-| [**`577Industries/forge-evolve-tmpc`**](https://github.com/577Industries/forge-evolve-tmpc) | **Evolve Extension (`DON26BZ01-NV013`)** | C#/.NET Mission-Planning Code Modernization & Split-Disposition Verification Harness on a synthetic surrogate (see its `ERRATUM.md`). [`/work/forge-evolve-tmpc`](https://www.577industries.com/work/forge-evolve-tmpc) |
+| [**`577Industries/forge-evolve-tdp`**](https://github.com/577Industries/forge-evolve-tdp) | **Evolve Extension** | **Evolve TDP** design: STEP AP242 / 2D PDF MBD modernization, hash-linked configuration lineage, FIPS 203 ML-KEM-768 + AES-256-GCM envelope encryption (design, not implemented), streamed viewing with a sub-second first-frame target, and planned NDI deviation routing. [`/work/forge-evolve-tdp`](https://www.577industries.com/work/forge-evolve-tdp) |
+| [**`577Industries/forge-evolve-tmpc`**](https://github.com/577Industries/forge-evolve-tmpc) | **Evolve Extension** | C#/.NET Mission-Planning Code Modernization & Split-Disposition Verification Harness on a synthetic surrogate (see its `ERRATUM.md`). [`/work/forge-evolve-tmpc`](https://www.577industries.com/work/forge-evolve-tmpc) |
 | [**`577Industries/forge-kinetic`**](https://github.com/577Industries/forge-kinetic) | **Core Product (`Kinetic`)** | Physical AI design: multi-sensor operating envelopes, 6-DOF + AGV whole-body IK, swept-capsule collision checking, and multi-vendor URTS post-processors (`FANUC`, `KUKA`, `ABB`, `SROS2`). The current public code is a placeholder that returns fixed values. [`/kinetic`](https://www.577industries.com/kinetic) |
-| [**`577Industries/forge-kinetic-mbd`**](https://github.com/577Industries/forge-kinetic-mbd) | **Kinetic Extension (`DAF27BZ01-DV012`)** | **Kinetic** TDP-to-robot workcell compiler design: GD&T-to-B-Rep binding, mobile base station clustering, Datum-A 3-fiducial docking calibration, and an operator interface. No binding precision or docking residual has been measured. [`/work/forge-kinetic-mbd`](https://www.577industries.com/work/forge-kinetic-mbd) |
+| [**`577Industries/forge-kinetic-mbd`**](https://github.com/577Industries/forge-kinetic-mbd) | **Kinetic Extension** | **Kinetic** TDP-to-robot workcell compiler design: GD&T-to-B-Rep binding, mobile base station clustering, Datum-A 3-fiducial docking calibration, and an operator interface. No binding precision or docking residual has been measured. [`/work/forge-kinetic-mbd`](https://www.577industries.com/work/forge-kinetic-mbd) |
 
 ---
 
@@ -44,14 +44,14 @@ The table that previously stood here reported "measured" results under a "TRL 4"
 
 | Design target | Source of threshold | Status |
 | :--- | :--- | :--- |
-| Encrypted viewer first frame under 1 s | DAF27BZ01-DV008 solicitation ("sub-second") | Not yet measured; no streaming code exists |
-| Numerical QC programming under 1.5 hr per part | DAF27BZ01-DV012 solicitation | Not yet measured; the CSV column is a seeded formula |
-| Line reconfiguration under 8 hr | DAF27BZ01-DV012 solicitation | Not yet measured; the CSV column is a seeded formula |
+| Encrypted viewer first frame under 1 s | Design target taken from a published government problem statement ("sub-second"); not a requirement placed on this work | Not yet measured; no streaming code exists |
+| Numerical QC programming under 1.5 hr per part | Design target taken from a published government problem statement; not a requirement placed on this work | Not yet measured; the CSV column is a seeded formula |
+| Line reconfiguration under 8 hr | Design target taken from a published government problem statement; not a requirement placed on this work | Not yet measured; the CSV column is a seeded formula |
 | GD&T-to-B-Rep binding precision and recall on the public NIST MBE PMI test cases (`CTC-01..05`, `FTC-06..11`) | Self-imposed gate of 95% | Not yet run; no NIST file is included and the per-case table in the code is hardcoded |
 | Swept-capsule clearance above a cell-specific safety floor (45 mm in the design) | Self-imposed | Not yet measured; the code clamps a sinusoid at 55.04 mm |
 | Datum-A 3-fiducial registration error under 25 um | Self-imposed | Simulation only (Kabsch Monte Carlo with an assumed 6.5 um fiducial noise); not an end-to-end TCP accuracy |
-| Rules-based IA gate with audit trail | DAF27BZ01-DV008 solicitation | Six boolean checks re-implemented in Python; the Rego policy is never evaluated and the 99.4 "score" is a constant |
-| Unattended parse envelope (file size, face count, BOM nesting depth) | DAF27BZ01-DV012 solicitation | Not yet measured |
+| Rules-based IA gate with audit trail | Design target taken from a published government problem statement; not a requirement placed on this work | Six boolean checks re-implemented in Python; the Rego policy is never evaluated and the 99.4 "score" is a constant |
+| Unattended parse envelope (file size, face count, BOM nesting depth) | Design target taken from a published government problem statement; not a requirement placed on this work | Not yet measured |
 
 Measured results, when they exist, will be published under `programs/evolve/bench-results/` with run receipts and will replace this directory in place.
 

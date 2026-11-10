@@ -10,7 +10,7 @@
 
 Drafts the full skeleton of the HELIOS fusion-engine arXiv preprint with everything except the §4 results filled in. The results section is a clearly-labelled placeholder that one commit fills in once `helios-program/results/<date>-killgate.json` lands from Sprint D.
 
-**Why parallel-safe**: by writing §§1-3 + §§5-6 + bib + figures NOW, the operator's decision window between "kill-gate result lands" and "preprint goes to arXiv" shrinks from ~3 weeks (typical drafting time) to ~1 day (results fill + final review). That's the difference between submitting a preprint *while the result is newsworthy* and submitting *after the conversation has moved on*.
+**Why parallel-safe**: by writing §§1-3 + §§5-6 + bib + figures NOW, the operator's turnaround between "kill-gate result lands" and "preprint goes to arXiv" shrinks from ~3 weeks (typical drafting time) to ~1 day (results fill + final review). That's the difference between submitting a preprint *while the result is newsworthy* and submitting *after the conversation has moved on*.
 
 ## Target venue
 
@@ -33,27 +33,27 @@ Thomas Waweru is the corresponding author. Per arXiv submission policy for first
 ### Authors
 1. Thomas Waweru — 577 Industries Inc. (corresponding)
 2. [Named Senior ML Engineer] — 577 Industries Inc.
-3. [Named Space-Weather / Ionospheric SME] — subcontract
+3. [Named Space-Weather / Ionospheric SME] — consultant
 
 Placeholder pattern: the agent inserts `\todo{...}` markers for the unconfirmed names.
 
 ### Abstract (~250 words)
-- Translation-gap framing (proposal §1.1)
-- Calibrated fusion innovation (proposal §4.2 innovation #1)
+- Translation-gap framing (companion §1.1)
+- Calibrated fusion innovation (companion §4.2 innovation #1)
 - Pre-registered hold-out methodology (master plan §C kill-gate)
 - Headline result (placeholder until Sprint D lands)
-- One sentence on the Phase II vision (proposal §3.3)
+- One sentence on later work (companion §3.3)
 
 ### §1 Introduction
-- Calibration-vs-accuracy distinction in operational SEP forecasting (cite Whitman 2023, 2024 — proposal refs [11], [13])
+- Calibration-vs-accuracy distinction in operational SEP forecasting (cite Whitman 2023, 2024 — companion refs [11], [13])
 - The provenance affordance for CCMC proving-ground evaluation (cite the RFC-0001 doc URL — `helios-provenance-spec` v0.1.0)
-- ISEP partnership + SEP Scoreboards A/B/C context (cite proposal §1.2)
+- ISEP partnership + SEP Scoreboards A/B/C context (cite companion §1.2)
 - Contribution statement
 
 ### §2 Methods
 - §2.1 BMA orchestrator (cite Hoeting et al. 1999 for the canonical BMA reference)
 - §2.2 Isotonic-regression reliability calibration (cite Niculescu-Mizil & Caruana 2005); justify rejection of Platt scaling at extremes
-- §2.3 Conformal prediction wrappers (split + Mondrian per Kp severity; cite Vovk 2022 — proposal ref [31])
+- §2.3 Conformal prediction wrappers (split + Mondrian per Kp severity; cite Vovk 2022 — companion ref [31])
 - §2.4 CCMC-compatible metrics (HSS Donaldson 1975; reliability slope; Brier; CRPS)
 - §2.5 Pre-registration discipline (cite the OSF URL; the locked commit SHA)
 
@@ -74,7 +74,7 @@ Placeholder pattern: the agent inserts `\todo{...}` markers for the unconfirmed 
 ### §5 Discussion
 - Limitations: ISWA pre-2017 cutover; synthetic-proxy training substrate for pre-2017 events
 - Generalizability: hold-out events span Cycle 25 ramp; covers solar quiet (2022) through G5 extreme (Gannon 2024)
-- Phase II vision (cite proposal §3.3)
+- Later work (cite companion §3.3)
 - Equipment-aware GNSS pathway (forward reference to the §2 Obj. 4 TFT pathway per `specs/2026-05-18-TFT-TEC-forecasting-spec.md`)
 
 ### §6 Reproducibility and data availability
@@ -84,8 +84,8 @@ Placeholder pattern: the agent inserts `\todo{...}` markers for the unconfirmed 
 - Provenance: every figure cites the OSF pre-reg URL + the locked commit SHA + the relevant `helios-program/results/<date>-killgate.json` artifact
 
 ### References (bib)
-- Proposal refs [1]-[32] (already enumerated in `companion/companion.md` §8)
-- New refs as needed: Hoeting 1999 (BMA), Niculescu-Mizil & Caruana 2005 (calibration comparison), Donaldson 1975 (HSS), Lim 2021 (already proposal ref [32])
+- Companion refs [1]-[32] (already enumerated in `companion/companion.md` §7)
+- New refs as needed: Hoeting 1999 (BMA), Niculescu-Mizil & Caruana 2005 (calibration comparison), Donaldson 1975 (HSS), Lim 2021 (already companion ref [32])
 
 ## Files to be created
 
@@ -114,7 +114,7 @@ helios-fusion-engine/paper/
    - Architecture diagram (Mermaid → PNG via `mmdc` CLI, or hand-built TikZ)
    - Table 3-1 (the 10-event train/hold-out split table)
    - Gannon Bz=-59.16 nT timeline (regenerate via the existing `DscovrAdapter.fetch_mag` call for the Gannon week; matplotlib figure)
-5. **Bib assembly**: write `refs.bib` with all proposal refs + the 3-4 new ones noted above.
+5. **Bib assembly**: write `refs.bib` with all companion refs + the 3-4 new ones noted above.
 6. **Auto-build CI**: `.github/workflows/paper.yml` builds the PDF on every push; uploads as a release artifact.
 7. **Cover-letter draft** at `paper/COVER_LETTER.md` for arXiv submission.
 8. **Submission checklist** at `paper/SUBMISSION_CHECKLIST.md` for the operator.

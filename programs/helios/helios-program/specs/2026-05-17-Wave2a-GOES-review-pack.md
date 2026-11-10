@@ -24,7 +24,7 @@
 
 ## ⚠️ Important caveat: GOES SGPS L2 differential-channel proxies
 
-The proposal §2 Obj. 3 invokes the operational SEP thresholds **>10 MeV at 10 pfu** and **>100 MeV at 1 pfu** — both are *pre-integrated* flux values.
+The companion §2 Obj. 3 invokes the operational SEP thresholds **>10 MeV at 10 pfu** and **>100 MeV at 1 pfu** — both are *pre-integrated* flux values.
 
 The 1-minute SGPS L2 file (`sgps-l2-avg1m`) does **NOT** publish pre-integrated >=10/>=50/>=100 MeV channels. It publishes:
 - `AvgDiffProtonFlux` — shape `(N, 2, 13)` (time × east/west × 13 differential channels)

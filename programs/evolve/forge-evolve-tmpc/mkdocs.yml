@@ -1,7 +1,7 @@
 site_name: Evolve for TMPC
 site_description: >-
   AI-assisted modernization of C#/.NET mission-planning software with behavioral-equivalence
-  proof and continuous-ATO artifacts - 577 Industries · U.S. Navy SBIR Phase I · Topic DON26BZ01-NV013.
+  proof and continuous-ATO artifacts - 577 Industries.
 site_url: https://577industries.github.io/forge-evolve-tmpc/
 site_author: 577 Industries, Inc.
 repo_url: https://github.com/577Industries/forge-evolve-tmpc
@@ -9,7 +9,7 @@ repo_name: 577Industries/forge-evolve-tmpc
 edit_uri: edit/main/
 copyright: >-
   Copyright &copy; 2026 577 Industries, Inc. - Apache-2.0 license. Preliminary, surrogate-based results -
-  not government-validated, no Navy endorsement implied.
+  not government-validated, no government endorsement implied.
 
 # Transcluded repo Markdown keeps its repo-relative links verbatim (rewrite-relative-urls=false, the
 # HELIOS pattern). Those links resolve on the canonical GitHub repo, not inside the built site, so the
@@ -131,8 +131,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - "For Reviewers (5-min)": reviewers.md
-  - Proposal Companion: companion.md
+  - "5-minute Onramp": reviewers.md
+  - Companion: companion.md
   - Technical Approach: technical-approach.md
   - Artifacts & Claims: artifacts.md
   - Reproducibility: reproducibility.md

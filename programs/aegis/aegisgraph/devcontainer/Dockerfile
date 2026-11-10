@@ -3,7 +3,7 @@
 # Pins every required toolchain version so reprochain harness builds, polydiff
 # parser builds, smabench corpora processing, and validator-export sanitize
 # checks are deterministic across maintainer machines, CI runners, and (later)
-# DARPA/ASEMA reviewer reproductions.
+# external reviewer reproductions.
 #
 # Versions are pinned by intent:
 #   * Python 3.11.9 — CPython, matches pyproject `requires-python = ">=3.11"`

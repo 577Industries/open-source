@@ -1,6 +1,6 @@
 # AegisGraph Schemas (`schema/`)
 
-JSON Schema 2020-12 contracts for every evidence record AegisGraph emits. The schemas are the load-bearing API between the five engineering streams (reprochain-proof, polydiff-core, real-extraction, smabench-harness, validator-export) and the validator + traceability matrix.
+JSON Schema 2020-12 contracts for every evidence record AegisGraph emits. The schemas are the API between the five engineering streams (reprochain-proof, polydiff-core, real-extraction, smabench-harness, validator-export) and the validator + traceability matrix.
 
 ## Versioning policy
 
@@ -63,7 +63,7 @@ Schema deltas go through the **schema-delta-via-PR-plus-ADR contract** documente
 
 ## Why this matters
 
-Every reproduce produces evidence records that hash-chain back to their inputs. A breaking schema change in any file silently invalidates every existing record. The DARPA/ASEMA submission manifest hashes the records; an invalidation of in-flight records during the submission window is a non-recoverable timing failure.
+Every reproduce produces evidence records that hash-chain back to their inputs. A breaking schema change in any file silently invalidates every existing record. Any manifest that hashes those records is invalidated with them.
 
 Additive-only makes the schema a versioned API rather than a moving target, lets parallel streams ship without coordinating timestamps, and protects the hash-chain guarantee that `record_hash(N+1)` only changes when *content* changes.
 

@@ -26,10 +26,10 @@ Ingest -> Discovery (AST/SCCs) -> CLAR IR (4-Layer) -> Migration Planner
 
 ### Official Domain Extensions
 
-| Extension Repository | Domain / Program Scope | Target Artifacts |
+| Extension Repository | Domain Scope | Target Artifacts |
 |---|---|---|
-| [`577Industries/forge-evolve-tmpc`](https://github.com/577Industries/forge-evolve-tmpc) | U.S. Navy `DON26BZ01-NV013` (Theater Mission Planning Center) | Legacy C#/.NET/JS/SQL mission-planning software -> modern .NET 8 microservices + cATO artifacts |
-| [`577Industries/forge-evolve-tdp`](https://github.com/577Industries/forge-evolve-tdp) | U.S. Air Force / Space Force `DAF27BZ01-DV008` (Technical Data Packages) | Legacy 2D MIL-DTL-31000 PDF/raster drawings + STEP AP242 CAD -> Canonical TDP Graph (`CTDP-G`) + hash-linked lineage; FIPS 203 ML-KEM-768 (design, not implemented) |
+| [`577Industries/forge-evolve-tmpc`](https://github.com/577Industries/forge-evolve-tmpc) | Theater Mission Planning Center (TMPC) | Legacy C#/.NET/JS/SQL mission-planning software -> modern .NET 8 microservices + cATO artifacts |
+| [`577Industries/forge-evolve-tdp`](https://github.com/577Industries/forge-evolve-tdp) | Technical Data Packages (TDP) | Legacy 2D MIL-DTL-31000 PDF/raster drawings + STEP AP242 CAD -> Canonical TDP Graph (`CTDP-G`) + hash-linked lineage; FIPS 203 ML-KEM-768 (design, not implemented) |
 
 ## Quickstart (Offline, Deterministic)
 

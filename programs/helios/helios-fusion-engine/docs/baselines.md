@@ -1,7 +1,7 @@
 # Baselines
 
 The kill-gate comparator is the **best individual component model on the
-hold-out set**. The proposal §2 Obj. 3 success criterion and the OSF
+hold-out set**. The design's success criterion and the OSF
 pre-registration §6 define the kill-gate as:
 
 > Fused all-clear-revocation HSS on the 3-event hold-out beats the
@@ -49,7 +49,7 @@ fused_hss > best_individual_hss * 1.15
 
 ## Why this comparator and not equal-weight ensemble?
 
-The proposal compares against the **best single component**, not an
+The design compares against the **best single component**, not an
 equal-weight ensemble, because:
 
 1. An operator deciding whether to switch from "the best model we already

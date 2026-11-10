@@ -14,10 +14,8 @@
 
 ## Status
 
-This repository is part of the **HELIOS** programme — a NASA SBIR Phase I
-effort by 577 Industries Inc. supporting subtopic SPWX.1.S26A (Advanced
-Data-Driven Applications for Space Weather R2O2R). See proposal §1.4 (CONOPS)
-+ §4.2 (Innovation #2).
+This repository is part of the **HELIOS** program, 577 Industries Inc.'s
+data-driven space weather research-to-operations-to-research work.
 
 **v0.1.0 — Request For Comments.** First publicly circulated draft. Community
 feedback expected before stabilising to v1.0. Pin to `helios-provenance-spec==0.1.*`.
@@ -33,7 +31,7 @@ lineage relations (PROV), and packaging (RO-Crate), but none captures
 via which specific transformations*. Operational fusion engines (Bayesian
 Model Averaging, isotonic-regression calibration, conformal-prediction
 wrappers) need that finer granularity for CCMC proving-ground evaluation,
-SRAG console adoption, and audit-grade parametric-insurance trails.
+operational forecast-console use, and audit-grade parametric-insurance trails.
 
 This repo defines four record types:
 

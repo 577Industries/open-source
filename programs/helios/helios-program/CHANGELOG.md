@@ -24,7 +24,7 @@ This repository is documents-first; the version reflects milestone polish or str
 ### Changed
 - **Palette refresh**: `deep_purple/amber` → `blue/teal` (better dark-mode contrast; signals "credible engineering" register for the NASA-center + precision-ag audience).
 - **Fonts**: Material defaults → Inter (text) + JetBrains Mono (code).
-- **Nav restructure**: Home is now the custom landing; Proposal Companion is a dedicated page; Blog added.
+- **Nav restructure**: Home is now the custom landing; the companion document is a dedicated page; Blog added.
 - **Workflow refactored**: `.github/workflows/pages.yml` dropped the 9-line `cp` aggregation step in favor of `mkdocs-include-markdown-plugin` directives in `docs/*.md` files. Only `companion/footnotes.yaml` is still copied (referenced as a relative download link in companion.md).
 - **`companion/footnotes.yaml`** PyPI URL corrected: `helios-provenance` → `helios-provenance-spec` (the actual package name).
 
@@ -36,7 +36,7 @@ This repository is documents-first; the version reflects milestone polish or str
 ### Added
 - Initial Pages publication at <https://577industries.github.io/helios-program/> via MkDocs Material with `actions/configure-pages` + `actions/deploy-pages` (workflow-source deployment, not branch-source Jekyll).
 - Master plan committed to `plan/master-plan.md`.
-- Proposal companion document at `companion/companion.md` mirroring the submitted NASA SBIR Phase I proposal with live artifact citations.
+- Companion document at `companion/companion.md` describing HELIOS with live artifact citations.
 - Operations runbook at `docs/operations.md`.
 - OSF pre-registration template at `orchestration/osf_preregistration.template.md` (binding text; the kill-gate runner refuses to execute without the OSF URL on file at `orchestration/osf_preregistration.url`).
 - Four per-artifact Wave 1 review packs at `specs/2026-05-17-{A,B,C,D}-*-review-pack.md`.

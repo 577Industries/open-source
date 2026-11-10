@@ -12,7 +12,7 @@ Status: accepted.
 - 0020 — fact-vector v2 migration (concrete additive migration example)
 - 0021 — validator hardening (the validator that enforces both v0.3 and v1 schemas)
 
-## Proposal claims
+## CETM claims
 
 - C-EVAL-1 — public-package verification workflow / 11 validator checks.
 - C-TECH-3 — evidence-graph schema (9 node families + 11 edge types) preserved across migration.

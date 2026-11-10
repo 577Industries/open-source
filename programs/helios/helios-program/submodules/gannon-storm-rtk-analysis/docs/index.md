@@ -3,8 +3,8 @@
 A reproducible analysis of how RTK-GNSS positioning error evolved across the
 Iowa / Illinois / Indiana / Ohio corridor during the May 10-12, 2024 Gannon
 G5 superstorm. The artifact is one of four in the HELIOS program (577
-Industries' NASA SBIR Phase I, subtopic SPWX.1.S26A); it converts §1.3 of
-the submitted proposal — the Gannon anecdote — from a story into a citable
+Industries' data-driven space weather research-to-operations-to-research
+work); it converts the Gannon case study from a story into a citable
 result with code, data manifests, and figures any operator can examine.
 
 ## Headline

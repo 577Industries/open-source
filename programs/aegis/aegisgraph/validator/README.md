@@ -6,7 +6,7 @@ The validator exists as a separate package so:
 
 1. CI / external reviewers can run a non-mutating validation on a checkout without altering tracked files.
 2. The sanitize gate (`validator/sanitize_check.py`) is the single source of truth for what is safe to leave the private repo. It is the only function authorized to return `True` from `aegisgraph.export._sanitize_check_passes`.
-3. The traceability matrix (`validator/traceability_matrix.py`) hydrates the proposal claim-to-evidence map without depending on emitter internals — it reads SPEC.md headers, `docs/proposal-claims-index.yml`, `docs/dsip-requirements.yml`, and on-disk evidence files.
+3. The traceability matrix (`validator/traceability_matrix.py`) hydrates the claim-to-evidence map without depending on emitter internals — it reads SPEC.md headers, `docs/proposal-claims-index.yml`, `docs/dsip-requirements.yml`, and on-disk evidence files.
 
 ## CLI subcommands
 
@@ -57,13 +57,13 @@ python3 -m validator.cli traceability
 Emits `reports/traceability_matrix.{json,md}` from:
 
 - SPEC.md section headers (claim source)
-- `docs/proposal-claims-index.yml` (proposal-side claim catalog)
-- `docs/dsip-requirements.yml` (DSIP requirement catalog)
+- `docs/proposal-claims-index.yml` (claim catalog: each claim id with its location in an internal narrative document)
+- `docs/dsip-requirements.yml` (an internal checklist of document-format and review rules; not software requirements)
 - on-disk evidence files (per-stream emitter outputs)
 
-Output format: a JSON document keyed by `claim_id` with an `evidence_refs[]` list (each entry: `path`, `field`, `tool_used`, `status`) plus an `unanchored_claims` array for claims that the matrix could not match against any on-disk evidence. The `.md` rendering is human-readable for proposal review.
+Output format: a JSON document keyed by `claim_id` with an `evidence_refs[]` list (each entry: `path`, `field`, `tool_used`, `status`) plus an `unanchored_claims` array for claims that the matrix could not match against any on-disk evidence. The `.md` rendering is for human review.
 
-A non-zero `claim_without_evidence` count is **expected and documented** (Phase 0 / Phase 1 anchoring is incomplete by design); reviewers should not block on it.
+A non-zero `claim_without_evidence` count is **expected and documented** (claim anchoring is incomplete at this stage by design); reviewers should not block on it.
 
 ## Expected output
 

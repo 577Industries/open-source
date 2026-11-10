@@ -8,7 +8,7 @@ library v3 + PolyDiff Extended regression). Produces a structured
 AegisGraph"** — findings AG surfaces that single-tool baselines miss at
 the same `(target, category, location_hash)` coordinate.
 
-This is the M14 demo-gate deliverable in the Phase II milestone table
+This is the M14 demo-gate deliverable in the milestone table
 (plan §5; see also `docs/decision-log/`):
 
 > "Baseline-tool delta report (AegisGraph vs CodeQL alone vs Semgrep
@@ -60,7 +60,7 @@ asserts the rendered report exists at the canonical path; it is
 `-- checksums.sha256             (atomic; regenerated after every full run)
 ```
 
-## Constraints (load-bearing)
+## Constraints
 
 1. **Anchor-only.** Target source trees are pinned by commit hash and
    not redistributed in this research repo. The self-hosted runner
@@ -121,4 +121,4 @@ input (no `pull_request_target`, no `issue_comment` triggers; only
     delta column is zero until the runner builds the DBs.
   * **The report writes the v0.4 output tree by default.** The v1.0 cut
     (M14) replaces this with a final report; the v0.4 staging is the
-    Phase II in-flight artifact.
+    in-flight artifact.

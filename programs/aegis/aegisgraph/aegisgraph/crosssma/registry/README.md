@@ -35,7 +35,7 @@ two optional fields in Wave 9C:
 * `deferral_note` -- prose rationale for the deferral.
 
 The wire-android and telegram-android entries are deferred to
-**M22.1** ("additional SMA target authorization", Phase II plan §25
+**M22.1** ("additional SMA target authorization", plan §25
 external-block T-M22.1, PI + counsel-gated). Pinning HEAD without
 authorized-target coordination just chases drift; the registry
 prefers an honest deferral.

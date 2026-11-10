@@ -10,7 +10,7 @@ authorization gate (`release_authorized` False unless
 sanitize-check function `aegisgraph/export.py::_sanitize_check_passes`
 was a stub returning False unconditionally, so the gate could never
 flip even when an operator deliberately authorized release. That
-stub was the single load-bearing line blocking the public release
+stub was the single line blocking the public release
 pipeline; this ADR records the hardening that replaces it and the
 adjacent governance the validator-export stream owns.
 
@@ -30,7 +30,7 @@ Three additional capabilities ride along:
 3. **Traceability matrix.** `reports/traceability_matrix.{json,md}`
    joins SPEC.md headers, on-disk evidence files,
    `docs/proposal-claims-index.yml`, and `docs/dsip-requirements.yml`.
-   Every active proposal claim must show on the matrix; missing
+   Every active claim must show on the matrix; missing
    evidence surfaces as `claim_without_evidence`; orphan evidence as
    `evidence_without_claim`.
 
@@ -175,7 +175,7 @@ treated as `planned` (human-owned, not auto-substantiable).
 `evidence_without_claim` rows surface on-disk artifacts under known
 spec sections (4 ReproChain, 5 PolyDiff, 6 Extraction, 7 SMABench, 8
 schema, 10 verification) that no claim references. These are
-candidates for the proposal-package agent to either tie back to a
+candidates to either tie back to a
 claim or retire.
 
 `claim_without_evidence` rows in the v0.3 master are EXPECTED for the
@@ -193,7 +193,7 @@ following streams that have not merged into validator-export yet:
   require the polydiff stream's expanded corpus.
 - Recommendation contract bundling — owns
   `AG-CLAIM-METRIC-RECOMMENDATIONS-TWELVE`. The 12 recommendation
-  records are described in §5.7 of the master proposal but are not
+  records are described in §5.7 of the master narrative but are not
   yet emitted as JSON evidence files; the recommendation-bundling
   stream will land them.
 
@@ -213,7 +213,7 @@ reviewer can confirm the expected unbacked count matches.
 
 - **Pro**: single-source sanitize ruleset; integration stream's gate
   flips correctly; third-party reviewers can verify without mutating
-  tracked files; SPEC.md ↔ proposal claims ↔ DSIP requirements
+  tracked files; SPEC.md ↔ claims index ↔ requirement catalog
   cross-referenced in one matrix.
 - **Pro**: empty / missing export trees fail-closed; missing
   `aegisgraph.safety` fails-closed; broken validator imports
@@ -232,7 +232,7 @@ reviewer can confirm the expected unbacked count matches.
 - 0020 — fact-vector v2 migration (validator must accept v1 + v2 in the migration window)
 - 0012 — integration merge-ready (the integration handoff that landed the stub this hardening replaces)
 
-## Proposal claims
+## CETM claims
 
 - C-EVAL-1 — public-package verification workflow / 11 validator checks.
 - C-EVAL-2 — safety-scan free of 8 forbidden categories.

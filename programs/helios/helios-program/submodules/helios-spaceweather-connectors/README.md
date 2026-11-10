@@ -7,9 +7,8 @@
 
 ## Status
 
-This repository is part of the **HELIOS** program — a NASA SBIR Phase I effort by
-577 Industries Inc. supporting subtopic SPWX.1.S26A (Advanced Data-Driven
-Applications for Space Weather R2O2R). See proposal §2 Obj. 1 + §3 T1.
+This repository is part of the **HELIOS** program, 577 Industries Inc.'s
+data-driven space weather research-to-operations-to-research work.
 
 | Adapter | Strategy | Status |
 |---|---|---|
@@ -75,7 +74,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Substantive changes should be discussed 
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, proposal companion document, orchestration scripts.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
 - **Wave 1 review pack**: [Artifact B foundation review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-B-connectors-foundation-review-pack.md) — adapter-pattern design notes and the 7 DONKI API quirks documented for follow-up adapter agents.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — the JSON Schema and pydantic models this package emits for every fetched record.
 - **Downstream consumer**: [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) — uses these adapters to fuse multi-source space-weather signals.

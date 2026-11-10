@@ -31,28 +31,23 @@ We seek community feedback before stabilising at v1.0.
 
 ## 1. Motivation
 
-577 Industries' NASA SBIR Phase I proposal "HELIOS: Heliophysics-Enhanced
-Location Integrity and Operations System" (subtopic SPWX.1.S26A) frames the
-provenance affordance as essential to both science transition and operator
-adoption.
+The design of HELIOS (Heliophysics-Enhanced Location Integrity and Operations
+System) treats the provenance affordance as essential to both science
+transition and operator adoption.
 
-From the **CONOPS** (proposal §1.4):
+In its concept of operations, every output exposes a drill-down to its full
+provenance chain: which upstream models contributed at which weights, with
+which calibration history. Operational console use and CCMC proving-ground
+evaluation both depend on that drill-down.
 
-> Every output exposes a drill-down to its full provenance chain — which
-> upstream models contributed at which weights, with which calibration
-> history. This provenance affordance is essential for SRAG console adoption
-> and for the CCMC proving-ground evaluation pathway.
+In its architecture, every output traces to its underlying models, data feeds,
+and assumptions, a property required for CCMC proving-ground evaluation,
+ARRT-compatible mission integration, and the operator trust that
+safety-critical adoption demands.
 
-From **Innovation #2** (§4.2):
-
-> Provenance-aware architecture. Every output traces to its underlying models,
-> data feeds, and assumptions — a property required for CCMC proving-ground
-> evaluation, ARRT-compatible mission integration, and the operator trust that
-> safety-critical adoption demands.
-
-The operational pull is concrete: an SRAG console operator deciding whether to
-revoke all-clear status under the operational SEP thresholds (≥10 MeV at 10
-pfu; ≥100 MeV at 1 pfu) currently cross-references raw outputs from UMASEP,
+The operational pull is concrete: a space-radiation console operator deciding
+whether to revoke all-clear status under the operational SEP thresholds (≥10
+MeV at 10 pfu; ≥100 MeV at 1 pfu) currently cross-references raw outputs from UMASEP,
 HESPERIA REleASE, SEPMOD, and MagPy across Scoreboards A/B/C. When a fusion
 engine reduces those into a single decision-calibrated probability with a
 conformal interval, the operator (and the CCMC validator, and the
@@ -63,8 +58,8 @@ answer.
 
 The same need applies to the precision-agriculture slice. When a fused
 predicted RTK error of 4.7 cm causes an operator to delay planting, the
-provenance record is what supports the *parametric-insurance* business model
-of §6.4: the verified threshold crossing has to be auditable.
+provenance record is what supports a *parametric-insurance* business model:
+the verified threshold crossing has to be auditable.
 
 ## 2. Background and Survey
 
@@ -351,9 +346,8 @@ We hope to circulate this RFC to:
 * the **CCMC** (ccmc-feedback), to align with proving-ground evaluation needs;
 * the **sunpy** and **PySPEDAS** developer communities, for adoption alongside
   existing Python heliophysics tooling;
-* **NASA SRAG** and **M2M SWAO**, the two operational consumers the HELIOS
-  fusion engine is targeted at, to confirm the lineage drill-down satisfies
-  console-operator needs;
+* **operational space-weather forecast teams**, to confirm the lineage
+  drill-down satisfies console-operator needs;
 * the **OSF / DataCite / Zenodo** communities, for the RO-Crate packaging
   story.
 
@@ -367,15 +361,13 @@ Feedback channels: GitHub issues on this repository, or email
 * Producers consuming v0.1 are encouraged to **pin** to `helios-provenance-spec==0.1.*`.
 * The path to v1.0 is: collect community feedback ⇒ ship v0.2 incorporating
   resolutions to the open questions in §6 ⇒ field a real fusion engine
-  against v0.2 for at least one full validation cycle (Table 3-1 retrospective
-  per the HELIOS proposal §3.1) ⇒ promote to v1.0 with a stable IRI for the
-  JSON-LD context.
+  against v0.2 for at least one full retrospective validation cycle ⇒
+  promote to v1.0 with a stable IRI for the JSON-LD context.
 * `record_type` and `schema_version` enums are reserved for v1.0; no v0.x
   release will repurpose them.
 
 ## 9. References
 
-* HELIOS NASA SBIR Phase I proposal, §1.4 (CONOPS) and §4.2 (Innovation #2). 577 Industries Inc., 2026.
 * SPASE 2.7.1 Data Model. <https://spase-group.org/data/schema/>
 * W3C PROV-JSON: a JSON Representation for PROV. W3C Submission, 2013. <https://www.w3.org/Submission/prov-json/>
 * RO-Crate 1.2 Specification. <https://www.researchobject.org/ro-crate/1.2/>

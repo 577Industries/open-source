@@ -1,7 +1,7 @@
 [project]
 name = "aegisgraph-tier3-research"
 version = "0.1.0"
-description = "Private AegisGraph Tier 3 research platform for DARPA ASEMA defensive evaluation."
+description = "AegisGraph Tier 3 research platform for defensive secure-messaging application assessment."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -1,6 +1,6 @@
 # ERRATUM (2026-10-15)
 
-This erratum corrects statements made in this repository, in its companion site and in the proposal materials that cited it. It applies to every revision up to and including the tag `v0.1.0-sbir-DON26BZ01-NV013`.
+This erratum corrects statements made in this repository, in its companion site and in the proposal materials that cited it. It applies to every revision up to and including the first tagged release (v0.1.0).
 
 ## (a) The cited Evolve paper is withdrawn as a citation
 
@@ -24,7 +24,7 @@ The 137 xUnit cases pass, and the differential run of the legacy surrogate again
 
 ## (f) Funding and status
 
-Topic DON26BZ01-NV013, for which this repository was built, was never submitted. The work is internally funded by 577 Industries Inc. and carries no government validation or endorsement.
+The solicitation topic this repository was built for was never submitted. The work is internally funded by 577 Industries Inc. and carries no government validation or endorsement.
 
 ## What is unchanged
 

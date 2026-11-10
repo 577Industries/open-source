@@ -13,14 +13,14 @@ effect-free migration simulation, a Typer CLI, a FastAPI `/v1` surface, and a
 read-only reviewer console built from content-addressed evidence.
 
 This repository is background software under active development. Its synthetic
-outputs are non-authoritative and do not demonstrate Air Force deployment,
+outputs are non-authoritative and do not demonstrate deployment,
 government validation, FIPS 140 validation, accreditation, or operational
 performance. The default maturity target is independently assessable TRL 4.
 
 The public Git history begins at a sanitized orphan root derived from local
 source snapshot `9277ee7d6a9acc8085ec56f5ea6150d39165e73c`. That source snapshot
-is retained only as a local background-IP archive because it also contains a
-private proposal subtree. See [the public-boundary manifest](PUBLIC_BOUNDARY.md)
+is retained only as a local background-IP archive because it also contains
+private material. See [the public-boundary manifest](PUBLIC_BOUNDARY.md)
 for the enforced exclusion and data policy.
 
 ## Quick start

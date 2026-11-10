@@ -1,17 +1,19 @@
-# 00 Evaluator Quickstart — AegisGraph ASEMA D2P2
+# 00 Quickstart: AegisGraph Review Collection
 
-**Tag:** `v1.0.0-asema-dp2-feasibility` · **License:** Apache-2.0 · **Reviewer reproduction target:** ≤ 5 minutes warm, ≤ 1 hour cold
+**Tag:** the v1.0.0 release tag · **License:** Apache-2.0 · **Reviewer reproduction target:** ≤ 5 minutes warm, ≤ 1 hour cold
 
 ## 1. Verify the release
 
 ```bash
-git clone https://github.com/577-Industries/asema-feasibility-artifacts
-cd asema-feasibility-artifacts
-git checkout v1.0.0-asema-dp2-feasibility
+git clone https://github.com/577Industries/open-source
+cd open-source/programs/aegis/aegisgraph/review-collection
+python3 scripts/verify_public_package.py            # PUBLIC PACKAGE READY
+sha256sum -c checksums/SHA256SUMS                   # all entries OK
 sha256sum -c evidence/checksums.sha256              # all entries OK
-node evidence/validate-evidence.mjs                  # safety_scan: passed
-node evidence/validate-cetm.mjs evidence/cetm.json   # issues_count: 0, total_claims: 82
 ```
+
+The two Node validators in `evidence/` are published as source. They expect the layout of the internal
+feasibility binder and do not run against this directory; the README says why.
 
 ## 2. Reproduce the engineering platform (full reproduction)
 
@@ -50,11 +52,11 @@ python3 -m validator.cli sanitize-check exports/public-sanitized   # exit 0
 - Embargoed disclosure records (`claim_state == "reviewed_embargoed"`)
 - Source snippets longer than 256 chars; attacker URLs / payloads inside cross-target candidates
 
-## 5. For reviewers verifying the ASEMA D2P2 proposal
+## 5. For reviewers verifying the engine claims
 
-- **Six-engine ensemble**: PolyDiff Extended, HarnessGen, InvariantCheck, CrossSMA, DynamicProbe (option period), Coordinated Disclosure — see `figures/F15-engine-architecture.png` and `figures/F16-discovery-loop.png`
+- **Six-engine ensemble**: PolyDiff Extended, HarnessGen, InvariantCheck, CrossSMA, DynamicProbe (later work), Coordinated Disclosure — see `figures/F15-engine-architecture.png` and `figures/F16-discovery-loop.png`
 - **Engine evidence anchored**: all six engines have evidence files in `evidence/aegisgraph-v1.0-evidence.json` and the corresponding CETM `C-ENG-*` / `C-NEW-*` claims
-- **CETM claim verification**: every status-A claim has its `evidence_artifact` path resolve on disk; `validate-cetm.mjs` enforces
+- **CETM claim verification**: none of the 53 status-A claims cites a file in this collection (41 cite the internal feasibility binder), so `validate-cetm.mjs` reports 43 issues when run here
 - **Engineering tip**: `stream/integration` at commit `d91c1df6` (= the v1.0.0-tier3-research tag), 1030 tests passing
 - **Cross-target validated cell**: `AG-XSMA-VALIDATED-SIG-GP-001-ELX` is the 1 of 24 cells confirmed `confirmed_reachable`
 
@@ -68,4 +70,3 @@ python3 -m validator.cli sanitize-check exports/public-sanitized   # exit 0
 
 - Engineering issues: https://github.com/577Industries/aegisgraph/issues
 - Disclosure policy: see `aegisgraph/disclosure/policy.md` in the engineering repo
-- Proposal evaluation: via DARPA SBIR ASEMA topic HR0011SB20254-12

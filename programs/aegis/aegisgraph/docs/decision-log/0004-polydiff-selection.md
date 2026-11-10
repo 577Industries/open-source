@@ -12,7 +12,7 @@ Status: accepted.
 - 0020 — fact-vector v2 migration (concrete schema artifact PolyDiff produces)
 - 0010 — schema additive-only (governs the v1 → v2 fact-vector migration)
 
-## Proposal claims
+## CETM claims
 
 - C-NEW-PD — selection of URL-parser differential as the rediscovery target.
 - C-ABS-5 — pre-disclosure / measured-output framing depends on this scope choice.

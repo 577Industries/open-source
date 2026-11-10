@@ -25,8 +25,8 @@ Strategy reference (from the master plan landscape survey):
 - **WRAP** — mature upstream client; we provide a thin facade that
   emits `NormalizedRecord` objects with provenance.
 
-Excluded by license: HESPERIA REleASE (commercial use restricted per
-proposal ref [30]); model outputs flow in via CCMC SEP Scoreboards
+Excluded by license: HESPERIA REleASE (commercial use restricted by its
+license); model outputs flow in via CCMC SEP Scoreboards
 rather than direct adapter integration.
 
 ## Quickstart
@@ -62,4 +62,3 @@ model, and how to add a new source.
   — JSON Schema for the provenance model
 - [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine)
   — downstream consumer (BMA fusion + calibration)
-- NASA SBIR Phase I proposal — see proposal §2 Obj. 1 and §3 T1

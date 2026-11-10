@@ -11,7 +11,7 @@ superseded — see the status legend.
 
 ## Index
 
-| #    | Title                                                | Status   | Date       | Substantiates proposal claims |
+| #    | Title                                                | Status   | Date       | Substantiates CETM claims |
 |------|------------------------------------------------------|----------|------------|------------------------------|
 | 0001 | Repo split (open-core engineering / sanitized public release) | Accepted | (Phase 0)  | (process; supports C-EVAL-2) |
 | 0002 | Private ReproChain handling                          | Accepted | (Phase 0)  | C-NEW-RC, C-EVAL-2 |
@@ -31,9 +31,7 @@ superseded — see the status legend.
 | 0021 | Validator hardening (sanitize-check, traceability, non-mutating mode) | Accepted | 2026-05-07 | C-EVAL-1, C-EVAL-2 |
 
 CETM claim IDs are sourced from
-`03_PROPOSAL/active-package/04_evidence/v0.3/cetm.json` (49 claims initially; new claim families `C-SCHEMA-V2`, `C-NEW-HG/IC/CS/DP/CD`, and `C-DISC-V1..V5` are added in the v0.4 CETM extension per the Phase II rollout plan). The
-master proposal is at
-`03_PROPOSAL/active-package/01_master_proposal/AegisGraph_ASEMA_DP2_Master_Proposal_v0.3.md`.
+`03_PROPOSAL/active-package/04_evidence/v0.3/cetm.json` (49 claims initially; new claim families `C-SCHEMA-V2`, `C-NEW-HG/IC/CS/DP/CD`, and `C-DISC-V1..V5` are added in the v0.4 CETM extension per the rollout plan).
 
 For the canonical file list:
 
@@ -57,11 +55,11 @@ ls docs/decision-log/*.md
    ## Rationale
    ## Consequences
    ## Related ADRs
-   ## Proposal claims
+   ## CETM claims
    ```
 
 4. If the ADR governs a schema change, see the schema-delta-via-PR-plus-ADR
    contract in `docs/operating-procedures.md` §2.
 5. Add a row to the table above and reference the relevant CETM
-   claim_id(s) so the proposal traceability matrix can rehydrate the
+   claim_id(s) so the traceability matrix can rehydrate the
    claim → evidence path.

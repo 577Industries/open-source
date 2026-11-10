@@ -25,8 +25,8 @@ lineage relations (PROV), and packaging (RO-Crate), but none captures *which
 specific upstream values contributed to one specific predicted value via
 which specific transformations*. Operational fusion engines (Bayesian model
 averaging, isotonic-regression calibration, conformal-prediction wrappers)
-need that finer granularity for CCMC proving-ground evaluation, SRAG console
-adoption, and the parametric-insurance audit trail that the HELIOS
+need that finer granularity for CCMC proving-ground evaluation, operational
+forecast-console use, and the parametric-insurance audit trail that the HELIOS
 commercialisation story leans on.
 
 See the [RFC](rfc/RFC-0001-feature-lineage.md) for the full motivation,
@@ -82,7 +82,5 @@ helios-provenance-validate schema/examples/*.json
 
 ## HELIOS programme context
 
-This repository is **Artifact A** of the HELIOS programme — a NASA SBIR
-Phase I effort by 577 Industries Inc. supporting subtopic SPWX.1.S26A
-(Advanced Data-Driven Applications for Space Weather R2O2R). See proposal
-§1.4 (CONOPS) and §4.2 (Innovation #2).
+This repository is **Artifact A** of the HELIOS program, 577 Industries
+Inc.'s data-driven space weather research-to-operations-to-research work.

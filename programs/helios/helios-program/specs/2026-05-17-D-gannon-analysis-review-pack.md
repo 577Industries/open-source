@@ -54,7 +54,7 @@
 ### Docs
 - `README.md` — rewritten with headline plot, install/run instructions, link to blog
 - `docs/index.md` — overview
-- `docs/methodology.md` — **explicit v1 vs v2 boundary** (this is the load-bearing document for any external publication; reviewers will go here)
+- `docs/methodology.md` — **explicit v1 vs v2 boundary** (this is the core document for any external publication; reviewers of that publication will go here)
 
 ### Tests (40 total)
 - `test_stations.py`, `test_fetch.py`, `test_swpc.py`, `test_positioning.py`, `test_analysis.py`, `test_plotting.py`
@@ -77,18 +77,18 @@ This is the correct shape for v1. v2 (post helios-spaceweather-connectors CDDIS 
 - Full pseudo-range SPP from raw RINEX observables (Klobuchar ionospheric correction; SP3 ephemerides via `helios_connectors.adapters.cddis` once that exists)
 - PPP refinement using IGS final orbits + clock products
 - RTK double-differencing simulation with explicit fix/float/SPP status tracking
-- **Equipment-specific transfer functions** for John Deere StarFire 6000/7000, Trimble RTX/RTK, AgLeader Surefire/Versa (the proposal §2 Obj. 4 deliverable — v2 of THIS artifact is the bridge to that)
+- **Equipment-specific transfer functions** for John Deere StarFire 6000/7000, Trimble RTX/RTK, AgLeader Surefire/Versa (the companion §2 Obj. 4 deliverable; v2 of THIS artifact is the bridge to that)
 - Operator-shared receiver telemetry — the blog post explicitly invites this; could be a real customer-discovery hook
 
 ## Surface-area decisions worth a human pass
 
-1. **IL coverage gap (1 station out of 25)**. The headline "25 of 25" is technically true and impressive-sounding; the implicit "balanced 4-state corridor" is overstated. **Recommend**: either (a) backfill IL stations in v1.1, or (b) add a sentence to the methodology doc and blog post explicitly acknowledging the IA/IN/OH-heavy sampling. The blog audience won't catch it; a NASA-center reviewer will.
+1. **IL coverage gap (1 station out of 25)**. The headline "25 of 25" is technically true and impressive-sounding; the implicit "balanced 4-state corridor" is overstated. **Recommend**: either (a) backfill IL stations in v1.1, or (b) add a sentence to the methodology doc and blog post explicitly acknowledging the IA/IN/OH-heavy sampling. The blog audience won't catch it; a domain-expert reader will.
 
 2. **Climatological model parameters baked into `positioning.py`**. The α/β coefficients calibrated for OEM-spec quiet + Gannon-peak are reasonable but not publicly justified by a citation. **Recommend**: add a `docs/calibration.md` walking through the calibration choices, OR replace v1 with full SPP in v0.2 so the question becomes moot.
 
-3. **Blog post mentions HELIOS by name in §5** and CTAs to engineering@577industries.com. Verify this is the right outbound channel for blog leads; the customer-discovery interviews per proposal §2 Obj. 5 use OSU Extension and OARDC as primary intermediaries. **Recommend**: also CTA toward OSU Extension office hours or OARDC contact for operator readers, alongside the corporate email.
+3. **Blog post mentions HELIOS by name in §5** and CTAs to engineering@577industries.com. Verify this is the right outbound channel for blog leads; the customer-discovery interviews per companion §2 Obj. 5 use OSU Extension and OARDC as primary intermediaries. **Recommend**: also CTA toward OSU Extension office hours or OARDC contact for operator readers, alongside the corporate email.
 
-4. **Result figures committed at runtime size** (PNG, no specified DPI). For NASA-center decks and Phase II re-pitch, you'll want SVG or high-DPI PNG. **Recommend**: add a `make figures-publication` Makefile target that re-renders at 300+ DPI to `results/figures/publication/`.
+4. **Result figures committed at runtime size** (PNG, no specified DPI). For NASA-center decks and later presentations, you'll want SVG or high-DPI PNG. **Recommend**: add a `make figures-publication` Makefile target that re-renders at 300+ DPI to `results/figures/publication/`.
 
 5. **The blog post's headline plot embedding** uses a relative path `results/figures/fig-01-...png`. On a GitHub README this renders fine; on a 577industries.com WordPress install it won't. **Recommend**: when publishing, host the figures on a CDN (or 577industries.com `/wp-content/uploads/`) and rewrite the markdown.
 
@@ -158,10 +158,10 @@ git push
 This artifact is **the single best customer-discovery hook in the program right now**. The blog post is engineered for:
 - Precision-ag press (AgFunder News, Farm Progress, Successful Farming) — the "78× baseline" / "1302 station-hours" framing is screen-grabbable
 - OSU Extension / OARDC operator audiences — the 2.5 cm threshold framing matches their educational vocabulary
-- NASA-center engagement (CCMC, SPoRT) — the methodology doc's transparent v1/v2 boundary is exactly the discipline reviewers reward
+- NASA-center engagement (CCMC, SPoRT) — the methodology doc's transparent v1/v2 boundary is exactly the discipline expert readers reward
 
 When citing externally, **always preserve the climatological-model disclosure**. Stripping it for marketing simplicity invites a credibility hit when a sharp reader checks the methodology doc.
 
 ---
 
-**Bottom line**: ready for your review and merge. The two caveats (climatological v1, IL coverage gap) are honestly documented in-code and in-docs; the headline is real and citable. This is the artifact that turns §1.3 of the proposal from an anecdote into a result.
+**Bottom line**: ready for your review and merge. The two caveats (climatological v1, IL coverage gap) are honestly documented in-code and in-docs; the headline is real and citable. This is the artifact that turns the §1.3 Gannon case study from an anecdote into a result.

@@ -8,9 +8,9 @@
 
 ## TL;DR
 
-Implements the Temporal Fusion Transformer (TFT) for vertical-TEC multi-horizon forecasting per the proposal §2 Objective 4 GNSS slice. TFT consumes 20+ years of CDDIS GIM data + DSCOVR upstream solar wind + SWPC Dst as exogenous variables, predicts TEC at 0-24 hour horizons.
+Implements the Temporal Fusion Transformer (TFT) for vertical-TEC multi-horizon forecasting per the companion §2 Objective 4 GNSS slice. TFT consumes 20+ years of CDDIS GIM data + DSCOVR upstream solar wind + SWPC Dst as exogenous variables, predicts TEC at 0-24 hour horizons.
 
-**Why this matters**: this is the second of the proposal's two main ML objectives (§2 Obj 2 BMA-on-SEP is the first; Sprint D evaluates that). When this ships, both proposal objectives have shipped artifacts. Bonus: `gannon-storm-rtk-analysis` v2 swaps its v1 climatological model for real SPP using the TFT-predicted TEC — the headline "1,302 station-hours" claim upgrades from "climatological-v1" to "real-data v2."
+**Why this matters**: this is the second of HELIOS's two main ML objectives (§2 Obj 2 BMA-on-SEP is the first; Sprint D evaluates that). When this ships, both objectives have shipped artifacts. Bonus: `gannon-storm-rtk-analysis` v2 swaps its v1 climatological model for real SPP using the TFT-predicted TEC — the headline "1,302 station-hours" claim upgrades from "climatological-v1" to "real-data v2."
 
 ## Prerequisites
 
@@ -20,12 +20,12 @@ Implements the Temporal Fusion Transformer (TFT) for vertical-TEC multi-horizon 
 | `NASA_EARTHDATA_PASS` set | `echo $NASA_EARTHDATA_PASS` non-empty | Yes |
 | CDDIS authorized on Earthdata profile | <https://urs.earthdata.nasa.gov/> → Applications → "NASA GESDISC DATA ARCHIVE" approved | Yes |
 | ~20 GB disk for the CDDIS cache | `df -h ~/.cache/helios-connectors/cddis/` shows ≥20 GB free | Auto |
-| GPU available (recommended) | `nvidia-smi` works; or use AWS GPU instance per proposal §5.2 budget | Operator decides (CPU works but ~10× slower) |
+| GPU available (recommended) | `nvidia-smi` works; or use AWS GPU instance | Operator decides (CPU works but ~10× slower) |
 | `helios-spaceweather-connectors` v0.2.1+ has `CddisGimAdapter` exposed | `python3 -c "from helios_connectors import CddisGimAdapter"` works | Auto (already true) |
 
 ## Architecture: Temporal Fusion Transformer
 
-Per Lim, Arik, Loeff, Pfister (2021), *International Journal of Forecasting* 37(4):1748-1764 (proposal ref [32]).
+Per Lim, Arik, Loeff, Pfister (2021), *International Journal of Forecasting* 37(4):1748-1764 (companion ref [32]).
 
 | Hyperparameter | Value | Rationale |
 |---|---|---|
@@ -66,7 +66,7 @@ Per Lim, Arik, Loeff, Pfister (2021), *International Journal of Forecasting* 37(
 
 ## Validation event set
 
-For consistency with the proposal Table 3-1 split AND the proposal §1.3 Gannon anchor:
+For consistency with the companion Table 3-1 split AND the companion §1.3 Gannon anchor:
 
 | Event | Date | Use |
 |---|---|---|
@@ -74,14 +74,14 @@ For consistency with the proposal Table 3-1 split AND the proposal §1.3 Gannon 
 | Sept 2017 storm | 2017-09-06 + 2017-09-10 | TRAIN — bridge cycle |
 | Cycle 25 onset | 2022-01-20 | HOLD-OUT (matches Sprint D set) |
 | Mid-cycle 25 | 2023-02-17 | HOLD-OUT |
-| Gannon | 2024-05-10 to 2024-05-12 | HOLD-OUT (proposal §1.3 anchor) |
+| Gannon | 2024-05-10 to 2024-05-12 | HOLD-OUT (companion §1.3 anchor) |
 | March 2024 (G4) | (date) | HOLD-OUT |
 | October 2024 (G3) | (date) | HOLD-OUT |
 | February 2024 (G2) | (date) | HOLD-OUT |
 
-The GNSS slice's 4-event hold-out (Gannon + March G4 + October G3 + February G2 per proposal §3.1) maps onto the Cycle-25 hold-out window naturally.
+The GNSS slice's 4-event hold-out (Gannon + March G4 + October G3 + February G2 per companion §3.1) maps onto the Cycle-25 hold-out window naturally.
 
-## Quality bar (per proposal §2 Obj. 4 success criterion)
+## Quality bar (per companion §2 Obj. 4 success criterion)
 
 - **TEC MAE ≤ 3 TECU on quiet-period hold-out** (Kp < 4 windows)
 - **TEC MAE ≤ 10 TECU during G2+ events** (the hard-mode regime)
@@ -129,7 +129,7 @@ After this lands:
 
 ## Verification gates
 
-1. Hold-out TEC MAE meets proposal §2 Obj. 4 thresholds.
+1. Hold-out TEC MAE meets companion §2 Obj. 4 thresholds.
 2. Reproducibility notebook runs end-to-end on a fresh checkout with Earthdata creds in env.
 3. `helios-fusion-internal/weights/manifest.json` has the new `tft_runs` array entry with full provenance.
 4. `gannon-storm-rtk-analysis` v2 builds + tests pass with the new real-SPP positioning.
@@ -137,14 +137,14 @@ After this lands:
 
 ## Cross-references
 
-- Proposal §2 Obj. 4 (GNSS slice success criteria)
-- Proposal §1.3 (Gannon case study + the v1→v2 boundary the gannon-storm-rtk-analysis methodology doc preserves)
+- Companion §2 Obj. 4 (GNSS slice success criteria)
+- Companion §1.3 (Gannon case study + the v1→v2 boundary the gannon-storm-rtk-analysis methodology doc preserves)
 - `helios-spaceweather-connectors/docs/adapters/cddis.md` (Earthdata setup walkthrough)
 - `OPERATOR_TODO.md §2` (Earthdata credentials)
-- Lim et al. (2021) — proposal ref [32]
+- Lim et al. (2021) — companion ref [32]
 
 ## What this sprint does NOT do
 
-- Does NOT integrate TFT-TEC outputs into the BMA fusion engine — that's a Phase II item. This sprint produces a standalone forecaster; integration with `helios-fusion-engine.bma` happens later.
-- Does NOT publish a separate TFT paper — that's also a Phase II item.
+- Does NOT integrate TFT-TEC outputs into the BMA fusion engine — that's later work. This sprint produces a standalone forecaster; integration with `helios-fusion-engine.bma` happens later.
+- Does NOT publish a separate TFT paper — that's also later work.
 - Does NOT replace the SEP all-clear kill-gate path — Sprint D's evaluation is unaffected.

@@ -119,7 +119,7 @@ Adopt a v2 fact-vector schema as an **additive** successor to v1.
 - 0008 — URL-parser differential over MLS lifecycle (selection that justifies the axis catalog)
 - 0021 — validator hardening (the validator that accepts both v1 and v2 records during the migration window)
 
-## Proposal claims
+## CETM claims
 
 - C-NEW-PD — PolyDiff fact-vector v2 is the artifact that records the rediscovered disagreements with full per-parser fidelity.
 - C-TECH-3 — concrete schema-evolution example for the evidence-graph contract.

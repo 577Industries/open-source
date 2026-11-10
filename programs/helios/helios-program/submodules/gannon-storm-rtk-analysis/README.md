@@ -24,10 +24,9 @@ Per-station, per-day breakdown: [`results/quantitative.md`](results/quantitative
 
 ## Status
 
-This is **Artifact D** of the **HELIOS** program (577 Industries' NASA SBIR
-Phase I, subtopic SPWX.1.S26A — Advanced Data-Driven Applications for Space
-Weather R2O2R). The artifact converts proposal §1.3 (the Gannon case study)
-from a story into a reproducible result.
+This is **Artifact D** of the **HELIOS** program (577 Industries' data-driven
+space weather research-to-operations-to-research work). The artifact converts
+the Gannon case study from a story into a reproducible result.
 
 v0.1.0 (pre-stable). The positioning model in v1 is **climatological** — it
 ingests real RINEX files and real Kp/Dst indices but uses a documented

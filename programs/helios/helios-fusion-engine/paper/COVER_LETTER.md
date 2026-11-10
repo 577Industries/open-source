@@ -41,16 +41,14 @@ The fusion-engine release tagged at the locked commit is
    mission-operations slice.
 2. The calibration + conformal methodology is of independent interest to
    the ML community; cross-listing on `cs.LG` reaches that audience.
-3. Pre-print exposure during the NASA SBIR Phase II decision window
-   provides an external, dated record of the methodology and the
-   pre-registered hold-out evaluation.
+3. Pre-print exposure provides an external, dated record of the
+   methodology and the pre-registered hold-out evaluation.
 
 ## Endorsement
 
 This is 577 Industries' first arXiv submission to `astro-ph.SR`.
 Per arXiv submission policy an endorser is required. Named endorser:
-`<TO_BE_FILLED — Space-Weather / Ionospheric SME consultant, see proposal
-§5.1>`; endorser email `<TO_BE_FILLED>`. Endorser status confirmed by
+`<TO_BE_FILLED — Space-Weather / Ionospheric SME consultant>`; endorser email `<TO_BE_FILLED>`. Endorser status confirmed by
 `gh issue` on the submission-tracking repo prior to upload.
 
 ## Reproducibility commitments
@@ -75,8 +73,7 @@ Per arXiv submission policy an endorser is required. Named endorser:
 
 ## Conflicts of interest and funding disclosure
 
-The work is conducted by 577 Industries Inc.; the submitted NASA SBIR
-Phase I proposal (subtopic SPWX.1.S26A) is awaiting decision. Funding
+The work is conducted by 577 Industries Inc. Funding
 for the preprint-stage work is from 577 Industries internal R&D.
 Authors have no other financial interests to disclose.
 

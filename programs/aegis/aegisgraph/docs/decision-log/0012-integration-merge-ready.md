@@ -207,7 +207,7 @@ Files NOT touched (other streams own them):
 ## Verification commands the reviewer can re-run
 
 ```bash
-cd "/home/twawe/577i-Projects/SBIR Working Folder/ASEMA/01_TIER3_RESEARCH/AegisGraph_Tier3_Research/.worktrees/integration"
+cd "<engineering checkout>/.worktrees/integration"
 git status            # clean
 git log --oneline     # 12 commits since bb244e8
 python3 -m pytest -q  # 28 passed
@@ -224,6 +224,6 @@ python3 -m aegisgraph.cli export public-sanitized --dry-run
 - 0011 — public-export human gate (this branch wires the fail-closed gate)
 - 0021 — validator hardening (the follower stream that lands `validator/sanitize_check.py` and replaces the stub)
 
-## Proposal claims
+## CETM claims
 
 - (process) — this ADR is process / branch-state and does not directly substantiate a CETM claim, but it is the integration handoff that lets ReproChain + PolyDiff + Extraction evidence reach the public-export sanitize boundary.

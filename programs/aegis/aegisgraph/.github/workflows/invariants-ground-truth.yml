@@ -15,7 +15,7 @@ name: tier3-research-invariants-ground-truth
 #   * Weekly cron so regressions in upstream CodeQL / Semgrep
 #     toolchains are caught.
 #
-# Toolchain pins (per devcontainer/Dockerfile + Phase II plan T-M4.1):
+# Toolchain pins (per devcontainer/Dockerfile + rollout plan T-M4.1):
 #   CodeQL CLI 2.20.6
 #   Semgrep   1.86
 #

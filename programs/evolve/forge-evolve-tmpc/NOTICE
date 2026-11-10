@@ -5,9 +5,8 @@ This product includes software developed by 577 Industries, Inc.
 (https://github.com/577Industries).
 
 This repository is the C#/.NET/JavaScript/SQL extension of the Evolve
-code-modernization framework, developed under U.S. Navy SBIR topic
-DON26BZ01-NV013 ("AI-Assisted Modernization and Optimization of Theater
-Mission Planning Center (TMPC) Software").
+code-modernization framework, targeting Theater Mission Planning Center
+(TMPC) software through a synthetic, unclassified surrogate.
 
 It reuses 577 Industries' FORGE OS framework (Apache-2.0). Specifically:
   - The orchestrator's live-mode routing directly consumes the published
@@ -23,7 +22,7 @@ IMPORTANT - SCOPE AND HONESTY OF CLAIMS
     tasking data, no real coordinates, and no real algorithms. See EXCLUSIONS.md.
   * Quantitative results produced by this repository are measured on that
     synthetic surrogate and are PRELIMINARY and FRAMEWORK-LEVEL. They are NOT
-    validated against government TMPC code and are NOT validated by the U.S. Navy.
+    validated against government TMPC code and carry NO government validation.
   * No published results exist; an internal draft paper cited here earlier
     contained generated figures and is withdrawn as a citation (see ERRATUM.md).
     The C#/.NET/JS/SQL capability in this repository is a newly developed

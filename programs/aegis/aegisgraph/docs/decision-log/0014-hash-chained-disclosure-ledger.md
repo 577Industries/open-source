@@ -102,7 +102,7 @@ The DARPA reviewer's mental question is: "Show me you actually filed a CVE." The
 - 0013 — schema v2 discovery-graph extension (introduces `disclosure_event` node + `reviewed_embargoed`/`disclosed_public` claim states)
 - 0021 — validator hardening (sanitize_check Rule 7 added by this ADR's enforcement)
 
-## Proposal claims
+## CETM claims
 
 - C-NEW-CD — Coordinated Disclosure (Engine 6) — anchored by this ADR's ledger format.
 - C-DISC-V1 through C-DISC-V5 — individual disclosure event claims as ledger entries land.

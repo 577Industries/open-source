@@ -13,7 +13,7 @@
 
 Two notable design moves that strengthen the program:
 1. **Explicit `to_state_dict` / `from_state_dict`** — no opaque pickle on the public API. JSON-friendly state. Eliminates a known security footgun before it bites in `helios-fusion-internal`.
-2. **Platt scaling shipped alongside isotonic**, with a test asserting isotonic beats Platt on tail-miscalibrated synthetic data. The proposal's §2 Obj. 2 rejection of Platt is now *reproducible* — any reviewer can clone, run, and verify.
+2. **Platt scaling shipped alongside isotonic**, with a test asserting isotonic beats Platt on tail-miscalibrated synthetic data. the companion's §2 Obj. 2 rejection of Platt is now *reproducible* — any reviewer can clone, run, and verify.
 
 **Recommend merging** — no blocking issues. The "BMA HSS == equal-weight HSS" finding on synthetic data is the right kind of honest reporting and resolves when real component models with distinct skill profiles wire in.
 
@@ -85,7 +85,7 @@ This is **not a framework bug** — when real Scoreboard A/B/C streams (UMASEP, 
 
 The kill-gate's HSS-improvement-over-best-component test will only be meaningful on real-event data, not synthetic. This is expected.
 
-## Deviations from proposal §2 Obj. 2 design
+## Deviations from the companion §2 Obj. 2 design
 
 1. **Conformal from-scratch, not mapie/crepes**. Agent's documented rationale (in `src/helios_fusion/conformal/__init__.py` and `docs/architecture.md`):
    - Neither library exposes Kp-stratum Mondrian taxonomy as first-class
@@ -94,7 +94,7 @@ The kill-gate's HSS-improvement-over-best-component test will only be meaningful
 
    **Recommend**: accept. Switching is trivial later if needed. From-scratch keeps the dep surface minimal.
 
-2. **Platt is shipped**. Proposal §2 Obj. 2 rejects Platt; framework ships it for reproducible-rejection. **Recommend**: this is a feature not a deviation. Document explicitly in the public README that Platt is shipped *for comparison* and isotonic is the default/recommended calibrator.
+2. **Platt is shipped**. Companion §2 Obj. 2 rejects Platt; framework ships it for reproducible-rejection. **Recommend**: this is a feature not a deviation. Document explicitly in the public README that Platt is shipped *for comparison* and isotonic is the default/recommended calibrator.
 
 ## Surface-area decisions worth a human pass
 

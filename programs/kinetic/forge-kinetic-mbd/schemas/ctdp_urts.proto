@@ -3,13 +3,13 @@ package forge_evolve.v2;
 
 option go_package = "577industries.com/forge_evolve/api/v2;evolv2";
 
-// 1. Sub-Second Progressive MBD Mesh & PMI Streaming Service (DV008)
+// 1. Sub-Second Progressive MBD Mesh & PMI Streaming Service
 service ZeroTrustMBDStreamService {
   rpc StreamProgressiveBVH (BVHStreamRequest) returns (stream EncryptedBVHChunk);
   rpc CommitAsSustainedState (SustainmentCommitRequest) returns (MerkleCommitReceipt);
 }
 
-// 2. Autonomous Robotic Pathing & Multi-Vendor Execution Service (DV012)
+// 2. Autonomous Robotic Pathing & Multi-Vendor Execution Service
 service AutonomousRoboticPathService {
   rpc CompileTDPToURTS (TDPCompileRequest) returns (URTSTaskPackage);
   rpc ExportVendorControllerCode (VendorExportRequest) returns (VendorControllerProgram);

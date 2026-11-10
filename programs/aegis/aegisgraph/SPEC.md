@@ -1,8 +1,8 @@
-# AegisGraph DP2 Feasibility Hardening: Tier-3 Technical Specification
+# AegisGraph Feasibility Hardening: Tier-3 Technical Specification
 
-**Project:** 577 Industries — AegisGraph for DARPA SBIR HR0011SB20254-12 (ASEMA)
+**Project:** 577 Industries — AegisGraph secure-messaging application assessment research
 **Document type:** Engineering specification, to be executed iteratively with Claude Code over an indefinite timeline
-**Goal:** Move AegisGraph's Phase-I-equivalent feasibility from "thoughtful methodology paper" to "DP2 proposal whose technical core is hard to ignore."
+**Goal:** Move AegisGraph's feasibility evidence from "thoughtful methodology paper" to "a technical core that is hard to ignore."
 **Scope:** This document covers four workstreams (ReproChain, PolyDiff, Extraction, SMABench), the evidence schema that ties them together, and a phased execution plan. It is a working spec — every section is intended to be edited as the work progresses.
 
 ---
@@ -26,7 +26,7 @@ If the spec and the code disagree, the code wins and the spec gets updated. Trea
 
 ### 1.1 What we are trying to prove
 
-ASEMA reviewers will judge this DP2 against three implicit questions:
+The work should answer three questions a technical reviewer would ask:
 
 1. **Has this team done credible vulnerability research, not just methodology?**
 2. **Does the prototype actually work on real targets, or only on schemas?**
@@ -90,7 +90,7 @@ The candidate set:
 | **libwebp (CVE-2023-4863)** | BSD-licensed open library; affected basically every SMA; well-documented bug; reachable from Signal Android and Element X Android via image-load paths; clean reproduction stops at memory corruption | Library is small enough that a static analyzer "finding" it could be argued as cherry-picked | **Selected** (see ADR 0007) |
 | Matrix/Megolm Albrecht et al. attacks (2022) | High-impact academic work; multi-CVE | Requires protocol-cryptography depth; harder to "reproduce" without authoring an attacker-Matrix client | Reject (consider as future work) |
 
-The libwebp choice is load-bearing for the ReproChain narrative. The story it lets us tell to ASEMA reviewers:
+The libwebp choice is central to the ReproChain narrative. The story it lets us tell to reviewers:
 
 > In September 2023, a single bug in a parser used by every major secure messenger turned a phone number plus a crafted image into universal heap corruption. AegisGraph's attack-surface modeling explicitly weights remote reachability, parser complexity, and native/FFI boundaries — exactly the dimensions where this bug lived. We reproduced the crash from public information against a vendored vulnerable libwebp, traced the call path from inbound media in both Signal Android and Element X Android, and recorded the resulting graph paths in our evidence model. The score vector for those paths is in the high-priority band. Had AegisGraph existed pre-disclosure and been pointed at either codebase's media pipeline, this exact subgraph would have been in the top-five attack-surface evidence records — not as a defect claim, but as a "validate this parser path under a fuzzer" task.
 
@@ -172,7 +172,7 @@ aegisgraph/
 │   └── ring3/                    # placeholder; future authorized work
 ├── schema/                       # JSON Schemas for evidence, scores, claims, recs
 ├── validator/                    # validate-evidence.{mjs,py} — schema + safety scan
-├── reports/                      # generated DARPA-facing artifacts
+├── reports/                      # generated reviewer-facing artifacts
 └── docs/                         # internal docs, decision log, ADRs
 ```
 
@@ -187,7 +187,7 @@ aegisgraph/
 
 ### 3.3 Tooling baseline (the "CodeQL not on PATH" embarrassment, fixed)
 
-The v0.3 SOTA matrix said CodeQL and MobSF were "Not run, unavailable on PATH on 2026-05-04." That is a credibility-killer in front of DARPA reviewers. Workstream C resolves it by making the tooling part of the repo, not the user's workstation:
+The v0.3 SOTA matrix said CodeQL and MobSF were "Not run, unavailable on PATH on 2026-05-04." That is a credibility-killer in front of technical reviewers. Workstream C resolves it by making the tooling part of the repo, not the user's workstation:
 
 - A `Dockerfile` (or Nix flake) that pins:
   - CodeQL CLI 2.20.x with the `codeql/java-queries` and `codeql/python-queries` packs
@@ -203,7 +203,7 @@ The v0.3 SOTA matrix said CodeQL and MobSF were "Not run, unavailable on PATH on
 
 Every artifact in the evidence package must be regenerable with one command (`make reproduce`) from a clean clone, given the dev container. CI runs `make reproduce` weekly on the pinned commits and posts checksum diffs. Drift is flagged.
 
-This is the single biggest defense against the "your DP2 evidence is hand-curated" critique.
+This is the single biggest defense against the "your evidence is hand-curated" critique.
 
 ---
 
@@ -547,7 +547,7 @@ Tasks:
 1. A deduplication pass that clusters Disagreements by (axis, parser_pair, error-class) and picks a minimal exemplar per cluster.
 2. A human-in-the-loop triage interface (CLI or simple HTML viewer) that shows: the input, the fact-vectors, the rule-classifier output, and a comment field. The triager assigns one of: `confirmed-security`, `theoretical-only`, `infrastructure-bug`, `parser-design-difference-not-bug`, `dupe`.
 3. For every `confirmed-security` Finding, generate an AegisGraph evidence record (§8).
-4. For every `theoretical-only` Finding, record it but do not surface in the proposal-facing report.
+4. For every `theoretical-only` Finding, record it but do not surface in the external-facing report.
 
 Acceptance: At Tier-P2, ≥1 `confirmed-security` Finding exists outside the regression set. At Tier-P3, ≥1 such Finding warrants disclosure under the policy in §9.
 
@@ -557,7 +557,7 @@ Goal: connect PolyDiff's library-level findings to actual SMA application code.
 
 For each `confirmed-security` Finding, identify whether the affected parser is on a reachable path in Signal Android or Element X Android (using the extraction graph from Workstream C). If yes, the AegisGraph evidence record carries that reachability info. If no, the Finding is recorded as "library-level only, not currently reachable in tracked targets."
 
-This is the bridge that turns PolyDiff from "we wrote a differential URL fuzzer" into "we found N disagreements in parsers reachable from inbound link previews in two real SMAs." That second framing is what makes ASEMA reviewers stop scrolling.
+This is the bridge that turns PolyDiff from "we wrote a differential URL fuzzer" into "we found N disagreements in parsers reachable from inbound link previews in two real SMAs." That second framing is what makes reviewers stop scrolling.
 
 ### 5.11 PolyDiff deliverables summary
 
@@ -702,7 +702,7 @@ Canonical schema for AegisGraph evidence records. Every record has:
 - `id` — stable identifier
 - `version` — schema version (currently `v1.0`, supersedes v0.3)
 - `target` — which SMA codebase, with pinned commit
-- `path_class` — one of the eight ASEMA classes
+- `path_class` — one of the eight path classes defined in `schema/evidence.schema.json`
 - `nodes` — ordered list of (node-type, source-anchor, evidence-source) tuples
 - `edges` — relationships between nodes
 - `score_vector` — the ten-dimensional score with sum check
@@ -801,10 +801,10 @@ The ordering below maximizes morale (early concrete demo) and minimizes blocking
 - Phase B9 (reachability mapping)
 - Phase C3 (MobSF integration)
 - Phase D (SMABench harnesses)
-- Demo-ready: full pipeline; proposal-quality artifacts.
+- Demo-ready: full pipeline; review-quality artifacts.
 
-**Phase 7 — Hardening and proposal-facing artifacts (Week 27+)**
-- The 20-page DARPA white paper compression.
+**Phase 7 — Hardening and external-facing artifacts (Week 27+)**
+- The 20-page white paper compression.
 - The 15-slide deck.
 - Final SOTA matrix.
 - Stretch goals from §1.4 if time permits.
@@ -827,7 +827,7 @@ If a phase misses its gate, the spec gets updated to reflect reality. The spec s
 - After Phase 1: ReproChain crash demo (5 minutes, screen recording).
 - After Phase 3: ReproChain end-to-end demo (10 minutes, includes pre-disclosure simulation).
 - After Phase 5: PolyDiff regression demo (10 minutes, shows rediscovery).
-- After Phase 6: Full pipeline demo (15 minutes — what the DARPA Month-14 demo looks like in miniature).
+- After Phase 6: Full pipeline demo (15 minutes — what the Month-14 demo looks like in miniature).
 
 ---
 
@@ -842,7 +842,7 @@ If a phase misses its gate, the spec gets updated to reflect reality. The spec s
 | MobSF integration is too fragile for CI | Medium | Low | Keep MobSF runs out of CI critical path; optional in `make extract` |
 | PolyDiff produces too many low-relevance disagreements; signal-to-noise destroys triage | High | Medium | Strict classifier rules; aggressive deduplication; human-in-the-loop triage |
 | PolyDiff produces an actual live bug we have to disclose responsibly | Medium | Medium | Disclosure policy in §8.5 |
-| Project takes longer than the proposal deadline allows | Very High | High | Phase 1-3 alone is enough for a credible feasibility story; Phase 4-6 makes it groundbreaking. Triage by priority. |
+| Project takes longer than the planned schedule allows | Very High | High | Phase 1-3 alone is enough for a credible feasibility story; Phase 4-6 makes it groundbreaking. Triage by priority. |
 | Reviewers see "we built parser fuzzer #11000" rather than novel contribution | Medium | High | The novelty is the fact-vector schema + SMA-reachability mapping; lead with that in writeups |
 | Forge OS prior-work continues to look bolted-on | Medium | Low | Limit Forge OS to one specific reuse: hash-chain audit for evidence provenance. Drop the other claims. |
 
@@ -858,7 +858,7 @@ If a phase misses its gate, the spec gets updated to reflect reality. The spec s
 - `[DECIDE]` Project owner / PI sign-off on the libwebp choice over ForcedEntry.
 - `[DECIDE]` Project owner / PI sign-off on URL-parser differential fuzzing over MLS lifecycle work.
 - `[DECIDE]` Disclosure-handling owner if PolyDiff produces a live finding.
-- `[DECIDE]` Whether the codebase ships under an Apache 2.0 / MIT license or stays private until proposal submission.
+- `[DECIDE]` Whether the codebase ships under an Apache 2.0 / MIT license or stays private.
 - `[DECIDE]` Whether to build a Signal Android APK from source for MobSF (C3-A) or use distributed APKs (C3-B).
 - `[DECIDE]` Whether to keep the v0.3 Node validator alongside the new Python validator.
 - `[DECIDE]` Whether to migrate v0.3 records to v1.0 schema or maintain both.
@@ -870,9 +870,9 @@ If a phase misses its gate, the spec gets updated to reflect reality. The spec s
 
 - **Publication strategy.** Out of scope per project owner.
 - **External validator engagement.** Out of scope per project owner.
-- **Phase III commercialization plan.** Lives in the master proposal, not in technical spec.
-- **Compliance / DSIP volumes.** Human-owned proposal-prep work.
-- **Team CVs and qualifications writeups.** Proposal-prep work.
+- **Commercialization plan.** Lives outside the technical spec.
+- **Compliance documents.** Human-owned administrative work.
+- **Team CVs and qualifications writeups.** Human-owned administrative work.
 - **iOS targets.** Future work; intentionally Android-only here to keep scope tractable and aligned with v0.3 corpus.
 - **Group-state rollback / MLS lifecycle work.** Considered and rejected for this spec; revisit after the parser-focused work ships.
 

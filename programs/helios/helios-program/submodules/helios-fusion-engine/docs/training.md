@@ -14,11 +14,8 @@ The training run produces four trained artifacts that the kill-gate hold-out eva
 
 - Python 3.11 or 3.12.
 - An isolated virtual environment in the worktree (`uv venv .venv` is the canonical pattern).
-- `helios-fusion-engine` installed editable (`uv pip install -e '.[dev]'`).
-- `helios-spaceweather-connectors` v0.2.1 from GitHub (registry expansion for Sprint C-Training-v2):
-  ```
-  uv pip install 'helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors.git@v0.2.1'
-  ```
+- `helios-fusion-engine` installed editable from a checkout of this repository (`uv pip install -e '.[dev]'`).
+- `helios-spaceweather-connectors` with the registry expansion of Sprint C-Training-v2 (v0.2.1 or later). The `dev` extra builds it from the sibling folder of the same checkout, `../helios-spaceweather-connectors`, as that folder is when the extra is installed, so it needs no step of its own. After the sibling changes, install it again; uv does not rebuild it otherwise: `uv pip install --reinstall-package helios-spaceweather-connectors -e '.[dev]'`. This walkthrough was written against the `v0.2.1` tag of the standalone repository; the folder holds that version with later changes (its changelog lists the notable ones). The training manifest records the connectors by package version only (`connectors_version`, 0.2.1 in both cases). Its `fusion_engine_git_sha` is the checkout's commit, which identifies the connectors too only if they were installed from the checkout at that commit.
 - `helios-provenance-spec` v0.1.0 from GitHub:
   ```
   uv pip install 'helios-provenance-spec @ git+https://github.com/577Industries/helios-provenance-spec.git@v0.1.0'

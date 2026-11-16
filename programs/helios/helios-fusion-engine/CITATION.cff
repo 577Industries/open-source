@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software in academic work, please cite as below."
+message: "If you use this software in academic work, please cite as below. The version and date below are those of the first release, made from the project's standalone repository, which is archived. The package in this folder reports 0.1.2; CHANGELOG.md lists the changes made in this repository, and the notes of the releases after 0.1.0 were published with that repository's tags."
 title: "helios-fusion-engine"
 abstract: "Model-agnostic probabilistic fusion of heterogeneous space-weather model outputs: Bayesian Model Averaging orchestrator, isotonic-regression reliability calibrator, split + Mondrian conformal prediction wrappers, and severity-stratified validation harness with CCMC-compatible metrics (HSS, TSS, POD, FAR, Brier, CRPS). Framework only; trained weights/configs live in the private helios-fusion-internal companion repo."
 authors:
@@ -13,8 +13,8 @@ keywords:
   - machine learning
   - provenance
 license: Apache-2.0
-repository-code: "https://github.com/577Industries/helios-fusion-engine"
-url: "https://github.com/577Industries/helios-fusion-engine"
+repository-code: "https://github.com/577Industries/open-source"
+url: "https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine"
 type: software
 version: 0.1.0
 date-released: "2026-05-17"

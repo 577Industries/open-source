@@ -2,6 +2,8 @@
 
 All notable changes to this project are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+Releases `v0.2.0a1`, `v0.2.0` and `v0.2.1` (all 2026-05-17) were tagged in the project's standalone repository, which is archived. This file never had a section per release: everything through `v0.2.1` is under `### Added` below, and what came after it is above that heading. The notes published with those tags are not reproduced here.
+
 ## [Unreleased]
 
 ### Removed
@@ -23,6 +25,34 @@ All notable changes to this project are documented here, following [Keep a Chang
   called GFZ's file CC BY 4.0 without the exception for its sunspot column.
 
 ### Changed
+- **The default User-Agent names this repository and this version.**
+  `DEFAULT_USER_AGENT` gave the address of the standalone repository, which is
+  archived, and version 0.1.0. It gives this project's folder in
+  `github.com/577Industries/open-source` and 0.2.1, and a test holds the
+  version to `__version__`.
+- **Install commands install this repository's `main` branch**, in `README.md`,
+  `docs/index.md` and the two adapter guides that install an extra. They named
+  the standalone repository's `v0.2.1` tag, or a PyPI package that does not
+  exist. `main` is version 0.2.1 plus later changes: what this section lists
+  above `### Added`, the two breaking changes included, and smaller ones it
+  does not list. Nothing in this repository is tagged. The hints in four error
+  messages name the adapter guides.
+- The schema dependency is a git reference to `helios-provenance-spec` at
+  `v0.1.0`. It changed on 2026-05-18, the day after `v0.2.1`, and no entry
+  recorded it. The tag requires `helios-provenance-spec>=0.1.0` from PyPI,
+  where that package is not published, so the tag's own install command does
+  not resolve in a clean environment (tried 2026-11-16).
+- The project's own addresses give this repository: `CITATION.cff`, the package
+  metadata (`[project.urls]`), `mkdocs.yml` (no `site_url`; `repo_url` and
+  `edit_uri`), `CONTRIBUTING.md` (the clone command), `SECURITY.md` (its scope
+  sentence) and the README, which loses
+  the badges that queried the standalone repository's CI and releases. Links to
+  the program and the fusion engine lead to their folders under
+  `programs/helios/`; links to `helios-provenance-spec` are unchanged.
+- `README.md` and `docs/index.md` called the program private; its folder in
+  this repository is public.
+  `CONTRIBUTING.md`, `CLAUDE.md` and the SEP Scoreboards guide say that no
+  workflow runs in this repository.
 - **BREAKING / NOAA upstream migration (2026-08)**: NOAA SWPC retired the
   entire `/products/solar-wind/` product line (every variant 404s). The
   `plasma`/`mag` products of `SwpcAdapter` and the near-real-time leg of
@@ -118,5 +148,3 @@ All notable changes to this project are documented here, following [Keep a Chang
 - 38 unit + 1 live tests on `DscovrAdapter`, 92% line+branch coverage.
 
 v0.1.0 alpha tag held until ≥3 adapters live (DONKI + at least two of SWPC/GOES/DSCOVR/Scoreboards/CDDIS). See Wave 2 dispatch in master plan.
-
-See [GitHub releases](https://github.com/577Industries/helios-spaceweather-connectors/releases) for the canonical release notes when a tag ships.

@@ -9,7 +9,7 @@
 
 **Production-grade Python adapters for NASA DONKI, CCMC SEP Scoreboards, NOAA SWPC, CDDIS GIMs, GOES, and DSCOVR — normalized to a common schema with feature-level provenance.**
 
-[![ci](https://img.shields.io/github/actions/workflow/status/577Industries/helios-spaceweather-connectors/ci.yml?style=flat-square&label=ci)](https://github.com/577Industries/helios-spaceweather-connectors/actions/workflows/ci.yml) [![release](https://img.shields.io/github/v/release/577Industries/helios-spaceweather-connectors?style=flat-square)](https://github.com/577Industries/helios-spaceweather-connectors/releases) [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/helios-spaceweather-connectors/)
+[![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-index-009688?style=flat-square)](docs/index.md)
 
 ## Status
 
@@ -31,8 +31,9 @@ See [`docs/index.md`](docs/index.md) for the full adapter survey and
 ## Quickstart
 
 ```bash
-# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses); install from the tag:
-pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors@v0.2.1"
+# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses). This installs the main
+# branch of this repository: version 0.2.1 plus later changes, two of them breaking (see CHANGELOG.md).
+pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-spaceweather-connectors"
 ```
 
 ```python
@@ -54,8 +55,8 @@ and [`examples/donki_quickstart.ipynb`](examples/donki_quickstart.ipynb).
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (private; internal team)
-- **Specification**: docs published at the project's docs site when available
+- **Master plan**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
+- **Specification**: [`docs/index.md`](docs/index.md), [`docs/design.md`](docs/design.md) and one guide per adapter under [`docs/adapters/`](docs/adapters/)
 - **Provenance**: every output traces to its upstream model and transformation chain
   via [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
 
@@ -75,13 +76,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Substantive changes should be discussed 
   title        = { helios-spaceweather-connectors: Production-grade Python adapters for six space-weather data sources (NASA DONKI, CCMC SEP Scoreboards A/B/C, NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR), normalized to a common feature schema with feature-level provenance per helios-provenance-spec },
   year         = {2026},
   publisher    = {577 Industries Inc.},
-  url          = {https://github.com/577Industries/helios-spaceweather-connectors},
+  url          = {https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors},
 }
 ```
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
-- **Wave 1 review pack**: [Artifact B foundation review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-B-connectors-foundation-review-pack.md) — adapter-pattern design notes and the 7 DONKI API quirks documented for follow-up adapter agents.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — master plan, orchestration scripts.
+- **Wave 1 review pack**: [Artifact B foundation review pack](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/specs/2026-05-17-B-connectors-foundation-review-pack.md) — adapter-pattern design notes and the 7 DONKI API quirks documented for follow-up adapter agents.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — the JSON Schema and pydantic models this package emits for every fetched record.
-- **Downstream consumer**: [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) — uses these adapters to fuse multi-source space-weather signals.
+- **Downstream consumer**: [`helios-fusion-engine`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine) — uses these adapters to fuse multi-source space-weather signals.

@@ -1,13 +1,12 @@
 site_name: helios-fusion-engine
 site_description: BMA + isotonic + conformal fusion-engine framework for heterogeneous space-weather model outputs — 577 Industries HELIOS program
-site_url: https://577industries.github.io/helios-fusion-engine/
 site_author: 577 Industries Inc.
-repo_url: https://github.com/577Industries/helios-fusion-engine
-repo_name: 577Industries/helios-fusion-engine
-edit_uri: edit/main/
+repo_url: https://github.com/577Industries/open-source
+repo_name: 577Industries/open-source
+edit_uri: edit/main/programs/helios/helios-fusion-engine/docs/
 copyright: >-
   Copyright &copy; 2026 577 Industries Inc. — Apache 2.0 license. No NASA endorsement implied.
-  See <a href="https://577industries.github.io/helios-program/">helios-program</a> for the master plan and public companion document.
+  See <a href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">helios-program</a> for the master plan and public companion document.
 
 theme:
   name: material
@@ -82,7 +81,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/577Industries/helios-fusion-engine
+      link: https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine
       name: helios-fusion-engine on GitHub
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/577-industries/

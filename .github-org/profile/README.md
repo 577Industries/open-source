@@ -25,7 +25,7 @@ Columbus, Ohio · Dual-use commercial & defense
 - 🔧 **Code modernization** — legacy migration, AI-assisted refactoring, and secure modernization
 - ⚛ **Frontier research** — high-energy physics, quantum sensing, and post-quantum security
 
-Every public artifact ships with a license, a CI badge, and citable evidence. Every internal artifact is gated by a documented IP boundary. Programs land in this org iteratively as they ship; the active set is below.
+Every public artifact ships with a license and citable evidence. Every internal artifact is gated by a documented IP boundary. Programs land in this org iteratively as they ship; the active set is below.
 
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
@@ -37,7 +37,7 @@ flowchart LR
     ORG --- FOS["⛭ FORGE OS<br/>agent infrastructure libraries"]
     ORG --- FI["🌐 FORGE INTELLIGENCE<br/>OSINT fusion console"]
     ORG --- QS["⚛ QSPARX<br/>post-quantum migration planning"]
-    HELIOS --- hp["helios-program<br/>+ 4 artifact repos"]
+    HELIOS --- hp["helios-program<br/>+ 4 artifacts"]
     EVOLVE --- fe["forge-evolve-tmpc"]
     AEGIS --- ag["aegisgraph<br/>engine + review collection"]
     FOS --- fl["forge-os-libs<br/>5 packages, one repo"]
@@ -57,13 +57,13 @@ Multi-source space-weather fusion with feature-level provenance and calibrated u
 
 | Repository | Purpose |
 |---|---|
-| [`helios-program`](https://github.com/577Industries/helios-program) | Umbrella meta-repo · master plan, 4 submodules |
+| [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) | Program folder · master plan, companion document, copies of the 4 artifacts |
 | [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) | JSON Schema 2020-12 + W3C PROV-JSON RFC for feature-level lineage |
-| [`helios-spaceweather-connectors`](https://github.com/577Industries/helios-spaceweather-connectors) | 6 production adapters · DONKI, SEP A/B/C, SWPC, GOES, DSCOVR, CDDIS GIMs |
-| [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) | BMA + isotonic + Mondrian conformal calibration · arXiv preprint draft |
-| [`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis) | May 2024 Gannon G5 retrospective on the NGS CORS network |
+| [`helios-spaceweather-connectors`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors) | 6 production adapters · DONKI, SEP A/B/C, SWPC, GOES, DSCOVR, CDDIS GIMs |
+| [`helios-fusion-engine`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine) | BMA + isotonic + Mondrian conformal calibration · arXiv preprint draft |
+| [`gannon-storm-rtk-analysis`](https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis) | May 2024 Gannon G5 retrospective on the NGS CORS network |
 
-**Companion site →** [577industries.github.io/helios-program](https://577industries.github.io/helios-program/)
+**Companion document →** [programs/helios/helios-program/companion](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/companion/companion.md)
 
 ---
 

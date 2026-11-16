@@ -12,8 +12,8 @@ just send the PR.
 ## Development setup
 
 ```bash
-git clone https://github.com/577Industries/<repo>.git
-cd <repo>
+git clone https://github.com/577Industries/open-source.git
+cd open-source/programs/helios/helios-fusion-engine
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -e '.[dev]'

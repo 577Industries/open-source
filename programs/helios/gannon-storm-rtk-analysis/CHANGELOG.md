@@ -4,6 +4,9 @@ All notable changes to this project are documented here, following [Keep a Chang
 
 ## [Unreleased]
 
+### Changed
+- Links to the program, the connectors and the review pack lead to their folders in this repository, under `programs/helios/`. They led to the standalone repositories; links to `helios-provenance-spec` are unchanged. `CONTRIBUTING.md` clones this repository, `SECURITY.md` names it in its scope sentence, and the entry for 0.1.0 no longer points to a release page of the standalone repository.
+
 ## [0.2.0] — 2026-11-16
 
 ### Removed
@@ -46,5 +49,3 @@ Regenerated with Python 3.12, numpy 2.5 and pandas 3.1 from the 175 cached RINEX
 - 40 tests at 80% line+branch coverage; `mypy --strict`, `ruff` clean.
 - 1,707-word blog post draft: `blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md`.
 - 4 result figures committed (`results/figures/`) + per-station quantitative table (`results/quantitative.md`).
-
-See [GitHub releases](https://github.com/577Industries/gannon-storm-rtk-analysis/releases/tag/v0.1.0) for the canonical release notes.

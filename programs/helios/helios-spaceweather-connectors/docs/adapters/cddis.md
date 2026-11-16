@@ -78,7 +78,7 @@ redirect chain across several hosts. The `earthaccess` library handles
 this cleanly. Install via the optional `[earthdata]` extra:
 
 ```bash
-pip install 'helios-spaceweather-connectors[earthdata]'
+pip install "helios-spaceweather-connectors[earthdata] @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-spaceweather-connectors"
 ```
 
 This pulls in:

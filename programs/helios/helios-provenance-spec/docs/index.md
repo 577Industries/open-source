@@ -35,7 +35,8 @@ design, open questions, and adoption ask.
 ## Quickstart
 
 ```bash
-pip install helios-provenance-spec
+# Not on PyPI; install the v0.1.0 tag of the project's own repository:
+pip install "helios-provenance-spec @ git+https://github.com/577Industries/helios-provenance-spec.git@v0.1.0"
 ```
 
 ```python

@@ -39,8 +39,9 @@ __all__ = ["DEFAULT_USER_AGENT", "make_client", "request_with_retry"]
 logger = logging.getLogger(__name__)
 
 DEFAULT_USER_AGENT = (
-    "helios-spaceweather-connectors/0.1.0 "
-    "(https://github.com/577Industries/helios-spaceweather-connectors)"
+    "helios-spaceweather-connectors/0.2.1 "
+    "(https://github.com/577Industries/open-source/tree/main/"
+    "programs/helios/helios-spaceweather-connectors)"
 )
 
 # HTTP statuses we retry. 429 = rate-limited. 5xx = server-side glitch.

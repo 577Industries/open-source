@@ -1,5 +1,12 @@
 """Rebuild the companion footnotes registry from each artifact's repo state.
 
+NOTE (2026-11-16): this script reads the releases of the standalone HELIOS
+repositories. The artifacts are maintained in the monorepo now, under
+``programs/helios/``, and the standalone repositories are archived. There,
+``companion/footnotes.yaml`` is kept by hand and names the folders in the
+monorepo, and this script would write the standalone addresses back over it.
+It therefore does nothing unless it is given ``--standalone``.
+
 Pulled metadata per artifact:
   - latest GitHub release tag (via `gh release view`)
   - status (derived from release: 0.0.0 -> scaffolding; 0.1.x -> in-development;
@@ -12,9 +19,9 @@ The output is written to `companion/footnotes.yaml`. The companion document
 `companion/companion.md` reads URLs and status fields from this YAML through
 its rendering pipeline (`companion/render.py`).
 
-Usage:
-    python -m orchestration.companion_sync                # write/refresh
-    python -m orchestration.companion_sync --check        # error if stale
+Usage (in a checkout of the standalone ``helios-program`` only):
+    python -m orchestration.companion_sync --standalone           # write/refresh
+    python -m orchestration.companion_sync --standalone --check   # error if stale
 """
 from __future__ import annotations
 
@@ -38,6 +45,14 @@ HERE = Path(__file__).parent
 REPO_ROOT = HERE.parent
 COMPANION_DIR = REPO_ROOT / "companion"
 FOOTNOTES_PATH = COMPANION_DIR / "footnotes.yaml"
+
+MONOREPO_NOTE = (
+    "companion_sync: nothing written. In this repository companion/footnotes.yaml "
+    "is kept by hand and names the projects' folders under programs/helios/. This "
+    "script builds the file from the releases of the standalone HELIOS "
+    "repositories, which are archived, and would write their addresses back. "
+    "Pass --standalone to run it anyway."
+)
 
 
 @dataclass
@@ -177,7 +192,15 @@ def main() -> int:
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="verbose logging"
     )
+    parser.add_argument(
+        "--standalone",
+        action="store_true",
+        help="read the standalone repositories' releases (see the module note)",
+    )
     args = parser.parse_args()
+    if not args.standalone:
+        print(MONOREPO_NOTE, file=sys.stderr)
+        return 2
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(message)s",

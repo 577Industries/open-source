@@ -662,8 +662,9 @@ def _load_mag_archive(start: datetime, end: datetime) -> list[dict[str, Any]]:
         from pyspedas.tplot_tools import get_data
     except ImportError as exc:  # pragma: no cover - exercised via mocked tests
         raise RuntimeError(
-            "DscovrAdapter PySPEDAS path requires the 'pyspedas' extra: "
-            "pip install 'helios-spaceweather-connectors[pyspedas]'"
+            "DscovrAdapter PySPEDAS path requires the 'pyspedas' extra of this "
+            "package; docs/adapters/dscovr.md in the project's repository gives "
+            "the install command."
         ) from exc
 
     var_names = _pyspedas_mag(trange=trange, time_clip=True, no_update=False)
@@ -689,8 +690,9 @@ def _load_plasma_archive(start: datetime, end: datetime) -> list[dict[str, Any]]
         from pyspedas.tplot_tools import get_data
     except ImportError as exc:  # pragma: no cover
         raise RuntimeError(
-            "DscovrAdapter PySPEDAS path requires the 'pyspedas' extra: "
-            "pip install 'helios-spaceweather-connectors[pyspedas]'"
+            "DscovrAdapter PySPEDAS path requires the 'pyspedas' extra of this "
+            "package; docs/adapters/dscovr.md in the project's repository gives "
+            "the install command."
         ) from exc
 
     var_names = _pyspedas_fc(trange=trange, time_clip=True, no_update=False)

@@ -101,7 +101,7 @@ def main() -> None:
         )
 
     # Row 2 (top): the orchestration meta-repo, dotted-linked to everything.
-    p_program = box(3.6, 3.8, 2.8, 1.0, "helios-program", "plan + companion", "v0.2.0", color=grey)
+    p_program = box(3.6, 3.8, 2.8, 1.0, "helios-program", "plan + companion", "v0.3.0", color=grey)
 
     # Row 1 (middle): the technical chain A -> B -> C plus the private weights F.
     p_spec = box(

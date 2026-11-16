@@ -38,13 +38,14 @@ package.
   composition and the rationale for that stack.
 - See [`baselines.md`](baselines.md) for the "best individual component
   model" baseline definition.
-- See the [`01-synthetic-bma-demo.ipynb`](https://github.com/577Industries/helios-fusion-engine/blob/main/notebooks/01-synthetic-bma-demo.ipynb)
+- See the [`01-synthetic-bma-demo.ipynb`](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-fusion-engine/notebooks/01-synthetic-bma-demo.ipynb)
   notebook for a runnable end-to-end demonstration on synthetic data.
 
 ## Quickstart
 
 ```bash
-pip install helios-fusion-engine
+# Not on PyPI. This installs the main branch of this repository; the package reports version 0.1.2.
+pip install "helios-fusion-engine @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-fusion-engine"
 ```
 
 ```python
@@ -77,4 +78,4 @@ cp = MondrianConformalRegressor()
 
 ## License
 
-Apache 2.0 — see [LICENSE](https://github.com/577Industries/helios-fusion-engine/blob/main/LICENSE).
+Apache 2.0 — see [LICENSE](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-fusion-engine/LICENSE).

@@ -586,8 +586,9 @@ class CddisGimAdapter(BaseAdapter):
                 if self._use_earthaccess is True:
                     raise RuntimeError(
                         "use_earthaccess=True but the 'earthaccess' package is "
-                        "not installed. Install with: pip install "
-                        "'helios-spaceweather-connectors[earthdata]'"
+                        "not installed. Install this package with its "
+                        "'earthdata' extra; docs/adapters/cddis.md in the "
+                        "project's repository gives the command."
                     ) from None
                 session = None
             else:
@@ -781,9 +782,9 @@ def _decompress_unix_z(data: bytes) -> bytes:
     except ImportError as exc:
         raise RuntimeError(
             "Cannot decompress .Z (legacy Unix-compress) IONEX file: "
-            "the 'unlzw3' package is not installed. Install via the "
-            "'[earthdata]' extra: "
-            "pip install 'helios-spaceweather-connectors[earthdata]'. "
+            "the 'unlzw3' package is not installed. Install this package with "
+            "its 'earthdata' extra; docs/adapters/cddis.md in the project's "
+            "repository gives the command. "
             "Most CDDIS IONEX files dated 2023 or later use .gz and "
             "do not need this dependency."
         ) from exc

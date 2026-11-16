@@ -1,5 +1,7 @@
 # HELIOS Phase II — refined commercialization plan
 
+> **Dated record (note added 2026-11-16).** This document is left as written. Its links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve: those repositories are archived, and the projects are maintained in `577Industries/open-source` under `programs/helios/`.
+
 **Status**: Phase I learnings → Phase II strategy refinement (initial draft).
 **Last refreshed**: 2026-05-18.
 **Supersedes (for Phase II proposal use only)**: §6 of the submitted Phase I proposal (companion mirror at <https://577industries.github.io/helios-program/companion/#6-potential-post-applications-and-commercialization-plan>). The Phase I §6 remains canonical for the submitted proposal; this document is the **Phase II re-pitch refinement** built on top of it.

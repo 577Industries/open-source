@@ -1,13 +1,12 @@
 site_name: helios-spaceweather-connectors
 site_description: Production-grade Python adapters for space-weather data sources with feature-level provenance — 577 Industries HELIOS program
-site_url: https://577industries.github.io/helios-spaceweather-connectors/
 site_author: 577 Industries Inc.
-repo_url: https://github.com/577Industries/helios-spaceweather-connectors
-repo_name: 577Industries/helios-spaceweather-connectors
-edit_uri: edit/main/
+repo_url: https://github.com/577Industries/open-source
+repo_name: 577Industries/open-source
+edit_uri: edit/main/programs/helios/helios-spaceweather-connectors/docs/
 copyright: >-
   Copyright &copy; 2026 577 Industries Inc. — Apache 2.0 license. No NASA endorsement implied.
-  See <a href="https://577industries.github.io/helios-program/">helios-program</a> for the master plan and public companion document.
+  See <a href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">helios-program</a> for the master plan and public companion document.
 
 theme:
   name: material
@@ -82,7 +81,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/577Industries/helios-spaceweather-connectors
+      link: https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors
       name: helios-spaceweather-connectors on GitHub
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/577-industries/

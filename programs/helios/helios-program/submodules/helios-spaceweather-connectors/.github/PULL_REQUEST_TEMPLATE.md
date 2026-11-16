@@ -4,7 +4,7 @@
 
 ## Related
 
-- HELIOS master plan: <https://github.com/577Industries/helios-program/blob/main/plan/master-plan.md>
+- HELIOS master plan: <https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/plan/master-plan.md>
 - Closes #
 - Adapter design doc: `docs/design.md`
 - Connector pattern playbook (DONKI quirks for new adapter agents)

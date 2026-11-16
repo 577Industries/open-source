@@ -22,7 +22,7 @@ We aim to **acknowledge reports within 72 hours** and provide a remediation time
 
 ## Scope
 
-This policy covers code published in `github.com/577Industries/helios-*` and `github.com/577Industries/gannon-storm-rtk-analysis`. Third-party dependencies are out of scope; please report those upstream and we'll coordinate.
+This policy covers the HELIOS code published under `programs/helios/` in `github.com/577Industries/open-source` and in `github.com/577Industries/helios-provenance-spec`. Third-party dependencies are out of scope; please report those upstream and we'll coordinate.
 
 ## Hall of fame
 

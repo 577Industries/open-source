@@ -184,8 +184,8 @@ def test_decompress_z_without_unlzw3_raises_runtime_error(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """If a user requests a pre-2023 .Z file without the [earthdata] extra
-    installed, we raise a clear actionable RuntimeError pointing them at
-    the right pip install."""
+    installed, we raise a clear actionable RuntimeError naming the extra
+    to install and the guide that gives the command."""
 
     # Force ``import unlzw3`` to fail inside _decompress_unix_z.
     import builtins

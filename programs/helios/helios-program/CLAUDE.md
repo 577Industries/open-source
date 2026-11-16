@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> **Dated record (note added 2026-11-16).** This file describes HELIOS as six standalone repositories, as it was run until the projects were consolidated into `577Industries/open-source` on 2026-10-14. `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis` are archived, and their content is maintained in that repository under `programs/helios/`. The procedures below are left as written and do not apply there. In particular, do not run `python -m orchestration.companion_sync` (§7 and §8): `companion/footnotes.yaml` is kept by hand, and the script does nothing unless it is given `--standalone`. Links to those four repositories and to their documentation sites may no longer resolve.
+
 > Working context for the **HELIOS** program. Read this first if you're a new Claude session, a developer joining the program, or a future-you returning after a context gap. The program is large enough that working without this orientation has cost real time.
 
 ---

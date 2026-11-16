@@ -1,10 +1,10 @@
 # Makefile — gannon-storm-rtk-analysis
 #
 # Reproducible end-to-end run. Targets:
-#   make all       — fetch indices, fetch RINEX, compute solutions, write
+#   make all       — fetch the Kp index, fetch RINEX, compute solutions, write
 #                    figures + results/quantitative.md (~5-10 min cold cache,
 #                    <30 s warm cache).
-#   make fetch     — fetch only (CORS RINEX + GFZ Kp + Kyoto Dst).
+#   make fetch     — fetch only (CORS RINEX + the GFZ Kp archive).
 #   make analyze   — run analysis assuming data is cached.
 #   make plot      — regenerate figures only (assumes data is cached).
 #   make test      — run pytest with coverage.
@@ -26,15 +26,14 @@ help:
 ## all       — Full pipeline: fetch + analyze + plot + write quantitative.md
 all: fetch analyze plot
 
-## fetch     — Download CORS RINEX and SWPC indices into $(DATA_DIR)/.
+## fetch     — Download CORS RINEX and the GFZ Kp archive into $(DATA_DIR)/.
 fetch:
 	$(PYTHON) -c "from pathlib import Path; from gannon_analysis.fetch import fetch_window; from gannon_analysis.stations import stations_in_corridor; import httpx; \
 client = httpx.Client(timeout=60.0); \
 [fetch_window(s, Path('$(DATA_DIR)'), client=client) for s in stations_in_corridor()]; \
 client.close()"
-	$(PYTHON) -c "from pathlib import Path; from gannon_analysis.swpc import fetch_kp, fetch_dst; \
-fetch_kp(cache_path=Path('$(DATA_DIR)/swpc/kp.txt')); \
-fetch_dst(cache_path=Path('$(DATA_DIR)/swpc'))"
+	$(PYTHON) -c "from pathlib import Path; from gannon_analysis.swpc import fetch_kp; \
+fetch_kp(cache_path=Path('$(DATA_DIR)/swpc/kp.txt'))"
 
 ## analyze   — Run positioning + aggregates, write results/quantitative.md.
 analyze:

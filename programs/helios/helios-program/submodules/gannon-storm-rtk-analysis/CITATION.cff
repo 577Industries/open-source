@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software in academic work, please cite as below."
 title: "gannon-storm-rtk-analysis"
-abstract: "Retrospective analysis of RTK-GNSS positioning error during the May 10-12, 2024 Gannon G5 superstorm. Pulls NGS CORS RINEX for Iowa, Illinois, Indiana, and Ohio; computes per-station positioning error envelopes and correlates with NOAA SWPC indices and proton flux. Reproducible notebooks + blog post + result figures."
+abstract: "Retrospective analysis of RTK-GNSS positioning error during the May 10-12, 2024 Gannon G5 superstorm. Pulls NGS CORS RINEX for Iowa, Illinois, Indiana, and Ohio and computes per-station positioning error envelopes with a climatological model driven by the Kp index. Notebooks, a blog post and result figures."
 authors:
   - family-names: Waweru
     given-names: Thomas
@@ -13,8 +13,8 @@ keywords:
   - machine learning
   - provenance
 license: Apache-2.0
-repository-code: "https://github.com/577Industries/gannon-storm-rtk-analysis"
-url: "https://github.com/577Industries/gannon-storm-rtk-analysis"
+repository-code: "https://github.com/577Industries/open-source"
+url: "https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis"
 type: software
-version: 0.1.0
-date-released: "2026-05-17"
+version: 0.2.0
+date-released: "2026-11-16"

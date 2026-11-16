@@ -1,6 +1,6 @@
 """Bayesian Model Averaging orchestrator.
 
-Implements the BMA orchestration described in NASA SBIR proposal §2 Obj. 2:
+Implements the BMA orchestration described in proposal §2 Obj. 2:
 
     Bayesian Model Averaging (BMA) with dynamic weights conditioned on
     rolling 90-day verification skill per model.

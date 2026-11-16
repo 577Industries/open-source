@@ -3,7 +3,7 @@
 Why this exists
 ---------------
 
-The NASA SBIR proposal §2 Obj. 2 explicitly rejects Platt scaling:
+The proposal, §2 Obj. 2, explicitly rejects Platt scaling:
 
     Isotonic regression reliability calibration so predicted probabilities
     match observed event frequencies (Platt scaling considered and rejected

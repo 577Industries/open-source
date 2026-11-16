@@ -39,9 +39,10 @@
 {577 Industries Inc.}
 \newblock {gannon-storm-rtk-analysis: reproducible retrospective of the May
   2024 Gannon G5 storm RTK impact}.
-\newblock \url{https://github.com/577Industries/gannon-storm-rtk-analysis},
+\newblock
+  \url{https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis},
   2026.
-\newblock v0.1.0.
+\newblock v0.2.0.
 
 \bibitem{helios_fusion_engine}
 {577 Industries Inc.}

@@ -64,9 +64,12 @@ transparently:
 Archive providers:
 
 - **Kp**: [GFZ Potsdam Kp index](https://kp.gfz.de/) at
-  `https://kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt`
-  (CC-BY-4.0). IAGA-authoritative; 8 3-hour Kp values per daily row,
-  going back to 1932.
+  `https://kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt`.
+  IAGA-authoritative; 8 3-hour Kp values per daily row, going back to
+  1932. The file is CC BY 4.0 except its sunspot-number column, which is
+  CC BY-NC 4.0 (WDC-SILSO). The adapter reads the Kp and ap columns only,
+  and in the test fixture cut from this file the sunspot column is
+  replaced by the file's missing-data value.
 
 - **Dst**: [World Data Center for Geomagnetism, Kyoto](https://wdc.kugi.kyoto-u.ac.jp/)
   via the per-month file
@@ -75,9 +78,17 @@ Archive providers:
   fall back to `dst_provisional` if final is not yet published — final
   Dst typically lags 6-12 months.
 
+  **Terms of use.** The centre's data service states that it "does not allow
+  commercial applications of the geomagnetic indices"
+  (<https://wdc.kugi.kyoto-u.ac.jp/wdc/Sec3.html>). Check its terms before you
+  call `fetch_dst`. The test fixture for this path holds invented values in
+  the file's layout, not the centre's data, and 577 Industries' own analyses
+  do not use the index.
+
 This pattern was first applied in
-[`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis)
-for the Gannon retrospective; this adapter generalizes it.
+[`gannon-storm-rtk-analysis`](../../../gannon-storm-rtk-analysis/)
+for the Gannon retrospective (its Kp half; that analysis dropped Dst in
+0.2.0); this adapter generalizes it.
 
 ## Rate limits
 
@@ -129,9 +140,9 @@ for r in records[:3]:
 Expected output (first three 3-hour bins on May 8, 2024):
 
 ```
-2024-05-08T00:00:00+00:00 Kp=2.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
-2024-05-08T03:00:00+00:00 Kp=2.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
-2024-05-08T06:00:00+00:00 Kp=2.333 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T00:00:00+00:00 Kp=1.0 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T03:00:00+00:00 Kp=1.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T06:00:00+00:00 Kp=1.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
 ```
 
 And on May 11, 00-03 UT (the Gannon G5 peak):

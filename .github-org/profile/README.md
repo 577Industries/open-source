@@ -53,7 +53,7 @@ flowchart LR
 Multi-source space-weather fusion with feature-level provenance and calibrated uncertainty. Two vertical slices: mission-operations radiation risk and U.S. precision-agriculture GNSS reliability.
 
 > [!NOTE]
-> **Headline result.** During the May 2024 Gannon G5 superstorm, **1,302 station-hours** of U.S. row-crop GNSS pushed past the 2.5 cm RTK tolerance — the first citable quantification of solar-storm impact on U.S. agriculture. (Climatological v1; real-SPP v2 in progress.)
+> **Headline result.** During the May 2024 Gannon G5 superstorm, **1,283 station-hours** of U.S. row-crop GNSS pushed past the 2.5 cm RTK tolerance — the first citable quantification of solar-storm impact on U.S. agriculture. (Climatological v1; real-SPP v2 in progress.)
 
 | Repository | Purpose |
 |---|---|

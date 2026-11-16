@@ -33,7 +33,7 @@ The training run produces four trained artifacts that the kill-gate hold-out eva
 | Adapter | Status for Sprint C-Training |
 |---|---|
 | `SepScoreboardsAdapter` (ISWA) | Used. ISWA JSON deposits typically start ~2018 for most contributing models; pre-2018 events fall back to documented synthetic proxy streams. |
-| `SwpcAdapter` | Used for Kp. Kyoto archive coverage is reliable for events back to ~1980; very-old events may still fall back to synthetic Kp profiles. |
+| `SwpcAdapter` | Used for Kp, from the GFZ archive. Coverage is reliable for events back to ~1980; very-old events may still fall back to synthetic Kp profiles. |
 | `GoesAdapter` | Available; not consumed in the current pipeline (proton-flux fusion path is a §2 Obj. 4 thing, not the SEP kill-gate). |
 | `DscovrAdapter` | Available; not consumed in the current pipeline. |
 | `CddisGimAdapter` | **Gated on Earthdata creds.** Not required for the SEP kill-gate; recorded as a deferral when creds are absent. |

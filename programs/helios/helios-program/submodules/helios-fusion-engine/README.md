@@ -1,13 +1,15 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-dark.svg">
+  <img alt="577 Industries" height="44" src="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-light.svg">
+</picture>
+
 # helios-fusion-engine
 
-[![CI](https://github.com/577Industries/helios-fusion-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/577Industries/helios-fusion-engine/actions/workflows/ci.yml) [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PyPI](https://img.shields.io/pypi/v/helios-fusion-engine.svg)](https://pypi.org/project/helios-fusion-engine/)
+`HELIOS` · [program overview](https://github.com/577Industries#helios--calibrated-heliophysics-fusion)
 
-> Model-agnostic probabilistic fusion of heterogeneous space-weather model
-> outputs: Bayesian Model Averaging orchestrator, isotonic-regression
-> reliability calibrator, split + Mondrian conformal prediction wrappers,
-> and severity-stratified validation harness with CCMC-compatible metrics
-> (HSS, TSS, POD, FAR, Brier, CRPS).
+**Model-agnostic probabilistic fusion of heterogeneous space-weather model outputs.**
+
+[![ci](https://img.shields.io/github/actions/workflow/status/577Industries/helios-fusion-engine/ci.yml?style=flat-square&label=ci)](https://github.com/577Industries/helios-fusion-engine/actions/workflows/ci.yml) [![release](https://img.shields.io/github/v/release/577Industries/helios-fusion-engine?style=flat-square)](https://github.com/577Industries/helios-fusion-engine/releases) [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/helios-fusion-engine/)
 
 ## What this is
 
@@ -54,11 +56,12 @@ Specifically, the package provides:
 This repository is part of the **HELIOS** program, 577 Industries Inc.'s
 data-driven space weather research-to-operations-to-research work.
 
-**v0.1.0 — public framework first release.** The framework is feature-
-complete for the kill-gate path; once `helios-spaceweather-connectors` v0.2
-ships and the OSF pre-registration is filed, training and hold-out
-evaluation proceed in the private companion repo using this framework as
-its core library.
+**v0.2.0 — BMA orchestration with isotonic / Platt / severity-stratified
+calibrators, split + Mondrian conformal regressors, and CCMC-compatible
+metrics (May 18, 2026).** The framework is feature-complete for the kill-
+gate path. Trained priors and hold-out evaluation are not part of this
+repository; they belong to the private companion repo
+(`helios-fusion-internal`), which uses this framework as its core library.
 
 ## Quickstart
 
@@ -94,7 +97,7 @@ for an end-to-end runnable pipeline.
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (private; internal team)
+- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (public; program entry point)
 - **Architecture**: [`docs/architecture.md`](docs/architecture.md) explains
   why BMA + isotonic + conformal compose as they do.
 - **Baselines**: [`docs/baselines.md`](docs/baselines.md) defines the

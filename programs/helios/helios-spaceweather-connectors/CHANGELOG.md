@@ -4,6 +4,24 @@ All notable changes to this project are documented here, following [Keep a Chang
 
 ## [Unreleased]
 
+### Removed
+- **The recorded Kyoto Dst file** (`tests/fixtures/swpc/kyoto-dst-2405.html`,
+  May 2024). The World Data Center for Geomagnetism, Kyoto, does not allow
+  commercial applications of its indices, and 577 Industries is a commercial
+  entity, so the repository no longer carries its data. The Dst path of
+  `SwpcAdapter` is tested against
+  `tests/fixtures/swpc/dst-wdc-layout-synthetic-2405.txt`: invented values in
+  the same file layout, labelled as such on the first line. `fetch_dst` itself
+  is unchanged; `docs/adapters/swpc.md` now quotes the centre's terms.
+- **The sunspot numbers in the GFZ fixture** (`tests/fixtures/swpc/gfz-kp-2024-05.txt`).
+  GFZ's file is CC BY 4.0 except its sunspot-number column, which is
+  CC BY-NC 4.0 (WDC-SILSO). The column now holds the file's missing-data
+  value, and a header line says so. The adapter never read it.
+
+### Fixed
+- `docs/adapters/swpc.md` gave May 10's first three Kp values as May 8's, and
+  called GFZ's file CC BY 4.0 without the exception for its sunspot column.
+
 ### Changed
 - **BREAKING / NOAA upstream migration (2026-08)**: NOAA SWPC retired the
   entire `/products/solar-wind/` product line (every variant 404s). The

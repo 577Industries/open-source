@@ -4,8 +4,7 @@ Every figure has a footer with: data source, computation method, and
 generation timestamp. Conventions: figure DPI 150 (publication-grade),
 sans-serif font, viridis or storm-severity-ramped colormaps where appropriate.
 
-The headline plot, ``regional_error_with_indices``, is the screen-grabbable
-"oh that's bad" image meant for the blog post and LinkedIn thread.
+The headline plot is the first figure, regional error above the Kp index.
 """
 
 from __future__ import annotations
@@ -27,6 +26,7 @@ if TYPE_CHECKING:
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from . import __version__
 from .analysis import AnalysisBundle
 from .positioning import (
     PRECISION_AG_PLANTING_THRESHOLD_M,
@@ -38,11 +38,12 @@ from .swpc import kp_severity_color
 logger = logging.getLogger(__name__)
 
 DATA_FOOTER: str = (
-    "Data: NGS CORS RINEX (geodesy.noaa.gov) | GFZ Potsdam Kp | Kyoto WDC Dst\n"
-    "Method: gannon_analysis v0.1 climatological positioning model "
+    "Data: NGS CORS RINEX (geodesy.noaa.gov) | Kp index: GFZ Helmholtz Centre for Geosciences, "
+    "CC BY 4.0 (Matzka et al., 2021, doi:10.1029/2020SW002641)\n"
+    f"Method: gannon_analysis v{__version__} climatological positioning model "
     "(see docs/methodology.md)"
 )
-"""Footer line attached to every emitted figure."""
+"""Footer line attached to every emitted figure. Carries the credit the Kp index's licence asks for."""
 
 
 def _add_footer(fig: Figure) -> None:
@@ -51,7 +52,8 @@ def _add_footer(fig: Figure) -> None:
     fig.text(
         0.01,
         0.005,
-        f"{DATA_FOOTER}\nGenerated {ts} | 577 Industries Inc. | github.com/577Industries/gannon-storm-rtk-analysis",
+        f"{DATA_FOOTER}\nGenerated {ts} | 577 Industries Inc. | "
+        "github.com/577Industries/open-source (programs/helios/gannon-storm-rtk-analysis)",
         ha="left",
         va="bottom",
         fontsize=6,
@@ -73,17 +75,16 @@ def plot_regional_error_vs_time(
     secondary_threshold_m: float = PRECISION_AG_SPRAYING_THRESHOLD_M,
     out_path: Path | None = None,
 ) -> Figure:
-    """The headline plot: regional median + p95 2D error with Kp/Dst overlays.
+    """The headline plot: regional median + p95 2D error above the Kp index.
 
     Two stacked panels:
       Top:    regional median and 95th-percentile 2D horizontal error vs time
-              with operator threshold lines (planting + spraying) and severity
-              bars annotating peak G-scale.
-      Bottom: Kp (right axis) and Dst (left axis) on the same x-axis.
+              with operator threshold lines (planting + spraying).
+      Bottom: the three-hourly Kp index as bars coloured by NOAA G-scale, on
+              the same x-axis.
     """
     solutions = bundle["solutions"]
     kp_df = bundle["kp"]
-    dst_df = bundle["dst"]
 
     # Resample to 1-hour median + p95 for plottability
     hourly = solutions.groupby(pd.Grouper(level="time_utc", freq="1h")).agg(
@@ -131,43 +132,45 @@ def plot_regional_error_vs_time(
         title=(
             "May 2024 Gannon Storm — IA/IL/IN/OH corridor 2D horizontal SPP error\n"
             "v1 climatological model | "
-            f"peak Kp={kp_df['kp'].max():.1f} | "
-            f"Dst min={dst_df['dst'].min():.0f} nT"
+            f"peak Kp={kp_df['kp'].max():.1f}"
         ),
         xlabel="",
         ylabel="2D horizontal error (m, log)",
     )
     ax_err.legend(loc="upper left", fontsize=8)
 
-    # Bottom: Kp + Dst
-    ax_idx2 = ax_idx.twinx()
-    # Kp as colored stems
+    # Bottom: Kp as coloured bars, one per three-hour interval (drawn from the
+    # interval's start, where GFZ stamps it).
     for t, kp_val in kp_df["kp"].items():
-        ax_idx2.bar(
-            t, kp_val, width=0.115, color=kp_severity_color(float(kp_val)), edgecolor="none"
+        ax_idx.bar(
+            t,
+            kp_val,
+            width=0.115,
+            align="edge",
+            color=kp_severity_color(float(kp_val)),
+            edgecolor="none",
         )
-    ax_idx.plot(dst_df.index, dst_df["dst"], color="#1f1f1f", lw=1.6, label="Dst (nT)")
-    ax_idx.axhline(0, color="#888", lw=0.6)
 
-    _setup_axes(ax_idx, title="", xlabel="UTC", ylabel="Dst (nT)")
-    ax_idx2.set_ylabel("Kp (G-scale color-coded)")
-    ax_idx2.set_ylim(0, 9.5)
-    ax_idx.set_ylim(min(dst_df["dst"].min() * 1.1, -50), 50)
+    _setup_axes(ax_idx, title="", xlabel="UTC", ylabel="Kp (G-scale color-coded)")
+    ax_idx.set_ylim(0, 9.5)
 
     # X-axis formatting
     ax_idx.xaxis.set_major_locator(mdates.DayLocator())  # type: ignore[no-untyped-call]
     ax_idx.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))  # type: ignore[no-untyped-call]
     ax_idx.xaxis.set_minor_locator(mdates.HourLocator(byhour=[0, 6, 12, 18]))  # type: ignore[no-untyped-call]
 
-    # Mark G5 issuance and Gannon storm window
-    storm_start = datetime(2024, 5, 10, 17, 23)  # NOAA G5 issuance ~17:23 UT 2024-05-10
+    # Shade the storm window from the first CME's arrival. NOAA SWPC's notices of May 10, 2024:
+    # the first CME reached Earth at 12:37 pm EDT (16:37 UT), G4 conditions were observed at
+    # 1:39 pm EDT (17:39 UT) and G5 conditions at 6:54 pm EDT (22:54 UT).
+    storm_start = datetime(2024, 5, 10, 16, 37)
     storm_end = datetime(2024, 5, 12, 12)
     for ax in (ax_err, ax_idx):
         ax.axvspan(storm_start, storm_end, color="#fff0c0", alpha=0.30, zorder=0)  # type: ignore[arg-type]
+    # The note sits under the curves, in the empty part of the shaded window.
     ax_err.text(
         storm_start,  # type: ignore[arg-type]
-        ax_err.get_ylim()[1] * 0.55,
-        "  NOAA G5 watch issued\n  2024-05-10 17:23 UT",
+        0.25,
+        "  2024-05-10 (NOAA SWPC):\n  first CME arrival 16:37 UT\n  G5 first observed 22:54 UT",
         ha="left",
         va="top",
         fontsize=8,

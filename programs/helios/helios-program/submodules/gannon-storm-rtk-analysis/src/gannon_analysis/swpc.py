@@ -1,20 +1,22 @@
-"""Geomagnetic-index fetchers for the Gannon storm window.
+"""Geomagnetic-index fetcher for the Gannon storm window.
 
-The module is named ``swpc`` for proposal-traceability (NOAA SWPC is the
-operational US source), but for the May 2024 archive we use the
-authoritative-and-archive-friendly upstream sources:
+The module is named ``swpc`` because NOAA SWPC is the operational US source
+of the Kp index, but for the May 2024 archive we use the upstream source that
+keeps the full history:
 
-- **Kp** — GFZ Potsdam (Helmholtz Geomagnetic Observatory Niemegk),
-  ``https://kp.gfz.de/app/files/Kp_ap_since_1932.txt``. CC-BY-4.0.
+- **Kp** — GFZ Helmholtz Centre for Geosciences,
+  ``https://kp.gfz.de/app/files/Kp_ap_since_1932.txt``. CC BY 4.0; GFZ asks
+  users to cite Matzka et al. (2021), https://doi.org/10.1029/2020SW002641.
   Three-hourly resolution. Same series SWPC publishes for the current
-  30-day window, with full historical archive available.
-- **Dst** — World Data Centre for Geomagnetism, Kyoto,
-  ``https://wdc.kugi.kyoto-u.ac.jp/dst_provisional/<YYYYMM>/dst<YYMM>.for.request``.
-  Hourly resolution. The IAGA-authoritative geomagnetic storm-time disturbance
-  index.
+  30-day window, with the full historical archive available.
 
-Both sources are freely accessible without authentication. A fixture file is
+The source is freely accessible without authentication. A fixture file is
 shipped under ``tests/fixtures/`` so unit tests do not hit the network.
+
+Kp is the only index this package reads. Version 0.1.0 also downloaded the
+hourly Dst index from the World Data Center for Geomagnetism, Kyoto. That
+centre's data service does not allow commercial applications of its indices,
+so the fetcher, its parser and its fixture were removed in 0.2.0.
 """
 
 from __future__ import annotations
@@ -30,12 +32,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 KP_ARCHIVE_URL: str = "https://kp.gfz.de/app/files/Kp_ap_since_1932.txt"
-"""GFZ Potsdam Kp archive (CC-BY-4.0). One line per 3-hour Kp interval."""
-
-DST_ARCHIVE_URL_TEMPLATE: str = (
-    "https://wdc.kugi.kyoto-u.ac.jp/dst_provisional/{yyyymm}/dst{yymm}.for.request"
-)
-"""Kyoto WDC Dst archive. ``{yyyymm}`` = ``202405`` for May 2024."""
+"""GFZ Kp archive (CC BY 4.0). One line per 3-hour Kp interval."""
 
 GANNON_WINDOW_START: date = date(2024, 5, 8)
 """First UTC date of the analysis window."""
@@ -105,84 +102,6 @@ def fetch_kp(
     df = df.loc[start_dt:end_dt].copy()
     df["g_scale"] = df["kp"].apply(_kp_from_index)
     return df
-
-
-def fetch_dst(
-    start: date = GANNON_WINDOW_START,
-    end: date = GANNON_WINDOW_END,
-    *,
-    client: httpx.Client | None = None,
-    cache_path: Path | None = None,
-) -> pd.DataFrame:
-    """Fetch Kyoto WDC hourly Dst for ``[start, end]`` inclusive.
-
-    Spans across month boundaries by fetching each YYYYMM file once.
-
-    Returns:
-        DataFrame indexed by UTC datetime with one column ``dst`` (nT).
-    """
-    months: set[tuple[int, int]] = set()
-    cur = start
-    while cur <= end:
-        months.add((cur.year, cur.month))
-        cur = (cur.replace(day=28) + timedelta(days=4)).replace(day=1)
-
-    out_frames: list[pd.DataFrame] = []
-    for year, month in sorted(months):
-        yyyymm = f"{year:04d}{month:02d}"
-        yymm = f"{year % 100:02d}{month:02d}"
-        url = DST_ARCHIVE_URL_TEMPLATE.format(yyyymm=yyyymm, yymm=yymm)
-        text = _fetch_text(
-            url,
-            client=client,
-            cache_path=(cache_path / f"dst-{yyyymm}.txt") if cache_path else None,
-        )
-        out_frames.append(_parse_dst_text(text, year=year, month=month))
-    df = pd.concat(out_frames).sort_index()
-    start_dt = datetime.combine(start, datetime.min.time())
-    end_dt = datetime.combine(end, datetime.max.time())
-    return df.loc[start_dt:end_dt].copy()
-
-
-def _parse_dst_text(text: str, *, year: int, month: int) -> pd.DataFrame:
-    """Parse the WDC Kyoto fixed-width Dst file.
-
-    Each non-blank line has the format::
-
-        DST2405*01PPX120   0 -19 -26 -21 ...  -2
-
-    Where ``2405`` is YYMM, ``01`` is day-of-month, and there are 25 4-character
-    integer fields after the prefix (24 hourly values + 1 daily mean) starting
-    at column 20.
-    """
-    rows: list[tuple[datetime, int]] = []
-    for raw in text.splitlines():
-        line = raw.rstrip()
-        if not line.startswith("DST"):
-            continue
-        try:
-            dd = int(line[8:10])
-        except ValueError:
-            continue
-        # 24 hourly values, 4 chars each, starting at column 20.
-        values_block = line[20 : 20 + 24 * 4]
-        for hour in range(24):
-            chunk = values_block[hour * 4 : (hour + 1) * 4].strip()
-            if not chunk or chunk in {"9999", "-999"}:
-                continue
-            try:
-                dst = int(chunk)
-            except ValueError:
-                continue
-            try:
-                dt = datetime(year, month, dd, hour, 0, 0)
-            except ValueError:
-                continue
-            rows.append((dt, dst))
-    if not rows:
-        raise RuntimeError(f"No Dst rows parsed for {year:04d}-{month:02d}")
-    df = pd.DataFrame(rows, columns=["time_utc", "dst"])
-    return df.set_index("time_utc")
 
 
 def _fetch_text(

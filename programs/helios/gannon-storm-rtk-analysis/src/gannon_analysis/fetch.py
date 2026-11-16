@@ -43,7 +43,7 @@ GANNON_PEAK_DAYS: tuple[date, date, date] = (
 """The three days of peak G5 conditions during the Gannon superstorm."""
 
 DEFAULT_USER_AGENT: str = (
-    "gannon-storm-rtk-analysis/0.1 (HELIOS Artifact D; engineering@577industries.com)"
+    "gannon-storm-rtk-analysis/0.2 (HELIOS Artifact D; engineering@577industries.com)"
 )
 """HTTP User-Agent identifying this client to NGS for support/audit purposes."""
 

@@ -1,7 +1,8 @@
 """Tests for the NOAA SWPC adapter.
 
-Unit tests use captured fixtures from services.swpc.noaa.gov plus the
-GFZ Potsdam and Kyoto WDC archives. The :mark.live integration test is
+Unit tests use captured fixtures from services.swpc.noaa.gov and the GFZ
+Potsdam archive, and a file of invented values for the Dst path (see
+``conftest.py``). The :mark.live integration test is
 deselected by default; CI nightly runs ``pytest -m live`` while PRs run
 ``pytest -m "not live"``.
 
@@ -95,7 +96,7 @@ def test_g_scale_from_kp(kp: float, expected: str) -> None:
 
 
 # ---------------------------------------------------------------------------- #
-# GFZ + Kyoto parser tests against real fixtures
+# Archive parser tests: the real GFZ Kp file; a synthetic file in the WDC Dst layout
 # ---------------------------------------------------------------------------- #
 
 
@@ -127,18 +128,23 @@ def test_parse_gfz_kp_skips_comments_and_negatives() -> None:
     assert all(s[0].day == 1 for s in samples)
 
 
-def test_parse_kyoto_dst_gannon_peak(kyoto_dst_2405_fixture: str) -> None:
-    """The Kyoto May 2024 fixture must contain Dst <= -400 nT during Gannon."""
-    samples = _parse_kyoto_dst(kyoto_dst_2405_fixture, year=2024, month=5)
-    assert len(samples) >= 24 * 28, f"expected ~720 hourly samples, got {len(samples)}"
-    # Find the minimum Dst over May 10-11 (Gannon's superstorm phase)
-    storm_window = [
+def test_parse_kyoto_dst_reads_a_month_in_the_wdc_layout(dst_wdc_layout_fixture: str) -> None:
+    """The parser reads every hour of the synthetic month, deep negatives included.
+
+    The fixture's values are invented (see ``conftest.py``). Its dip, which reaches
+    -500 on day 11, makes four-character fields adjoin with no space between them
+    on days 10 to 12, which is the layout's hard case.
+    """
+    samples = _parse_kyoto_dst(dst_wdc_layout_fixture, year=2024, month=5)
+    assert len(samples) == 24 * 31, f"expected 744 hourly samples, got {len(samples)}"
+    dip = [
         (ts, dst)
         for ts, dst in samples
         if datetime(2024, 5, 10, tzinfo=UTC) <= ts <= datetime(2024, 5, 12, tzinfo=UTC)
     ]
-    min_dst = min(s[1] for s in storm_window)
-    assert min_dst <= -400, f"expected Dst <= -400 nT during Gannon, got {min_dst}"
+    min_dst = min(s[1] for s in dip)
+    assert min_dst <= -400, f"expected the synthetic dip to pass -400, got {min_dst}"
+    assert min(ts for ts, dst in samples if dst == min_dst) == datetime(2024, 5, 11, 12, tzinfo=UTC)
 
 
 def test_parse_kyoto_dst_skips_sentinels() -> None:
@@ -397,9 +403,12 @@ async def test_fetch_kp_archive_lineage_includes_gfz(
 
 
 @pytest.mark.asyncio
-async def test_fetch_dst_gannon_via_kyoto(kyoto_dst_2405_fixture: str) -> None:
-    """fetch_dst must produce hourly Dst records with Kyoto WDC lineage."""
-    archive_client = _archive_mock_client({"dst_provisional/202405": kyoto_dst_2405_fixture})
+async def test_fetch_dst_gannon_via_kyoto(dst_wdc_layout_fixture: str) -> None:
+    """fetch_dst must produce hourly Dst records with Kyoto WDC lineage.
+
+    The archive is mocked with the synthetic month; no real Dst value is read.
+    """
+    archive_client = _archive_mock_client({"dst_provisional/202405": dst_wdc_layout_fixture})
     async with SwpcAdapter(archive_client=archive_client, cache=False) as swpc:
         records = [r async for r in swpc.fetch_dst(start=GANNON_START, end=GANNON_END)]
     assert records
@@ -410,17 +419,17 @@ async def test_fetch_dst_gannon_via_kyoto(kyoto_dst_2405_fixture: str) -> None:
         and any("Kyoto WDC" in segment for segment in r.provenance.extra["lineage"])
         for r in records
     )
-    # Min Dst during Gannon should be at most -400 nT
+    # The synthetic month dips below -400 inside the window asked for.
     min_dst = min(r.value["dst"] for r in records)
     assert min_dst <= -400
 
 
 @pytest.mark.asyncio
-async def test_fetch_dst_recent_uses_provisional(kyoto_dst_2405_fixture: str) -> None:
+async def test_fetch_dst_recent_uses_provisional(dst_wdc_layout_fixture: str) -> None:
     """A 'recent' window (<30d) should hit provisional Kyoto, not final."""
     requested: list[str] = []
     archive_client = _archive_mock_client(
-        {"dst_provisional": kyoto_dst_2405_fixture},
+        {"dst_provisional": dst_wdc_layout_fixture},
         requested_log=requested,
     )
     now = datetime.now(UTC)

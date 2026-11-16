@@ -21,7 +21,7 @@
 
 /* Subtle "part of the HELIOS program" footer link */
 .md-footer-meta::after {
-  content: "Part of the HELIOS program — see helios-program for the master plan and proposal companion.";
+  content: "Part of the HELIOS program — see helios-program.";
   display: block;
   padding: 0.5rem 1rem;
   font-size: 0.8rem;

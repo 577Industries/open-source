@@ -4,10 +4,10 @@
 
 ## Related
 
-- HELIOS master plan: <https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/plan/master-plan.md>
+- HELIOS program: <https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program>
 - Closes #
 - OSF pre-registration template: https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/orchestration/osf_preregistration.template.md
-- Kill-gate decision rules in helios-program master plan §C
+- Kill-gate decision rules: §9 of the OSF pre-registration template
 
 ## Quality
 

@@ -57,13 +57,11 @@ Multi-source space-weather fusion with feature-level provenance and calibrated u
 
 | Repository | Purpose |
 |---|---|
-| [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) | Program folder · master plan, companion document, copies of the 4 artifacts |
+| [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) | Program folder · review packs, the pre-registration text, copies of the 4 artifacts |
 | [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) | JSON Schema 2020-12 + W3C PROV-JSON RFC for feature-level lineage |
 | [`helios-spaceweather-connectors`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors) | 6 production adapters · DONKI, SEP A/B/C, SWPC, GOES, DSCOVR, CDDIS GIMs |
 | [`helios-fusion-engine`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine) | BMA + isotonic + Mondrian conformal calibration · arXiv preprint draft |
 | [`gannon-storm-rtk-analysis`](https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis) | May 2024 Gannon G5 retrospective on the NGS CORS network |
-
-**Companion document →** [programs/helios/helios-program/companion](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/companion/companion.md)
 
 ---
 

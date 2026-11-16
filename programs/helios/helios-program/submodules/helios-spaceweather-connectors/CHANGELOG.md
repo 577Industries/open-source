@@ -7,6 +7,13 @@ Releases `v0.2.0a1`, `v0.2.0` and `v0.2.1` (all 2026-05-17) were tagged in the p
 ## [Unreleased]
 
 ### Removed
+- **`CLAUDE.md`** (2026-11-16), the agent working notes written for the
+  standalone repository. The test policy it summarized is in
+  `CONTRIBUTING.md`, which gains the two rules that only the notes stated:
+  where the version is kept, and that a provenance URL must be absolute. It
+  also names what the notes did not: two version literals in the Scoreboards
+  adapter, and the local path that the CDDIS GIM adapter records where an
+  address belongs.
 - **The recorded Kyoto Dst file** (`tests/fixtures/swpc/kyoto-dst-2405.html`,
   May 2024). The World Data Center for Geomagnetism, Kyoto, does not allow
   commercial applications of its indices, and 577 Industries is a commercial
@@ -48,11 +55,16 @@ Releases `v0.2.0a1`, `v0.2.0` and `v0.2.1` (all 2026-05-17) were tagged in the p
   sentence) and the README, which loses
   the badges that queried the standalone repository's CI and releases. Links to
   the program and the fusion engine lead to their folders under
-  `programs/helios/`; links to `helios-provenance-spec` are unchanged.
+  `programs/helios/`; links to `helios-provenance-spec` are unchanged. The
+  program's master plan is no longer in this repository, so nothing here links
+  or names it as a document to read; two source comments still credit it. The
+  SEP Scoreboards guide loses its cross-reference to the program's companion
+  document, removed as well, and the adapter table's strategy note no longer
+  names a survey that is not in this repository.
 - `README.md` and `docs/index.md` called the program private; its folder in
   this repository is public.
-  `CONTRIBUTING.md`, `CLAUDE.md` and the SEP Scoreboards guide say that no
-  workflow runs in this repository.
+  `CONTRIBUTING.md` and the SEP Scoreboards guide say that no workflow runs in
+  this repository.
 - **BREAKING / NOAA upstream migration (2026-08)**: NOAA SWPC retired the
   entire `/products/solar-wind/` product line (every variant 404s). The
   `plasma`/`mag` products of `SwpcAdapter` and the near-real-time leg of

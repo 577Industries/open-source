@@ -2,7 +2,7 @@
 
 This page documents how to reproduce the Table 3-1 training run end-to-end: fitting BMA priors, severity-stratified isotonic calibrators, and split + Mondrian conformal residual sets across the seven training events specified in the OSF pre-registration (`helios-program/orchestration/osf_preregistration.template.md`, §5).
 
-The training run produces four trained artifacts that the kill-gate hold-out evaluation will consume. The artifacts themselves live in the private `helios-fusion-internal/weights/` companion repo (per the hybrid-IP strategy in the master plan §6.6); the reproducible code paths that produce them live in this package's `helios_fusion.training` subpackage.
+The training run produces four trained artifacts that the kill-gate hold-out evaluation will consume. The artifacts themselves live in the private `helios-fusion-internal/weights/` companion repo (the program's split between open framework and private weights); the reproducible code paths that produce them live in this package's `helios_fusion.training` subpackage.
 
 ## What this sprint does NOT do
 
@@ -43,7 +43,7 @@ When an upstream source doesn't cover the window, the loader substitutes a deter
 ### Option A: end-to-end via the notebook (preferred)
 
 ```
-cd ~/577i-Projects/.worktrees/helios-fusion-engine-training
+cd open-source/programs/helios/helios-fusion-engine
 source .venv/bin/activate
 jupyter execute notebooks/02-train-on-table-3-1.ipynb
 ```
@@ -118,9 +118,9 @@ A separate "trained-parameter-record" model is not currently necessary; the oper
 
 ## Reproducibility seed
 
-All synthetic-proxy fallbacks are seeded from `_SYNTH_SEED = 20260517` (the spec date, YYYYMMDD) xor-ed with the event-ID hash. The seed is locked.
+All synthetic-proxy fallbacks are seeded from `_SYNTH_SEED = 20260517` (the date the training sprint was specified, YYYYMMDD) xor-ed with the event-ID hash. The seed is locked.
 
-## Verification gate (per the spec)
+## Verification gate
 
 The training run is considered successful when:
 

@@ -57,6 +57,17 @@ Any new connector, transformation, or fused output that produces a value must em
 `ProvenanceRecord` per [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec).
 PRs that produce values without a provenance record will be sent back for revision.
 
+A provenance reference that is a URL must be absolute, host included: a relative path cannot be followed from a
+record. The CDDIS GIM adapter records the path of the cached file it read, not the file's address; that is a known
+gap.
+
+## Versions
+
+The version is `__version__` in `src/helios_connectors/__init__.py`. Change `version:` in `CITATION.cff` and the
+product token of `DEFAULT_USER_AGENT` in `src/helios_connectors/http.py` in the same commit; a test compares the
+last with `__version__`. Two literals in `src/helios_connectors/adapters/sep_scoreboards.py` (in
+`to_helios_model_output`) repeat the version and no test compares them: change them too.
+
 ## License
 
 By contributing, you agree your contributions will be licensed under the project's

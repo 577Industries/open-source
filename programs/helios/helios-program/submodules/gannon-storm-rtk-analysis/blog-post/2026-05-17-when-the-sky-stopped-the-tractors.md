@@ -12,7 +12,8 @@ canonical: https://577industries.com/posts/when-the-sky-stopped-the-tractors
 longer used or shown: its source, the World Data Center for Geomagnetism in
 Kyoto, does not allow commercial applications of its indices. The figures were
 regenerated without it, and the headline is now 1,283 station-hours; the text
-below keeps its round 1,300.*
+below keeps its round 1,300. The companion document named near the end was
+removed from the repository on 2026-11-16.*
 
 ## The day the GPS broke
 

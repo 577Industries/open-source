@@ -87,7 +87,5 @@ jobs:
             paper/tables/
             paper/figures/*.png
             paper/main.bbl
-            paper/COVER_LETTER.md
-            paper/SUBMISSION_CHECKLIST.md
           if-no-files-found: error
           retention-days: 90

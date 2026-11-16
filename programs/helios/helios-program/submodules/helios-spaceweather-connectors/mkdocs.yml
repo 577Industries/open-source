@@ -6,7 +6,7 @@ repo_name: 577Industries/open-source
 edit_uri: edit/main/programs/helios/helios-spaceweather-connectors/docs/
 copyright: >-
   Copyright &copy; 2026 577 Industries Inc. — Apache 2.0 license. No NASA endorsement implied.
-  See <a href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">helios-program</a> for the master plan and public companion document.
+  See <a href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">helios-program</a> for the program's review packs.
 
 theme:
   name: material

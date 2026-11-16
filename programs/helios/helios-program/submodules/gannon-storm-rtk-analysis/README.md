@@ -114,7 +114,7 @@ press: [`blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md`](blog-post/2
 
 ## Documentation
 
-- Master plan: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
+- Program: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
 - Methodology: [`docs/methodology.md`](docs/methodology.md)
 - Provenance schema (sibling artifact): [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
 
@@ -154,7 +154,7 @@ engineering@577industries.com
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — master plan, orchestration scripts.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — review packs and the pre-registration text.
 - **Wave 1 review pack**: [Artifact D Gannon analysis review pack](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/specs/2026-05-17-D-gannon-analysis-review-pack.md) — methodology disclosure, IL undersampling caveat, citation guidance.
-- **Connector library** (v2 dependency): [`helios-spaceweather-connectors`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors) — when CDDIS GIMs adapter ships (Wave 2b), v2 will swap the climatological model for full pseudo-range SPP via IGS ephemerides.
+- **Connector library** (v2 dependency): [`helios-spaceweather-connectors`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors) — its CDDIS GIMs adapter is in v0.2.1; v2 will swap the climatological model for full pseudo-range SPP via IGS ephemerides.
 - **Blog post**: [`blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md`](./blog-post/2026-05-17-when-the-sky-stopped-the-tractors.md) — draft of about 1,700 words for 577industries.com.

@@ -31,7 +31,7 @@ Some tests gate on environment variables. The defaults are honest about toolchai
 
 Parsers / wrappers not built in the current host (Java/Rust/Go/Clang) skip cleanly with `pytest.skip()`. Run `python3 -m pytest -q` and expect ~5 skips on a host without the full toolchain. In the devcontainer, all skips drop to 0.
 
-If you see a test fail rather than skip on a missing toolchain, that is a contract bug — file it under the relevant stream's MERGE_REQUEST follow-ups.
+If you see a test fail rather than skip on a missing toolchain, that is a contract bug — report it against the relevant stream.
 
 ## Adding tests
 

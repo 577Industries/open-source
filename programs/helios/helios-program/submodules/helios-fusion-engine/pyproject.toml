@@ -79,9 +79,8 @@ Documentation = "https://github.com/577Industries/open-source/tree/main/programs
 path = "src/helios_fusion/__init__.py"
 
 [tool.hatch.metadata]
-# Required to allow git+https direct references in optional-dependencies
-# (helios-provenance-spec and helios-spaceweather-connectors are not yet on PyPI;
-# trusted publishing pending per OPERATOR_TODO Step 3).
+# Required to allow direct references in optional-dependencies
+# (helios-provenance-spec and helios-spaceweather-connectors are not on PyPI).
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]

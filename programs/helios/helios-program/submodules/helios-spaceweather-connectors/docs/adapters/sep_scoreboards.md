@@ -220,7 +220,6 @@ absent keys as `None`.
 * CCMC ISEP project: <https://ccmc.gsfc.nasa.gov/scoreboards/sep/>
 * `sep_json_writer.py` documentation:
   <https://ccmc.gsfc.nasa.gov/scoreboards/sep/using-json-helper-script-documentation/>
-* HELIOS companion §3 T1 — CCMC integration constraints
 
 ## Pre-2018 coverage (v0.2.1 ISWA probe)
 

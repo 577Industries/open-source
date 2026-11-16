@@ -25,4 +25,4 @@ labels: enhancement
 
 ## Additional context
 
-<!-- Links to HELIOS master plan sections, related RFCs, upstream documentation. -->
+<!-- Links to related design specs, RFCs, upstream documentation. -->

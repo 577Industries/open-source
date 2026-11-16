@@ -27,6 +27,7 @@ import datetime
 import hashlib
 import json
 import math
+import os
 import pathlib
 import re
 import sys
@@ -41,7 +42,7 @@ from scipy.spatial import cKDTree
 from scipy.spatial.transform import Rotation as R
 
 # Optional NVIDIA Blackwell / CUDA hardware acceleration probe (with deterministic CPU fallback for CI)
-_GPU_CACHE_SITE = pathlib.Path("/home/twawe/.cache/nv074-gpu-py312-site")
+_GPU_CACHE_SITE = pathlib.Path(os.path.expanduser(os.environ.get("FORGE_GPU_CACHE_SITE") or "~/.cache/nv074-gpu-py312-site"))
 if _GPU_CACHE_SITE.exists() and str(_GPU_CACHE_SITE) not in sys.path:
     sys.path.append(str(_GPU_CACHE_SITE))
 

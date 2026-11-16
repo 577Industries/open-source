@@ -22,8 +22,8 @@ Public entry points
 * :func:`run_full_training` -- end-to-end orchestrator that runs the four
   fits in sequence and returns a :class:`TrainingArtifacts` bundle.
 
-Critical-constraint reminders (see
-``helios-program/specs/2026-05-17-Sprint-C-Training-spec.md``):
+Critical-constraint reminders (see ``docs/training.md``, and §5 of the
+pre-registration template for the locked events):
 
 * The seven events are locked. Hyperparameters are locked. Do NOT retune.
 * This subpackage does NOT execute the hold-out evaluation. That's gated on

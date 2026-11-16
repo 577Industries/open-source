@@ -18,7 +18,7 @@ contract.
 | GOES X-ray + proton flux | WRAP (PySPEDAS / SWPC NRT JSON) | **v0.2.1 — shipped** | [`adapters.goes`](adapters/goes.md) |
 | DSCOVR upstream solar wind | WRAP (PySPEDAS archive / NOAA RTSW realtime) | **v0.2.1 — shipped** (realtime records carry `SourceID.RTSW`) | [`adapters.dscovr`](adapters/dscovr.md) |
 
-Strategy reference (from the master plan landscape survey):
+Strategy reference:
 
 - **BUILD** — no existing maintained client; we implement from scratch.
 - **EXTEND** — partial SunPy / community client; we add the gaps.
@@ -58,7 +58,7 @@ model, and how to add a new source.
 
 ## See also
 
-- [HELIOS program master plan](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program)
+- [HELIOS program folder](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program)
   (public; program entry point)
 - [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
   — JSON Schema for the provenance model

@@ -37,9 +37,9 @@ best_id, hss_point, (ci_lo, ci_hi) = best_individual_component_baseline(
 )
 ```
 
-The function is referenced by the kill-gate runner in
+The function is meant for the kill-gate runner in
 `helios-program/orchestration/kill_gate.py` (currently a placeholder that
-raises). When the kill-gate runs, the fused HSS (from
+raises and calls nothing). When the kill-gate runs, the fused HSS (from
 `evaluate(...).aggregate.hss.point`) is compared against
 `hss_point` via the locked 15% relative-improvement rule:
 

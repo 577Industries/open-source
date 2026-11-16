@@ -34,13 +34,6 @@ jobs:
       - name: Install docs dependencies
         run: pip install -r requirements-docs.txt
 
-      - name: Copy non-markdown assets into docs/
-        run: |
-          set -e
-          # All markdown content is included at build time via mkdocs-include-markdown-plugin.
-          # The only file still copied is footnotes.yaml (referenced as a relative download link in companion.md).
-          cp companion/footnotes.yaml docs/footnotes.yaml
-
       - name: Build site
         run: mkdocs build --strict
 

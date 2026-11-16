@@ -52,7 +52,7 @@
   {
     "repo": "helios-program",
     "program": "HELIOS",
-    "blurb": "HELIOS program meta-repo: master plan, orchestration scripts, per-artifact design specs"
+    "blurb": "HELIOS program folder: per-artifact review packs and the pre-registration text"
   },
   {
     "repo": "helios-provenance-spec",

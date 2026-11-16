@@ -1,7 +1,7 @@
 # HELIOS Fusion Engine — Pre-Registration
 
 **File this on the Open Science Framework BEFORE running hold-out evaluation on Table 3-1.**
-**The OSF URL must be present in `orchestration/osf_preregistration.url` for the kill-gate runner to proceed.**
+**Record the OSF URL in `orchestration/osf_preregistration.url` before the kill-gate runner is run.**
 
 ---
 
@@ -96,7 +96,7 @@ All metrics are reported per-stratum AND aggregated.
 
 Computed AFTER hold-out evaluation; no post-hoc re-baselining.
 
-- **PASS both H1 and H2** → file full arXiv preprint to astro-ph.SR with cs.LG cross-list. Companion footnote in `companion.md` populated with arXiv URL within 7 days of submission.
+- **PASS both H1 and H2** → file full arXiv preprint to astro-ph.SR with cs.LG cross-list.
 - **PASS one, FAIL one** → file an "honest ablation" preprint reporting the failing dimension, with explicit pre-registration reference. Useful for the community even though it isn't the headline result.
 - **FAIL both** → do not publish. Ship `helios-fusion-engine` v0.1.0 with the negative result documented in a notebook and a clearly-labeled section of the README.
 
@@ -117,4 +117,4 @@ Deviations from the pre-registration (e.g., a component model becomes unavailabl
 4. File. Save the OSF DOI/URL to `orchestration/osf_preregistration.url`.
 5. Tag the helios-fusion-engine repo with `prereg-v1.0` at the locked commit.
 
-Only then does the kill-gate runner permit invocation.
+Only then may the kill-gate runner be invoked.

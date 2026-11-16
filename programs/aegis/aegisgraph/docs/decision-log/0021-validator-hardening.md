@@ -197,8 +197,9 @@ following streams that have not merged into validator-export yet:
   yet emitted as JSON evidence files; the recommendation-bundling
   stream will land them.
 
-These are recorded in `validator/MERGE_REQUEST.md` so the integration
-reviewer can confirm the expected unbacked count matches.
+These were recorded in `validator/MERGE_REQUEST.md`, a working note removed
+from this repository on 2026-11-16, so that the integration reviewer could
+confirm the expected unbacked count matched.
 
 ## Tests
 

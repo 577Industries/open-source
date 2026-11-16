@@ -5,7 +5,7 @@ All notable changes to this project are documented here, following [Keep a Chang
 ## [Unreleased]
 
 ### Changed
-- Links to the program, the connectors and the review pack lead to their folders in this repository, under `programs/helios/`. They led to the standalone repositories; links to `helios-provenance-spec` are unchanged. `CONTRIBUTING.md` clones this repository, `SECURITY.md` names it in its scope sentence, and the entry for 0.1.0 no longer points to a release page of the standalone repository.
+- Links to the program, the connectors and the review pack lead to their folders in this repository, under `programs/helios/`. They led to the standalone repositories; links to `helios-provenance-spec` are unchanged. `CONTRIBUTING.md` clones this repository, `SECURITY.md` names it in its scope sentence, and the entry for 0.1.0 no longer points to a release page of the standalone repository. The program's master plan and companion document are no longer in this repository, so the README, the templates and the documentation settings name the program's folder alone, and the blog post's dated note says that the companion it names was removed. The README no longer says that the connectors' CDDIS adapter is yet to ship; it is in `v0.2.1`.
 
 ## [0.2.0] — 2026-11-16
 

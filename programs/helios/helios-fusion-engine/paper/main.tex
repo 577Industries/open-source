@@ -187,9 +187,9 @@ trajectory.  Section~\ref{sec:repro} documents reproducibility artifacts.
     \texttt{helios-fusion-engine} (C).  Trained weights are persisted to the
     private companion repo \texttt{helios-fusion-internal} (F).
     \texttt{gannon-storm-rtk-analysis} (D) consumes the connector layer
-    independently.  The \texttt{helios-program} meta-repo holds the master
-    plan, companion document, OSF pre-registration template, and orchestration
-    scripts; dotted lines denote orchestration / documentation links rather
+    independently.  The \texttt{helios-program} meta-repo held, at the cited revision
+    \cite{helios_program}, the master plan, companion document, OSF
+    pre-registration template, and orchestration scripts; dotted lines denote orchestration / documentation links rather
     than hard code dependencies.}
   \label{fig:architecture}
 \end{figure*}
@@ -497,7 +497,7 @@ the three-event hold-out:
         within 0.15 of 1.0 across all three Kp severity strata.
 \end{itemize}
 
-The master plan §C decision tree has three branches, presented as stock
+The master plan §C decision tree \cite{helios_program} has three branches, presented as stock
 paragraphs below.  At fill-in time the operator selects exactly one and
 deletes the other two.
 
@@ -663,8 +663,8 @@ the kill-gate evaluation harness are public under Apache 2.0:
 \begin{itemize}[leftmargin=*,itemsep=0pt]
   \item \texttt{helios-program} \cite{helios_program} ---
         master plan, OSF pre-registration template, master-plan §C decision
-        tree, orchestration scripts, this companion document.
-        \url{https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program}
+        tree, orchestration scripts, this companion document (all at the
+        revision cited).
   \item \texttt{helios-provenance-spec} \cite{helios_provenance_spec} ---
         JSON Schema (draft 2020-12) + pydantic v2 reference implementation
         + RFC-0001.

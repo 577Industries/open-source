@@ -27,12 +27,10 @@
         <strong>1,283 station-hours</strong>
         <span>of RTK error exceeding the 2.5 cm planting threshold across 25 NGS CORS stations in IA / IL / IN / OH during the May 10-12, 2024 Gannon G5 storm.</span>
       </div>
-      <span class="helios-hero__caveat">First reproducible quantification. v1 climatological model — full SPP refinement in v2 via the CDDIS adapter (in flight).</span>
+      <span class="helios-hero__caveat">First reproducible quantification. v1 climatological model — full SPP refinement is planned for v2, via the CDDIS adapter.</span>
 
       <div class="helios-hero__actions">
-        <a class="helios-btn helios-btn--primary" href="companion/">Read the Companion Document</a>
-        <a class="helios-btn helios-btn--secondary" href="master-plan/">Master Plan</a>
-        <a class="helios-btn helios-btn--secondary" href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">GitHub</a>
+        <a class="helios-btn helios-btn--primary" href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program">GitHub</a>
       </div>
     </div>
   </section>
@@ -43,9 +41,9 @@
 <div class="helios-artifacts">
   <h2 id="artifacts">Public artifacts</h2>
   <p class="helios-artifacts__intro">
-    Four public repositories + one private companion convert the HELIOS technical
-    claims into citable, reproducible URLs. Status reflects the most recent tagged
-    release; see <a href="footnotes.yaml">footnotes.yaml</a> for the machine-readable registry.
+    Four public projects + one private companion convert the HELIOS technical
+    claims into citable, reproducible URLs. Each card gives the version the
+    program's README lists for that project.
   </p>
 
   <div class="helios-artifact-grid">
@@ -65,10 +63,10 @@
       <h3>helios-spaceweather-connectors</h3>
       <p class="helios-artifact-card__desc">
         Production-grade Python adapters for DONKI, NOAA SWPC, CCMC SEP Scoreboards,
-        NASA CDDIS GIMs, GOES, and DSCOVR. DONKI live; five more in flight.
+        NASA CDDIS GIMs, GOES, and DSCOVR.
       </p>
       <div class="helios-artifact-card__footer">
-        <span class="helios-status helios-status--scaffolding">scaffolding · pre-v0.1</span>
+        <span class="helios-status helios-status--in-development">v0.2.1 · in-development</span>
         <a class="helios-artifact-card__link" href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors">repo →</a>
       </div>
     </div>
@@ -80,7 +78,7 @@
         Mondrian conformal prediction + CCMC-compatible metrics. Public framework.
       </p>
       <div class="helios-artifact-card__footer">
-        <span class="helios-status helios-status--in-development">v0.1.0 · in-development</span>
+        <span class="helios-status helios-status--in-development">v0.2.0 · in-development</span>
         <a class="helios-artifact-card__link" href="https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine">repo →</a>
       </div>
     </div>
@@ -100,14 +98,6 @@
 </div>
 
 <div class="helios-stats">
-  <div class="helios-stat">
-    <div class="helios-stat__number">309</div>
-    <div class="helios-stat__label">tests passing</div>
-  </div>
-  <div class="helios-stat">
-    <div class="helios-stat__number">≥80%</div>
-    <div class="helios-stat__label">coverage across artifacts</div>
-  </div>
   <div class="helios-stat">
     <div class="helios-stat__number">1,283</div>
     <div class="helios-stat__label">station-hours over 2.5 cm</div>
@@ -130,8 +120,8 @@
 <div class="mermaid">
 graph LR
   A["helios-provenance-spec<br/>v0.1.0 · RFC"]:::ship
-  B["helios-spaceweather-connectors<br/>foundation+DONKI"]:::part
-  C["helios-fusion-engine<br/>v0.1.0 · framework"]:::ship
+  B["helios-spaceweather-connectors<br/>v0.2.1 · six adapters"]:::ship
+  C["helios-fusion-engine<br/>v0.2.0 · framework"]:::ship
   D["gannon-storm-rtk-analysis<br/>v0.2.0 · v1 climatological"]:::ship
   F["helios-fusion-internal<br/>(private weights)"]:::priv
   A -- "schema" --> B
@@ -140,16 +130,8 @@ graph LR
   D -. "v2 ↣ CDDIS" .-> B
   C -- "trained weights" --> F
   classDef ship fill:#5cb85c,stroke:#3e8e41,color:#fff,font-weight:600
-  classDef part fill:#f0ad4e,stroke:#cb8430,color:#fff,font-weight:600
   classDef priv fill:#888,stroke:#555,color:#fff,font-weight:600
 </div>
-
-  <p>
-    Wave 2 dispatch (in progress) adds 5 more connector adapters to B:
-    NOAA SWPC, GOES, DSCOVR (Wave 2a — DONKI-pattern-similar), then SEP Scoreboards
-    A/B/C and CDDIS GIMs (Wave 2b — complex). Sprint C-Training begins once B v0.2
-    ships with real Scoreboard A flow.
-  </p>
 </section>
 
 {{ super() }}

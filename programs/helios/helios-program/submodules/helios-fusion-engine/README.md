@@ -42,10 +42,10 @@ Specifically, the package provides:
   at runtime. Trained weights, BMA priors fitted on the training events, and
   equipment transfer functions live in the private companion repo
   `helios-fusion-internal` and are NOT distributed here.
-- **No kill-gate execution.** The kill-gate runner lives in
-  `helios-program/orchestration/kill_gate.py` and *consumes* this
-  framework's `EvalReport`. The kill-gate itself is out of scope for this
-  repo.
+- **No kill-gate execution.** The kill-gate runner is
+  `helios-program/orchestration/kill_gate.py`, a placeholder today; it is
+  meant to consume this framework's `EvalReport`. The kill-gate itself is
+  out of scope for this repo.
 - **No retrospective paper figures.** The arXiv preprint (if the kill-gate
   passes) is generated from the private repo + `helios-fusion-engine`
   composed; this repo ships only the framework and the synthetic-data
@@ -98,7 +98,7 @@ for an end-to-end runnable pipeline.
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
+- **Program**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
 - **Architecture**: [`docs/architecture.md`](docs/architecture.md) explains
   why BMA + isotonic + conformal compose as they do.
 - **Baselines**: [`docs/baselines.md`](docs/baselines.md) defines the
@@ -148,8 +148,8 @@ discussed in an issue first.
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — master plan, orchestration scripts.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — review packs and the pre-registration text.
 - **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from the original design (conformal from-scratch, Platt shipped for reproducible-rejection).
-- **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. The kill-gate runner (`orchestration/kill_gate.py`) refuses to execute without an OSF URL on file at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
+- **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. It has not been filed. The kill-gate runner (`orchestration/kill_gate.py`) is a placeholder that raises when called, and nothing yet checks for the registration's address at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — `ModelOutput`, `FusedOutput`, `LineageStep` types align with this schema.
 - **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on the training events; not redistributed.

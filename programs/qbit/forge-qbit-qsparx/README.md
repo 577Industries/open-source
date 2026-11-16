@@ -105,4 +105,3 @@ query-latency, or detector acceptance result.
 - [Reviewer console validation](docs/REVIEWER_CONSOLE_VALIDATION.md)
 - [Limitations and claim boundaries](docs/LIMITATIONS.md)
 - [v0.1.2 release notes](docs/releases/v0.1.2.md)
-- [Executable foundation plan](docs/superpowers/plans/2026-07-21-qsparx-foundation.md)

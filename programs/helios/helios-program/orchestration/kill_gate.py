@@ -1,6 +1,7 @@
-"""Execute the pre-registered HELIOS fusion-engine kill-gate.
+"""Placeholder for the HELIOS fusion-engine kill-gate. Nothing here runs an evaluation.
 
-Per the master plan §C (Decisions Locked), the kill-gate is:
+Per the pre-registration text (`osf_preregistration.template.md`, §4, §5 and §9),
+the kill-gate is:
 
   1. Fused all-clear-revocation HSS on the 3-event hold-out beats the
      best-component-model HSS by >= 15%.
@@ -18,9 +19,9 @@ Outcomes:
                           documenting the negative result
 
 The OSF pre-registration MUST be timestamped before this script runs on
-the hold-out events. The CI workflow that ships this file verifies the
-OSF registration URL is present in `helios-program/orchestration/osf_preregistration.txt`
-and refuses to run otherwise.
+the hold-out events. Nothing enforces that yet: the text has not been filed,
+and no code reads `orchestration/osf_preregistration.url`, the file the
+template names for the registration's address.
 
 Implementation deferred to the helios-fusion-engine build phase. This file
 is a placeholder so consumers can `from orchestration.kill_gate import run`.
@@ -42,14 +43,14 @@ RELIABILITY_SLOPE_TOLERANCE = 0.15         # |slope - 1| <= 0.15 in every stratu
 
 
 def run() -> dict[str, object]:
-    """Execute the kill-gate evaluation and return a structured result.
+    """Would run the kill-gate evaluation and return a structured result.
 
-    Implementation in Sprint C-K1 (kill-gate execution day). For now, raises
-    to make accidental early invocation loud.
+    Not implemented. Raises, to make accidental early invocation loud.
     """
     raise NotImplementedError(
-        "Kill-gate execution is deferred to helios-fusion-engine Sprint C-K1. "
-        "Filing OSF pre-registration must happen first; see master plan §C."
+        "Kill-gate execution is not implemented. "
+        "Filing OSF pre-registration must happen first; see "
+        "orchestration/osf_preregistration.template.md."
     )
 
 

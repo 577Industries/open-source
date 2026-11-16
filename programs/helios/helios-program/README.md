@@ -7,22 +7,20 @@
 
 `HELIOS` · [program overview](https://github.com/577Industries#helios--calibrated-heliophysics-fusion)
 
-**Meta-repo for HELIOS — 577 Industries' research program on calibrated space-weather decision intelligence: public companion document, master plan, cross-repo orchestration scripts, and per-artifact design specs.**
+**Program folder for HELIOS — 577 Industries' research program on calibrated space-weather decision intelligence: copies of its four public artifacts, per-artifact review packs, and the pre-registration text and constants for its hold-out evaluation.**
 
 [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE)
-[![docs](https://img.shields.io/badge/docs-companion-009688?style=flat-square)](companion/companion.md)
 
-HELIOS (Heliophysics-Enhanced Location Integrity and Operations System) is a model-agnostic Bayesian-Model-Averaging fusion layer for space-weather model outputs, with two vertical slices (NASA SRAG mission-operations radiation risk and U.S. precision-agriculture GNSS). This meta-repo coordinates the public artifacts that back its technical claims with live, citable code.
+HELIOS (Heliophysics-Enhanced Location Integrity and Operations System) is a model-agnostic Bayesian-Model-Averaging fusion layer for space-weather model outputs, with two vertical slices (NASA SRAG mission-operations radiation risk and U.S. precision-agriculture GNSS). It does not replace SRAG's Acute Radiation Risk Tool (ARRT): it produces fused inputs designed to be compatible with that tool's dose-rate computation. This folder gathers the public artifacts that back its technical claims.
 
 ## For technical reviewers (5-minute onramp)
 
-This repository orchestrates the public artifact ecosystem for HELIOS. To verify its technical claims:
+To check the program's technical claims, go to the artifact that carries each one:
 
-1. **Start with [`companion/companion.md`](companion/companion.md)** — the canonical index that maps every section of the HELIOS technical description (§1.3 Gannon case study, §2 technical objectives, §3 work plan, etc.) to specific files in the public artifact repos.
-2. **Pre-registration**: see [`orchestration/kill_gate.py`](orchestration/kill_gate.py) for the kill-gate constants and [`plan/master-plan.md`](plan/master-plan.md) for the sealed hold-out event list.
-3. **Empirical evidence**: see [`gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) for the 25-station NGS CORS analysis (1,283 station-hours headline; `results/quantitative.md`).
-4. **Framework code**: [`helios-fusion-engine`](../helios-fusion-engine/) (BMA + isotonic + Mondrian conformal) and [`helios-spaceweather-connectors`](../helios-spaceweather-connectors/) (6 data adapters).
-5. **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) (feature-level lineage JSON Schema).
+1. **Empirical evidence**: see [`gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) for the 25-station NGS CORS analysis (1,283 station-hours headline; `results/quantitative.md`).
+2. **Framework code**: [`helios-fusion-engine`](../helios-fusion-engine/) (BMA + isotonic + Mondrian conformal) and [`helios-spaceweather-connectors`](../helios-spaceweather-connectors/) (6 data adapters).
+3. **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) (feature-level lineage JSON Schema).
+4. **Pre-registration**: [`orchestration/osf_preregistration.template.md`](orchestration/osf_preregistration.template.md) is the text to file before any hold-out evaluation, with the hypotheses and the three hold-out events; [`orchestration/kill_gate.py`](orchestration/kill_gate.py) holds the same events and the pass thresholds as constants. The text has not been filed and the evaluation has not been run: `kill_gate.py` is a placeholder that raises when called.
 
 Trained model weights, BMA priors, and equipment transfer functions are held in the private `helios-fusion-internal` repo (commercial-license gated); the framework code is fully open.
 
@@ -44,13 +42,10 @@ Three of the copies were refreshed on 2026-11-16 from those sibling folders: `ga
   - [`helios-spaceweather-connectors`](./submodules/helios-spaceweather-connectors/) @ `v0.2.1` plus the unreleased changes of [`../helios-spaceweather-connectors`](../helios-spaceweather-connectors/) as of 2026-11-16
   - [`helios-fusion-engine`](./submodules/helios-fusion-engine/) @ `v0.2.0` plus the unreleased changes of [`../helios-fusion-engine`](../helios-fusion-engine/) as of 2026-11-16
   - [`gannon-storm-rtk-analysis`](./submodules/gannon-storm-rtk-analysis/) @ `v0.2.0` plus the unreleased changes of [`../gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) as of 2026-11-16 (`v0.2.0` was cut in this repository; the standalone repository stopped at `v0.1.0`)
-- [`companion/`](./companion/) — public-facing companion document describing HELIOS with artifact citations. Its registry, `footnotes.yaml`, was generated by `orchestration/companion_sync.py` from the standalone repositories' releases and is kept by hand here. **Read this first** if you're a reviewer or stakeholder.
-- [`plan/master-plan.md`](./plan/master-plan.md) — program-level master plan, including the dependency graph across artifacts, the pre-registered kill-gate for the fusion-engine arXiv preprint, and the rolling execution log.
-- [`specs/`](./specs/) — per-artifact design specs from each follow-up brainstorm cycle, plus operator-facing review packs for completed agent work.
-- [`orchestration/`](./orchestration/) — cross-repo automation: `companion_sync.py` rebuilt the artifact registry from the standalone repositories' GitHub release state (no workflow runs it here); `kill_gate.py` executes the pre-registered HSS + reliability-slope evaluation on the 3-event hold-out; `osf_preregistration.template.md` is the binding text to file on the Open Science Framework before any hold-out evaluation runs.
-- [`docs/operations.md`](./docs/operations.md) — operator runbook: where everything lives, daily checklist, agent dispatch conventions, known gotchas.
-- [`results/`](./results/) — kill-gate evaluation results, validation runs.
-- [`.github/workflows/`](./.github/workflows/) — CI: yamllint, footnotes-sync check, lychee link-check on the companion document. These ran in the standalone repository; GitHub runs no workflow from this folder.
+- [`specs/`](./specs/) — review packs: one per piece of completed work, written for the operator who reviewed it. They are dated records, left as written: some refer to a master plan, a companion document and operator notes that were removed from this repository on 2026-11-16.
+- [`orchestration/`](./orchestration/) — scaffolding for the hold-out evaluation: `osf_preregistration.template.md` is the text to file on the Open Science Framework before any hold-out evaluation runs (not filed); `kill_gate.py` holds the hold-out events and the HSS and reliability-slope thresholds, and is a placeholder that raises when called; `schema_diff.py` is a placeholder as well.
+- [`results/`](./results/) — one record, the coverage matrix of the SEP Scoreboard archive probed on 2026-05-17. It holds no evaluation result.
+- [`.github/workflows/`](./.github/workflows/) — the documentation build of the standalone repository. GitHub runs no workflow from this folder.
 
 ## Artifact repositories
 
@@ -62,19 +57,13 @@ Three of the copies were refreshed on 2026-11-16 from those sibling folders: `ga
 | Trained weights, BMA priors, equipment transfer functions | `helios-fusion-internal` | private (IP) |
 | May 2024 Gannon storm retrospective on NGS CORS data | [`gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) | public |
 
-## Reading order for first-time visitors
-
-1. [`companion/companion.md`](./companion/companion.md) — what HELIOS is and where the supporting evidence lives
-2. [`plan/master-plan.md`](./plan/master-plan.md) — how the program is structured and what gates each artifact passes
-3. Whichever artifact repo above matches your interest
-
 ## Status
 
-As of 2026-05-18, all 4 public HELIOS artifacts have shipped initial releases and were bundled here as submodules (plain copies in this repository). Specs in [`specs/`](./specs/) include the Sprint D kill-gate, TFT-TEC forecasting and the arXiv preprint. See [`plan/master-plan.md` § Execution Log](./plan/master-plan.md#execution-log) for the rolling state.
+As of 2026-05-18, all 4 public HELIOS artifacts have shipped initial releases and were bundled here as submodules (plain copies in this repository).
 
 ## License
 
-Apache 2.0 — see [LICENSE](./LICENSE). Document content (companion, plan, specs, ops) is provided for reference and citation; please attribute 577 Industries Inc. when quoting.
+Apache 2.0 — see [LICENSE](./LICENSE). Document content (review packs) is provided for reference and citation; please attribute 577 Industries Inc. when quoting.
 
 ## Contact
 

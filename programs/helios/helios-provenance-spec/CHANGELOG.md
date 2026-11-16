@@ -5,7 +5,7 @@ All notable changes to this project are documented here, following [Keep a Chang
 ## [Unreleased]
 
 ### Changed
-- Links to the program, the connectors and the fusion engine lead to their folders in `577Industries/open-source`, under `programs/helios/`. They led to the standalone repositories. `SECURITY.md` names `577Industries/open-source` in its scope sentence.
+- Links to the program, the connectors and the fusion engine lead to their folders in `577Industries/open-source`, under `programs/helios/`. They led to the standalone repositories. `SECURITY.md` names `577Industries/open-source` in its scope sentence. The program's master plan and companion document are no longer in that repository, so the README, the templates and the documentation settings name the program's folder alone.
 - `README.md` and `docs/index.md` gave `pip install helios-provenance-spec`, and no package of that name is on PyPI. They install the `v0.1.0` tag of this project's own repository, as the connectors do.
 
 ## [0.1.0] — 2026-05-17

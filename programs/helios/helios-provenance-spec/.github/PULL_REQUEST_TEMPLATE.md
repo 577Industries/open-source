@@ -4,7 +4,7 @@
 
 ## Related
 
-- HELIOS master plan: <https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/plan/master-plan.md>
+- HELIOS program: <https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program>
 - Closes #
 - RFC-0001 discussion: https://github.com/577Industries/helios-provenance-spec/issues
 

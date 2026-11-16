@@ -27,9 +27,9 @@ package.
   fit them at runtime via `BMAOrchestrator.update_weights`.
 - No equipment transfer functions. The GNSS slice (design objective 4) builds
   on top of this framework but ships separately.
-- No kill-gate execution. The kill-gate runner lives in
-  `helios-program/orchestration/kill_gate.py` and **consumes** this
-  framework's `EvalReport`.
+- No kill-gate execution. The kill-gate runner is
+  `helios-program/orchestration/kill_gate.py`, a placeholder today; it is
+  meant to consume this framework's `EvalReport`.
 
 ## Status
 

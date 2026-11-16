@@ -55,7 +55,7 @@ and [`examples/donki_quickstart.ipynb`](examples/donki_quickstart.ipynb).
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
+- **Program**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
 - **Specification**: [`docs/index.md`](docs/index.md), [`docs/design.md`](docs/design.md) and one guide per adapter under [`docs/adapters/`](docs/adapters/)
 - **Provenance**: every output traces to its upstream model and transformation chain
   via [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
@@ -82,7 +82,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Substantive changes should be discussed 
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — master plan, orchestration scripts.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — review packs and the pre-registration text.
 - **Wave 1 review pack**: [Artifact B foundation review pack](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/specs/2026-05-17-B-connectors-foundation-review-pack.md) — adapter-pattern design notes and the 7 DONKI API quirks documented for follow-up adapter agents.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — the JSON Schema and pydantic models this package emits for every fetched record.
 - **Downstream consumer**: [`helios-fusion-engine`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine) — uses these adapters to fuse multi-source space-weather signals.

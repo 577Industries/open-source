@@ -74,10 +74,11 @@ this via three layered guards:
    list that references a forbidden directory raises at construction,
    not mid-fetch.
 
-The repository's CI runs the regression test
+The hermetic suite includes the regression test
 `tests/test_sep_scoreboards.py::test_no_url_contains_release_or_hesperia`
 which sweeps every URL a standard `fetch` would issue and asserts none
-contains a forbidden token.
+contains a forbidden token. No workflow runs that suite in this repository:
+run `pytest -m "not live"` before a change to this adapter is published.
 
 **What we still consume**: the *consensus aggregated scoreboard* output
 — records from non-REleASE models in the registry. We never call a
@@ -226,7 +227,7 @@ absent keys as `None`.
 An exhaustive layout walk of every visible model directory under the
 ISWA scoreboard tree was conducted on 2026-05-17 (Sprint
 C-Training-v2). The full results live in
-[`helios-program/results/2026-05-17-iswa-coverage-matrix.md`](https://github.com/577Industries/helios-program/blob/main/results/2026-05-17-iswa-coverage-matrix.md).
+[`helios-program/results/2026-05-17-iswa-coverage-matrix.md`](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/results/2026-05-17-iswa-coverage-matrix.md).
 
 ### Headline finding
 

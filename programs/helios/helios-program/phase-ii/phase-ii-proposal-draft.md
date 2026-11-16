@@ -1,5 +1,7 @@
 # HELIOS Phase II Proposal — DRAFT SCAFFOLD
 
+> **Dated record (note added 2026-11-16).** This document is left as written. Its links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve: those repositories are archived, and the projects are maintained in `577Industries/open-source` under `programs/helios/`.
+
 **Status**: SCAFFOLD ONLY — section headers + key-phrasing carry-over + cross-link placeholders. The operator writes actual Phase II copy.
 **Submission deadline**: TBD — depends on the NASA Phase II solicitation cycle (subtopic SPWX.1.S26A continuation, when announced).
 **Last refreshed**: 2026-05-18 (initial scaffold).

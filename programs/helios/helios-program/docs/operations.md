@@ -1,5 +1,7 @@
 # HELIOS Program — Operations Guide
 
+> **Dated record (note added 2026-11-16).** Written for the standalone repositories, which are archived. The projects are maintained in `577Industries/open-source` under `programs/helios/`. The steps and links below are left as written and do not apply there. In particular, do not run `python -m orchestration.companion_sync`: `companion/footnotes.yaml` is kept by hand, and the script does nothing unless it is given `--standalone`. Links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve.
+
 *For Thomas (operator) and any future Claude session driving the program. This is the practical "how to run the day" document.*
 
 ---

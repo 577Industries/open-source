@@ -12,8 +12,8 @@ just send the PR.
 ## Development setup
 
 ```bash
-git clone https://github.com/577Industries/<repo>.git
-cd <repo>
+git clone https://github.com/577Industries/open-source.git
+cd open-source/programs/helios/helios-spaceweather-connectors
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -e '.[dev]'
@@ -29,6 +29,9 @@ Two suites, never conflated:
 pytest -m "not live"                      # PR gate: hermetic, fixtures only (what CI runs on pull requests)
 pytest -m live --no-cov --timeout=300     # live: real NASA/NOAA/CCMC endpoints; nightly 06:17 UTC + workflow_dispatch only
 ```
+
+No workflow runs in this repository. The pull-request gate and the nightly run described here belonged to the
+standalone repository, which is archived: run the first suite yourself before opening a pull request.
 
 - A live failure is an upstream-drift signal, not a flaky test. Never `xfail`, `skip`,
   mute or loosen an assertion to get green — fix the adapter, re-capture the fixture

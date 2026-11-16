@@ -1,11 +1,13 @@
 # CLAUDE.md — helios-spaceweather-connectors
 
-Six adapters (DONKI, SEP Scoreboards A/B/C, SWPC, CDDIS GIM, GOES, DSCOVR) → one `NormalizedRecord` + feature-level provenance. Program context and gh identity rules: [helios-program/CLAUDE.md §2](https://github.com/577Industries/helios-program/blob/main/CLAUDE.md). Style, coverage, commits: [CONTRIBUTING.md](CONTRIBUTING.md). Adding an adapter: [docs/design.md](docs/design.md).
+Six adapters (DONKI, SEP Scoreboards A/B/C, SWPC, CDDIS GIM, GOES, DSCOVR) → one `NormalizedRecord` + feature-level provenance. Program context and gh identity rules: [helios-program/CLAUDE.md §2](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/CLAUDE.md). Style, coverage, commits: [CONTRIBUTING.md](CONTRIBUTING.md). Adding an adapter: [docs/design.md](docs/design.md).
 
 ## Two suites — never conflate them
 
     pytest -m "not live"                      # PR gate: hermetic, fixtures only
     pytest -m live --no-cov --timeout=300     # live: real NASA/NOAA/CCMC; nightly 06:17 UTC + workflow_dispatch only
+
+No workflow runs in this repository. The pull-request gate, the nightly run, the job cap and the publish workflow named in this file belonged to the standalone repository, which is archived: run the first suite yourself before a change is published.
 
 - **Live tests are drift detectors, not flaky tests.** A live failure means upstream changed (2026-08: NOAA retired `/products/solar-wind` — see [CHANGELOG.md](CHANGELOG.md)). Never `xfail`, `skip`, mute or loosen an assertion to get green: fix the adapter, re-capture the fixture, record it in CHANGELOG + the adapter's docs page.
 - Fixtures in `tests/fixtures/<source>/` are real captures, with two exceptions for data whose terms do not allow commercial use: the Dst file holds invented values, and the GFZ file's sunspot-number column is blanked. Note the capture date and any hand edit in the fixture docstring (pattern: `tests/conftest.py::swpc_plasma_fixture`).
@@ -22,4 +24,4 @@ Six adapters (DONKI, SEP Scoreboards A/B/C, SWPC, CDDIS GIM, GOES, DSCOVR) → o
 - `SourceID.RTSW` ≠ `SourceID.DSCOVR`: the realtime L1 feed is multi-observatory (SOLAR1/IMAP/ACE, spacecraft in `value["observatory"]`); `DSCOVR` survives only on the NCEI/PySPEDAS archive leg. Filtering realtime records on `DSCOVR` silently returns nothing — [docs/adapters/dscovr.md](docs/adapters/dscovr.md) § Routing rule, [docs/adapters/swpc.md](docs/adapters/swpc.md) § The 2026-08 RTSW migration.
 - Provenance URLs must be absolute (host included) — relative ISWA paths passed unit tests for months and only surfaced as live failures.
 - Release ≠ publish: `gh release create` fires [publish.yml](.github/workflows/publish.yml) → PyPI trusted publishing, which fails while `helios-provenance-spec` is a `git+https` direct reference in `pyproject.toml`.
-- Version lives in `src/helios_connectors/__init__.py`; bump `CITATION.cff` `version:` in the same commit.
+- Version lives in `src/helios_connectors/__init__.py`; bump `CITATION.cff` `version:` and the product token of `DEFAULT_USER_AGENT` (`src/helios_connectors/http.py`; a test compares it) in the same commit.

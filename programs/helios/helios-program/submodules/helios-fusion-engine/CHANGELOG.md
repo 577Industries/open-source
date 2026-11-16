@@ -2,6 +2,8 @@
 
 All notable changes to this project are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+Releases `v0.1.1` and `v0.1.2` (2026-05-17) and `v0.2.0` (2026-05-18) were tagged in the project's standalone repository, which is archived. They have no section here, and the notes published with those tags are not reproduced. `docs/training.md` describes the training work of 0.1.1. The work of 0.1.2 (ground-truth labels from NOAA's archive of solar proton events, and a fallback per component) is described in the module notes of `src/helios_fusion/training/swpc_sep_archive.py` and `load_table_3_1.py`. `paper/` holds the manuscript draft that 0.2.0 added.
+
 ## [Unreleased]
 
 ### Changed
@@ -10,6 +12,10 @@ All notable changes to this project are documented here, following [Keep a Chang
 - The manuscript, its reference and figure 1 name the storm analysis at `v0.2.0`, in this repository. The text had named 0.2.0 as a planned release with a full positioning solution; 0.2.0 is the climatological model without the Dst index, and the positioning solution is a later release.
 - `docs/training.md` named Kyoto as the archive behind the Kp index. The connectors take Kp from GFZ.
 - Three module notes no longer name a funding program.
+- The `dev` extra takes `helios-spaceweather-connectors` from the sibling folder of the same checkout (`{root:parent:uri}`, which hatchling expands). Installing the extra builds that folder as it then is and copies it into the environment, so the suite runs against the checkout's connectors as of that install; uv does not rebuild them later unless told to (`--reinstall-package helios-spaceweather-connectors`). It took the standalone repository's `v0.2.1` tag. The connectors' source here differs from that tag in ten files, and this suite passes against it (176 tests). `docs/training.md` no longer has an install step for the connectors.
+- `README.md` and `docs/index.md` gave `pip install helios-fusion-engine`, and no package of that name is on PyPI. They install this repository's `main` branch; nothing in this repository is tagged.
+- The manuscript's references to the connectors, to this framework, to the program and to the storm analysis give their folders in this repository at the commit they describe (the address names it), and its link to the program gives the program's folder. The reference to the program and figure 1 name `v0.3.0`, its last release; they said `v0.2.0`. It no longer names a `feat/v0.2-paper` branch for the figure scripts, which are in `paper/figures/`. `paper/main.bbl` and `paper/main.pdf` are rebuilt. The cover letter's addresses follow, and the submission checklist carries a dated note at its head.
+- The project's own addresses give this repository: `CITATION.cff`, the package metadata (`[project.urls]`), `mkdocs.yml` (no `site_url`; `repo_url` and `edit_uri`), `CONTRIBUTING.md` (the clone command), `SECURITY.md` (its scope sentence) and the README, which loses the badges that queried the standalone repository's CI and releases. The README says that no workflow runs here, that the 85% coverage it named was a target no workflow enforced, and what the suite measures, 89% (it said 92%). Links to the program and the connectors lead to their folders under `programs/helios/`; links to `helios-provenance-spec` are unchanged.
 
 ## [0.1.0] — 2026-05-17
 
@@ -25,5 +31,3 @@ All notable changes to this project are documented here, following [Keep a Chang
 - Synthetic-data demo notebook: isotonic brings reliability slope 1.0071 → 1.0772 (within ±0.15 target); Mondrian conformal achieves 91% aggregate coverage @ α=0.1.
 
 **Public framework only.** Trained weights, BMA priors fitted on Table 3-1 events, and equipment transfer functions live in the private companion `helios-fusion-internal`.
-
-See [GitHub releases](https://github.com/577Industries/helios-fusion-engine/releases/tag/v0.1.0) for the canonical release notes.

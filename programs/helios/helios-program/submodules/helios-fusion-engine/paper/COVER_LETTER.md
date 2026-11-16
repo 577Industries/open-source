@@ -54,9 +54,9 @@ Per arXiv submission policy an endorser is required. Named endorser:
 ## Reproducibility commitments
 
 - All code released under Apache 2.0 at
-  <https://github.com/577Industries/helios-fusion-engine>
-  (and four sibling repositories under
-  <https://github.com/577Industries>).
+  <https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine>
+  (and its sibling projects in the same repository, under
+  <https://github.com/577Industries/open-source/tree/main/programs/helios>).
 - The OSF pre-registration at
   `<TO_BE_FILLED with the OSF URL>` binds the methodology;
   any deviation between the pre-registration and the submitted manuscript
@@ -80,7 +80,7 @@ Authors have no other financial interests to disclose.
 ## Contact
 
 `engineering@577industries.com` — Thomas Waweru, PI
-`<https://577industries.github.io/helios-program/>` — program landing page
+`<https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program>` — program landing page
 
 ---
 

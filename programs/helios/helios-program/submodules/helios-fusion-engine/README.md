@@ -9,7 +9,7 @@
 
 **Model-agnostic probabilistic fusion of heterogeneous space-weather model outputs.**
 
-[![ci](https://img.shields.io/github/actions/workflow/status/577Industries/helios-fusion-engine/ci.yml?style=flat-square&label=ci)](https://github.com/577Industries/helios-fusion-engine/actions/workflows/ci.yml) [![release](https://img.shields.io/github/v/release/577Industries/helios-fusion-engine?style=flat-square)](https://github.com/577Industries/helios-fusion-engine/releases) [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/helios-fusion-engine/)
+[![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-index-009688?style=flat-square)](docs/index.md)
 
 ## What this is
 
@@ -66,7 +66,8 @@ repository; they belong to the private companion repo
 ## Quickstart
 
 ```bash
-pip install helios-fusion-engine
+# Not on PyPI. This installs the main branch of this repository; the package reports version 0.1.2.
+pip install "helios-fusion-engine @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-fusion-engine"
 ```
 
 ```python
@@ -97,7 +98,7 @@ for an end-to-end runnable pipeline.
 
 ## Documentation
 
-- **Master plan**: see [`helios-program`](https://github.com/577Industries/helios-program) (public; program entry point)
+- **Master plan**: see [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) (public; program entry point)
 - **Architecture**: [`docs/architecture.md`](docs/architecture.md) explains
   why BMA + isotonic + conformal compose as they do.
 - **Baselines**: [`docs/baselines.md`](docs/baselines.md) defines the
@@ -120,8 +121,9 @@ mypy
 pytest --cov
 ```
 
-CI runs the same on every PR. Coverage gate is 85%; `main` currently sits
-at 92%.
+No workflow runs these in this repository. The standalone repository's CI ran
+them on every pull request. This README stated a coverage target of 85%, which
+that workflow did not enforce; the suite measures 89% here (2026-11-16).
 
 ## License
 
@@ -140,14 +142,14 @@ discussed in an issue first.
   title        = { helios-fusion-engine: Model-agnostic probabilistic fusion of heterogeneous space-weather model outputs: Bayesian Model Averaging orchestrator, isotonic-regression reliability calibrator, split + Mondrian conformal prediction wrappers, and severity-stratified validation harness with CCMC-compatible metrics (HSS, TSS, POD, FAR, Brier, CRPS) },
   year         = {2026},
   publisher    = {577 Industries Inc.},
-  url          = {https://github.com/577Industries/helios-fusion-engine},
+  url          = {https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine},
 }
 ```
 
 ## Related
 
-- **HELIOS program**: [`helios-program`](https://github.com/577Industries/helios-program) — master plan, orchestration scripts.
-- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/helios-program/blob/main/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from the original design (conformal from-scratch, Platt shipped for reproducible-rejection).
-- **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/helios-program/blob/main/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. The kill-gate runner (`orchestration/kill_gate.py`) refuses to execute without an OSF URL on file at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
+- **HELIOS program**: [`helios-program`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program) — master plan, orchestration scripts.
+- **Wave 1 review pack**: [Artifact C framework review pack](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/specs/2026-05-17-C-fusion-engine-framework-review-pack.md) — synthetic-data demo numbers, design decisions, deviations from the original design (conformal from-scratch, Platt shipped for reproducible-rejection).
+- **OSF pre-registration template**: [`orchestration/osf_preregistration.template.md`](https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/orchestration/osf_preregistration.template.md) — **must** be filed publicly **before** hold-out evaluation runs. The kill-gate runner (`orchestration/kill_gate.py`) refuses to execute without an OSF URL on file at `orchestration/osf_preregistration.url`. Decision rules: PASS both H1+H2 → full arXiv paper; PASS one → ablation paper; FAIL both → no paper.
 - **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) — `ModelOutput`, `FusedOutput`, `LineageStep` types align with this schema.
 - **Trained weights / BMA priors** (private companion): `helios-fusion-internal` — fitted on the training events; not redistributed.

@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 import pytest
 
+from helios_connectors import __version__
 from helios_connectors.http import (
     DEFAULT_USER_AGENT,
     make_client,
@@ -16,6 +17,11 @@ def test_default_user_agent_is_repo_url() -> None:
     """The User-Agent must include the repo URL per NASA API etiquette."""
     assert "github.com/577Industries" in DEFAULT_USER_AGENT
     assert "helios-spaceweather-connectors" in DEFAULT_USER_AGENT
+
+
+def test_default_user_agent_carries_the_package_version() -> None:
+    """The product token names this package's version (it said 0.1.0 through 0.2.1)."""
+    assert DEFAULT_USER_AGENT.startswith(f"helios-spaceweather-connectors/{__version__} ")
 
 
 def test_make_client_sets_headers() -> None:

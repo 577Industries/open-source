@@ -32,8 +32,9 @@ rather than direct adapter integration.
 ## Quickstart
 
 ```bash
-# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses); install from the tag:
-pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors@v0.2.1"
+# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses). This installs the main
+# branch of this repository: version 0.2.1 plus later changes, two of them breaking (see CHANGELOG.md).
+pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-spaceweather-connectors"
 ```
 
 ```python
@@ -57,9 +58,9 @@ model, and how to add a new source.
 
 ## See also
 
-- [HELIOS program master plan](https://github.com/577Industries/helios-program)
-  (private; internal team)
+- [HELIOS program master plan](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-program)
+  (public; program entry point)
 - [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec)
   — JSON Schema for the provenance model
-- [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine)
+- [`helios-fusion-engine`](https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine)
   — downstream consumer (BMA fusion + calibration)

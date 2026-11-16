@@ -4,7 +4,7 @@
 
 ## Related
 
-- HELIOS master plan: <https://github.com/577Industries/helios-program/blob/main/plan/master-plan.md>
+- HELIOS master plan: <https://github.com/577Industries/open-source/blob/main/programs/helios/helios-program/plan/master-plan.md>
 - Closes #
 - Methodology disclosure: `docs/methodology.md` (v1 climatological boundary)
 

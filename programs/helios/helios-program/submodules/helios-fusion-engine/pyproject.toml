@@ -51,11 +51,17 @@ dev = [
     "pre-commit>=3.7",
     "detect-secrets>=1.5",
     "matplotlib>=3.8",
-    # v2 training tests import these directly. Until trusted publishing
-    # lands them on PyPI, install via git so CI can exercise the v2 paths
-    # (DEFAULT_COMPONENT_MODELS expansion, real HeliosModelOutputRecord).
+    # v2 training tests import these directly (DEFAULT_COMPONENT_MODELS
+    # expansion, real HeliosModelOutputRecord). Neither is on PyPI. The schema
+    # comes from its own repository at a tag. The connectors are built from the
+    # sibling folder of this checkout (hatchling expands {root:parent:uri}) and
+    # copied into the environment, as that folder is when the extra is
+    # installed. After the sibling changes, install it again: pip rebuilds it
+    # on every install of this extra, and uv needs
+    # `--reinstall-package helios-spaceweather-connectors`. A wheel built with
+    # this extra would carry a local path: editable installs only.
     "helios-provenance-spec @ git+https://github.com/577Industries/helios-provenance-spec.git@v0.1.0",
-    "helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors.git@v0.2.1",
+    "helios-spaceweather-connectors @ {root:parent:uri}/helios-spaceweather-connectors",
 ]
 docs = [
     "mkdocs>=1.6",
@@ -64,10 +70,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/577Industries/helios-fusion-engine"
-Repository = "https://github.com/577Industries/helios-fusion-engine.git"
-Issues = "https://github.com/577Industries/helios-fusion-engine/issues"
-Documentation = "https://577industries.github.io/helios-fusion-engine"
+Homepage = "https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine"
+Repository = "https://github.com/577Industries/open-source.git"
+Issues = "https://github.com/577Industries/open-source/issues"
+Documentation = "https://github.com/577Industries/open-source/tree/main/programs/helios/helios-fusion-engine/docs"
 
 [tool.hatch.version]
 path = "src/helios_fusion/__init__.py"

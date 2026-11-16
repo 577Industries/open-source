@@ -1,5 +1,7 @@
 # HELIOS Phase II — evidence package
 
+> **Dated record (note added 2026-11-16).** This folder was last refreshed on 2026-05-18 and is left as written, the status line below included: nothing refreshes it now. Its links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve: those repositories are archived, and the projects are maintained in `577Industries/open-source` under `programs/helios/`.
+
 **Last refreshed**: 2026-05-18 (initial assembly)
 **Status**: incremental — refreshed each session as new artifacts ship.
 

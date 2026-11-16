@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software in academic work, please cite as below."
+message: "If you use this software in academic work, please cite as below. Version 0.2.1 was released from the project's standalone repository, which is archived; this folder holds it with the later changes listed in CHANGELOG.md."
 title: "helios-spaceweather-connectors"
 abstract: "Production-grade Python adapters for six space-weather data sources (NASA DONKI, CCMC SEP Scoreboards A/B/C, NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR), normalized to a common feature schema with feature-level provenance per helios-provenance-spec."
 authors:
@@ -13,8 +13,8 @@ keywords:
   - machine learning
   - provenance
 license: Apache-2.0
-repository-code: "https://github.com/577Industries/helios-spaceweather-connectors"
-url: "https://github.com/577Industries/helios-spaceweather-connectors"
+repository-code: "https://github.com/577Industries/open-source"
+url: "https://github.com/577Industries/open-source/tree/main/programs/helios/helios-spaceweather-connectors"
 type: software
 version: 0.2.1
 date-released: "2026-05-17"

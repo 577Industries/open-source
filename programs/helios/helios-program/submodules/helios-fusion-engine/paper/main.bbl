@@ -40,7 +40,7 @@
 \newblock {gannon-storm-rtk-analysis: reproducible retrospective of the May
   2024 Gannon G5 storm RTK impact}.
 \newblock
-  \url{https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis},
+  \url{https://github.com/577Industries/open-source/tree/d53e387e0bc090789365527167eae70cd961c968/programs/helios/gannon-storm-rtk-analysis},
   2026.
 \newblock v0.2.0.
 
@@ -48,15 +48,19 @@
 {577 Industries Inc.}
 \newblock {helios-fusion-engine: calibrated, provenance-tracked fusion
   framework for heliophysics model outputs}.
-\newblock \url{https://github.com/577Industries/helios-fusion-engine}, 2026.
-\newblock v0.1.2.
+\newblock
+  \url{https://github.com/577Industries/open-source/tree/d53e387e0bc090789365527167eae70cd961c968/programs/helios/helios-fusion-engine},
+  2026.
+\newblock v0.1.2 with later changes.
 
 \bibitem{helios_program}
 {577 Industries Inc.}
 \newblock {helios-program: master plan, companion, and orchestration for
   HELIOS}.
-\newblock \url{https://github.com/577Industries/helios-program}, 2026.
-\newblock v0.2.0.
+\newblock
+  \url{https://github.com/577Industries/open-source/tree/d53e387e0bc090789365527167eae70cd961c968/programs/helios/helios-program},
+  2026.
+\newblock v0.3.0 with later changes.
 
 \bibitem{helios_provenance_spec}
 {577 Industries Inc.}
@@ -70,8 +74,9 @@
 \newblock {helios-spaceweather-connectors: production-grade Python adapters for
   federal space-weather sources}.
 \newblock
-  \url{https://github.com/577Industries/helios-spaceweather-connectors}, 2026.
-\newblock v0.2.1.
+  \url{https://github.com/577Industries/open-source/tree/d53e387e0bc090789365527167eae70cd961c968/programs/helios/helios-spaceweather-connectors},
+  2026.
+\newblock v0.2.1 with later changes.
 
 \bibitem{afbf2024}
 {American Farm Bureau Federation}.

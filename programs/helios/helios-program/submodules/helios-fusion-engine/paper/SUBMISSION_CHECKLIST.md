@@ -1,5 +1,7 @@
 # arXiv Submission Checklist — HELIOS Fusion Engine Preprint
 
+> **Dated record (note added 2026-11-16).** Written for the standalone `helios-fusion-engine` repository, which is archived. The project is maintained in `577Industries/open-source` under `programs/helios/helios-fusion-engine`. The steps that name that repository, a `feat/v0.2-paper` branch or a tag in it are left as written and have no counterpart here yet.
+
 Operator-facing checklist. Each step is gated and ordered. Do **not** submit
 to arXiv until every box is checked.
 

@@ -117,7 +117,7 @@ The PySPEDAS backend is an optional extra to avoid pulling `cdflib`, `astropy`,
 and a chain of plotting libs into JSON-only consumers:
 
 ```bash
-pip install 'helios-spaceweather-connectors[pyspedas]'
+pip install "helios-spaceweather-connectors[pyspedas] @ git+https://github.com/577Industries/open-source@main#subdirectory=programs/helios/helios-spaceweather-connectors"
 ```
 
 The SWPC path needs no extras.

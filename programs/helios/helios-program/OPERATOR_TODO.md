@@ -1,5 +1,7 @@
 # OPERATOR_TODO
 
+> **Dated record (note added 2026-11-16).** Written for the standalone repositories, which are archived. The projects are maintained in `577Industries/open-source` under `programs/helios/`. The steps and links below are left as written: links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve.
+
 > Step-by-step ordered checklist for actions only the operator (Thomas) can take. Each step is gated on credentials, external accounts, or one-time configurations an automated agent can't complete. Items are numbered in **execution order** with explicit gating notes.
 >
 > **Last refreshed**: 2026-05-18 (Session 6 — production deploy + GitHub consolidation).

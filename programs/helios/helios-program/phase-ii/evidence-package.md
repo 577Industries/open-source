@@ -7,6 +7,8 @@ date: "2026-05-18"
 
 # HELIOS Phase II — Evidence Package
 
+> **Dated record (note added 2026-11-16).** This document is left as written. Its links to `helios-program`, `helios-spaceweather-connectors`, `helios-fusion-engine` and `gannon-storm-rtk-analysis`, and to their documentation sites, may no longer resolve: those repositories are archived, and the projects are maintained in `577Industries/open-source` under `programs/helios/`.
+
 **Heliophysics-Enhanced Location Integrity and Operations System**
 *Calibrated Space-Weather Decision Intelligence for NASA Mission Operations and U.S. Precision Agriculture*
 

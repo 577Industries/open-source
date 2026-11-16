@@ -6,6 +6,10 @@ This repository is documents-first; the version reflects milestone polish or str
 
 ## [Unreleased]
 
+### Changed
+- **The copies under `submodules/` no longer carry Kyoto's Dst data (2026-11-16).** The copies of `gannon-storm-rtk-analysis`, `helios-spaceweather-connectors` and `helios-fusion-engine` were refreshed from this repository's own copies of those projects. The first is `v0.2.0`, which no longer downloads, stores, plots or uses the Dst index; the second tests its Dst path against invented values, and its GFZ fixture no longer carries the sunspot numbers, which are CC BY-NC 4.0; the third brings its manuscript, rebuilt from the current source. The World Data Center for Geomagnetism, Kyoto, does not allow commercial applications of its indices.
+- The companion's footnote on the Gannon analysis, the landing page and the README give the regenerated headline (1,283 station-hours; 1,302 in `v0.1.0`), and the blog post copy is updated with a dated note. The companion's artifact table names `v0.2.0` of the analysis and links to this repository's copy of it, as do the README, the landing page and the blog post copy. `companion/footnotes.yaml` is left as its script generates it, from the standalone repositories' releases: it lists the analysis at 0.1.0, and the companion now says why. Dated records are left as written: the review packs under `specs/`, the plan, the social posts, other working documents and this folder's `CLAUDE.md` (whose release table is a dated snapshot) still describe `v0.1.0`, and one review pack quotes the Dst minimum it reported.
+
 ### Added
 - `CHANGELOG.md` (this file) — back-filled to v0.1.0 from `gh release` history.
 

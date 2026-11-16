@@ -17,8 +17,8 @@ HELIOS' §2 Obj.2 fusion layer needs.
 | `kp`             | `/products/noaa-planetary-k-index.json`                           | 3-hour  | SWPC (real-time)             | `SWPC_KP`               |
 | `kp` (archive)   | `kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt`             | 3-hour  | GFZ Potsdam (since 1932)     | `SWPC_KP`               |
 | `dst`            | `wdc.kugi.kyoto-u.ac.jp/dst_{provisional,final}/<yyyymm>/...`     | 1-hour  | Kyoto WDC                    | `SWPC_KP` *(see below)* |
-| `plasma`         | `/products/solar-wind/plasma-7-day.json`                          | 1-min   | SWPC (DSCOVR-derived)        | `SWPC_PLASMA`           |
-| `mag`            | `/products/solar-wind/mag-7-day.json`                             | 1-min   | SWPC (DSCOVR-derived)        | `SWPC_MAG`              |
+| `plasma`         | `/json/rtsw/rtsw_wind_1m.json`                                    | 1-min   | SWPC RTSW (SOLAR1/IMAP/ACE, prime-selected) | `SWPC_PLASMA`           |
+| `mag`            | `/json/rtsw/rtsw_mag_1m.json`                                     | 1-min   | SWPC RTSW (SOLAR1/IMAP/ACE, prime-selected) | `SWPC_MAG`              |
 | `goes_protons`   | `/json/goes/primary/integral-protons-7-day.json`                  | 1-min   | SWPC (GOES-derived)          | `GOES_PROTON`           |
 | `sep_forecast`   | `/text/3-day-forecast.txt`                                        | daily   | SWPC (forecast text product) | `SWPC_SEP_FORECAST`     |
 
@@ -26,6 +26,25 @@ Dst is tagged with `SWPC_KP` (the closest existing SourceID; HELIOS
 treats Kp/Dst as a single geomag-index suite at the fusion layer).
 A dedicated `SWPC_DST` SourceID can be added in a follow-up PR if
 downstream consumers need to discriminate.
+
+### The 2026-08 RTSW migration (plasma/mag)
+
+NOAA retired the whole `/products/solar-wind/` product line in 2026-08 —
+every variant (7-day, 2-hour, 5-minute) now 404s. The RTSW successors
+(`/json/rtsw/`) differ in three ways the adapter absorbs:
+
+- **Shape**: list-of-dicts, newest-first, one record per (minute,
+  observatory) with the prime stream flagged `active: true`. The adapter
+  yields prime rows only, chronologically.
+- **Sources**: observatories are `SOLAR1` / `IMAP` / `ACE` — DSCOVR no
+  longer appears. Each record carries `value["observatory"]`.
+- **Depth**: ~24 h (was 7 days; `SWPC_SOLARWIND_HOURS`). Older windows
+  warn and route consumers to the DSCOVR adapter's archive path.
+
+Plasma field names map onto the long-standing keys: `proton_density` →
+`density`, `proton_speed` → `speed`, `proton_temperature` → `temperature`
+(alpha-particle fields ride along verbatim). Mag field names were carried
+over by NOAA unchanged.
 
 ## The 30-day archive limit (the gotcha)
 
@@ -45,9 +64,12 @@ transparently:
 Archive providers:
 
 - **Kp**: [GFZ Potsdam Kp index](https://kp.gfz.de/) at
-  `https://kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt`
-  (CC-BY-4.0). IAGA-authoritative; 8 3-hour Kp values per daily row,
-  going back to 1932.
+  `https://kp.gfz.de/app/files/Kp_ap_Ap_SN_F107_since_1932.txt`.
+  IAGA-authoritative; 8 3-hour Kp values per daily row, going back to
+  1932. The file is CC BY 4.0 except its sunspot-number column, which is
+  CC BY-NC 4.0 (WDC-SILSO). The adapter reads the Kp and ap columns only,
+  and in the test fixture cut from this file the sunspot column is
+  replaced by the file's missing-data value.
 
 - **Dst**: [World Data Center for Geomagnetism, Kyoto](https://wdc.kugi.kyoto-u.ac.jp/)
   via the per-month file
@@ -56,9 +78,17 @@ Archive providers:
   fall back to `dst_provisional` if final is not yet published — final
   Dst typically lags 6-12 months.
 
+  **Terms of use.** The centre's data service states that it "does not allow
+  commercial applications of the geomagnetic indices"
+  (<https://wdc.kugi.kyoto-u.ac.jp/wdc/Sec3.html>). Check its terms before you
+  call `fetch_dst`. The test fixture for this path holds invented values in
+  the file's layout, not the centre's data, and 577 Industries' own analyses
+  do not use the index.
+
 This pattern was first applied in
-[`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis)
-for the Gannon retrospective; this adapter generalizes it.
+[`gannon-storm-rtk-analysis`](../../../gannon-storm-rtk-analysis/)
+for the Gannon retrospective (its Kp half; that analysis dropped Dst in
+0.2.0); this adapter generalizes it.
 
 ## Rate limits
 
@@ -91,7 +121,8 @@ from helios_connectors import SwpcAdapter
 
 async with SwpcAdapter() as swpc:
     records = [
-        r async for r in swpc.fetch_kp(
+        r
+        async for r in swpc.fetch_kp(
             start=datetime(2024, 5, 8, tzinfo=UTC),
             end=datetime(2024, 5, 14, tzinfo=UTC),
         )
@@ -109,9 +140,9 @@ for r in records[:3]:
 Expected output (first three 3-hour bins on May 8, 2024):
 
 ```
-2024-05-08T00:00:00+00:00 Kp=2.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
-2024-05-08T03:00:00+00:00 Kp=2.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
-2024-05-08T06:00:00+00:00 Kp=2.333 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T00:00:00+00:00 Kp=1.0 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T03:00:00+00:00 Kp=1.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
+2024-05-08T06:00:00+00:00 Kp=1.667 G-scale=G0 lineage=('swpc/kp', 'GFZ Potsdam/Kp_ap_Ap_SN_F107_since_1932.txt')
 ```
 
 And on May 11, 00-03 UT (the Gannon G5 peak):

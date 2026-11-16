@@ -22,7 +22,7 @@ This repository orchestrates the public artifact ecosystem for HELIOS. To verify
 
 1. **Start with [`companion/companion.md`](companion/companion.md)** — the canonical index that maps every section of the HELIOS technical description (§1.3 Gannon case study, §2 technical objectives, §3 work plan, etc.) to specific files in the public artifact repos.
 2. **Pre-registration**: see [`orchestration/kill_gate.py`](orchestration/kill_gate.py) for the kill-gate constants and [`plan/master-plan.md`](plan/master-plan.md) for the sealed hold-out event list.
-3. **Empirical evidence**: see [`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis) for the 25-station NGS CORS analysis (1,302 station-hours headline; `results/quantitative.md`).
+3. **Empirical evidence**: see [`gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) for the 25-station NGS CORS analysis (1,283 station-hours headline; `results/quantitative.md`).
 4. **Framework code**: [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) (BMA + isotonic + Mondrian conformal) and [`helios-spaceweather-connectors`](https://github.com/577Industries/helios-spaceweather-connectors) (6 data adapters).
 5. **Provenance schema**: [`helios-provenance-spec`](https://github.com/577Industries/helios-provenance-spec) (feature-level lineage JSON Schema).
 
@@ -36,13 +36,15 @@ git clone --recurse-submodules https://github.com/577Industries/helios-program.g
 
 This umbrella repo bundles the 4 public HELIOS artifacts as git submodules pinned at their latest release tags (see [`submodules/`](./submodules/)). Each submodule is independently usable from its own repo URL.
 
+In this monorepo the four are plain copies under `submodules/`, not submodules. Three of them were refreshed on 2026-11-16 from this repository's own copies of those projects: `gannon-storm-rtk-analysis` (now `v0.2.0`), `helios-spaceweather-connectors` (its state after `v0.2.1`) and `helios-fusion-engine` (its state after `v0.2.0`). The first two had carried a month of the Dst index of the World Data Center for Geomagnetism, Kyoto, which does not allow commercial applications of its indices; the copies no longer do.
+
 ## Contents
 
 - [`submodules/`](./submodules/) — the 4 public HELIOS artifact repos pinned at release tags:
   - [`helios-provenance-spec`](./submodules/helios-provenance-spec/) @ `v0.1.0`
-  - [`helios-spaceweather-connectors`](./submodules/helios-spaceweather-connectors/) @ `v0.2.1`
-  - [`helios-fusion-engine`](./submodules/helios-fusion-engine/) @ `v0.2.0`
-  - [`gannon-storm-rtk-analysis`](./submodules/gannon-storm-rtk-analysis/) @ `v0.1.0`
+  - [`helios-spaceweather-connectors`](./submodules/helios-spaceweather-connectors/) @ `v0.2.1` plus the unreleased changes of [`../helios-spaceweather-connectors`](../helios-spaceweather-connectors/) as of 2026-11-16
+  - [`helios-fusion-engine`](./submodules/helios-fusion-engine/) @ `v0.2.0` plus the unreleased changes of [`../helios-fusion-engine`](../helios-fusion-engine/) as of 2026-11-16
+  - [`gannon-storm-rtk-analysis`](./submodules/gannon-storm-rtk-analysis/) @ `v0.2.0`
 - [`companion/`](./companion/) — public-facing companion document describing HELIOS with live artifact citations; rebuilt automatically from upstream release state via `orchestration/companion_sync.py`. **Read this first** if you're a reviewer or stakeholder.
 - [`plan/master-plan.md`](./plan/master-plan.md) — program-level master plan, including the dependency graph across artifacts, the pre-registered kill-gate for the fusion-engine arXiv preprint, and the rolling execution log.
 - [`specs/`](./specs/) — per-artifact design specs from each follow-up brainstorm cycle, plus operator-facing review packs for completed agent work.
@@ -59,7 +61,7 @@ This umbrella repo bundles the 4 public HELIOS artifacts as git submodules pinne
 | Space-weather data adapters (DONKI, SEP Scoreboards, NOAA SWPC, CDDIS GIMs, GOES, DSCOVR) | [`helios-spaceweather-connectors`](https://github.com/577Industries/helios-spaceweather-connectors) | public |
 | Fusion engine (BMA + isotonic + conformal + severity-stratified validation) | [`helios-fusion-engine`](https://github.com/577Industries/helios-fusion-engine) | public |
 | Trained weights, BMA priors, equipment transfer functions | `helios-fusion-internal` | private (IP) |
-| May 2024 Gannon storm retrospective on NGS CORS data | [`gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis) | public |
+| May 2024 Gannon storm retrospective on NGS CORS data | [`gannon-storm-rtk-analysis`](../gannon-storm-rtk-analysis/) | public |
 
 ## Reading order for first-time visitors
 

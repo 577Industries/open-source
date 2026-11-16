@@ -24,15 +24,20 @@ def swpc_kp_realtime_fixture() -> list[dict[str, object]]:
 
 
 @pytest.fixture(scope="session")
-def swpc_plasma_fixture() -> list[list[object]]:
-    """Real SWPC plasma-7-day response (header + ~1 hour of rows)."""
-    return json.loads((SWPC_FIXTURES_ROOT / "plasma-7-day.json").read_text())
+def swpc_plasma_fixture() -> list[dict[str, object]]:
+    """Real SWPC RTSW wind response (newest-first, ~20 min, multi-observatory).
+
+    Captured 2026-08-31 after NOAA retired /products/solar-wind. One active
+    (SOLAR1) row has ``proton_density`` nulled by hand so the None-handling
+    path stays covered (the live capture had no natural null that day).
+    """
+    return json.loads((SWPC_FIXTURES_ROOT / "rtsw_wind_1m.json").read_text())
 
 
 @pytest.fixture(scope="session")
-def swpc_mag_fixture() -> list[list[object]]:
-    """Real SWPC mag-7-day response (header + ~1 hour of rows)."""
-    return json.loads((SWPC_FIXTURES_ROOT / "mag-7-day.json").read_text())
+def swpc_mag_fixture() -> list[dict[str, object]]:
+    """Real SWPC RTSW mag response (newest-first, ~16 min, multi-observatory)."""
+    return json.loads((SWPC_FIXTURES_ROOT / "rtsw_mag_1m.json").read_text())
 
 
 @pytest.fixture(scope="session")
@@ -49,14 +54,26 @@ def swpc_sep_forecast_fixture() -> str:
 
 @pytest.fixture(scope="session")
 def gfz_kp_archive_fixture() -> str:
-    """GFZ Potsdam Kp archive slice for May 2024 (31 days)."""
+    """GFZ Potsdam Kp archive slice for May 2024 (31 days).
+
+    Hand edit, 2026-11-16: the sunspot-number column holds the file's missing-data
+    value, -1. GFZ's file is CC BY 4.0 except that column, which is CC BY-NC 4.0
+    (WDC-SILSO); the adapter does not read it. The file's header says so.
+    """
     return (SWPC_FIXTURES_ROOT / "gfz-kp-2024-05.txt").read_text()
 
 
 @pytest.fixture(scope="session")
-def kyoto_dst_2405_fixture() -> str:
-    """Kyoto WDC provisional Dst for May 2024."""
-    return (SWPC_FIXTURES_ROOT / "kyoto-dst-2405.html").read_text()
+def dst_wdc_layout_fixture() -> str:
+    """A month of invented hourly values in the layout of a WDC monthly Dst file.
+
+    Not observations. The values are made up (a slow wave, and a straight-line
+    dip to -500 at noon on day 11 so that four-character negative fields adjoin), and
+    the file says so on its first line. The real May 2024 file was removed:
+    the World Data Center for Geomagnetism, Kyoto, does not allow commercial
+    applications of its indices.
+    """
+    return (SWPC_FIXTURES_ROOT / "dst-wdc-layout-synthetic-2405.txt").read_text()
 
 
 @pytest.fixture(scope="session")

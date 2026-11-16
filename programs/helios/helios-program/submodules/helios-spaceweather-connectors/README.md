@@ -1,9 +1,15 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-dark.svg">
+  <img alt="577 Industries" height="44" src="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-light.svg">
+</picture>
+
 # helios-spaceweather-connectors
 
-[![CI](https://github.com/577Industries/helios-spaceweather-connectors/actions/workflows/ci.yml/badge.svg)](https://github.com/577Industries/helios-spaceweather-connectors/actions/workflows/ci.yml) [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PyPI](https://img.shields.io/pypi/v/helios-spaceweather-connectors.svg)](https://pypi.org/project/helios-spaceweather-connectors/)
+`HELIOS` · [program overview](https://github.com/577Industries#helios--calibrated-heliophysics-fusion)
 
-> Production-grade Python adapters for six space-weather data sources (NASA DONKI, CCMC SEP Scoreboards A/B/C, NOAA SWPC, NASA CDDIS GIMs, GOES, DSCOVR), normalized to a common feature schema with feature-level provenance per helios-provenance-spec.
+**Production-grade Python adapters for NASA DONKI, CCMC SEP Scoreboards, NOAA SWPC, CDDIS GIMs, GOES, and DSCOVR — normalized to a common schema with feature-level provenance.**
+
+[![ci](https://img.shields.io/github/actions/workflow/status/577Industries/helios-spaceweather-connectors/ci.yml?style=flat-square&label=ci)](https://github.com/577Industries/helios-spaceweather-connectors/actions/workflows/ci.yml) [![release](https://img.shields.io/github/v/release/577Industries/helios-spaceweather-connectors?style=flat-square)](https://github.com/577Industries/helios-spaceweather-connectors/releases) [![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE) [![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/helios-spaceweather-connectors/)
 
 ## Status
 
@@ -13,11 +19,11 @@ data-driven space weather research-to-operations-to-research work.
 | Adapter | Strategy | Status |
 |---|---|---|
 | NASA DONKI | BUILD | **v0.1 — shipped** |
-| CCMC SEP Scoreboards A/B/C | BUILD | Planned (v0.2) |
-| NOAA SWPC | EXTEND | Planned (v0.2) |
-| NASA CDDIS GIMs | BUILD | Planned (v0.3) |
-| GOES X-ray + proton | WRAP | Planned (v0.3) |
-| DSCOVR | WRAP | Planned (v0.3) |
+| CCMC SEP Scoreboards A/B/C | BUILD | **v0.2 — shipped** |
+| NOAA SWPC | EXTEND | **v0.2 — shipped** (RTSW feeds since 2026-08) |
+| NASA CDDIS GIMs | BUILD | **v0.2.1 — shipped** |
+| GOES X-ray + proton | WRAP | **v0.2.1 — shipped** |
+| DSCOVR | WRAP | **v0.2.1 — shipped** (archive leg; realtime is `SourceID.RTSW`) |
 
 See [`docs/index.md`](docs/index.md) for the full adapter survey and
 [`docs/design.md`](docs/design.md) for the framework conventions.
@@ -25,7 +31,8 @@ See [`docs/index.md`](docs/index.md) for the full adapter survey and
 ## Quickstart
 
 ```bash
-pip install helios-spaceweather-connectors
+# Not on PyPI yet (the publish step is blocked on a dependency that PyPI refuses); install from the tag:
+pip install "helios-spaceweather-connectors @ git+https://github.com/577Industries/helios-spaceweather-connectors@v0.2.1"
 ```
 
 ```python

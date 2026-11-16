@@ -2,7 +2,7 @@
 
 Drives the end-to-end pipeline used by the notebooks and the CLI/Makefile:
 
-    fetch RINEX  +  fetch Kp/Dst  ->  per-station positioning solutions
+    fetch RINEX  +  fetch Kp  ->  per-station positioning solutions
         ->  regional aggregates  ->  threshold-crossing tallies
 
 The ``run_analysis`` entry-point returns a single dictionary with the four
@@ -22,6 +22,7 @@ import httpx
 import numpy as np
 import pandas as pd
 
+from . import __version__
 from .fetch import (
     DEFAULT_USER_AGENT,
     GANNON_PEAK_DAYS,
@@ -29,6 +30,7 @@ from .fetch import (
     gannon_window_dates,
 )
 from .positioning import (
+    KP_STORM_ONSET,
     PRECISION_AG_PLANTING_THRESHOLD_M,
     PRECISION_AG_SPRAYING_THRESHOLD_M,
     daily_p95_error,
@@ -38,7 +40,6 @@ from .positioning import (
 )
 from .stations import CORRIDOR_STATES, CORS_STATIONS, CorsStation
 from .swpc import (
-    fetch_dst,
     fetch_kp,
     join_kp_to_minute_grid,
 )
@@ -54,7 +55,6 @@ class AnalysisBundle(TypedDict):
     crossings_planting: pd.DataFrame
     crossings_spraying: pd.DataFrame
     kp: pd.DataFrame
-    dst: pd.DataFrame
     headline: HeadlineClaim
 
 
@@ -70,8 +70,8 @@ class HeadlineClaim:
     n_stations_over_threshold: int
     peak_h_error_p95_m: float
     peak_kp: float
-    peak_dst_nT: float
     quiet_baseline_mean_m: float
+    """The mean, over pre-storm station-days, of each station-day's median 2D error."""
 
     def sentence(self) -> str:
         """Render the headline as a single-paragraph claim suitable for a blog."""
@@ -80,10 +80,11 @@ class HeadlineClaim:
             f"stations spanning the {', '.join(self.states)} corridor, the v1 "
             f"climatological model produced 2D horizontal SPP error exceeding the "
             f"agronomic {self.threshold_m * 100:.1f} cm threshold for an aggregate "
-            f"of {self.aggregate_hours_over_threshold:.0f} station-hours during "
+            f"of {self.aggregate_hours_over_threshold:,.0f} station-hours during "
             f"May {self.storm_dates[0].day}-{self.storm_dates[-1].day}, 2024 "
-            f"(peak Kp={self.peak_kp:.1f}, Dst minimum={self.peak_dst_nT:.0f} nT). "
-            f"Pre-storm quiet-period mean 2D error was {self.quiet_baseline_mean_m:.2f} m; "
+            f"(peak Kp={self.peak_kp:.1f}). "
+            f"Before the storm the median 2D error of a station-day averaged "
+            f"{self.quiet_baseline_mean_m:.3f} m; "
             f"peak storm-window 95th-percentile 2D error was "
             f"{self.peak_h_error_p95_m:.1f} m."
         )
@@ -101,7 +102,7 @@ def run_analysis(
 
     Args:
         stations: Subset of CORS catalog; defaults to ``CORS_STATIONS``.
-        data_dir: Cache root (RINEX + indices land under ``data_dir``).
+        data_dir: Cache root (RINEX + the Kp archive land under ``data_dir``).
         rate_limit_sec: Politeness for NGS.
         skip_missing: If True, log and continue on per-station fetch errors.
         threshold_m: Operator-configurable accuracy threshold; defaults to
@@ -109,16 +110,15 @@ def run_analysis(
 
     Returns:
         ``AnalysisBundle`` containing per-epoch solutions, daily aggregates,
-        threshold crossings, indices, and the headline claim.
+        threshold crossings, the Kp series, and the headline claim.
     """
     use_stations = stations if stations is not None else CORS_STATIONS
     logger.info("Analysing %d stations", len(use_stations))
 
-    # --- 1. Indices first (cheap) ---
+    # --- 1. The Kp index first (cheap) ---
     swpc_cache = data_dir / "swpc"
     swpc_cache.mkdir(parents=True, exist_ok=True)
     kp_df = fetch_kp(cache_path=swpc_cache / "kp.txt")
-    dst_df = fetch_dst(cache_path=swpc_cache)
     kp_minute = join_kp_to_minute_grid(kp_df)
 
     # --- 2. Per-station RINEX + positioning ---
@@ -147,7 +147,6 @@ def run_analysis(
                         path,
                         station,
                         kp_series=kp_minute,
-                        dst_series=dst_df,
                     )
                 except Exception as exc:
                     logger.warning("Solve failed for %s %s: %s", station.station_id, d, exc)
@@ -179,7 +178,6 @@ def run_analysis(
         if threshold_m == PRECISION_AG_PLANTING_THRESHOLD_M
         else crossings_spraying,
         kp=kp_df,
-        dst=dst_df,
         states=tuple(s.state for s in use_stations),
         threshold_m=threshold_m,
     )
@@ -190,7 +188,6 @@ def run_analysis(
         "crossings_planting": crossings_planting,
         "crossings_spraying": crossings_spraying,
         "kp": kp_df,
-        "dst": dst_df,
         "headline": headline,
     }
 
@@ -201,7 +198,6 @@ def _compute_headline(
     daily: pd.DataFrame,
     crossings: pd.DataFrame,
     kp: pd.DataFrame,
-    dst: pd.DataFrame,
     states: tuple[str, ...],
     threshold_m: float,
 ) -> HeadlineClaim:
@@ -233,7 +229,6 @@ def _compute_headline(
         n_stations_over_threshold=n_stations_over,
         peak_h_error_p95_m=peak_p95,
         peak_kp=float(kp["kp"].max()),
-        peak_dst_nT=float(dst["dst"].min()),
         quiet_baseline_mean_m=quiet_baseline,
     )
 
@@ -275,7 +270,7 @@ def write_quantitative_md(
     lines: list[str] = [
         "# Gannon storm 2D horizontal SPP error — per-station summary",
         "",
-        "_Generated by `gannon-storm-rtk-analysis` v0.1.0._",
+        f"_Generated by `gannon-storm-rtk-analysis` v{__version__}._",
         "",
         "## Headline",
         "",
@@ -285,8 +280,16 @@ def write_quantitative_md(
         "",
         "- Stations: NGS CORS, lat/lon and ITRF2014 truth coordinates from each",
         "  station's day-131 RINEX header.",
-        "- Indices: GFZ Potsdam Kp (CC-BY-4.0); Kyoto WDC hourly Dst.",
+        "- Index: the Kp index, GFZ Helmholtz Centre for Geosciences, CC BY 4.0",
+        "  (Matzka et al., 2021, https://doi.org/10.1029/2020SW002641).",
         "- Positioning: v1 climatological model — see `docs/methodology.md`.",
+        "- Random draws: seeded per station from a key that is the same on every run,",
+        "  so `make analyze` regenerates this table from the same inputs. (The table",
+        "  of v0.1.0 could not be regenerated: its seed depended on the process.) A",
+        "  station is given the same draws on every day, so days with the same Kp",
+        "  give the same errors.",
+        "- Table columns: for each station, the highest daily 95th percentile of the",
+        "  modeled error within the window.",
         "- Threshold for crossings: 2.5 cm planting (operator-configurable).",
         "- Pre-storm window: May 8-9, 2024 (Kp <= 3 baseline).",
         "- Storm window: May 10-12, 2024 (G3-G5 peak).",
@@ -307,9 +310,53 @@ def write_quantitative_md(
                 state = s.state
                 break
         lines.append(f"| {row['station_id']} | {state} | {pre:.3f} | {storm:.2f} | {ratio:.0f}x |")
+    lines.extend(_hours_by_day_lines(bundle))
     lines.append("")
     out_path.write_text("\n".join(lines), encoding="utf-8")
     logger.info("wrote %s", out_path)
+
+
+def _hours_by_day_lines(bundle: AnalysisBundle) -> list[str]:
+    """The headline's count for every day of the window, quiet days included.
+
+    The storm term of the model is zero below Kp 4, so a day whose Kp stays
+    under 4 shows what the quiet-period draws alone put over the threshold.
+    """
+    headline = bundle["headline"]
+    crossings = bundle["crossings_planting"]
+    by_day = (
+        crossings.assign(day=crossings["time_utc"].dt.date)
+        .groupby("day")
+        .agg(hours=("hours_over_threshold", "sum"), kp_max=("kp_max", "max"))
+    )
+    lines = [
+        "",
+        "## Station-hours over the threshold, by day",
+        "",
+        f"All stations together, {headline.threshold_m * 100:.1f} cm threshold.",
+        "",
+        "| Date (UTC) | Highest Kp | Station-hours over the threshold |",
+        "|---|---|---|",
+    ]
+    lines.extend(
+        f"| {day.isoformat()} | {row['kp_max']:.1f} | {row['hours']:.1f} |"
+        for day, row in by_day.iterrows()
+    )
+    quiet = by_day.loc[by_day["kp_max"] < KP_STORM_ONSET, "hours"]
+    if len(quiet):
+        low, high = f"{quiet.min():.1f}", f"{quiet.max():.1f}"
+        count = low if low == high else f"{low} to {high}"
+        share = quiet.mean() / (headline.n_stations * 24.0)
+        lines.extend(
+            [
+                "",
+                f"On a day when Kp stays below {KP_STORM_ONSET:.0f} the model's storm term is zero.",
+                f"Such a day gives {count} station-hours over the threshold, about",
+                f"{share:.0%} of the day's station-hours: the quiet-period draws alone. The",
+                "storm-window total in the headline includes that share.",
+            ]
+        )
+    return lines
 
 
 def quick_corridor_run(*, data_dir: Path, n_stations: int | None = None) -> AnalysisBundle:
@@ -323,13 +370,12 @@ def quick_corridor_run(*, data_dir: Path, n_stations: int | None = None) -> Anal
 
 
 def utc_window_summary(bundle: AnalysisBundle) -> pd.DataFrame:
-    """Return a tidy table of (date, kp_max, dst_min, regional_p95_2d_m)."""
+    """Return a tidy table of (date, kp_max, regional_p95_2d_m)."""
     daily = bundle["daily"]
     grouped = daily.groupby(daily["time_utc"].dt.date).agg(
         regional_p95_2d_m=("h_error_2d_p95_m", lambda s: float(np.percentile(s, 95))),
         regional_median_2d_m=("h_error_2d_median_m", "median"),
         kp_max=("kp_max", "max"),
-        dst_min=("dst_min", "min"),
         n_stations=("station_id", "nunique"),
     )
     grouped.index.name = "date"

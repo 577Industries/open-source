@@ -1,6 +1,6 @@
 """Isotonic-regression reliability calibrator.
 
-Implements the proposal-default reliability calibrator (NASA SBIR §2 Obj. 2):
+Implements the proposal-default reliability calibrator (§2 Obj. 2):
 
     Isotonic regression reliability calibration so predicted probabilities
     match observed event frequencies (Platt scaling considered and rejected

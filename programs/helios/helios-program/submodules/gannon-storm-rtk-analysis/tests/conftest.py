@@ -23,9 +23,3 @@ def rinex_fixture(fixtures_dir: Path) -> Path:
 def kp_fixture(fixtures_dir: Path) -> Path:
     """Path to a GFZ Kp text fixture covering 2024-05-08 to 2024-05-14."""
     return fixtures_dir / "kp_fixture.txt"
-
-
-@pytest.fixture
-def dst_fixture(fixtures_dir: Path) -> Path:
-    """Path to a Kyoto WDC Dst text fixture for May 2024."""
-    return fixtures_dir / "dst_202405.txt"

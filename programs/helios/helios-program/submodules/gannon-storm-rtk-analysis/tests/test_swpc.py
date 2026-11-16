@@ -1,17 +1,17 @@
-"""Tests for the SWPC/GFZ/Kyoto-WDC index fetchers."""
+"""Tests for the Kp index fetcher (GFZ archive)."""
 
 from __future__ import annotations
 
-from datetime import date
+import importlib
+import re
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
+import gannon_analysis
 from gannon_analysis.swpc import (
     _kp_from_index,
-    _parse_dst_text,
-    fetch_dst,
     fetch_kp,
     join_kp_to_minute_grid,
     kp_severity_color,
@@ -35,8 +35,8 @@ def test_fetch_kp_from_fixture(kp_fixture: Path, tmp_path: Path) -> None:
     assert not df.empty
     assert df["kp"].max() == pytest.approx(9.0, abs=0.01)
     assert df["g_scale"].max() == "G5"
-    # The G5 watch was issued around 17:23 UT 2024-05-10, but Kp values
-    # of 8.667+ start with the 15:00-18:00 UT interval that day.
+    # Kp is 7.667 in the 15:00-18:00 UT interval of 2024-05-10, 8.667 from
+    # 18:00 UT, and reaches 9.000 on May 11.
     storm_window = df.loc[
         (df.index >= pd.Timestamp("2024-05-10 15:00"))
         & (df.index <= pd.Timestamp("2024-05-11 18:00"))
@@ -44,24 +44,27 @@ def test_fetch_kp_from_fixture(kp_fixture: Path, tmp_path: Path) -> None:
     assert storm_window["kp"].max() >= 8.0
 
 
-def test_fetch_dst_from_fixture(dst_fixture: Path, tmp_path: Path) -> None:
-    cache_dir = tmp_path / "swpc"
-    cache_dir.mkdir()
-    cache_dir.joinpath("dst-202405.txt").write_text(dst_fixture.read_text())
-    df = fetch_dst(start=date(2024, 5, 10), end=date(2024, 5, 11), cache_path=cache_dir)
-    assert not df.empty
-    # Catastrophic Dst depression on 2024-05-11 -- WDC reported -406 nT.
-    assert df["dst"].min() <= -200
-    assert df["dst"].max() < 200
+def test_kp_is_the_only_index_this_package_reads() -> None:
+    """The Dst index was removed in 0.2.0: no module has a fetcher, a parser or an address for it.
 
-
-def test_parse_dst_text_handles_typical_format() -> None:
-    sample = "DST2405*10PPX120   0  12  10  12  21  16   7   9  16  13  15  13   3  -1   1  10  23  25  66 -33-131-157-277-339-308 -41"
-    df = _parse_dst_text(sample, year=2024, month=5)
-    assert len(df) == 24
-    assert df["dst"].iloc[0] == 12
-    # The 339 column is at hour 23 in this sample
-    assert df["dst"].min() == -339
+    Every module of the package is read, and the addresses they name are held to a list, so a
+    new source cannot arrive in another module or under another name without failing this.
+    """
+    modules = sorted(Path(gannon_analysis.__file__).parent.glob("*.py"))
+    assert {path.stem for path in modules} >= {
+        "analysis",
+        "fetch",
+        "plotting",
+        "positioning",
+        "swpc",
+    }
+    hosts: set[str] = set()
+    for path in modules:
+        name = "gannon_analysis" if path.stem == "__init__" else f"gannon_analysis.{path.stem}"
+        module = importlib.import_module(name)
+        assert not {attr for attr in dir(module) if "dst" in attr.lower()}, path.name
+        hosts.update(re.findall(r"https?://([^/\s\"'`)>]+)", path.read_text(encoding="utf-8")))
+    assert hosts == {"doi.org", "geodesy.noaa.gov", "kp.gfz.de", "www.swpc.noaa.gov"}
 
 
 def test_join_kp_to_minute_grid_forward_fills(kp_fixture: Path, tmp_path: Path) -> None:

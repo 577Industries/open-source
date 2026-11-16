@@ -140,7 +140,7 @@ def main() -> None:
 
     # Row 0 (bottom): a leaf consumer of B.
     p_gan = box(
-        2.7, 0.3, 2.4, 1.2, "gannon-storm-rtk-analysis", "retrospective", "v0.1.0", color=teal
+        2.7, 0.3, 2.4, 1.2, "gannon-storm-rtk-analysis", "retrospective", "v0.2.0", color=teal
     )
 
     # Hard dependency arrows.

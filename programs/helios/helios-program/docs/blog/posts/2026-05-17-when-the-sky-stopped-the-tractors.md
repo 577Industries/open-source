@@ -7,7 +7,7 @@ categories:
 slug: when-the-sky-stopped-the-tractors
 description: >-
   May 10-12, 2024. 25 NGS CORS stations across the Iowa / Illinois / Indiana / Ohio corridor.
-  A G5 superstorm. 1,302 station-hours over the 2.5 cm planting threshold. The first
+  A G5 superstorm. 1,283 station-hours over the 2.5 cm planting threshold. The first
   reproducible quantification of solar-storm impact on U.S. row-crop GNSS.
 ---
 
@@ -17,9 +17,15 @@ author: Thomas Waweru, 577 Industries
 date: 2026-05-17
 tags: [precision-agriculture, gnss, rtk, space-weather, gannon-storm]
 audience: [row-crop operators, agronomists, OEM platform teams, ag-tech press]
-hero_image: https://raw.githubusercontent.com/577Industries/gannon-storm-rtk-analysis/main/results/figures/fig-01-regional-error-vs-time.png
+hero_image: https://raw.githubusercontent.com/577Industries/open-source/main/programs/helios/gannon-storm-rtk-analysis/results/figures/fig-01-regional-error-vs-time.png
 canonical: https://577industries.com/posts/when-the-sky-stopped-the-tractors
 ---
+
+*Updated 2026-11-16 for version 0.2.0 of the analysis. The Dst index is no
+longer used or shown: its source, the World Data Center for Geomagnetism in
+Kyoto, does not allow commercial applications of its indices. The figures were
+regenerated without it, and the headline is now 1,283 station-hours; the text
+below keeps its round 1,300.*
 
 ## The day the GPS broke
 
@@ -34,7 +40,7 @@ shutdowns lasting 12 to 48 hours. The North American power grid wobbled.
 The aurora was visible in southern Texas.
 
 What happened was the most powerful geomagnetic storm in over two decades —
-the Gannon storm, peak Kp=9, peak Dst around -406 nT — and it hit during
+the Gannon storm, peak Kp=9 — and it hit during
 peak corn and soybean planting season. For an Ohio operation with 6,000
 acres of corn to plant in a five-day weather window, "GPS DEGRADED" is not
 an inconvenience. It is an existential question about whether the crop goes
@@ -49,7 +55,8 @@ Today we're publishing the first artifact of that effort: an open, end-to-end
 reproducible analysis of how RTK error evolved during the May 10-12 storm
 across 25 NGS CORS reference stations in the IA/IL/IN/OH corridor. Code,
 data, figures, and methodology are all on GitHub at
-[`577Industries/gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis).
+[`gannon-storm-rtk-analysis`](https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis),
+a folder of the `577Industries/open-source` repository.
 
 ## What actually happened up there
 
@@ -72,33 +79,34 @@ top of the ionosphere. Two things happened simultaneously:
    ambiguities that give RTK its centimetre precision become impossible
    to resolve cleanly.
 
-NOAA's Space Weather Prediction Center issued a G5 watch at 17:23 UT on
-May 10 — the first since the Halloween storms of 2003. By 21:00 UT
-(5 PM Central, prime field-work hours in the Midwest), the planetary Kp
-index had hit 8.667 (between G4 and G5). It would stay above 7 for the
-next 36 hours.
+NOAA's Space Weather Prediction Center recorded the first CME's arrival at
+16:37 UT on May 10, G4 conditions at 17:39 UT and G5 conditions at
+22:54 UT. By 21:00 UT (4 PM Central, prime field-work hours in the
+Midwest), the planetary Kp index had hit 8.667 (between G4 and G5). It
+would stay above 7 through the end of May 11.
 
 ## What we measured
 
 Here is the headline figure from our analysis. The top panel shows the
 median and 95th-percentile 2D horizontal positioning error across all 25
 corridor stations, on a log scale. The bottom panel shows the contemporaneous
-Kp index (colored bars, green-quiet through dark-red G5) and Dst (black
-line, with the catastrophic -406 nT minimum on May 11).
+Kp index (colored bars, green-quiet through dark-red G5).
 
-![Regional 2D RTK error vs time](https://raw.githubusercontent.com/577Industries/gannon-storm-rtk-analysis/main/results/figures/fig-01-regional-error-vs-time.png)
+![Regional 2D RTK error vs time](https://raw.githubusercontent.com/577Industries/open-source/main/programs/helios/gannon-storm-rtk-analysis/results/figures/fig-01-regional-error-vs-time.png)
 
-The story the figure tells is brutally simple: error stayed below the 2.5 cm
-agronomic planting threshold throughout May 8-9 (the pre-storm baseline),
-then jumped by roughly two orders of magnitude starting around 18:00 UT on
-May 10, peaked at multi-metre levels on May 11, and only returned to RTK-
-useful levels late on May 12.
+The story the figure tells is brutally simple: the corridor's median error
+stayed below the 2.5 cm agronomic planting threshold throughout May 8-9 (the
+pre-storm baseline; its 95th percentile sat just above the threshold), then
+jumped by nearly two orders of magnitude from 15:00 UT on May 10, where the
+first three-hour Kp interval above the model's storm level begins, peaked
+at multi-metre levels on May 11, fell back to the quiet level for parts of
+May 12, and was last above it until 06:00 UT on May 13.
 
 The per-station view is the same story 25 times, with subtle differences
 by latitude. Northern Iowa stations (higher geomagnetic latitude) saw
 larger excursions than southern Indiana stations:
 
-![Per-station error grid](https://raw.githubusercontent.com/577Industries/gannon-storm-rtk-analysis/main/results/figures/fig-02-per-station-grid.png)
+![Per-station error grid](https://raw.githubusercontent.com/577Industries/open-source/main/programs/helios/gannon-storm-rtk-analysis/results/figures/fig-02-per-station-grid.png)
 
 The aggregate operator impact is captured in our **citable headline result**:
 
@@ -114,17 +122,17 @@ window." A row-crop operation that lost 50 productive hours during the
 five-day May planting window lost roughly a fifth of its annual planting
 capacity.
 
-![Hours over threshold by day](https://raw.githubusercontent.com/577Industries/gannon-storm-rtk-analysis/main/results/figures/fig-03-station-hours-over-threshold.png)
+![Hours over threshold by day](https://raw.githubusercontent.com/577Industries/open-source/main/programs/helios/gannon-storm-rtk-analysis/results/figures/fig-03-station-hours-over-threshold.png)
 
 The bar chart makes the time evolution legible at a glance. May 11 — the
-day Dst hit -406 nT — saw the worst per-station impact. May 12 was
+day Kp reached 9 — saw the worst per-station impact. May 12 was
 still bad. By May 14, RTK was back to normal.
 
 ## A note on the model
 
 We're publishing this analysis as v1, and we're publishing it with an
 explicit, documented limitation: the per-epoch 2D error trajectory comes
-from a *climatological model* tied to the real Kp and Dst time series,
+from a *climatological model* tied to the real Kp time series,
 not from full pseudo-range processing of the raw RINEX observables. We
 fetch and parse the real RINEX files for every station — that's where the
 truth coordinates and the per-day epoch grid come from — but the actual
@@ -134,16 +142,16 @@ SPP or PPP.
 Why? Because what the precision-ag industry needs from this analysis is
 not whether one specific station's error was 2.18 m or 2.52 m at 19:43 UT
 on May 11. What it needs is the regional, multi-day, multi-station
-*envelope* of degradation — and that envelope is dominated by Kp and Dst,
-which are public, archival, and traceable to GFZ Potsdam and the Kyoto WDC.
+*envelope* of degradation — and that envelope is dominated by Kp,
+which is public, archival, and traceable to GFZ.
 Our v2 release (scheduled alongside the rest of the HELIOS work plan)
 will replace the climatological model with full PPP/RTK processing
 and add **equipment-specific transfer functions** for the John Deere
 StarFire 6000/7000, Trimble RTK, and AgLeader Surefire/Versa families —
 the receivers operating on 80%+ of US row-crop acres.
 
-For now: the methodology is at [docs/methodology.md](https://577industries.github.io/gannon-storm-rtk-analysis/methodology/),
-the model constants are at [src/gannon_analysis/positioning.py](https://github.com/577Industries/gannon-storm-rtk-analysis/blob/main/src/gannon_analysis/positioning.py),
+For now: the methodology is at [docs/methodology.md](https://github.com/577Industries/open-source/blob/main/programs/helios/gannon-storm-rtk-analysis/docs/methodology.md),
+the model constants are at [src/gannon_analysis/positioning.py](https://github.com/577Industries/open-source/blob/main/programs/helios/gannon-storm-rtk-analysis/src/gannon_analysis/positioning.py),
 and you can replace either with your own and re-run `make all` in under
 ten minutes.
 
@@ -175,11 +183,11 @@ team, and every agricultural insurer to take away from this analysis:
   for.
 
 - **NOAA's G-scale issuance is a useful trigger, not a substitute for
-  receiver-specific prediction.** NOAA issued the G5 watch at 17:23 UT
-  on May 10. In the data, you can see that 2D error had already begun to
-  climb by then. The G-scale is a coarse-grained, ground-truth-after-the-
-  fact indicator. The operator needs something forward-looking, receiver-
-  specific, and field-level.
+  receiver-specific prediction.** NOAA recorded G4 conditions at 17:39 UT
+  and G5 conditions at 22:54 UT on May 10. The G-scale is a coarse-grained,
+  ground-truth-after-the-fact indicator, and so is the three-hour Kp index
+  this model runs on. The operator needs something forward-looking,
+  receiver-specific, and field-level.
 
 The good news is that all the upstream science needed to build that
 operator-facing prediction system exists — at NASA CCMC, at NOAA SWPC, at
@@ -207,7 +215,8 @@ single, citable URL for every claim in that document.
 
 If you operate row crops in the Midwest, run an OEM telematics platform,
 or write about ag-tech for a living: **read the analysis on GitHub at**
-[`577Industries/gannon-storm-rtk-analysis`](https://github.com/577Industries/gannon-storm-rtk-analysis),
+[`gannon-storm-rtk-analysis`](https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis)
+(in the `577Industries/open-source` repository),
 **fork it, run `make all`, and tell us what you'd want to see in v2.**
 We're particularly interested in receiver telemetry from operators willing
 to share it (anonymised, aggregated, no proprietary configurations
@@ -220,5 +229,5 @@ Reach out: **engineering@577industries.com**.
 
 *577 Industries Inc. is a Columbus, Ohio-based applied-AI company. All
 public HELIOS artifacts are released under the Apache 2.0 license. Headline image and per-station
-analysis are reproducible from the [GitHub repository](https://github.com/577Industries/gannon-storm-rtk-analysis)
+analysis are reproducible from the [GitHub repository](https://github.com/577Industries/open-source/tree/main/programs/helios/gannon-storm-rtk-analysis)
 using `make all`.*

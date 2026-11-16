@@ -1,7 +1,8 @@
 """Tests for the NOAA SWPC adapter.
 
-Unit tests use captured fixtures from services.swpc.noaa.gov plus the
-GFZ Potsdam and Kyoto WDC archives. The :mark.live integration test is
+Unit tests use captured fixtures from services.swpc.noaa.gov and the GFZ
+Potsdam archive, and a file of invented values for the Dst path (see
+``conftest.py``). The :mark.live integration test is
 deselected by default; CI nightly runs ``pytest -m live`` while PRs run
 ``pytest -m "not live"``.
 
@@ -27,7 +28,6 @@ from helios_connectors.adapters.swpc import (
     GFZ_KP_ARCHIVE_URL,
     SWPC_BASE_URL,
     SWPC_PRODUCTS,
-    SWPC_REALTIME_DAYS,
     _coerce_float,
     _g_scale_from_kp,
     _needs_archive,
@@ -96,7 +96,7 @@ def test_g_scale_from_kp(kp: float, expected: str) -> None:
 
 
 # ---------------------------------------------------------------------------- #
-# GFZ + Kyoto parser tests against real fixtures
+# Archive parser tests: the real GFZ Kp file; a synthetic file in the WDC Dst layout
 # ---------------------------------------------------------------------------- #
 
 
@@ -128,18 +128,23 @@ def test_parse_gfz_kp_skips_comments_and_negatives() -> None:
     assert all(s[0].day == 1 for s in samples)
 
 
-def test_parse_kyoto_dst_gannon_peak(kyoto_dst_2405_fixture: str) -> None:
-    """The Kyoto May 2024 fixture must contain Dst <= -400 nT during Gannon."""
-    samples = _parse_kyoto_dst(kyoto_dst_2405_fixture, year=2024, month=5)
-    assert len(samples) >= 24 * 28, f"expected ~720 hourly samples, got {len(samples)}"
-    # Find the minimum Dst over May 10-11 (Gannon's superstorm phase)
-    storm_window = [
+def test_parse_kyoto_dst_reads_a_month_in_the_wdc_layout(dst_wdc_layout_fixture: str) -> None:
+    """The parser reads every hour of the synthetic month, deep negatives included.
+
+    The fixture's values are invented (see ``conftest.py``). Its dip, which reaches
+    -500 on day 11, makes four-character fields adjoin with no space between them
+    on days 10 to 12, which is the layout's hard case.
+    """
+    samples = _parse_kyoto_dst(dst_wdc_layout_fixture, year=2024, month=5)
+    assert len(samples) == 24 * 31, f"expected 744 hourly samples, got {len(samples)}"
+    dip = [
         (ts, dst)
         for ts, dst in samples
         if datetime(2024, 5, 10, tzinfo=UTC) <= ts <= datetime(2024, 5, 12, tzinfo=UTC)
     ]
-    min_dst = min(s[1] for s in storm_window)
-    assert min_dst <= -400, f"expected Dst <= -400 nT during Gannon, got {min_dst}"
+    min_dst = min(s[1] for s in dip)
+    assert min_dst <= -400, f"expected the synthetic dip to pass -400, got {min_dst}"
+    assert min(ts for ts, dst in samples if dst == min_dst) == datetime(2024, 5, 11, 12, tzinfo=UTC)
 
 
 def test_parse_kyoto_dst_skips_sentinels() -> None:
@@ -191,6 +196,26 @@ def test_parse_3_day_forecast_missing_issued_returns_now() -> None:
 # ---------------------------------------------------------------------------- #
 # Mocked-transport adapter tests
 # ---------------------------------------------------------------------------- #
+
+
+def _pin_realtime_routing(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Force ``fetch_*`` onto the realtime branch regardless of fixture age.
+
+    ``_needs_archive`` compares ``start`` against ``now - SWPC_REALTIME_DAYS``
+    using the wall clock, so a test whose window spans recorded fixtures flips
+    to the GFZ archive branch once those fixtures are more than 30 days old.
+    That made the realtime tests time bombs: they passed when the fixtures were
+    captured and began failing roughly a month later, on unchanged code.
+
+    Pinning the branch here keeps these tests about realtime normalization and
+    filtering. Routing itself is covered separately and unmocked by
+    ``test_needs_archive_*``, ``test_fetch_kp_gannon_routes_to_archive`` and
+    ``test_fetch_kp_archive_lineage_includes_gfz``.
+    """
+    monkeypatch.setattr(
+        "helios_connectors.adapters.swpc._needs_archive",
+        lambda start: False,
+    )
 
 
 def _swpc_mock_client(
@@ -245,20 +270,15 @@ def _archive_mock_client(
 @pytest.mark.asyncio
 async def test_fetch_kp_realtime_normalizes(
     swpc_kp_realtime_fixture: list[dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Real-time Kp fetcher must normalize records with provenance + G-scale."""
-    # Derive the fixture's timestamp range and use a recent window that
-    # captures it. The fixture's earliest entry must be inside the SWPC
-    # real-time window (<30 days) for routing to stay on the realtime branch.
+    _pin_realtime_routing(monkeypatch)
+    # Window simply has to surround the fixture timestamps; routing is pinned
+    # above, so the fixture's age no longer decides which branch runs.
     fixture_ts = datetime.fromisoformat(swpc_kp_realtime_fixture[0]["time_tag"]).replace(tzinfo=UTC)
-    # Build a window that surrounds the fixture timestamps. The window
-    # start must be within the SWPC realtime window from "now" in real
-    # wall-clock time so the routing stays on realtime. We set start to
-    # the smaller of (now - 1 day, fixture_ts - 1 hour) — whichever keeps
-    # the routing branch on realtime AND captures the fixture.
-    now = datetime.now(UTC)
-    start = min(now - timedelta(days=1), fixture_ts - timedelta(hours=1))
-    end = max(now + timedelta(days=1), fixture_ts + timedelta(days=1))
+    start = fixture_ts - timedelta(hours=1)
+    end = fixture_ts + timedelta(days=1)
     client = _swpc_mock_client({SWPC_PRODUCTS["kp"]: swpc_kp_realtime_fixture})
     async with SwpcAdapter(client=client, cache=False) as swpc:
         records = [r async for r in swpc.fetch_kp(start=start, end=end)]
@@ -277,13 +297,15 @@ async def test_fetch_kp_realtime_normalizes(
 @pytest.mark.asyncio
 async def test_fetch_kp_realtime_filters_outside_window(
     swpc_kp_realtime_fixture: list[dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Records outside [start, end] must be filtered out.
 
-    We use a window that's recent enough to stay on the realtime branch
-    (and thus exercise the realtime filter code path) but that doesn't
-    overlap the fixture's actual timestamps.
+    Routing is pinned to the realtime branch so this exercises the realtime
+    filter; the window is offset from the fixture timestamps so nothing
+    should survive it.
     """
+    _pin_realtime_routing(monkeypatch)
     client = _swpc_mock_client({SWPC_PRODUCTS["kp"]: swpc_kp_realtime_fixture})
     fixture_ts = datetime.fromisoformat(swpc_kp_realtime_fixture[0]["time_tag"]).replace(tzinfo=UTC)
     # Window 5 days after the fixture, still well within 30 days of "now".
@@ -381,9 +403,12 @@ async def test_fetch_kp_archive_lineage_includes_gfz(
 
 
 @pytest.mark.asyncio
-async def test_fetch_dst_gannon_via_kyoto(kyoto_dst_2405_fixture: str) -> None:
-    """fetch_dst must produce hourly Dst records with Kyoto WDC lineage."""
-    archive_client = _archive_mock_client({"dst_provisional/202405": kyoto_dst_2405_fixture})
+async def test_fetch_dst_gannon_via_kyoto(dst_wdc_layout_fixture: str) -> None:
+    """fetch_dst must produce hourly Dst records with Kyoto WDC lineage.
+
+    The archive is mocked with the synthetic month; no real Dst value is read.
+    """
+    archive_client = _archive_mock_client({"dst_provisional/202405": dst_wdc_layout_fixture})
     async with SwpcAdapter(archive_client=archive_client, cache=False) as swpc:
         records = [r async for r in swpc.fetch_dst(start=GANNON_START, end=GANNON_END)]
     assert records
@@ -394,17 +419,17 @@ async def test_fetch_dst_gannon_via_kyoto(kyoto_dst_2405_fixture: str) -> None:
         and any("Kyoto WDC" in segment for segment in r.provenance.extra["lineage"])
         for r in records
     )
-    # Min Dst during Gannon should be at most -400 nT
+    # The synthetic month dips below -400 inside the window asked for.
     min_dst = min(r.value["dst"] for r in records)
     assert min_dst <= -400
 
 
 @pytest.mark.asyncio
-async def test_fetch_dst_recent_uses_provisional(kyoto_dst_2405_fixture: str) -> None:
+async def test_fetch_dst_recent_uses_provisional(dst_wdc_layout_fixture: str) -> None:
     """A 'recent' window (<30d) should hit provisional Kyoto, not final."""
     requested: list[str] = []
     archive_client = _archive_mock_client(
-        {"dst_provisional": kyoto_dst_2405_fixture},
+        {"dst_provisional": dst_wdc_layout_fixture},
         requested_log=requested,
     )
     now = datetime.now(UTC)
@@ -421,15 +446,15 @@ async def test_fetch_dst_recent_uses_provisional(kyoto_dst_2405_fixture: str) ->
 
 
 # ---------------------------------------------------------------------------- #
-# Plasma + Mag (columnar)
+# Plasma + Mag (RTSW list-of-dicts)
 # ---------------------------------------------------------------------------- #
 
 
 @pytest.mark.asyncio
-async def test_fetch_plasma_columnar(
-    swpc_plasma_fixture: list[list[Any]],
+async def test_fetch_plasma_rtsw(
+    swpc_plasma_fixture: list[dict[str, Any]],
 ) -> None:
-    """Plasma fetcher must parse header-as-first-row JSON arrays correctly."""
+    """Plasma fetcher must reduce RTSW to prime rows with legacy value keys."""
     client = _swpc_mock_client({SWPC_PRODUCTS["plasma"]: swpc_plasma_fixture})
     # Use a very wide window so all fixture rows pass the filter.
     async with SwpcAdapter(client=client, cache=False) as swpc:
@@ -440,21 +465,29 @@ async def test_fetch_plasma_columnar(
                 end=datetime(2099, 1, 1, tzinfo=UTC),
             )
         ]
-    assert records
-    sample = records[0]
+    # Only prime (active) rows survive — one record per minute, not one per
+    # (minute, observatory).
+    n_active = sum(1 for row in swpc_plasma_fixture if row.get("active"))
+    assert len(records) == n_active
+    sample = records[-1]  # newest
     assert sample.source == SourceID.SWPC
     assert sample.record_type == "plasma"
-    # Expected float columns: density, speed, temperature
+    # RTSW proton_* keys must land under the legacy names.
     assert "density" in sample.value
     assert "speed" in sample.value
     assert "temperature" in sample.value
-    # Values must be parsed as floats from their string representation.
-    assert isinstance(sample.value["density"], float)
     assert isinstance(sample.value["speed"], float)
+    # The observing spacecraft is carried per record (post-DSCOVR feed).
+    assert sample.value["observatory"] in {"SOLAR1", "IMAP", "ACE"}
+    # Records come out chronologically even though RTSW serves newest-first.
+    times = [r.event_time for r in records]
+    assert times == sorted(times)
+    # The hand-nulled proton_density row must surface as None, not a fill value.
+    assert any(r.value["density"] is None for r in records)
 
 
 @pytest.mark.asyncio
-async def test_fetch_mag_columnar(swpc_mag_fixture: list[list[Any]]) -> None:
+async def test_fetch_mag_rtsw(swpc_mag_fixture: list[dict[str, Any]]) -> None:
     client = _swpc_mock_client({SWPC_PRODUCTS["mag"]: swpc_mag_fixture})
     async with SwpcAdapter(client=client, cache=False) as swpc:
         records = [
@@ -464,18 +497,21 @@ async def test_fetch_mag_columnar(swpc_mag_fixture: list[list[Any]]) -> None:
                 end=datetime(2099, 1, 1, tzinfo=UTC),
             )
         ]
-    assert records
-    sample = records[0]
+    n_active = sum(1 for row in swpc_mag_fixture if row.get("active"))
+    assert len(records) == n_active
+    sample = records[-1]
     assert sample.source == SourceID.SWPC
     assert sample.record_type == "mag"
     assert sample.value_units == "nT"
+    # Mag field names carried over from the retired feed unchanged.
     assert "bz_gsm" in sample.value
     assert "bt" in sample.value
+    assert sample.value["observatory"] in {"SOLAR1", "IMAP", "ACE"}
 
 
 @pytest.mark.asyncio
 async def test_fetch_plasma_archive_window_warns(
-    swpc_plasma_fixture: list[list[Any]],
+    swpc_plasma_fixture: list[dict[str, Any]],
     caplog: pytest.LogCaptureFixture,
 ) -> None:
     """fetch_plasma with old start must log a deferral warning."""
@@ -540,11 +576,13 @@ async def test_fetch_sep_forecast(swpc_sep_forecast_fixture: str) -> None:
 @pytest.mark.asyncio
 async def test_unified_fetch_dispatches_across_products(
     swpc_kp_realtime_fixture: list[dict[str, Any]],
-    swpc_plasma_fixture: list[list[Any]],
-    swpc_mag_fixture: list[list[Any]],
+    swpc_plasma_fixture: list[dict[str, Any]],
+    swpc_mag_fixture: list[dict[str, Any]],
     swpc_protons_fixture: list[dict[str, Any]],
     swpc_sep_forecast_fixture: str,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    _pin_realtime_routing(monkeypatch)
     client = _swpc_mock_client(
         {
             SWPC_PRODUCTS["kp"]: swpc_kp_realtime_fixture,
@@ -554,11 +592,10 @@ async def test_unified_fetch_dispatches_across_products(
             SWPC_PRODUCTS["sep_forecast"]: swpc_sep_forecast_fixture,
         }
     )
-    now = datetime.now(UTC)
-    # Window covering both fixture timestamps and "now" while staying inside
-    # the SWPC real-time window (else routing flips to GFZ archive).
-    start = now - timedelta(days=SWPC_REALTIME_DAYS - 1)
-    end = now + timedelta(days=365)
+    # Routing is pinned above, so the window only has to span the fixtures.
+    fixture_ts = datetime.fromisoformat(swpc_kp_realtime_fixture[0]["time_tag"]).replace(tzinfo=UTC)
+    start = fixture_ts - timedelta(days=1)
+    end = datetime.now(UTC) + timedelta(days=365)
     async with SwpcAdapter(client=client, cache=False) as swpc:
         records = [
             r

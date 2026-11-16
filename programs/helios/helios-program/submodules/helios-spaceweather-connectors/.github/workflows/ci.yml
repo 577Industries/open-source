@@ -14,12 +14,20 @@ on:
     - cron: '17 6 * * *'
   workflow_dispatch:
 
+# Superseded PR runs are cancelled; push, schedule and dispatch runs never
+# are (the nightly must finish), and the event name in the group keeps a
+# 06:17 UTC schedule run from queueing behind a push run on main.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -30,22 +38,27 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    # The hermetic suite ran ~26 min until 2026-09-02, when --durations showed
+    # 25 of them were the SEP scoreboard tests sleeping on the real token
+    # bucket (tests/test_sep_scoreboards.py no-ops it for non-live tests now);
+    # the suite is ~2 min. 15 is the backstop, not a target.
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - run: pip install '.[dev]'
       # Unit-test pass: deselects @pytest.mark.live to keep PR signal
       # independent of upstream NASA service availability.
-      - run: pytest -m "not live"
+      - run: pytest -m "not live" --durations=20
       - if: matrix.python-version == '3.12'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         with:
           files: coverage.xml
           fail_ci_if_error: false
@@ -56,9 +69,14 @@ jobs:
     # PR signal on a flaky NASA gateway.
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    # Cap the job: the runner default is 6 h, and the 2026-08-30 run burned
+    # 2 h 33 m crawling an active ISWA month. Per-test budgets live in
+    # pytest-timeout (--timeout below, plus @pytest.mark.timeout overrides);
+    # this is the hard backstop.
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -67,13 +85,14 @@ jobs:
           # NASA_API_KEY is optional — the live test defaults to the
           # CCMC kauai endpoint which is unauthenticated.
           NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
-        run: pytest -m live --no-cov
+        run: pytest -m live --no-cov --timeout=300 --durations=15
 
   security:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: pip install pip-audit

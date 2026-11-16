@@ -7,19 +7,16 @@ A full Single Point Positioning (SPP) solution from raw GPS observables
 combination, weighted least-squares) is a 500-line implementation that does not
 materially change the headline story of this artifact: 2D horizontal error
 during the Gannon storm rose by 1-2 orders of magnitude above quiet-time
-baseline and crossed precision-ag accuracy thresholds. We therefore ship two
-positioning paths:
+baseline and crossed precision-ag accuracy thresholds. We therefore ship one
+positioning path, ``solve_spp(rinex_path, station, kp_series=...)``:
 
-1. ``solve_spp_real(rinex_path, station)`` — reads the RINEX header with
-   ``georinex`` (real I/O, real station truth coordinates), extracts the
-   observation epoch grid from the file, and emits one position-error row per
-   observation epoch using the climatological model below. The RINEX file is
-   not a placeholder — it is downloaded, cached, header-parsed, and timestamp
-   epochs are taken from the actual file. We do not synthesise epochs.
-2. ``solve_spp_climatological(...)`` — pure-Python time-series of 2D error
-   built from a documented model that takes (a) the station's geomagnetic
-   latitude, (b) the contemporaneous Kp value at each epoch, and (c) the
-   contemporaneous Dst value. This is what both code paths emit.
+1. It reads the RINEX file's header with ``georinex`` (real I/O) for the
+   sampling interval and takes the day from the file's name. The file is
+   downloaded, cached and header-parsed, and it is the evidence of fetch in
+   the manifest. Its observations are not used: the epochs are one per
+   sampling interval across that UTC day.
+2. It emits one position-error row per epoch from a documented model that
+   takes (a) the station's latitude and (b) the Kp value at that epoch.
 
 **Climatological model** (v1, explicit assumptions):
 
@@ -33,20 +30,32 @@ peak, with 12-48 hour equipment shutdowns common (American Farm Bureau
 Federation 2024 survey, OSU Extension 2024 advisory). We model post-RTK
 residual 2D error as::
 
-    sigma_2d(t) = sigma_quiet + alpha * f_kp(Kp(t)) + beta * |Dst(t)| / 100
+    sigma_2d(t) = sigma_quiet + alpha * f_kp(Kp(t))
 
 where ``f_kp`` is an empirically-anchored monotonic function::
 
     f_kp(Kp) = exp(0.55 * (Kp - 4.0))  if Kp >= 4 else 0
 
-The constants ``sigma_quiet``, ``alpha``, and ``beta`` are set so the model
-recovers approximate agreement with: (a) the ~2 cm quiet-time RTK accuracy
-reported by Deere/Trimble in their precision-ag spec sheets, and (b) the
-30 cm to multi-metre horizontal excursions documented in CORS-derived RTK
-loss-of-fix periods during the May 2024 storm peak.
+The constants ``sigma_quiet`` and ``alpha`` are set so the model recovers
+approximate agreement with: (a) the ~2 cm quiet-time RTK accuracy reported by
+Deere/Trimble in their precision-ag spec sheets, and (b) the 30 cm to
+multi-metre horizontal excursions documented in CORS-derived RTK loss-of-fix
+periods during the May 2024 storm peak.
+
+**No Dst term (since 0.2.0).** Version 0.1.0 added a third term,
+``beta * |Dst(t)| / 100`` with ``beta = 0.0015``, driven by the hourly Dst
+index of the World Data Center for Geomagnetism, Kyoto. That centre's data
+service does not allow commercial applications of its indices, and
+577 Industries is a commercial entity, so the index is no longer downloaded,
+stored, plotted or used. At the storm's minimum the term was about 6 mm
+against a Kp term above 1 m: under 1% of ``sigma_2d``.
 
 **Limitations honestly disclosed**:
 
+- A station is given the same sequence of random draws on every day: the
+  seed is the station's id. Days with the same Kp therefore give the same
+  errors, and May 8, 9 and 14, where Kp stays below 4, are identical for
+  each station. In 0.1.0 the Dst term changed from day to day and hid this.
 - The model is climatological, not derived from raw observables. We do not
   claim it reproduces any individual station's error trajectory at second
   resolution. We claim it produces a regional-corridor distribution that
@@ -63,6 +72,7 @@ The 2D error column ``h_error_2d_m`` is the model's per-epoch 1-sigma estimate.
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import math
 import warnings
@@ -74,6 +84,18 @@ import numpy as np
 import pandas as pd
 
 from .stations import CorsStation
+
+
+def _stable_key(text: str) -> int:
+    """Return a process-stable 32-bit key derived from ``text``.
+
+    Python salts :func:`hash` for ``str`` per process (PYTHONHASHSEED), so
+    offsetting ``rng_seed`` by ``hash(station_id)`` would draw a different
+    error realisation on every run despite the caller supplying a fixed
+    seed. SHA-256 is stable across processes and machines.
+    """
+    return int.from_bytes(hashlib.sha256(text.encode("utf-8")).digest()[:4], "big")
+
 
 logger = logging.getLogger(__name__)
 
@@ -89,17 +111,14 @@ multipath environments; Trimble RTX and AgLeader spec ~1-2 cm similarly.
 ALPHA_KP: float = 0.075
 """Multiplier on the Kp severity term.
 
-Tuned so f_kp(6) ~ 0.25 m (initial RTK loss-of-fix territory at G2),
-f_kp(8) ~ 1.1 m (G4 broad RTK degradation), f_kp(9) ~ 1.9 m (G5 catastrophic).
+With this value the Kp term ``alpha * f_kp(Kp)`` is about 0.23 m at Kp 6
+(G2), 0.68 m at Kp 8 (G4) and 1.17 m at Kp 9 (G5): one-sigma per horizontal
+component, before the latitude factor. (This comment gave 0.25, 1.1 and
+1.9 m until 0.2.0, which the coefficient does not produce.)
 """
 
-BETA_DST: float = 0.0015
-"""Multiplier on |Dst|/100 (low-latitude geomagnetic disturbance proxy).
-
-Adds ~6 mm error per 100 nT of Dst depression — small but recovers the
-~6 mm/100 nT slope observed across mid-latitude CORS in the Halloween 2003
-and St. Patrick's 2015 storms.
-"""
+KP_STORM_ONSET: float = 4.0
+"""The Kp level at which the model's storm term starts. Below it the term is zero."""
 
 GEOMAG_LATITUDE_FACTOR: float = 1.25
 """Scaling applied to stations above 42 deg N (steeper ionospheric gradient).
@@ -131,20 +150,19 @@ class PositioningManifest:
 def _kp_severity_function(kp: np.ndarray) -> np.ndarray:
     """Empirical monotone function of Kp: 0 below Kp=4, exponential above."""
     out = np.zeros_like(kp, dtype=float)
-    active = kp >= 4.0
-    out[active] = np.exp(0.55 * (kp[active] - 4.0))
+    active = kp >= KP_STORM_ONSET
+    out[active] = np.exp(0.55 * (kp[active] - KP_STORM_ONSET))
     return out
 
 
 def _per_epoch_sigma(
     *,
     kp: np.ndarray,
-    dst: np.ndarray,
     geomag_lat_deg: float,
 ) -> np.ndarray:
     """Compute the per-epoch sigma (1-sigma 2D error) in metres."""
     f_kp = _kp_severity_function(kp)
-    sigma: np.ndarray = SIGMA_QUIET_M + ALPHA_KP * f_kp + BETA_DST * np.abs(dst) / 100.0
+    sigma: np.ndarray = SIGMA_QUIET_M + ALPHA_KP * f_kp
     if abs(geomag_lat_deg) >= 42.0:
         sigma = sigma * GEOMAG_LATITUDE_FACTOR
     return np.asarray(sigma, dtype=float)
@@ -195,18 +213,18 @@ def solve_spp(
     station: CorsStation,
     *,
     kp_series: pd.DataFrame,
-    dst_series: pd.DataFrame,
     rng_seed: int = 0,
 ) -> pd.DataFrame:
     """Produce a per-epoch SPP solution for one station-day.
 
     Args:
         rinex_path: Cached RINEX file. Used for: real epoch grid + provenance.
-        station: Catalog entry — needed for geomagnetic latitude scaling.
+        station: Catalog entry — needed for the latitude scaling.
         kp_series: Minute-resolution Kp series (use
             ``swpc.join_kp_to_minute_grid``).
-        dst_series: Hourly Dst series.
-        rng_seed: Deterministic noise seed.
+        rng_seed: Deterministic noise seed. The draws are also keyed on the
+            station id through a hash that is stable across processes, so the
+            same inputs give the same solution on every run.
 
     Returns:
         DataFrame with columns:
@@ -214,24 +232,17 @@ def solve_spp(
     """
     epochs, _n_epochs = _epochs_from_rinex_header(rinex_path)
     times = pd.DatetimeIndex(epochs)
-    # Align Kp/Dst onto the observation epochs (ffill for both — both are
-    # piecewise-constant within their cadence intervals).
+    # Align Kp onto the observation epochs (ffill: Kp is piecewise-constant
+    # within each 3-hour interval).
     kp_align = kp_series["kp"].reindex(times, method="ffill")
-    dst_align = (
-        dst_series["dst"].reindex(times, method="ffill")
-        if "dst" in dst_series.columns
-        else pd.Series(0.0, index=times)
-    )
     kp_arr = kp_align.to_numpy(dtype=float, na_value=0.0)
-    dst_arr = dst_align.to_numpy(dtype=float, na_value=0.0)
 
     sigma_arr = _per_epoch_sigma(
         kp=kp_arr,
-        dst=dst_arr,
         geomag_lat_deg=station.latitude_deg,
     )
 
-    rng = np.random.default_rng(rng_seed + hash(station.station_id) % 2**32)
+    rng = np.random.default_rng(rng_seed + _stable_key(station.station_id) % 2**32)
     # 2D horizontal error magnitude: |R| where R is a 2-vector with N(0, sigma)
     # per component — Rayleigh distribution, mean = sigma * sqrt(pi/2).
     east = rng.normal(0.0, sigma_arr)
@@ -251,7 +262,6 @@ def solve_spp(
             "lon_deg": station.longitude_deg + math.degrees(east[0] / 6.371e6),
             "height_m": 0.0,
             "kp": kp_arr,
-            "dst_nT": dst_arr,
             "h_error_2d_m": h_error,
             "hdop": hdop,
         }
@@ -271,7 +281,7 @@ def manifest_for_solution(
         rinex_path=str(rinex_path),
         observation_count=len(df),
         model="climatological_v1",
-        model_version="0.1.0",
+        model_version="0.2.0",
         generated_at=datetime.now(UTC),
     )
 
@@ -285,7 +295,6 @@ def daily_p95_error(df: pd.DataFrame, *, by_day: bool = True) -> pd.DataFrame:
             h_error_2d_p95_m=("h_error_2d_m", lambda s: float(np.percentile(s, 95))),
             h_error_2d_median_m=("h_error_2d_m", "median"),
             kp_max=("kp", "max"),
-            dst_min=("dst_nT", "min"),
             n=("h_error_2d_m", "size"),
         )
         .reset_index()

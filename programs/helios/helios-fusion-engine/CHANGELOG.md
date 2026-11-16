@@ -4,6 +4,13 @@ All notable changes to this project are documented here, following [Keep a Chang
 
 ## [Unreleased]
 
+### Changed
+- `paper/main.pdf` is rebuilt from the current `paper/main.tex` (2026-11-16). The PDF in the repository had been built on 2026-05-18 and no longer matched its source.
+- The manuscript no longer quotes a Dst value for the May 2024 storm. The index's source, the World Data Center for Geomagnetism in Kyoto, does not allow commercial applications of its indices.
+- The manuscript, its reference and figure 1 name the storm analysis at `v0.2.0`, in this repository. The text had named 0.2.0 as a planned release with a full positioning solution; 0.2.0 is the climatological model without the Dst index, and the positioning solution is a later release.
+- `docs/training.md` named Kyoto as the archive behind the Kp index. The connectors take Kp from GFZ.
+- Three module notes no longer name a funding program.
+
 ## [0.1.0] — 2026-05-17
 
 ### Added

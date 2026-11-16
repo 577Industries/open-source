@@ -1,7 +1,8 @@
 # Methodology
 
-This document explains what the v1 release of `gannon-storm-rtk-analysis`
-actually computes, what it does **not** compute, and what v2 will add.
+This document explains what the v1 model of `gannon-storm-rtk-analysis`
+actually computes, what it does **not** compute, and what v2 will add. It
+describes version 0.2.0; what changed from 0.1.0 is at the end.
 
 ## What is SPP?
 
@@ -32,19 +33,20 @@ For each NGS CORS station in the corridor, the v1 pipeline:
 2. **Parses the RINEX header** with `georinex` to recover the station's
    published ITRF2014 truth coordinates and the per-day observation epoch grid.
 3. **Computes per-epoch 2D horizontal error** using a *climatological model*
-   tied to contemporaneous geomagnetic indices (real Kp from GFZ Potsdam,
-   real Dst from the Kyoto WDC):
+   tied to the contemporaneous Kp index (the real series, from GFZ):
 
    ```
-   sigma_2d(t) = sigma_quiet
-               + alpha * f_kp(Kp(t))
-               + beta * |Dst(t)| / 100
+   sigma_2d(t) = sigma_quiet + alpha * f_kp(Kp(t))
 
    f_kp(Kp) = 0                       if Kp <  4
             = exp(0.55 * (Kp - 4))     if Kp >= 4
    ```
 
-   Constants `sigma_quiet`, `alpha`, `beta` are calibrated against (a)
+   `sigma_2d` is multiplied by 1.25 for stations at or above 42 deg N. The
+   error at each epoch is then drawn at random: two independent normal
+   components with that standard deviation, combined into a 2D magnitude.
+
+   Constants `sigma_quiet` and `alpha` are calibrated against (a)
    OEM-published RTK accuracy specifications (~2 cm baseline) and (b)
    field-reported error excursions during the May 2024 Gannon storm
    (30 cm to multi-metre during peak hours).
@@ -53,7 +55,7 @@ For each NGS CORS station in the corridor, the v1 pipeline:
    "station-hours over threshold" — the citable summary statistic.
 
 5. **Renders four figures** with `data + method + timestamp` footer:
-   - Regional median + p95 error vs time, with Kp/Dst overlay (headline).
+   - Regional median + p95 error vs time, above the Kp index (headline).
    - Per-station error grid (one panel per station, Kp-coloured points).
    - Stacked station-hours bar chart by UTC date.
    - Station map showing peak severity by location.
@@ -78,13 +80,35 @@ A full PPP/RTK pipeline is roughly an additional 1500 lines of Python plus
 phase-centre files). It changes the per-station error trajectory but does
 **not** change the qualitative regional story the artifact wants to tell:
 that the May 10-12, 2024 storm drove 2D RTK error across the IA/IL/IN/OH
-corridor up by 1-2 orders of magnitude for an aggregate of ~1300
+corridor up by 1-2 orders of magnitude for an aggregate of about 1,280
 station-hours.
 
 For a customer-discovery artifact and a public-facing blog
 post, the climatological model is honest, reproducible, and traceable to
-the real Kp and Dst time series that anyone can verify against GFZ Potsdam
-and the Kyoto WDC.
+the real Kp time series that anyone can verify against GFZ.
+
+## How to read the per-station table
+
+The model knows two things about a station: whether it lies at or above
+42 deg N, and which random draws it was given. Kp is the same for every
+station at every epoch. So two stations on the same side of 42 deg N have the
+same distribution of error, and the differences between their rows in
+`results/quantitative.md` (2.30 to 2.43 m below the line, 2.90 to 3.00 m at or
+above it, storm-window p95) are the spread of 2,880 random draws. The table is
+not a ranking of stations, and the station with the highest value is not a
+station that fared worst.
+
+The table's two columns are, for each station, the highest daily 95th
+percentile of the modeled error within the window.
+
+The draws are seeded per station from a key that is the same on every run, so
+`make analyze` regenerates the table from the same inputs. A station is given
+the same sequence of draws on every day, two for each of the day's 2,880
+epochs. Days with the same Kp therefore give the
+same errors: May 8, 9 and 14, where Kp stays below 4, are identical for each
+station, and each shows 88 station-hours over the 2.5 cm threshold across the
+25 stations, about 15% of the day. That share is the quiet-period draws alone,
+and the storm-window total of 1,283 station-hours includes it.
 
 ## What v2 will add
 
@@ -104,15 +128,30 @@ and the Kyoto WDC.
 
 ## References
 
-- GFZ Potsdam Kp index. Matzka, J., Stolle, C., Yamazaki, Y., Bronkalla, O.
-  and Morschhauser, A. (2021). *The geomagnetic Kp index and derived indices
-  of geomagnetic activity.* Space Weather 19.
-  https://doi.org/10.1029/2020SW002641
-- Kyoto WDC Dst index. World Data Center for Geomagnetism, Kyoto. Hourly
-  provisional Dst values.
-  https://wdc.kugi.kyoto-u.ac.jp/dstdir/
+- GFZ Kp index (GFZ Helmholtz Centre for Geosciences, CC BY 4.0). Matzka, J.,
+  Stolle, C., Yamazaki, Y., Bronkalla, O. and Morschhauser, A. (2021). *The
+  geomagnetic Kp index and derived indices of geomagnetic activity.* Space
+  Weather 19. https://doi.org/10.1029/2020SW002641. Data publication:
+  https://doi.org/10.5880/Kp.0001
 - NGS CORS. National Geodetic Survey Continuously Operating Reference
   Stations. https://geodesy.noaa.gov/CORS/
 - American Farm Bureau Federation (2024). *Precision Agriculture Technology
   Survey Results.*
 - OSU Extension (2024). *Space Weather Disturbances and Farm GPS Interruptions.*
+
+## What changed in 0.2.0
+
+- **No Dst index.** Version 0.1.0 added a third term to the model,
+  `beta * |Dst(t)| / 100` with `beta = 0.0015`, driven by the hourly Dst index
+  of the World Data Center for Geomagnetism, Kyoto, and plotted that index
+  under the headline figure. That centre's data service does not allow
+  commercial applications of its indices, and 577 Industries is a commercial
+  entity. The index is no longer downloaded, stored, plotted or used. The term
+  was about 6 mm at the storm's minimum, against a Kp term above 1 m; removing
+  it lowers storm-window p95 by 0.4 to 0.7%. With the term gone, the quiet
+  days of the window come out identical (see the section above): the term had
+  varied from day to day.
+- **Repeatable draws.** The table of 0.1.0 came from draws seeded with
+  Python's per-process string hash and could not be regenerated. The seed is
+  stable now, and the table was rerun. That moves individual station values by
+  up to 4.9% and leaves the ranges where they were. See `CHANGELOG.md`.

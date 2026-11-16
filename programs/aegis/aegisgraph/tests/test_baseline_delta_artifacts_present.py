@@ -17,6 +17,12 @@ package path from the engineering repo location, then checks for:
     signal_android/
     element_x_android/
 
+A checkout outside that workspace layout (a standalone or public clone)
+has no proposal package beside it. Set WORKSPACE_ROOT to the workspace
+root to point the test at one; `.github/workflows/baseline-delta.yml`
+stages the report under the same variable. When neither the layout nor
+WORKSPACE_ROOT yields a workspace, the artifact checks skip.
+
 Reviewers can run `python3 -m pytest tests/test_baseline_delta_artifacts_present.py -v`
 post-execution to confirm the cut.
 """
@@ -31,13 +37,15 @@ import pytest
 from aegisgraph.io import repo_root
 
 
-def _baseline_delta_dir() -> Path:
+def _baseline_delta_dir() -> Path | None:
     """Resolve the workspace-level baseline-tool-delta dir.
 
     Engineering repo lives at:
         <workspace>/01_TIER3_RESEARCH/AegisGraph_Tier3_Research[/.worktrees/<wt>]/
     Proposal package lives at:
         <workspace>/03_PROPOSAL/active-package/04_evidence/v0.4/baseline-tool-delta/
+
+    Returns None when no workspace can be located.
     """
     rr = repo_root()
     # Walk up to the workspace root. We accept either of:
@@ -55,8 +63,11 @@ def _baseline_delta_dir() -> Path:
             workspace = deeper
             break
     if workspace is None:
-        # Fall back to the documented constant path.
-        workspace = Path("/home/twawe/577i-Projects/SBIR/Archive/1. ASEMA")
+        # Fall back to the workspace root named by the environment.
+        env_root = os.environ.get("WORKSPACE_ROOT")
+        if not env_root:
+            return None
+        workspace = Path(env_root)
     return (
         workspace
         / "03_PROPOSAL"
@@ -74,11 +85,22 @@ BASELINE_DELTA_DIR = _baseline_delta_dir()
 # pre-M14 is that this skips with a clear reason. Once the self-hosted
 # runner has run the workflow, the report will be present and these
 # tests will all pass — which is the v1.0 cut condition.
-_REPORT_PRESENT = (BASELINE_DELTA_DIR / "delta-report.md").is_file()
-_SKIP_REASON = (
-    "baseline-tool delta report not yet generated; "
-    f"expected at {BASELINE_DELTA_DIR} — runs on self-hosted runner per T-M4.1"
+# With no workspace located there is nowhere to look, so that skips too.
+_REPORT_PRESENT = (
+    BASELINE_DELTA_DIR is not None
+    and (BASELINE_DELTA_DIR / "delta-report.md").is_file()
 )
+if BASELINE_DELTA_DIR is None:
+    _SKIP_REASON = (
+        "proposal workspace not found (the baseline-tool delta report lives "
+        "in a private workspace, not in this repository); set WORKSPACE_ROOT "
+        "to the directory that holds 03_PROPOSAL/active-package to check it"
+    )
+else:
+    _SKIP_REASON = (
+        "baseline-tool delta report not yet generated; "
+        f"expected at {BASELINE_DELTA_DIR} — runs on self-hosted runner per T-M4.1"
+    )
 
 
 @pytest.mark.skipif(not _REPORT_PRESENT, reason=_SKIP_REASON)

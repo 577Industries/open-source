@@ -67,7 +67,7 @@ def test_hash_is_invariant_to_object_key_order() -> None:
 def test_hash_detects_lineage_step_reordering() -> None:
     h_original = lineage_hash(lineage=_LINEAGE, **_COMMON)
     h_reversed = lineage_hash(lineage=list(reversed(_LINEAGE)), **_COMMON)
-    assert h_original != h_reversed, "lineage list order must be load-bearing (causal direction)"
+    assert h_original != h_reversed, "lineage list order must change the hash (causal direction)"
 
 
 def test_hash_detects_value_mutation() -> None:

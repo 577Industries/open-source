@@ -13,12 +13,13 @@ public sanitized export by the safety scanner.
 Encoding strategy:
 
 - If PIL is available we render solid-colored 32x32 images via the
-  standard Pillow encoders. This is the default — PIL is in the base
-  install set.
-- If PIL is unavailable we fall back to byte-stable, hand-rolled
-  minimal headers (a 1x1 PNG, a 1x1 GIF, a 1x1 JPEG, a 1x1 WebP) so
-  the corpus still produces ≥4 valid items in degraded environments.
-  The metadata flags `encoding="raw_minimal"` in that case.
+  standard Pillow encoders. This is the default — Pillow is a declared
+  dependency (`pyproject.toml`).
+- If PIL is unavailable we fall back to byte-stable constants, one per
+  format (a 1x1 PNG, a 1x1 GIF, a 1x1 JPEG, a 1x1 WebP), so a degraded
+  environment still gets a valid item in every format: four items at
+  most, whatever `count` asks for. The metadata flags
+  `encoding="raw_minimal"` in that case.
 
 Either path is byte-deterministic given (count, seed). The RNG is used
 only for color choice — the geometry is fixed.
@@ -94,8 +95,11 @@ def _pil_solid_color_webp(image_module, color: tuple[int, int, int]) -> bytes:
     return buf.getvalue()
 
 
-# Hand-rolled 1x1 fallbacks. Each is a real file structure that decodes
-# to a 1x1 image; downstream harnesses can sanity-check encoding.
+# Constant 1x1 fallbacks. Each is a real file structure that decodes to
+# a single white pixel; `tests/test_smabench_ring1_real_corpora.py`
+# decodes all four.
+_RAW_MIN_COLOR = (255, 255, 255)
+
 
 def _raw_min_png() -> bytes:
     # 1x1, 8-bit RGB, single white pixel.
@@ -124,31 +128,38 @@ def _raw_min_gif() -> bytes:
 
 
 def _raw_min_jpeg() -> bytes:
-    # Smallest legal JPEG — well-formed SOI, JFIF marker, DQT, DHT, SOF0,
-    # SOS, EOI. We use a hand-built constant; this is a known-good
-    # 1x1 black JPEG.
+    # Baseline JFIF, 1x1, three components: the bytes libjpeg-turbo
+    # writes for one white pixel at quality 85 with optimized Huffman
+    # tables (the settings of `_pil_solid_color_jpeg`). Frozen here, one
+    # segment per line, so this path needs no encoder.
     return bytes.fromhex(
-        "ffd8ffe000104a46494600010100000100010000ffdb0043"
-        "00010101010101010101010101010101010101010101010101"
-        "01010101010101010101010101010101010101010101010101"
-        "010101010101010101010101010101010101"
-        "ffc4001f0000010501010101010100000000000000000102030405060708090a0b"
-        "ffc4001f0100030101010101010101010000000000000102030405060708090a0b"
-        "ffc000110800010001010100021101031101"
-        "ffda000c03010002110311003f00fffd"
-        "ffd9"
+        "ffd8"  # SOI
+        "ffe000104a46494600010100000100010000"  # APP0: JFIF 1.1
+        "ffdb004300"  # DQT 0, followed by its 64 entries
+        "0503040404030504040405050506070c08070707070f0b0b090c110f1212110f"
+        "111113161c1713141a1511111821181a1d1d1f1f1f13172224221e241c1e1f1e"
+        "ffdb004301"  # DQT 1, followed by its 64 entries
+        "0505050706070e08080e1e1411141e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e"
+        "1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e"
+        "ffc00011080001000103012200021101031101"  # SOF0: 8-bit, 1x1, 3 components
+        "ffc4001500010100000000000000000000000000000008"  # DHT: DC table 0
+        "ffc40014100100000000000000000000000000000000"  # DHT: AC table 0
+        "ffc40014010100000000000000000000000000000000"  # DHT: DC table 1
+        "ffc40014110100000000000000000000000000000000"  # DHT: AC table 1
+        "ffda000c03010002110311003f00"  # SOS
+        "b2c007"  # entropy-coded data
+        "ffd9"  # EOI
     )
 
 
 def _raw_min_webp() -> bytes:
-    # Smallest valid VP8L (lossless WebP) for a 1x1 white pixel. Build
-    # the RIFF container by hand: ASCII "RIFF" + size + "WEBP" + "VP8L"
-    # + chunk size + 1-byte signature + 4 bytes for size (1x1 minus 1)
-    # + bitstream. The bitstream encodes a transparent-LZ77 stream
-    # whose entire body is zero (white).
-    # This is taken from the libwebp reference 1x1 fixture so it
-    # decodes cleanly under both libwebp and platform decoders.
-    vp8l_payload = bytes.fromhex("2f0000004000004801fc0fffff21")
+    # Lossless WebP (VP8L) for a 1x1 white pixel. The payload is the one
+    # libwebp writes, frozen here so this path needs no encoder: a
+    # signature byte, 14 bits each for width and height minus one, the
+    # alpha flag, three version bits (zero), then the bitstream. Only
+    # the RIFF container is built by hand: ASCII "RIFF" + size + "WEBP"
+    # + "VP8L" + chunk size + payload.
+    vp8l_payload = bytes.fromhex("2f0000000045ff23fa1f")
     vp8l_chunk = b"VP8L" + struct.pack("<I", len(vp8l_payload)) + vp8l_payload
     if len(vp8l_payload) % 2 == 1:
         vp8l_chunk += b"\x00"  # RIFF padding to even byte boundary
@@ -163,6 +174,10 @@ def _items(rng: random.Random, count: int) -> Iterator[CorpusItem]:
     image_module = _try_import_pil()
     encoding = "pil" if image_module is not None else "raw_minimal"
     rounds = (count // len(_FORMATS)) + 1
+    if image_module is None:
+        # The fallback samples are constants: a second round would repeat
+        # the first, and `write_corpus` rejects repeated content.
+        rounds = 1
     yielded = 0
     for round_idx in range(rounds):
         for fmt in _FORMATS:
@@ -179,6 +194,7 @@ def _items(rng: random.Random, count: int) -> Iterator[CorpusItem]:
                 else:
                     payload = _pil_solid_color_webp(image_module, color)
             else:
+                color = _RAW_MIN_COLOR  # what the constants actually hold
                 if fmt == "png":
                     payload = _raw_min_png()
                 elif fmt == "jpeg":

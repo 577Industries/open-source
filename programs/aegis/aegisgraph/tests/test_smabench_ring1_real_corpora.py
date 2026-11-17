@@ -23,6 +23,7 @@ produce a corpus via the placeholder PNG path, so the test runs.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 from pathlib import Path
 
@@ -139,6 +140,47 @@ def test_media_corpus_valid_samples(tmp_path: Path) -> None:
     # crash input). The safety scanner depends on this label.
     for item in metadata["items"]:
         assert item["extra"]["purpose"] == "harness-false-positive-baseline"
+
+
+def test_media_corpus_without_pillow_holds_one_sample_per_format(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Without Pillow the generator emits each constant sample once, whatever the count."""
+
+    monkeypatch.setattr(media_corpus, "_try_import_pil", lambda: None)
+    out = tmp_path / "media-corpus"
+    metadata = media_corpus.generate(out, count=16, seed=42)
+    _assert_manifest_shape(metadata, "media-corpus")
+    assert metadata["generator"]["encoder"] == "raw_minimal"
+    assert metadata["generator"]["pil_available"] is False
+    assert metadata["requested_count"] == 16
+    assert metadata["item_count"] == 4
+    formats = sorted(item["extra"]["format"] for item in metadata["items"])
+    assert formats == ["gif", "jpeg", "png", "webp"]
+    for item in metadata["items"]:
+        assert item["extra"]["encoding"] == "raw_minimal"
+        assert item["extra"]["purpose"] == "harness-false-positive-baseline"
+    _assert_per_item_sha_matches_disk(out, metadata)
+    again = media_corpus.generate(out, count=16, seed=42)
+    assert again["sha256"] == metadata["sha256"]
+
+
+def test_media_corpus_fallback_samples_decode() -> None:
+    """Each constant fallback sample is a real 1x1 white image in its own format."""
+
+    image = pytest.importorskip("PIL.Image", reason="decoding the samples needs Pillow")
+    samples = {
+        "PNG": media_corpus._raw_min_png(),
+        "JPEG": media_corpus._raw_min_jpeg(),
+        "GIF": media_corpus._raw_min_gif(),
+        "WEBP": media_corpus._raw_min_webp(),
+    }
+    for expected_format, payload in samples.items():
+        with image.open(io.BytesIO(payload)) as decoded:
+            decoded.load()
+            assert decoded.format == expected_format
+            assert decoded.size == (1, 1)
+            assert decoded.convert("RGB").getpixel((0, 0)) == (255, 255, 255)
 
 
 def test_pq_corpus_covers_pqxdh_and_megolm(tmp_path: Path) -> None:

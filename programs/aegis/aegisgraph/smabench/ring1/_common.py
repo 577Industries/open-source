@@ -8,8 +8,9 @@ The returned dict is the corpus metadata that gets serialized as
 `corpus.metadata.json` in the corpus directory. Items themselves are
 written as `<sha8>.<ext>` filenames so collisions surface as an
 explicit error (rather than silently overwriting). Determinism is the
-load-bearing property: two invocations with the same (count, seed)
-must yield byte-identical files AND byte-identical metadata.
+property the rest depends on: two invocations with the same
+(count, seed) must yield byte-identical files AND byte-identical
+metadata.
 
 We deliberately avoid `os.urandom`, time-derived RNG, or unsorted dict
 iteration — every place that needs randomness uses a `random.Random`

@@ -72,7 +72,7 @@ contains:
   is called out by name (`android.graphics.ImageDecoder` /
   `BitmapFactory.decodeStream` mediating to a system codec linked
   against libwebp). The fact that the app code does NOT call libwebp
-  directly is the load-bearing limitation that prevents over-claiming.
+  directly is the limitation that prevents over-claiming.
 * **Source anchors**: target-pin commits (`signal=1043851`,
   `element-x=91d265e6`) plus the libwebp vendored vuln pin
   (`7ba44f8`). When CodeQL-derived extraction lands these anchors get

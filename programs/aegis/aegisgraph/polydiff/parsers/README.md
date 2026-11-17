@@ -44,5 +44,5 @@ environment vs. deferred to the pinned devcontainer.
 - **Time-budget enforcement.** SIGKILL on timeout is the only reliable
   way to bound parse time across language runtimes.
 - **No parser library import in the orchestrator.** This is a
-  load-bearing safety contract — the orchestrator never trusts a
-  parser's library code with its own address space.
+  safety contract the design depends on — the orchestrator never
+  trusts a parser's library code with its own address space.

@@ -2,8 +2,8 @@
 
 Two consecutive end-to-end orchestrator runs must produce byte-
 identical output (modulo the `generated_at` timestamp). This is the
-load-bearing reproducibility property the SPEC §7.4 commits us to —
-without it any "regression vs. previous run" delta is meaningless.
+reproducibility property the SPEC §7.4 commits us to — without it any
+"regression vs. previous run" delta is meaningless.
 
 The test runs the orchestrator into a tmp_path that's been seeded
 with a minimal repo skeleton (the real extraction graphs are copied

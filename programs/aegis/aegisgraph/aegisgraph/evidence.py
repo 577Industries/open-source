@@ -69,7 +69,7 @@ def provenance(source: str) -> dict[str, Any]:
 def finalize_record(record: dict[str, Any], previous_hash: str | None = None) -> dict[str, Any]:
     """Apply safety flags, hash, chain. Public-classified records raise on blocks.
 
-    Order of operations is load-bearing:
+    The steps must run in this order:
       1. deepcopy + default missing arrays so the schema-required fields
          exist before any scan touches them.
       2. apply_safety_flags() runs scan_record() and attaches flags to the

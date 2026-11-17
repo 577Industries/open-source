@@ -21,8 +21,8 @@ What this test asserts:
 4. The two new claim_state enum values are accepted by the schema.
 5. The two new optional score_vector dimensions are accepted.
 
-This is load-bearing: the v0.3 public release tarball (SHA
-3ce05fbf...) hashes records produced under v1.0. If any v1 record
+A released artifact depends on this: the v0.3 public release tarball
+(SHA 3ce05fbf...) hashes records produced under v1.0. If any v1 record
 fails to validate or its hash drifts, ADR-0010 is breached and the
 v0.3 tarball can no longer be reproduced from sources.
 """

@@ -183,7 +183,7 @@ def _stable_hash(results: dict[str, Any]) -> str:
     """Hash the results dict, excluding fields that aren't byte-stable.
 
     Excluded keys: top-level `generated_at` (the calendar date is fine
-    but the timestamp itself isn't load-bearing) and any nested
+    but no result depends on the timestamp itself) and any nested
     `generated_at` carried in the embedded metadata (none today, but
     we strip defensively so future additions don't break the hash).
     """
@@ -552,7 +552,7 @@ def _set_latest_pointer(results_root: Path, dated: Path) -> str:
 def run(root: Path, *, seed: int = DEFAULT_SEED) -> dict[str, Any]:
     """Run the full SMABench pipeline.
 
-    Order of operations is load-bearing:
+    The steps must run in this order:
       1. Capture previous results before anything mutates.
       2. Run pipeline iteration 1.
       3. Run pipeline iteration 2 (against the SAME root — generators

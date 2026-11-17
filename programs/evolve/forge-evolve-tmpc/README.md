@@ -53,7 +53,7 @@ exact file/test that backs it. [`EXCLUSIONS.md`](EXCLUSIONS.md) states why this 
 > TMPC code and carries no government validation. The surrogate is engineered to exhibit the *same classes*
 > of technical debt and *shapes* of mission-planning logic described for TMPC, so results
 > transfer in kind, not in fidelity. See [`surrogate/DEBT.md`](surrogate/DEBT.md).
-> See [`ERRATUM.md`](ERRATUM.md) for the 2026-10-15 corrections to earlier claims in this repository.
+> See [`ERRATUM.md`](ERRATUM.md) for the corrections to earlier claims in this repository (2026-10-15, with one item added 2026-11-16).
 
 ## Reading order for first-time visitors
 

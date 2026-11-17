@@ -26,6 +26,10 @@ The 137 xUnit cases pass, and the differential run of the legacy surrogate again
 
 The work is internally funded by 577 Industries Inc. and carries no government validation or endorsement.
 
+## (g) Compliance status (added 2026-11-16)
+
+Earlier versions of `RELEASE_APPROVAL.md` described CMMC Level 2 (Self), ITAR/DDTC registration and a facility clearance as in progress or expected. When that form was written, none of the three was in place. The form, an unfilled approval record, has been removed from this repository.
+
 ## What is unchanged
 
 `EXCLUSIONS.md` and `REPRODUCIBILITY.md` remain accurate: the surrogate is synthetic and unclassified, and `make demo` reproduces the harness results offline. The frozen contracts, the Roslyn analyzer, the hash chain with Merkle root, the review gates and the seeded corpus generator are real code and remain available for reuse.

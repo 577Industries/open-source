@@ -18,7 +18,7 @@ tooling-strict:
 
 # test: pytest unit + integration tests (excludes anything network-bound).
 test:
-	$(PYTHON) -m pytest
+	$(PYTHON) -m pytest -q
 
 # validate: run the schema + safety + hash-chain validator across the repo.
 # Output: validation-report.json. Status must be "pass" before exports.

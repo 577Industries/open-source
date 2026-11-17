@@ -1,0 +1,8 @@
+# URLs lychee cannot validate without auth, but which we intentionally list.
+# Private repos in the 577Industries org — lychee runs unauthenticated so they 404.
+^https?://github\.com/577Industries/577i-unified/?$
+^https?://github\.com/577Industries/helios-fusion-internal/?$
+
+# npmjs.com returns 403 to all programmatic requests (incl. with browser User-Agent).
+# Links are valid in a real browser; lychee can't validate them. Skip.
+^https?://(www\.)?npmjs\.com/.*$

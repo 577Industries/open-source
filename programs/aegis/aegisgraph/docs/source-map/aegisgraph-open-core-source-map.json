@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "name": "aegisgraph-open-core-source-map",
+  "generated_for": "ASEMA DP2 feasibility and open-core engineering boundary",
+  "boundary": {
+    "engineering_repo_posture": "public_open_core",
+    "sanitized_release_posture": "human_gated_public_export",
+    "summary": "This engineering repository is public/open-core. Engineering-side evidence classes and generated working outputs are excluded from the sanitized feasibility release unless they pass the export gate and human review.",
+    "excluded_from_sanitized_release": [
+      "live probing outputs",
+      "credentialed test material",
+      "raw third-party target source",
+      "raw crash-triggering bytes",
+      "undisclosed vulnerability reports",
+      "private submission manifests"
+    ]
+  },
+  "repositories": {
+    "engineering_open_core": {
+      "path_hint": "01_TIER3_RESEARCH/AegisGraph_Tier3_Research/",
+      "public_name": "AegisGraph open-core engineering platform",
+      "url": "https://github.com/577Industries/aegisgraph",
+      "tag": "v1.0.0-tier3-research",
+      "commit": "d91c1df6e9d6849060388949c6e0202f1aef1e5c",
+      "evidence_tier": "backed_now",
+      "verification_commands": [
+        "git checkout v1.0.0-tier3-research",
+        "make tooling-strict",
+        "python3 -m pytest -q",
+        "make validate",
+        "make reproduce"
+      ]
+    },
+    "public_artifact_release": {
+      "path_hint": "02_PUBLIC_RELEASE/ASEMA_Public_GitHub_Artifacts/",
+      "public_name": "577-Industries/asema-feasibility-artifacts",
+      "url": "https://github.com/577-Industries/asema-feasibility-artifacts",
+      "tag": "v1.0.0-asema-dp2-feasibility",
+      "commit": "ac83e3f52c8e9cf6c86bdfa13f197bede9e65d1f",
+      "evidence_tier": "backed_now",
+      "verification_commands": [
+        "git checkout v1.0.0-asema-dp2-feasibility",
+        "python3 scripts/verify_public_package.py",
+        "sha256sum -c checksums/SHA256SUMS"
+      ]
+    }
+  },
+  "proposal_volume2_sources": {
+    "path_hint": "03_PROPOSAL/active-package/",
+    "evidence_tier": "backed_with_caveat",
+    "caveat": "Proposal source paths live outside this open-core repository; this map records the expected Volume 2 source anchors used by the proposal package.",
+    "sources": [
+      {
+        "name": "Volume 2 white paper",
+        "path": "03_PROPOSAL/active-package/01_master_proposal/WP_AegisGraph_ASEMA_DP2_v1.1.md"
+      },
+      {
+        "name": "Volume 2 slide deck",
+        "path": "03_PROPOSAL/active-package/01_master_proposal/SD_AegisGraph_ASEMA_DP2_v1.1.md"
+      },
+      {
+        "name": "Claim/Evidence Traceability Matrix",
+        "path": "03_PROPOSAL/active-package/04_evidence/v0.4/cetm.json"
+      },
+      {
+        "name": "Proposal source map",
+        "path": "03_PROPOSAL/active-package/04_evidence/source-map.json"
+      }
+    ],
+    "verification_commands": [
+      "node 05_verification/validate-evidence.mjs --version v0.4",
+      "node 05_verification/validate-cetm.mjs --version v0.4 04_evidence/v0.4/cetm.json",
+      "(cd 04_evidence/v0.4 && sha256sum -c checksums.sha256)",
+      "python3 05_verification/render-volume2.py"
+    ]
+  },
+  "evidence_tiers": {
+    "backed_now": {
+      "meaning": "Mapped to a named tag or file set with concrete verification commands.",
+      "items": [
+        "engineering_open_core",
+        "public_artifact_release"
+      ]
+    },
+    "backed_with_caveat": {
+      "meaning": "Mapped to an external workspace source or proposal package path that must be verified in that owning checkout.",
+      "items": [
+        "proposal_volume2_sources",
+        "release-reported 1030 engineering tests pending refreshed transcript attachment",
+        "ReproChain calibration evidence pending ASAN execution transcript"
+      ]
+    },
+    "planned_gated": {
+      "meaning": "Not released by default; requires written authorization, sanitize-check, and human review before public disclosure.",
+      "items": [
+        "SMABench Ring 3 authorized dynamic assessment",
+        "DynamicProbe option-period outputs",
+        "novel private candidate findings",
+        "raw crash artifacts",
+        "vendor disclosure records before public disclosure",
+        "customer-discovery and external-validator claims before permission to cite"
+      ]
+    }
+  },
+  "safety_contract": {
+    "no_live_probing": true,
+    "no_credentials": true,
+    "no_raw_target_source": true,
+    "crash_bytes_hash_only": true,
+    "public_export_gate": [
+      "make export-public-sanitized",
+      "python3 -m validator.cli sanitize-check exports/public-sanitized/",
+      "human review before publication"
+    ]
+  }
+}

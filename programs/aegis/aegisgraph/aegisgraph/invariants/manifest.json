@@ -1,0 +1,508 @@
+{
+  "tool_output_type": "invariantcheck_library_manifest",
+  "version": "v1.0",
+  "generated_by": "aegisgraph-tier3-research",
+  "safety_posture": "private_by_default",
+  "library_version": "m7-gt-v3",
+  "production_count": 15,
+  "notes": [
+    "M7-GT-v3 deliverable (May 2026, Wave 8A): library v3 with 15 invariants total and 15 of 15 graduated to production-encoded status (closing the M7 quality metric).",
+    "M3.3 baseline (5): INV-01, INV-07, INV-09, INV-11, INV-13.",
+    "M5.3 additions (10): INV-02, INV-03, INV-04, INV-05, INV-06, INV-08, INV-10, INV-12, INV-14, INV-15.",
+    "M5.3 production-encoded (3): INV-02 notification leak, INV-05 key storage no keystore, INV-08 clipboard paste to send.",
+    "M7-INV production-encoded (7 newly graduated): INV-03 group state unauth, INV-04 device link no kex, INV-06 pq downgrade, INV-10 attachment path traversal, INV-12 media decode unsanitized, INV-14 backup blob unauth, INV-15 metadata leak outside envelope.",
+    "M7-GT-v3 production-encoded (3 newly graduated, Wave 8A): INV-09 webview JS interface (Semgrep, pattern-either), INV-11 deeplink open redirect (CodeQL, TaintTracking::Global), INV-13 QR payload unverified binding (CodeQL, TaintTracking::Global). All three closed via the demo-vulnerable-app ground-truth fixture and the new tests/invariants/test_ground_truth_pass.py harness.",
+    "Production CodeQL after M7-GT-v3 (12): INV-01, INV-02, INV-03, INV-04, INV-05, INV-06, INV-10, INV-11, INV-12, INV-13, INV-14, INV-15.",
+    "Production Semgrep after M7-GT-v3 (3): INV-07, INV-08, INV-09.",
+    "Remaining stubs after M7-GT-v3: 0 (all 15 invariants production-encoded).",
+    "Each static (codeql / semgrep) encoding carries a `status` field of either `production` or `stub`; test_library_v2_production_count asserts the production count is 15 (12 CodeQL + 3 Semgrep).",
+    "Encoding `query` fields are paths relative to this manifest.json (i.e. relative to aegisgraph/invariants/).",
+    "Ground-truth expected_violations counts are validated by tests/fixtures/demo-vulnerable-app/ (synthetic Android+Kotlin+Java fixture) via tests/invariants/test_ground_truth_pass.py; the harness skips if codeql/semgrep binaries are absent and runs them on the self-hosted runner per T-M4.1.",
+    "Full 25-30 invariants ship across M3-M11 per Phase II rollout plan (M8.2 adds invariants 16-20 as library v2; M11.1 adds 21-25 as library v3)."
+  ],
+  "invariants": [
+    {
+      "invariant_id": "INV-01",
+      "statement": "Attacker-controlled URL strings shall not reach outbound network calls (OkHttp newCall, HttpURLConnection, Ktor, Retrofit) without passing through an allowlist or policy checker.",
+      "rationale": "Unchecked URL fetches enable SSRF, internal-network probing, private-IP exfiltration, and exploitation of redirect-following parsers. The CodeQL taint analysis detects URL strings from message bodies, deep-link URIs, push payloads, and QR-encoded URLs flowing to HTTP-client invocations without traversing a recognized policy barrier.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/01_url_fetch_without_policy.ql",
+          "status": "production"
+        },
+        {
+          "engine": "frida_dynamic",
+          "hook": "dynamic/01_url_fetch_hook.js",
+          "option_only": true
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 3
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "link_preview",
+        "deeplink",
+        "media_decode"
+      ],
+      "mastg_mapping": "MSTG-NETWORK-2",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-02",
+      "statement": "Notification builders (NotificationCompat.Builder.setContentText, setContentTitle, setStyle) shall not be invoked on sensitive message body or sender PII strings without traversing a redaction barrier or a lockscreen-visibility guard (setVisibility(VISIBILITY_SECRET) / NotificationManager.IMPORTANCE_NONE on locked-device branches).",
+      "rationale": "An SMA that delivers raw decrypted message bodies into the Android notification surface leaks plaintext to the lockscreen, screenshot recents view, and Wear/Auto mirrors. The CodeQL taint analysis tracks message-content getters (getBody, getPreview, getSenderDisplayName) into Notification builder setters, treating redactedBody / lockscreenSafeText / scrubForNotification as sanitizers.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/02_notification_leak.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "inbound_message"
+      ],
+      "mastg_mapping": "MSTG-STORAGE-7",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-03",
+      "statement": "Group-event handlers (add member, change admin, change avatar, rotate sender key) shall not accept an event without verifying the sender's authorization role (admin / co-admin) and current group membership against the local group-state authority.",
+      "rationale": "Group-state mutation without sender-role check is a textbook lateral-movement and account-takeover surface: a relayed or replayed group-management event from a removed or non-admin member silently changes group composition. The CodeQL query (M5.3 stub; full encoding at M7) detects group-event handler entry points whose call paths do not invoke a sender-role / sender-membership check before mutating local group state.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/03_group_state_unauth.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 1
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "inbound_message",
+        "sync_state"
+      ],
+      "mastg_mapping": "MSTG-AUTH-2",
+      "ssdf_mapping": "PW.4.4"
+    },
+    {
+      "invariant_id": "INV-04",
+      "statement": "Device-linking flows (QR scan, link code, magic-link) shall not provision device keys, session state, or sync tokens without completing a key-exchange (KEX) round-trip that authenticates both endpoints.",
+      "rationale": "Provisioning device-side state from a QR scan or link code without a KEX round-trip lets a tampered, relayed, or social-engineered linking primitive add an attacker device to a victim account silently. The CodeQL query (M5.3 stub; full encoding at M7) detects QR/link-code entry points reaching device-registration or key-storage sinks without an intervening KEX-completion barrier (X3DH / Noise / MLS handshake).",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/04_device_link_no_kex.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 1
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "qr_device_link",
+        "crypto_key_lifecycle"
+      ],
+      "mastg_mapping": "MSTG-AUTH-9",
+      "ssdf_mapping": "PW.4.4"
+    },
+    {
+      "invariant_id": "INV-05",
+      "statement": "Private cryptographic keys (identity keys, device keys, signed pre-keys, sender keys, MLS leaf keys) shall not be persisted via android.content.SharedPreferences, plain java.io.File writes, or unencrypted SQLite columns; they shall flow only through the Android Keystore (android.security.keystore.KeyGenParameterSpec) or an EncryptedFile / EncryptedSharedPreferences (androidx.security.crypto) wrapper.",
+      "rationale": "Persisting raw private keys via SharedPreferences or File.write puts them on disk in app-private storage that is recoverable via root, OEM backups, /data extraction on unlocked development devices, or adb backup on debuggable builds. The CodeQL taint analysis tracks key-generation outputs (KeyPair.getPrivate, SecretKeySpec construction, libsodium privateKeyBytes) into SharedPreferences.Editor.putString / File.write / OutputStream.write sinks, with Keystore-aliased and EncryptedFile-wrapped paths treated as sanitizers.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/05_key_storage_no_keystore.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 1
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "crypto_key_lifecycle"
+      ],
+      "mastg_mapping": "MSTG-STORAGE-1",
+      "ssdf_mapping": "PW.6.1"
+    },
+    {
+      "invariant_id": "INV-06",
+      "statement": "Post-quantum KEM handshake protocols shall not silently downgrade to classical-only (e.g. X25519 without Kyber768 hybrid) without a user-visible notification or session-level opt-in record.",
+      "rationale": "PQ-to-classical downgrade silently strips harvest-now-decrypt-later resistance from a session. A silent downgrade triggered by a server hint or a malformed peer-capability response should be observable to the user (or at least to telemetry) so that downgrade-by-attacker is not invisible. The CodeQL query (M5.3 stub; full encoding at M7) detects PQ-handshake code paths where a classical-only fallback occurs without an intervening notification or user-consent record.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/06_pq_downgrade.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 1
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "crypto_key_lifecycle"
+      ],
+      "mastg_mapping": "MSTG-CRYPTO-4",
+      "ssdf_mapping": "PW.4.4"
+    },
+    {
+      "invariant_id": "INV-07",
+      "statement": "AndroidManifest <intent-filter> elements declared on an exported component shall not omit a guarding android:permission (or signature-level permission) when the component handles attacker-reachable actions or data schemes.",
+      "rationale": "An exported activity, service, or receiver with an open intent-filter and no permission gate is reachable from any installed app. Combined with weak input validation in the handler, this is a textbook lateral-movement path. The Semgrep rule detects AndroidManifest XML patterns where android:exported=\"true\" (or implicit-exported via intent-filter on pre-Android-12 components) appears without a matching android:permission attribute.",
+      "encodings": [
+        {
+          "engine": "semgrep",
+          "query": "library/semgrep/07_intent_filter_implicit_export.yaml",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "deeplink",
+        "inbound_message"
+      ],
+      "mastg_mapping": "MSTG-PLATFORM-1",
+      "ssdf_mapping": "PW.4.1"
+    },
+    {
+      "invariant_id": "INV-08",
+      "statement": "Clipboard content flowing into a message-send pipeline (ClipboardManager.getPrimaryClip().getItemAt(0).getText() reaching MessageSender.send / Conversation.sendText) shall pass through an explicit user-confirmation barrier (confirmation dialog, paste-preview UI, or share-sheet acknowledgment).",
+      "rationale": "Automatic auto-paste-to-send (e.g., on focus, or via deep-link-triggered share-intent into a hidden conversation) bypasses user intent and is exploitable by malicious-app clipboard-poisoning combined with deeplink hijacking. The Semgrep rule detects clipboard-read methods flowing into message-send call sites without an intervening confirmation-dialog reference (AlertDialog.show, MaterialAlertDialog, ConfirmSendDialog).",
+      "encodings": [
+        {
+          "engine": "semgrep",
+          "query": "library/semgrep/08_clipboard_paste_to_send.yaml",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 1
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "inbound_message",
+        "deeplink"
+      ],
+      "mastg_mapping": "MSTG-STORAGE-10",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-09",
+      "statement": "Android WebView instances shall not call addJavascriptInterface() on user-controlled content without setting setAllowFileAccess(false), setAllowContentAccess(false), and a same-origin guard on the bound object.",
+      "rationale": "addJavascriptInterface bridges the JS execution context into the host app, exposing reflectively-callable Java methods. When the WebView loads attacker-influenced HTML (link preview, federated room content, oEmbed) without origin restrictions, the bridge becomes a remote code execution surface. The Semgrep rule (stub at M3.3, fully encoded at M5.3) detects addJavascriptInterface call sites without preceding hardening calls.",
+      "encodings": [
+        {
+          "engine": "semgrep",
+          "query": "library/semgrep/09_webview_jsinterface_addjavascript.yaml",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "link_preview",
+        "native_boundary"
+      ],
+      "mastg_mapping": "MSTG-PLATFORM-7",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-10",
+      "statement": "Attachment filenames received from inbound messages shall not flow into java.io.File.write / FileOutputStream constructor without passing through a path-canonicalization barrier (File.getCanonicalPath, comparison against the attachment-directory prefix).",
+      "rationale": "An attachment whose filename contains traversal sequences (`../`, absolute paths, NUL bytes) can escape the attachment directory and overwrite app private storage, including key material and shared preferences. The CodeQL query (M5.3 stub; full encoding at M7) detects attachment-name getters flowing into File construction or write paths without a canonicalization or prefix-containment check.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/10_attachment_path_traversal.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "inbound_message",
+        "media_decode"
+      ],
+      "mastg_mapping": "MSTG-STORAGE-2",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-11",
+      "statement": "Deep-link handlers shall not invoke startActivity / Custom Tabs / WebView.loadUrl with a URL parsed from an inbound intent (Intent.getData, intent.getDataString) unless the URL passed through a host/scheme allowlist.",
+      "rationale": "Open-redirect-style abuse of deep links lets an attacker get the messenger app to load a URL of their choosing \u2014 useful for phishing, OAuth-flow hijacking, and as a SSRF amplifier when combined with INV-01. The CodeQL query (stub at M3.3, fully encoded at M3.4) tracks intent.getData/getDataString through host activities to the first outbound load without an intervening allowlist check.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/11_deeplink_open_redirect.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 3
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "deeplink",
+        "link_preview"
+      ],
+      "mastg_mapping": "MSTG-PLATFORM-3",
+      "ssdf_mapping": "PW.5.1"
+    },
+    {
+      "invariant_id": "INV-12",
+      "statement": "Incoming media (images, video, audio thumbnails) shall not be decoded via BitmapFactory.decodeStream / android.media.MediaCodec / Glide / Coil without an intervening dimension-bound check (width \u00d7 height \u00d7 bytes-per-pixel against an explicit upper limit) or a first-pixel sanitization gate.",
+      "rationale": "Unbounded image decode is the classic remote-trigger for libwebp / libavif / libheif memory corruption (e.g. CVE-2023-4863, CVE-2023-5217). Dimension-bound check before decode prevents the allocator-overflow shape; first-pixel sanitization detects the malformed-header shape. The CodeQL query (M5.3 stub; full encoding at M7) detects decoder call sites lacking an antecedent dimension-bound or sanitization barrier.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/12_media_decode_unsanitized.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 3
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "media_decode",
+        "native_boundary"
+      ],
+      "mastg_mapping": "MSTG-PLATFORM-11",
+      "ssdf_mapping": "PW.7.1"
+    },
+    {
+      "invariant_id": "INV-13",
+      "statement": "QR-code-initiated device linking flows shall bind the QR payload to a verified key-exchange round-trip (X3DH, Noise, MLS keypair confirmation) before any session key, identity claim, or sync token is provisioned.",
+      "rationale": "Provisioning a session from an unverified QR payload allows a tampered QR (printed, shoulder-surfed, MITM-relayed) to silently link an attacker device into a victim's account. The CodeQL query (stub at M3.3, fully encoded at M3.4) detects QR-payload data sources (camera intent results, image-decoded QR strings) reaching a device-link provisioning sink (session keystore, identity key registration, sync-state initializer) without a KEX-completion barrier.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/13_qr_payload_unverified_binding.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "qr_device_link",
+        "crypto_key_lifecycle"
+      ],
+      "mastg_mapping": "MSTG-AUTH-9",
+      "ssdf_mapping": "PW.4.4"
+    },
+    {
+      "invariant_id": "INV-14",
+      "statement": "Backup write and restore paths shall not produce or consume backup blobs without a MAC (HMAC-SHA256 or KMAC) or signature (Ed25519, ECDSA-P256) covering the entire blob; a backup without authentication is rejected on restore.",
+      "rationale": "Unauthenticated backup blobs are a tampering surface: an attacker with backup-file access can modify message history, group state, or key references on disk and have them silently accepted on restore. The CodeQL query (M5.3 stub; full encoding at M7) detects backup-write code paths that emit serialized state without a MAC/signature wrap, and backup-restore code paths that consume blobs without verifying a MAC/signature first.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/14_backup_blob_unauthenticated.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "crypto_key_lifecycle",
+        "sync_state"
+      ],
+      "mastg_mapping": "MSTG-STORAGE-8",
+      "ssdf_mapping": "PW.6.1"
+    },
+    {
+      "invariant_id": "INV-15",
+      "statement": "Message metadata (recipient list, timestamps, group IDs, thread IDs, read-receipts) shall not escape the encrypted envelope on a network-egress path; metadata-bearing fields shall be encrypted with the message body or routed through a sealed-sender / sealed-metadata channel.",
+      "rationale": "Metadata leakage outside the envelope reveals social graphs and timing patterns to network observers and server operators, defeating the privacy goals of an SMA. The CodeQL query (M5.3 stub; full encoding at M7) detects metadata-bearing data fields reaching network-egress sinks (OkHttp Request body, Ktor request, websocket send) outside the encrypted-envelope wrapping function.",
+      "encodings": [
+        {
+          "engine": "codeql",
+          "query": "library/codeql/15_metadata_leak_outside_envelope.ql",
+          "status": "production"
+        }
+      ],
+      "ground_truth": [
+        {
+          "target": "demo-vulnerable-app",
+          "expected_violations": 2
+        },
+        {
+          "target": "signal_android@1043851",
+          "expected_violations": "unknown"
+        },
+        {
+          "target": "elementx_android@91d265e6",
+          "expected_violations": "unknown"
+        }
+      ],
+      "applicable_path_classes": [
+        "inbound_message",
+        "sync_state"
+      ],
+      "mastg_mapping": "MSTG-NETWORK-1",
+      "ssdf_mapping": "PW.5.1"
+    }
+  ]
+}

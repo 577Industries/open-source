@@ -1,0 +1,17 @@
+name: Kinetic Core Robotics CI
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      - run: pytest -v
+      - run: |
+          forge-kinetic envelope
+          forge-kinetic ik-solve
+          forge-kinetic swept-ccd
+          forge-kinetic urts-compile --dialect FANUC

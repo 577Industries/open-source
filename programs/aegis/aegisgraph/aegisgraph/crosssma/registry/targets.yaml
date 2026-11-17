@@ -1,0 +1,152 @@
+# CrossSMA Target Registry
+#
+# Commit-pinned manifest of SMA targets that CrossSMA queries fan out
+# to. Per ADR principles (additive extension): the canonical 2-target
+# map at aegisgraph/constants.py:TARGETS remains the source of truth
+# for the M0-M2 toolchain. This file EXTENDS that map with 2 more
+# targets (wire-android, telegram-android) without touching the
+# global constants. Verified targets here MUST agree with
+# `aegisgraph.constants.TARGETS` for the corresponding commit pin --
+# the test suite enforces this.
+#
+# Schema (per Target entry):
+#
+#   target_id           : str   - stable id used in evidence records
+#   name                : str   - human-readable name
+#   repo_url            : str   - public source URL (anchor-only)
+#   commit              : str   - short commit pin (verified) or
+#                                 placeholder for stub entries
+#   verified            : bool  - true iff `commit` is verified against
+#                                 the actual repo; false for v0 stubs
+#   path_classes        : list  - subset of aegisgraph.constants.PATH_CLASSES
+#                                 that this target's extraction graph
+#                                 exposes
+#   dependency_snapshot : list  - <library>@<version> tokens captured
+#                                 from the static extraction. Used by
+#                                 the shared_library_check query.
+#   deferred_to         : str   - (optional, Wave 9C) Phase II
+#                                 milestone id of the form
+#                                 'M<digits>[.<digits>...]' that will
+#                                 resolve a placeholder commit pin.
+#                                 REQUIRED whenever `commit` matches
+#                                 'TODO-*-COMMIT'. Removed once the
+#                                 entry graduates to verified=true.
+#   deferral_note       : str   - (optional) prose rationale for the
+#                                 deferral; surfaced in registry
+#                                 documentation.
+#
+# Stub targets (wire-android, telegram-android) ship at M5.5 with
+# placeholder commit pins. They graduate to verified at M11 per plan
+# §5; until then their cells in the matrix render as candidate_path
+# only when dependency snapshots happen to match.
+#
+# Additive field (Wave 9C, ADR-0010-compatible):
+#
+#   deferred_to : str (optional) - Phase II milestone id (shape
+#                                  M<digits>[.<digits>...]) that will
+#                                  resolve a placeholder commit pin.
+#                                  Required whenever `commit` is a
+#                                  `TODO-...-COMMIT` placeholder; see
+#                                  tests/crosssma/test_targets_yaml_no_orphan_todo.py.
+#                                  Per §25 external-block table:
+#                                  T-M22.1 covers authorized-target
+#                                  coordination for additional SMAs
+#                                  beyond Signal + Element X.
+#
+# Pinning policy: a real verified commit pin requires the upstream-
+# target authorization workflow (T-M22.1) to be complete. Pinning
+# HEAD-of-now without authorization just chases drift; we therefore
+# defer rather than fabricate a pin.
+
+version: v1.1
+generated_by: aegisgraph/crosssma/registry/targets.yaml
+last_reviewed: 2026-05-13
+
+targets:
+
+  signal-android:
+    name: Signal Android
+    repo_url: https://github.com/signalapp/Signal-Android
+    commit: "1043851"
+    verified: true
+    path_classes:
+      - inbound_message
+      - media_decode
+      - link_preview
+      - deeplink
+      - qr_device_link
+      - sync_state
+      - crypto_key_lifecycle
+      - native_boundary
+    dependency_snapshot:
+      - libwebp@1.3.1
+      - libavif@1.0.4
+      - libheif@1.16.2
+      - glide@4.16.0
+      - okhttp@4.12.0
+
+  element-x-android:
+    name: Element X Android
+    repo_url: https://github.com/element-hq/element-x-android
+    commit: "91d265e6"
+    verified: true
+    path_classes:
+      - inbound_message
+      - media_decode
+      - link_preview
+      - deeplink
+      - qr_device_link
+      - sync_state
+      - crypto_key_lifecycle
+      - native_boundary
+    dependency_snapshot:
+      - libwebp@1.3.1
+      - libavif@1.0.4
+      - coil@2.5.0
+      - matrix-rust-sdk@0.7.0
+
+  wire-android:
+    name: Wire Android
+    repo_url: https://github.com/wireapp/wire-android
+    commit: "TODO-WIRE-COMMIT"
+    verified: false
+    deferred_to: M22.1
+    deferral_note: >-
+      wire-android upstream commit selection requires authorized-target
+      coordination per Phase II §25 external-block T-M22.1 (additional
+      SMA target authorization, PI + counsel-gated). Pinning HEAD
+      without that workflow would chase drift; defer rather than
+      fabricate a verified pin.
+    path_classes:
+      - inbound_message
+      - media_decode
+      - link_preview
+      - deeplink
+      - qr_device_link
+      - native_boundary
+    dependency_snapshot:
+      - okhttp@4.12.0
+      - glide@4.16.0
+
+  telegram-android:
+    name: Telegram Android
+    repo_url: https://github.com/DrKLO/Telegram
+    commit: "TODO-TELEGRAM-COMMIT"
+    verified: false
+    deferred_to: M22.1
+    deferral_note: >-
+      telegram-android (DrKLO/Telegram) upstream commit selection
+      requires authorized-target coordination per Phase II §25
+      external-block T-M22.1. Telegram's release cadence and the
+      requirement for a counsel-reviewed authorization window mean
+      a HEAD-pinned snapshot today is not the right object to lock;
+      defer to M22.1 per CrossSMA registry-expansion plan.
+    path_classes:
+      - inbound_message
+      - media_decode
+      - link_preview
+      - deeplink
+      - native_boundary
+    dependency_snapshot:
+      - libwebp@1.3.1
+      - okhttp@4.12.0

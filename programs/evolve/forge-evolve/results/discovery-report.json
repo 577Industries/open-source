@@ -1,0 +1,25 @@
+{
+  "modules": [
+    "legacy_CoordinateWrap",
+    "legacy_GeodesicStep",
+    "legacy_WaypointSolver",
+    "legacy_TelemetryExport"
+  ],
+  "sccs": [
+    [
+      "legacy_WaypointSolver",
+      "legacy_GeodesicStep"
+    ],
+    [
+      "legacy_CoordinateWrap"
+    ],
+    [
+      "legacy_TelemetryExport"
+    ]
+  ],
+  "cyclomatic_estimate": 18,
+  "boundary_functions": [
+    "legacy_wrap_longitude_deg",
+    "geodesic_bearing_rad"
+  ]
+}

@@ -1,0 +1,84 @@
+name: Reviewer Pages
+
+on:
+  workflow_call:
+    inputs:
+      release_tag:
+        required: true
+        type: string
+      source_commit:
+        required: true
+        type: string
+      image_digest:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing protected release tag to publish
+        required: true
+        type: string
+      source_commit:
+        description: Full source commit for the release tag
+        required: true
+        type: string
+      image_digest:
+        description: Immutable GHCR sha256 digest
+        required: true
+        type: string
+
+concurrency:
+  group: pages-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Pages
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.release_tag }}
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: "0.11.16"
+          python-version: "3.12"
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - run: uv sync --frozen --extra dev
+      - name: Build bound reviewer site and verify release
+        env:
+          FORGE_QSPARX_RELEASE_TAG: ${{ inputs.release_tag }}
+          FORGE_QSPARX_SOURCE_COMMIT: ${{ inputs.source_commit }}
+          FORGE_QSPARX_IMAGE_DIGEST: ${{ inputs.image_digest }}
+        run: make reviewer-demo verify
+      - name: Verify tag and source binding
+        env:
+          EXPECTED_COMMIT: ${{ inputs.source_commit }}
+        run: test "$(git rev-list -n 1 HEAD)" = "$EXPECTED_COMMIT"
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+
+  deploy:
+    name: Deploy Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    steps:
+      - name: Deploy release reviewer site
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

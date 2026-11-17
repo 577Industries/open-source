@@ -1,0 +1,9 @@
+{
+  "standoff_mm": 780.0,
+  "fov_deg": 42.0,
+  "occluder_offset_ratio": 0.18,
+  "visible_target_fraction": 0.677,
+  "incident_angle_deg": 14.5,
+  "hitl_takeover_required": true,
+  "reason": "operator_handoff_occlusion_or_standoff_limit"
+}

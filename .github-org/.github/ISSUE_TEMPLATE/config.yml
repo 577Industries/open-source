@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/577Industries/.github/blob/main/SECURITY.md
+    about: Please report vulnerabilities privately — see our security policy.
+  - name: Commercial / general inquiries
+    url: https://577industries.com/contact
+    about: FORGE OS, custom AI development, and government/SBIR work.

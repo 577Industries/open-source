@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "analysis_scope": {
+      "type": "string"
+    },
+    "claim_boundary": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "target_class": {
+      "type": "string"
+    },
+    "target_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_id",
+    "name",
+    "target_class",
+    "analysis_scope",
+    "claim_boundary"
+  ],
+  "title": "target_manifest.schema.json",
+  "type": "object"
+}

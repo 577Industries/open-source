@@ -1,0 +1,122 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-dark.svg">
+  <img alt="577 Industries" height="44" src="https://raw.githubusercontent.com/577Industries/.github/main/brand/out/wordmark-light.svg">
+</picture>
+
+# forge-evolve-tmpc
+
+`EVOLVE` · [program overview](https://github.com/577Industries#forge-evolve-for-tmpc--a-verification-harness-for-modernized-mission-planning-software)
+
+**A verification harness for modernized C#/.NET mission-planning software, with continuous-ATO artifacts. It runs end to end on a synthetic, unclassified surrogate and compares a legacy component with its hand-refactored replacement.**
+
+[![ci](https://img.shields.io/github/actions/workflow/status/577Industries/forge-evolve-tmpc/demo-offline.yml?style=flat-square&label=ci)](https://github.com/577Industries/forge-evolve-tmpc/actions/workflows/demo-offline.yml)
+[![license](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)](LICENSE)
+[![docs](https://img.shields.io/badge/docs-live-009688?style=flat-square)](https://577industries.github.io/forge-evolve-tmpc/)
+
+[![tests](https://img.shields.io/badge/tests-137_passing-brightgreen?style=flat-square)](#build--test-developers)
+[![make demo](https://img.shields.io/badge/make_demo-offline_%7C_keyless_%7C_deterministic-success?style=flat-square)](#-5-minute-onramp)
+
+Developed by [577 Industries, Inc.](https://github.com/577Industries). The target domain is Theater
+Mission Planning Center (TMPC) software. This repository is the **C#/.NET/JavaScript/SQL extension** of the Evolve
+code-modernization framework. *(No published results exist; an internal draft paper cited here earlier
+contained generated figures and is withdrawn as a citation, see [ERRATUM.md](ERRATUM.md). The C#/.NET
+capability here is newly developed for the TMPC stack.)*
+
+---
+
+## ⭐ 5-minute onramp
+
+This repo lets you **run the modernization pipeline yourself**, with **no API keys and no network**,
+and inspect both the legacy input and the modernized output.
+
+```bash
+git clone https://github.com/577Industries/forge-evolve-tmpc
+cd forge-evolve-tmpc
+make demo        # offline, deterministic, ~minutes
+```
+
+`make demo` runs the full pipeline on the synthetic surrogate and writes evidence to `results/`:
+
+| Objective | What the demo does | Evidence produced |
+|---|---|---|
+| 1. Analyze architecture, identify modernization needs | Roslyn discovery (C#) plus regex heuristics for JS/SQL/VB6 → dependency graph, complexity, surrogate-keyed business-rule probes, crypto inventory | `results/discovery-report.json`, `results/business-rules.ttl` |
+| 2. Conceptual AI models for analysis/refactor/cyber | template CLAR lift → risk-scored microservice decomposition → replayed transform (no model call) | `results/migration-plan.json`, `results/clar/*.jsonld` |
+| 3. PoC AI refactoring on a representative component | Replay the hand-refactored .NET 8 version of a coupled C# component (no model call) and compare its behavior with the legacy component on the seeded corpus | `results/equivalence-report.json`, `tmpc-modern-mds/` |
+| 4. Prototype plans + cyber | cATO artifacts as CI byproducts | `results/stig-findings.*.json`, `results/control-map.yaml`, `results/sbom.cdx.json`, `results/provenance.json`, `results/poam.csv` |
+
+**What to read first:** [`companion/companion.md`](companion/companion.md) maps each claim to the
+exact file/test that backs it. [`EXCLUSIONS.md`](EXCLUSIONS.md) states why this is safe to publish.
+
+> **Honesty note.** Every metric the demo prints is measured on the **synthetic, unclassified**
+> surrogate in [`surrogate/`](surrogate/) and is **preliminary** - not validated against government
+> TMPC code and carries no government validation. The surrogate is engineered to exhibit the *same classes*
+> of technical debt and *shapes* of mission-planning logic described for TMPC, so results
+> transfer in kind, not in fidelity. See [`surrogate/DEBT.md`](surrogate/DEBT.md).
+> See [`ERRATUM.md`](ERRATUM.md) for the corrections to earlier claims in this repository (2026-10-15, with one item added 2026-11-16).
+
+## Reading order for first-time visitors
+
+1. [`companion/companion.md`](companion/companion.md) - each claim mapped to the exact file/test that backs it.
+2. [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) - reproduce every cited metric offline, from a clean clone.
+3. [`EXCLUSIONS.md`](EXCLUSIONS.md) - why this is unclassified, ITAR-clean, and safe to publish.
+4. [`governance/pre-registration.md`](governance/pre-registration.md) - metrics, thresholds, and kill-gates frozen before any run.
+5. Companion site: <https://577industries.github.io/forge-evolve-tmpc/>
+
+---
+
+## What it does (the pipeline)
+
+```
+ingest → Discovery → CLAR → Migration Planner → Tool Orchestrator → Transformation
+       → Validation (behavioral equivalence) → Cyber/cATO overlay → Governance
+```
+
+- **Discovery** - [Roslyn](https://github.com/dotnet/roslyn) semantic analysis of C# (JS/SQL/VB6 are
+  recognized by regex heuristics; no Tree-sitter or ANTLR grammar is present): dependency graph, Tarjan
+  SCCs, complexity vectors, business-rule extraction by structural AST probes keyed to the surrogate
+  (no language model; emitted as RDF), cryptographic inventory.
+- **CLAR** - Cross-Language Abstract Representation ([`clar-spec/`](clar-spec/CLAR.schema.json)):
+  four layers, decouples source parsing from target generation; flags precision-constrained values so
+  coordinate/time-on-target math is emitted with `decimal`/checked arithmetic. (The lifter in this
+  repository emits a fixed mission-domain template; see ERRATUM.md.)
+- **Migration Planner** - composite risk scoring + spectral clustering → candidate microservice
+  boundaries + a topologically-ordered, risk-scored migration sequence.
+- **Tool Orchestrator** - routes transform tasks via
+  [`@577-industries/model-router`](https://github.com/577Industries); runs **offline** (deterministic
+  transcript replay - the default). The **local** and **cloud** modes select a model but do not call one
+  (`orchestrator/src/cli.ts` exits before any model call).
+- **Transformation** - replays the hand-refactored .NET 8 files in `tmpc-modern-mds/`; no code is
+  generated at run time (see ERRATUM.md).
+- **Validation** - differential + property-based testing with **mission-data-aware oracles**
+  (route feasibility, anti-meridian, time-on-target); discrete outputs to exact equality, continuous to
+  bounded relative error; reports a Chernoff confidence bound.
+- **Cyber/cATO** - STIG checks (before/after), NIST 800-53 mapping, CycloneDX SBOM, hashchain
+  provenance ([`@577-industries/hashchain-audit`](https://github.com/577Industries)), POA&M.
+- **Governance** - human-in-the-loop review gates + tamper-evident audit trail.
+
+## Layout
+
+| Path | Contents |
+|---|---|
+| [`src/`](src/) | The Evolve for TMPC engine (.NET). `ForgeEvolve.Contracts` = frozen interfaces/DTOs. |
+| [`orchestrator/`](orchestrator/) | TypeScript orchestration layer (consumes `@577-industries/*`). |
+| [`surrogate/`](surrogate/) | The synthetic, unclassified MDS-like component + golden corpus + legacy runtime. |
+| [`clar-spec/`](clar-spec/) | CLAR JSON-LD schema + per-language profiles. |
+| [`evidence/`](evidence/) | Claim→Evidence Traceability Matrix (CETM) + validator. |
+| [`results/`](results/) | Demo outputs (a committed reference run + your local run). |
+| [`governance/`](governance/) | Pre-registration of metrics + human review gates. |
+
+## Build / test (developers)
+
+```bash
+make build      # dotnet build + npm build
+make test       # unit + integration tests with coverage
+make audit      # run the CETM validator (claim→evidence honesty check)
+make sbom       # generate the CycloneDX SBOM
+```
+
+Toolchain: .NET SDK 8 (pinned in `global.json`), Node 18+, Python 3.10+ (corpus generation only),
+Docker (legacy surrogate runtime for differential testing). See [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
+
+## License
+Apache-2.0 - see [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).

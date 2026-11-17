@@ -1,0 +1,86 @@
+{
+  "corpus_name": "signed_angle_antimeridian_corpus",
+  "total_cases": 11,
+  "passed_cases": 11,
+  "max_abs_error": 0.0,
+  "chernoff_confidence_99": 0.999999,
+  "cases": [
+    {
+      "input_value": -540.0,
+      "legacy_output": -180.0,
+      "candidate_output": -180.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": -360.0,
+      "legacy_output": 0.0,
+      "candidate_output": 0.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": -180.0,
+      "legacy_output": -180.0,
+      "candidate_output": -180.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": -179.999999,
+      "legacy_output": -179.999999,
+      "candidate_output": -179.999999,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": -45.0,
+      "legacy_output": -45.0,
+      "candidate_output": -45.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 0.0,
+      "legacy_output": 0.0,
+      "candidate_output": 0.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 45.0,
+      "legacy_output": 45.0,
+      "candidate_output": 45.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 179.999999,
+      "legacy_output": 179.999999,
+      "candidate_output": 179.999999,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 180.0,
+      "legacy_output": -180.0,
+      "candidate_output": -180.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 360.0,
+      "legacy_output": 0.0,
+      "candidate_output": 0.0,
+      "abs_diff": 0.0,
+      "matched": true
+    },
+    {
+      "input_value": 540.0,
+      "legacy_output": -180.0,
+      "candidate_output": -180.0,
+      "abs_diff": 0.0,
+      "matched": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forge-kinetic"
+version = "2.4.0"
+description = "577 Industries Core Physical AI, Multi-Sensor Perception & Autonomous Robotics Platform (Sensor Envelopes, GPU SDF, 6-Link Swept-Capsule CCD & URTS Multi-Vendor Post-Processors)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Dr. Thomas G. Waweru", email = "info@577industries.com"}]
+dependencies = ["numpy>=1.24.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4.0"]
+
+[project.scripts]
+forge-kinetic = "forge_kinetic.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

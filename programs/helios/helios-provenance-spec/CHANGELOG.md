@@ -1,0 +1,22 @@
+# Changelog
+
+All notable changes to this project are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Changed
+- Links to the program, the connectors and the fusion engine lead to their folders in `577Industries/open-source`, under `programs/helios/`. They led to the standalone repositories. `SECURITY.md` names `577Industries/open-source` in its scope sentence. The program's master plan and companion document are no longer in that repository, so the README, the templates and the documentation settings name the program's folder alone.
+- `README.md` and `docs/index.md` gave `pip install helios-provenance-spec`, and no package of that name is on PyPI. They install the `v0.1.0` tag of this project's own repository, as the connectors do.
+
+## [0.1.0] — 2026-05-17
+
+### Added
+- JSON Schema 2020-12 for 4 record types: `HeliosDatasetRecord`, `HeliosModelOutputRecord`, `HeliosTransformationRecord`, `HeliosFusedOutputRecord`.
+- pydantic v2 reference implementation with RFC-8785 JCS canonical-JSON tamper-evident lineage hashing.
+- 11 worked examples including end-to-end fused SEP all-clear lineage tracing BMA + isotonic + conformal across three Scoreboard A inputs.
+- Crosswalks: SPASE 2.7.1, W3C PROV-JSON, RO-Crate 1.2 JSON-LD.
+- RFC-0001 issued for community comment (8 open questions in §6).
+- CLI: `helios-provenance-validate` for schema validation against arbitrary files.
+- 98 tests passing at 98% line+branch coverage. `mypy --strict`, `ruff`, `ruff format --check` all clean.
+
+See [GitHub releases](https://github.com/577Industries/helios-provenance-spec/releases/tag/v0.1.0) for the canonical release notes.

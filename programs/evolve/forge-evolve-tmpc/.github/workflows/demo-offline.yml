@@ -1,0 +1,75 @@
+name: demo-offline
+
+# Proves the reviewer contract: the pipeline builds and the offline demo runs with NO API keys,
+# on both Linux and Windows (matching the TMPC dual-OS reality).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Cancel superseded pull-request runs only; push runs always finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build-and-demo:
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_NOLOGO: 1
+      FORGE_ORCHESTRATOR_MODE: offline
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+
+      - name: Build
+        run: dotnet build ForgeEvolve.sln -v q
+
+      - name: Test (with coverage)
+        run: dotnet test ForgeEvolve.sln --collect:"XPlat Code Coverage" -v q
+
+      - name: CETM honesty audit
+        run: node evidence/validate-cetm.mjs
+
+      - name: Offline demo (no API keys)
+        shell: bash
+        run: bash scripts/run-demo.sh
+
+      - name: Secret scan (no committed credentials)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -uo pipefail
+          echo "Scanning tracked files for real credential signatures..."
+          # High-confidence real-secret formats. The scanner-rule source files
+          # (CryptoInventory.cs, StigAnalyzer.cs) legitimately contain detection
+          # PATTERNS, and the surrogate uses a password-less synthetic (localdb)
+          # connection string by design (see EXCLUSIONS.md) - both are excluded.
+          PATTERN='AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{36,}|xox[baprs]-[A-Za-z0-9-]{10,}|-----BEGIN (RSA |EC |OPENSSH |PGP |DSA )?PRIVATE KEY-----|AIza[0-9A-Za-z_-]{35}|sk-[A-Za-z0-9]{20,}'
+          MATCHES=$(git ls-files -z \
+            | grep -zvE '(CryptoInventory\.cs|StigAnalyzer\.cs)$' \
+            | xargs -0 grep -nEI "$PATTERN" 2>/dev/null || true)
+          if [ -n "$MATCHES" ]; then
+            echo "::error::Potential real secret detected:"; echo "$MATCHES"; exit 1
+          fi
+          echo "OK: no real credential signatures in tracked files."

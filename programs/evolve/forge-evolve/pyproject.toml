@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forge-evolve"
+version = "2.4.0"
+description = "577 Industries Core Code & Artifact Modernization Engine (Discovery, CLAR IR, Spectral Decomposition, Differential Equivalence & Hashchain Governance)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "Dr. Thomas G. Waweru", email = "info@577industries.com"}]
+dependencies = ["numpy>=1.24.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4.0"]
+
+[project.scripts]
+forge-evolve = "forge_evolve.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

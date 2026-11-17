@@ -1,0 +1,139 @@
+{
+  "edges": [
+    {
+      "from": "baseline.entry.ca3cceb70a1f",
+      "relationship": "co_observed_entry_point_to_handler",
+      "to": "baseline.handler.ca3cceb70a1f"
+    }
+  ],
+  "generated_at": "2026-05-05T00:00:00Z",
+  "generated_by": "aegisgraph-tier3-research",
+  "nodes": [
+    {
+      "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+      "id": "baseline.entry.ca3cceb70a1f",
+      "label": "target entry point pending media_decode extraction",
+      "node_type": "entry_point",
+      "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+    },
+    {
+      "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+      "id": "baseline.handler.ca3cceb70a1f",
+      "label": "target handler pending media_decode extraction",
+      "node_type": "handler",
+      "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+    },
+    {
+      "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+      "id": "baseline.decoder.ca3cceb70a1f",
+      "label": "image decoder pending media_decode extraction",
+      "node_type": "decoder",
+      "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+    },
+    {
+      "evidence_source": "baseline_anchor_pending_toolchain:reprochain_libwebp",
+      "id": "baseline.sink.ca3cceb70a1f",
+      "label": "WebP decoding boundary; ReproChain harness mapping pending",
+      "node_type": "sink",
+      "source_anchor": "reprochain/vendor/libwebp/README.md"
+    }
+  ],
+  "records": [
+    {
+      "claim_state": "validation_tasked",
+      "edges": [
+        {
+          "from": "baseline.entry.ca3cceb70a1f",
+          "relationship": "co_observed_entry_point_to_handler",
+          "to": "baseline.handler.ca3cceb70a1f"
+        }
+      ],
+      "evidence_refs": [
+        {
+          "command": "extraction/adapters/assemble.py",
+          "id": "REF-ELEMENT-X-ANDROID-MEDIA-DECODE-BASELINE",
+          "output_hash": "ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+          "tool": "aegisgraph-extraction-baseline",
+          "version": "phase1"
+        }
+      ],
+      "hash_chain": {
+        "canonicalization": "json-v1-sorted-no-hash-chain",
+        "previous_hash": "a26445eb87686a3476a272fb8b04d2a88a765fd31a1de4c727cd324cc9885f44",
+        "record_hash": "bb7eba6fb98332399d5073c0b53ef865ece3700ed87c4df3b207a0b971eb9b76"
+      },
+      "id": "AG-EV-EXTRACT-ELEMENT-X-ANDROID-MEDIA-DECODE-001",
+      "limitations": "Phase 1 record. Records anchored to commit-pinned source locations from real CodeQL / Semgrep / AndroidManifest / MobSF tool runs. It does not assert a Signal or Element vulnerability, does not redistribute target source, and explicitly leaves downstream harness validation (ReproChain libwebp, etc.) for later phases.",
+      "nodes": [
+        {
+          "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+          "id": "baseline.entry.ca3cceb70a1f",
+          "label": "target entry point pending media_decode extraction",
+          "node_type": "entry_point",
+          "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+        },
+        {
+          "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+          "id": "baseline.handler.ca3cceb70a1f",
+          "label": "target handler pending media_decode extraction",
+          "node_type": "handler",
+          "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+        },
+        {
+          "evidence_source": "baseline_anchor_pending_toolchain:ca3cceb70a1f2cc4355201427792186fe8dd9f28f0b9d6b889172c610577d738",
+          "id": "baseline.decoder.ca3cceb70a1f",
+          "label": "image decoder pending media_decode extraction",
+          "node_type": "decoder",
+          "source_anchor": "https://github.com/element-hq/element-x-android/tree/91d265e6"
+        },
+        {
+          "evidence_source": "baseline_anchor_pending_toolchain:reprochain_libwebp",
+          "id": "baseline.sink.ca3cceb70a1f",
+          "label": "WebP decoding boundary; ReproChain harness mapping pending",
+          "node_type": "sink",
+          "source_anchor": "reprochain/vendor/libwebp/README.md"
+        }
+      ],
+      "path_class": "media_decode",
+      "provenance": {
+        "generated_at": "2026-05-05T00:00:00Z",
+        "generated_by": "aegisgraph-tier3-research",
+        "private_by_default": true,
+        "source": "phase1 real extraction adapters"
+      },
+      "recommendation_refs": [],
+      "safety_flags": [],
+      "score_vector": {
+        "attacker_control": 0.9,
+        "auth_boundary": 0.6,
+        "confidence": 0.55,
+        "exploit_history": 0.9,
+        "mitigation_strength": 0.5,
+        "native_boundary": 0.8,
+        "observability": 0.4,
+        "parser_complexity": 0.8,
+        "privilege_impact": 0.7,
+        "remote_reachability": 0.9,
+        "total": 7.05
+      },
+      "target": {
+        "commit": "91d265e6",
+        "name": "Element X Android",
+        "repo_url": "https://github.com/element-hq/element-x-android",
+        "source_policy": "anchor-only"
+      },
+      "validation_task": {
+        "command": "make extract && make reprochain-map",
+        "expected_output": "commit-pinned media_decode path with explicit downstream harness mapping",
+        "id": "VAL-ELEMENT-X-ANDROID-MEDIA-DECODE-REACHABILITY",
+        "status": "planned"
+      },
+      "version": "v1.0"
+    }
+  ],
+  "safety_posture": "private_by_default",
+  "source_policy": "anchor-only",
+  "target": "Element X Android",
+  "tool_output_type": "extraction_graph",
+  "version": "v1.0"
+}

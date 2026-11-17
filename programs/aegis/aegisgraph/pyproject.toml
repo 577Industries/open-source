@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "aegisgraph-tier3-research"
 version = "0.1.0"
@@ -20,6 +24,13 @@ dev = [
 
 [project.scripts]
 aegisgraph = "aegisgraph.cli:main"
+
+# The repository root keeps schema, evidence and report directories beside the
+# code, so setuptools cannot infer which directories are packages: name them.
+# The code finds those directories relative to the checkout, so the supported
+# install is the editable one: `pip install -e ".[dev]"`.
+[tool.setuptools]
+packages = ["aegisgraph", "extraction", "polydiff", "smabench", "validator"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
